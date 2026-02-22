@@ -1,44 +1,42 @@
 ---
 const credentials = [
-  { year: "2008", title: "Licenciatura en Psicología", subtitle: "Universidad de Granada" },
-  { year: "2010", title: "Máster en Psicología Clínica", subtitle: "Universidad de Málaga" },
-  { year: "2015", title: "Especialización en Terapia de Pareja", subtitle: "EFT - Terapia Focalizada en las Emociones" },
-  { year: "2023", title: "Formación continua", subtitle: "Actualización constante en técnicas de tercera generación" },
+  { year: "2008", title: "Licenciatura en Psicología", institution: "Universidad de Granada" },
+  { year: "2010", title: "Máster en Psicología Clínica", institution: "Universidad de Málaga" },
+  { year: "2015", title: "Especialización en Terapia de Pareja", institution: "EFT" },
+  { year: "Actualidad", title: "Formación continua", institution: "Tercera generación" },
 ];
 ---
 
 <section class="section bg-bg-base relative overflow-hidden" id="sobre-mi">
-  <!-- Subtle background -->
-  <div class="absolute top-1/2 right-0 w-[40vw] h-[40vw] bg-sage/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+  <div class="absolute top-1/2 right-0 w-[40vw] h-[40vw] bg-sage/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" aria-hidden="true"></div>
 
   <div class="container-elegant relative z-10">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-      <!-- Image -->
-      <div class="relative order-2 lg:order-1 opacity-0 animate-reveal" data-animate>
-        <div class="absolute -top-4 -left-4 w-full h-full border border-sage/20 rounded-t-full rounded-b-3xl hidden lg:block"></div>
-        <div class="absolute -bottom-6 -right-6 w-3/4 h-3/4 bg-sage/10 rounded-full blur-3xl"></div>
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
+      <div class="relative order-2 lg:order-1 opacity-0 min-h-[500px] lg:min-h-0" data-animate>
+        <div class="absolute -top-4 -left-4 w-full h-full border border-sage/20 rounded-t-full rounded-b-3xl hidden lg:block pointer-events-none" aria-hidden="true"></div>
+        <div class="absolute -bottom-6 -right-6 w-3/4 h-3/4 bg-sage/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
-        <div class="relative aspect-[4/5] overflow-hidden rounded-t-full rounded-b-3xl shadow-2xl shadow-sage/10">
+        <div class="relative w-full h-full min-h-[400px] lg:min-h-[500px] overflow-hidden rounded-t-full rounded-b-3xl shadow-2xl shadow-sage/10">
           <img
             src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80"
-            alt="María Ángeles Mata - Consulta de psicología"
+            alt="María Ángeles Mata - Psicóloga en Córdoba con más de 15 años de experiencia"
             class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-1000 hover:scale-105"
+            width="400"
+            height="500"
             loading="lazy"
           />
         </div>
         
-        <!-- Quote Card -->
-        <div class="absolute -bottom-4 -right-4 lg:right-auto lg:-left-6 bg-bg-surface p-5 rounded-2xl shadow-xl border border-border-light max-w-[260px]">
-          <svg class="w-8 h-8 text-sage/30 mb-2" fill="currentColor" viewBox="0 0 24 24">
+        <div class="absolute -bottom-4 -right-4 lg:right-auto lg:-left-6 bg-bg-surface p-5 rounded-2xl shadow-xl border border-border-light max-w-[240px]">
+          <svg class="w-6 h-6 text-sage/30 mb-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
           </svg>
           <p class="font-serif text-text-primary italic leading-relaxed text-sm">"La terapia es un viaje conjunto hacia el bienestar"</p>
         </div>
       </div>
 
-      <!-- Content -->
-      <div class="order-1 lg:order-2 opacity-0 animate-reveal" data-animate style="animation-delay: 0.15s">
-        <div class="inline-flex items-center gap-3 mb-5 px-3 py-1.5 bg-sage/5 rounded-full border border-sage/10">
+      <div class="order-1 lg:order-2 opacity-0 flex flex-col justify-center py-4" data-animate style="animation-delay: 0.15s">
+        <div class="section-label mb-5 w-fit">
           <div class="w-4 h-px bg-sage"></div>
           <span class="eyebrow !mb-0 text-xs">Sobre mí</span>
         </div>
@@ -47,7 +45,7 @@ const credentials = [
           Tu psicóloga en <span class="text-sage italic font-light">Córdoba</span>
         </h2>
 
-        <div class="space-y-4 text-text-secondary leading-relaxed mb-8 text-[15px]">
+        <div class="space-y-4 text-body mb-8">
           <p>
             Soy María Ángeles Mata, psicóloga colegiada con más de 15 años de experiencia ayudando a personas a superar sus dificultades emocionales y recuperar el bienestar.
           </p>
@@ -56,31 +54,19 @@ const credentials = [
           </p>
         </div>
 
-        <!-- Timeline -->
-        <div class="mb-8 p-5 bg-bg-surface rounded-2xl border border-border-light">
-          <h3 class="font-serif text-base text-text-primary mb-4 flex items-center gap-2">
-            <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.499 5.221 69.222 69.222 0 00-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-            </svg>
-            Formación y trayectoria
-          </h3>
-          <div class="relative pl-4 border-l border-sage/20 space-y-3">
-            {credentials.map((cred, index) => (
-              <div class="relative group">
-                <div class={`absolute -left-[21px] top-1.5 w-2.5 h-2.5 rounded-full border-2 transition-all duration-300 ${index === 0 ? 'bg-sage border-sage' : 'bg-bg-surface border-sage group-hover:bg-sage'}`}></div>
-                <div class="flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-3">
-                  <span class="text-xs font-semibold text-sage w-9">{cred.year}</span>
-                  <div>
-                    <p class="font-medium text-text-primary text-sm">{cred.title}</p>
-                    <p class="text-xs text-text-secondary">{cred.subtitle}</p>
-                  </div>
-                </div>
+        <div class="mb-8">
+          <span class="text-xs text-text-tertiary uppercase tracking-wider mb-3 block">Formación académica</span>
+          <div class="flex flex-wrap gap-2">
+            {credentials.map((cred) => (
+              <div class="flex items-center gap-2 px-3 py-2 bg-bg-surface rounded-lg border border-border-light hover:border-sage/30 transition-colors cursor-default">
+                <span class="text-xs font-medium text-sage">{cred.year}</span>
+                <span class="text-sm text-text-primary">{cred.title}</span>
               </div>
             ))}
           </div>
         </div>
 
-        <a href="/contact" class="btn btn-primary">
+        <a href="/contact" class="btn btn-primary w-fit">
           <span>Conóceme en consulta</span>
           <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
@@ -90,23 +76,3 @@ const credentials = [
     </div>
   </div>
 </section>
-
-<script>
-  if (typeof window !== 'undefined') {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-reveal');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
-    });
-  }
-</script>

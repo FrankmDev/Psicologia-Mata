@@ -3,12 +3,11 @@ import { mainServices } from '../../data/services';
 ---
 
 <section class="section bg-bg-muted relative overflow-hidden" id="servicios">
-  <!-- Background decoration -->
-  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent"></div>
+  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent" aria-hidden="true"></div>
   
   <div class="container-elegant relative z-10">
-    <div class="text-center max-w-2xl mx-auto mb-14 lg:mb-16 opacity-0 animate-reveal" data-animate>
-      <div class="inline-flex items-center gap-3 mb-4 px-4 py-1.5 bg-bg-surface rounded-full border border-border-light">
+    <div class="text-center max-w-2xl mx-auto mb-14 lg:mb-16 opacity-0" data-animate>
+      <div class="section-label inline-flex mb-4">
         <div class="w-5 h-px bg-sage"></div>
         <span class="eyebrow !mb-0 text-xs">Áreas de Especialidad</span>
         <div class="w-5 h-px bg-sage"></div>
@@ -23,20 +22,19 @@ import { mainServices } from '../../data/services';
       {mainServices.map((service, index) => (
         <a 
           href="/services" 
-          class="group bg-bg-surface rounded-2xl p-7 border border-border-light transition-all duration-500 hover:shadow-card-hover hover:-translate-y-1.5 hover:border-sage/15 opacity-0 animate-reveal"
+          class="group bg-bg-surface rounded-2xl p-7 border border-border-light transition-all duration-500 hover:shadow-card-hover hover:-translate-y-1.5 hover:border-sage/15 opacity-0"
           data-animate
           style={`animation-delay: ${(index + 1) * 0.1}s`}
         >
-          <!-- Icon -->
           <div class="w-14 h-14 rounded-xl bg-sage/10 flex items-center justify-center text-sage mb-5 transition-all duration-300 group-hover:bg-sage group-hover:text-white group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-sage/20">
             <Fragment set:html={service.icon} />
           </div>
           
-          <h3 class="font-serif text-xl text-text-primary mb-2 group-hover:text-sage transition-colors duration-300">
+          <h3 class="font-serif text-xl text-text-primary mb-3 group-hover:text-sage transition-colors duration-300">
             {service.title}
           </h3>
           
-          <p class="text-text-secondary text-sm leading-relaxed mb-5 line-clamp-3">
+          <p class="text-body line-clamp-3 mb-5">
             {service.shortDescription}
           </p>
           
@@ -50,7 +48,7 @@ import { mainServices } from '../../data/services';
       ))}
     </div>
     
-    <div class="mt-12 text-center opacity-0 animate-reveal" data-animate style="animation-delay: 0.4s">
+    <div class="mt-12 text-center opacity-0" data-animate style="animation-delay: 0.4s">
       <a href="/services" class="btn btn-outline">
         <span>Ver todos los servicios</span>
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,23 +58,3 @@ import { mainServices } from '../../data/services';
     </div>
   </div>
 </section>
-
-<script>
-  if (typeof window !== 'undefined') {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-reveal');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
-    });
-  }
-</script>

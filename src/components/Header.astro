@@ -14,13 +14,11 @@ const navLinks = [
 ---
 
 <header class="fixed top-0 inset-x-0 z-50 transition-all duration-500" id="header">
-  <!-- Background with blur -->
   <div class="absolute inset-0 bg-bg-base/80 backdrop-blur-xl border-b border-border-light/50" id="header-bg"></div>
 
   <div class="container-elegant relative">
     <div class="flex items-center justify-between h-16 lg:h-20">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group">
+      <a href="/" class="flex items-center gap-3 group" aria-label="María Ángeles Mata - Inicio">
         <div class="w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-sage/10 flex items-center justify-center transition-all duration-300 group-hover:bg-sage group-hover:scale-105">
           <span class="font-serif text-base lg:text-lg text-sage group-hover:text-white italic transition-colors">M</span>
         </div>
@@ -30,8 +28,7 @@ const navLinks = [
         </div>
       </a>
 
-      <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center">
+      <nav class="hidden lg:flex items-center" aria-label="Navegación principal">
         <div class="flex items-center gap-1 bg-bg-muted/50 rounded-full p-1 border border-border-light/50">
           {navLinks.map((link) => (
             <a
@@ -41,6 +38,7 @@ const navLinks = [
                   ? "bg-bg-surface text-text-primary shadow-sm" 
                   : "text-text-secondary hover:text-text-primary hover:bg-bg-surface/50"
               }`}
+              aria-current={activePage === link.label ? "page" : undefined}
             >
               {link.label}
             </a>
@@ -48,7 +46,6 @@ const navLinks = [
         </div>
       </nav>
 
-      <!-- CTA -->
       <div class="hidden lg:block">
         <a href="/contact" class="btn btn-primary btn-sm">
           <span>Reservar cita</span>
@@ -58,10 +55,10 @@ const navLinks = [
         </a>
       </div>
 
-      <!-- Mobile Menu Button -->
       <button
         class="lg:hidden relative z-50 p-2 text-text-primary flex items-center justify-center w-10 h-10 rounded-full hover:bg-bg-muted transition-colors"
-        aria-label="Menú"
+        aria-label="Abrir menú"
+        aria-expanded="false"
         id="menu-toggle"
       >
         <div class="flex flex-col justify-center items-center gap-1.5 w-5 h-5">
@@ -72,13 +69,15 @@ const navLinks = [
     </div>
   </div>
 
-  <!-- Mobile Menu -->
   <div
     class="lg:hidden fixed inset-0 bg-bg-base/98 backdrop-blur-2xl z-40 opacity-0 pointer-events-none transition-all duration-500"
     id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú de navegación"
   >
     <div class="flex flex-col h-full pt-24 pb-8 container-elegant">
-      <nav class="flex flex-col gap-2 mt-8">
+      <nav class="flex flex-col gap-2 mt-8" aria-label="Navegación móvil">
         {navLinks.map((link, index) => (
           <a
             href={link.href}
@@ -88,6 +87,7 @@ const navLinks = [
                 : "text-text-primary hover:bg-bg-muted"
             }`}
             style={`animation-delay: ${index * 0.05}s`}
+            aria-current={activePage === link.label ? "page" : undefined}
           >
             {link.label}
           </a>
@@ -109,7 +109,7 @@ const navLinks = [
   </div>
 </header>
 
-<div class="h-16 lg:h-20"></div>
+<div class="h-16 lg:h-20" aria-hidden="true"></div>
 
 <script>
   const header = document.getElementById("header");
@@ -135,6 +135,7 @@ const navLinks = [
     if (menuOpen) {
       mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
       document.body.style.overflow = "hidden";
+      menuToggle?.setAttribute("aria-expanded", "true");
       if (line1 && line2) {
         line1.style.transform = "translateY(4px) rotate(45deg)";
         line2.style.transform = "translateY(-4px) rotate(-45deg)";
@@ -142,6 +143,7 @@ const navLinks = [
     } else {
       mobileMenu?.classList.add("opacity-0", "pointer-events-none");
       document.body.style.overflow = "";
+      menuToggle?.setAttribute("aria-expanded", "false");
       if (line1 && line2) {
         line1.style.transform = "none";
         line2.style.transform = "none";
@@ -152,5 +154,10 @@ const navLinks = [
   menuToggle?.addEventListener("click", toggleMenu);
   mobileMenu?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => { if (menuOpen) toggleMenu(); });
+  });
+
+  // Close on escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menuOpen) toggleMenu();
   });
 </script>

@@ -11,36 +11,32 @@ import Footer from '../components/Footer.astro';
   <Header activePage="Contacto" />
   
   <main id="main-content">
-    <!-- Header Section -->
     <section class="pt-24 lg:pt-32 pb-12 lg:pb-16 bg-bg-base relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-[40vw] h-[40vw] bg-sage/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4"></div>
+      <div class="absolute top-0 right-0 w-[40vw] h-[40vw] bg-sage/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/4 pointer-events-none" aria-hidden="true"></div>
       
       <div class="container-elegant relative z-10">
         <div class="max-w-2xl">
-          <div class="inline-flex items-center gap-3 mb-4 px-4 py-1.5 bg-bg-surface rounded-full border border-border-light opacity-0 animate-reveal" data-animate>
+          <div class="section-label mb-4 opacity-0" data-animate>
             <div class="w-4 h-px bg-sage"></div>
             <span class="eyebrow !mb-0 text-xs">Contacto</span>
           </div>
           
-          <h1 class="font-serif text-3xl lg:text-5xl text-text-primary leading-tight mb-4 opacity-0 animate-reveal" data-animate style="animation-delay: 0.1s">
+          <h1 class="font-serif text-3xl lg:text-5xl text-text-primary leading-tight mb-4 opacity-0" data-animate style="animation-delay: 0.1s">
             Hablemos de <span class="italic text-sage">ti</span>
           </h1>
           
-          <p class="text-text-secondary text-lg leading-relaxed opacity-0 animate-reveal" data-animate style="animation-delay: 0.2s">
+          <p class="text-body-lg opacity-0" data-animate style="animation-delay: 0.2s">
             Estoy aquí para escucharte. El primer paso hacia el bienestar comienza con una conversación.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Contact Content -->
     <section class="section-sm bg-bg-muted relative">
       <div class="container-elegant">
         <div class="grid lg:grid-cols-5 gap-8 lg:gap-12">
           
-          <!-- Left: Contact Info -->
-          <div class="lg:col-span-2 space-y-6 opacity-0 animate-reveal" data-animate style="animation-delay: 0.3s">
-            <!-- Info Cards -->
+          <div class="lg:col-span-2 space-y-6 opacity-0" data-animate style="animation-delay: 0.3s">
             <div class="bg-bg-surface rounded-2xl p-6 border border-border-light">
               <div class="flex items-center gap-3 mb-6">
                 <div class="w-10 h-10 rounded-xl bg-sage/10 flex items-center justify-center text-sage">
@@ -75,14 +71,13 @@ import Footer from '../components/Footer.astro';
                 </div>
                 <div>
                   <p class="text-sm text-text-secondary">Ubicación</p>
-                  <p class="font-medium text-text-primary text-sm">C/ Rodríguez Sánchez, 22<br>14003 Córdoba</p>
+                  <address class="font-medium text-text-primary text-sm not-italic">C/ Rodríguez Sánchez, 22<br/>14003 Córdoba</address>
                 </div>
               </div>
             </div>
             
-            <!-- Availability -->
             <div class="bg-sage rounded-2xl p-6 text-white relative overflow-hidden">
-              <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+              <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl" aria-hidden="true"></div>
               <div class="relative z-10">
                 <div class="flex items-center gap-2 mb-3">
                   <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
@@ -95,8 +90,7 @@ import Footer from '../components/Footer.astro';
             </div>
           </div>
 
-          <!-- Right: Form -->
-          <div class="lg:col-span-3 opacity-0 animate-reveal" data-animate style="animation-delay: 0.4s">
+          <div class="lg:col-span-3 opacity-0" data-animate style="animation-delay: 0.4s">
             <div class="bg-bg-surface rounded-2xl p-6 lg:p-8 border border-border-light shadow-sm">
               <div class="mb-6">
                 <h2 class="font-serif text-2xl text-text-primary mb-2">Envíame un mensaje</h2>
@@ -114,6 +108,7 @@ import Footer from '../components/Footer.astro';
                       placeholder="Tu nombre" 
                       class="w-full px-4 py-3 bg-bg-base border border-border-light rounded-xl text-sm focus:outline-none focus:border-sage/40 transition-colors"
                       required 
+                      autocomplete="name"
                     />
                   </div>
                   <div>
@@ -124,6 +119,7 @@ import Footer from '../components/Footer.astro';
                       name="telefono" 
                       placeholder="+34..." 
                       class="w-full px-4 py-3 bg-bg-base border border-border-light rounded-xl text-sm focus:outline-none focus:border-sage/40 transition-colors"
+                      autocomplete="tel"
                     />
                   </div>
                 </div>
@@ -137,6 +133,7 @@ import Footer from '../components/Footer.astro';
                     placeholder="tu@email.com" 
                     class="w-full px-4 py-3 bg-bg-base border border-border-light rounded-xl text-sm focus:outline-none focus:border-sage/40 transition-colors"
                     required 
+                    autocomplete="email"
                   />
                 </div>
                 
@@ -189,24 +186,4 @@ import Footer from '../components/Footer.astro';
   </main>
   
   <Footer />
-</layout>
-
-<script>
-  if (typeof window !== 'undefined') {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-reveal');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-    );
-
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
-    });
-  }
-</script>
+</Layout>

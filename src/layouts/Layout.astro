@@ -17,7 +17,6 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://psicologamata.es");
 
-// Schema.org
 const schemaOrg = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -28,11 +27,13 @@ const schemaOrg = {
   email: "mangelesmatacala@hotmail.com",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "C/ Rodríguez Sánchez",
+    streetAddress: "C/ Rodríguez Sánchez, 22",
     addressLocality: "Córdoba",
     postalCode: "14003",
     addressCountry: "ES"
-  }
+  },
+  priceRange: "€€",
+  openingHours: "Mo-Fr 09:00-20:00"
 };
 ---
 
@@ -52,11 +53,18 @@ const schemaOrg = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.site || "https://psicologamata.es")} />
+    <meta property="og:locale" content="es_ES" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <!-- Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
@@ -78,16 +86,47 @@ const schemaOrg = {
     
     <slot />
     
-    <!-- Scroll Progress -->
     <div id="scroll-progress" class="fixed top-0 left-0 h-0.5 bg-sage z-50 origin-left scale-x-0 transition-transform"></div>
-    
-    <script is:inline>
-      const progress = document.getElementById('scroll-progress');
-      window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        progress.style.transform = `scaleX(${scrollTop / docHeight})`;
-      }, { passive: true });
-    </script>
   </body>
 </html>
+
+<script>
+  // Scroll Progress
+  const progress = document.getElementById('scroll-progress');
+  
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) {
+      progress.style.transform = `scaleX(${scrollTop / docHeight})`;
+    }
+  }
+  
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  // Global Scroll Reveal Observer
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-reveal');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  );
+
+  function initRevealElements() {
+    document.querySelectorAll('[data-animate]').forEach((el) => {
+      if (!el.classList.contains('animate-reveal')) {
+        revealObserver.observe(el);
+      }
+    });
+  }
+
+  initRevealElements();
+
+  // Re-init on page navigation
+  document.addEventListener('astro:page-load', initRevealElements);
+</script>

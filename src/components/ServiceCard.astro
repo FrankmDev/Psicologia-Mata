@@ -16,14 +16,13 @@ const { id, number, title, description, approaches, duration, icon, href = "/con
 
 <div 
   id={id} 
-  class="group relative bg-bg-surface rounded-2xl border border-border-light transition-all duration-500 ease-out hover:shadow-card-hover hover:-translate-y-1 hover:border-sage/20 overflow-hidden opacity-0 animate-reveal"
+  class="group relative bg-bg-surface rounded-2xl border border-border-light transition-all duration-500 ease-out hover:shadow-card-hover hover:-translate-y-1 hover:border-sage/20 overflow-hidden opacity-0"
+  data-animate
   style={`animation-delay: ${index * 0.1}s; animation-fill-mode: forwards;`}
 >
-  <!-- Top accent line -->
-  <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sage/0 via-sage/30 to-sage/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+  <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sage/0 via-sage/30 to-sage/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500" aria-hidden="true"></div>
   
   <div class="p-6 lg:p-8">
-    <!-- Header: Icon + Title + Number in one row -->
     <div class="flex items-start gap-4 mb-5">
       <div class="w-12 h-12 rounded-xl bg-sage/10 flex items-center justify-center text-sage flex-shrink-0 transition-all duration-300 group-hover:bg-sage group-hover:text-white group-hover:scale-105">
         {icon && <Fragment set:html={icon} />}
@@ -34,19 +33,16 @@ const { id, number, title, description, approaches, duration, icon, href = "/con
           <h3 class="font-serif text-xl lg:text-2xl text-text-primary group-hover:text-sage transition-colors duration-300">
             {title}
           </h3>
-          <span class="font-serif text-2xl text-sage/15 group-hover:text-sage/30 transition-colors flex-shrink-0">{number}</span>
+          <span class="font-serif text-2xl text-sage/15 group-hover:text-sage/30 transition-colors flex-shrink-0" aria-hidden="true">{number}</span>
         </div>
       </div>
     </div>
     
-    <!-- Description -->
-    <p class="text-text-secondary leading-relaxed mb-5">
+    <p class="text-body mb-5">
       {description}
     </p>
     
-    <!-- Footer: Tags + Duration + CTA -->
     <div class="flex flex-col lg:flex-row lg:items-center gap-4 pt-5 border-t border-border-light">
-      <!-- Approaches Tags -->
       <div class="flex flex-wrap gap-2 flex-1">
         {approaches.map((approach) => (
           <span class="px-3 py-1 bg-bg-muted text-text-secondary text-xs rounded-full border border-border-light group-hover:border-sage/15 group-hover:bg-sage/5 transition-colors">
@@ -55,7 +51,6 @@ const { id, number, title, description, approaches, duration, icon, href = "/con
         ))}
       </div>
       
-      <!-- Right side: Duration & CTA -->
       <div class="flex items-center gap-4 lg:border-l lg:border-border-light lg:pl-5">
         <div class="flex items-center gap-1.5 text-sm text-text-secondary">
           <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">

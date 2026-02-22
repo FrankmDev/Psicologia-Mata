@@ -1,29 +1,36 @@
 ---
 ---
 
-<section class="relative min-h-auto flex items-center overflow-hidden bg-bg-base pt-28 pb-16 lg:pt-32 lg:pb-24" aria-label="Introducción">
-  <!-- Background Elements -->
-  <div class="absolute top-0 right-0 w-[50vw] h-[50vw] lg:w-[25vw] lg:h-[25vw] bg-accent-primary/5 rounded-full blur-[100px] -translate-y-1/4 translate-x-1/4" aria-hidden="true"></div>
-  <div class="absolute bottom-0 left-0 w-[35vw] h-[35vw] lg:w-[18vw] lg:h-[18vw] bg-accent-secondary/10 rounded-full blur-[80px] translate-y-1/4 -translate-x-1/4" aria-hidden="true"></div>
+<section class="relative overflow-hidden bg-bg-base" aria-label="Introducción">
+  <div class="absolute top-0 right-0 w-[60vw] h-[60vw] lg:w-[40vw] lg:h-[40vw] bg-sage/5 rounded-full blur-[120px] -translate-y-1/4 translate-x-1/3" aria-hidden="true"></div>
+  <div class="absolute bottom-0 left-0 w-[50vw] h-[50vw] lg:w-[25vw] lg:h-[25vw] bg-accent-secondary/10 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/4" aria-hidden="true"></div>
 
-  <div class="container-elegant relative z-10">
+  <div class="container-elegant relative z-10 py-20 lg:py-28">
     <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-      <!-- Content -->
-      <div class="order-2 lg:order-1 max-w-xl lg:max-w-none">
-        <div class="flex items-center gap-3 mb-5 opacity-0 animate-fade-in-up" style="animation-delay: 0.1s; animation-fill-mode: forwards;">
-          <div class="w-8 h-px bg-sage"></div>
-          <span class="eyebrow !mb-0">Psicóloga Clínica en Córdoba</span>
+      
+      <!-- Text Content -->
+      <div class="order-2 lg:order-1">
+        <div class="inline-flex items-center gap-3 mb-6 px-4 py-1.5 bg-sage/5 rounded-full border border-sage/10 opacity-0" data-animate style="animation-delay: 0.1s; animation-fill-mode: forwards;">
+          <div class="w-1.5 h-1.5 rounded-full bg-sage"></div>
+          <span class="eyebrow !mb-0 !text-xs">Psicóloga General Sanitaria</span>
         </div>
 
-        <h1 class="font-serif text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.12] text-text-primary mb-5 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
-          Encuentra tu <span class="italic text-accent-primary">equilibrio</span> emocional
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-[3.25rem] leading-[1.1] text-text-primary mb-6 opacity-0" data-animate style="animation-delay: 0.2s; animation-fill-mode: forwards;">
+          Encuentra tu <span class="italic text-sage">equilibrio</span> emocional
         </h1>
 
-        <p class="text-base lg:text-[17px] text-text-secondary leading-relaxed max-w-md mb-7 opacity-0 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: forwards;">
-          Un espacio seguro donde trabajar tu bienestar con acompañamiento profesional, cercano y basado en evidencia científica.
+        <p class="text-body-lg max-w-lg mb-6 opacity-0" data-animate style="animation-delay: 0.3s; animation-fill-mode: forwards;">
+          Soy María Ángeles Mata, psicóloga en Córdoba. Un espacio seguro donde trabajar tu bienestar con acompañamiento profesional, cercano y basado en evidencia científica.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-3 mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.4s; animation-fill-mode: forwards;">
+        <!-- Specialties -->
+        <div class="flex flex-wrap gap-2 mb-8 opacity-0" data-animate style="animation-delay: 0.35s; animation-fill-mode: forwards;">
+          <span class="px-3 py-1 bg-bg-muted text-text-secondary text-sm rounded-lg border border-border-light">Terapia Individual</span>
+          <span class="px-3 py-1 bg-bg-muted text-text-secondary text-sm rounded-lg border border-border-light">Terapia de Pareja</span>
+          <span class="px-3 py-1 bg-bg-muted text-text-secondary text-sm rounded-lg border border-border-light">Terapia Familiar</span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 mb-8 opacity-0" data-animate style="animation-delay: 0.4s; animation-fill-mode: forwards;">
           <a href="/contact" class="btn btn-primary">
             <span>Reservar consulta</span>
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,53 +40,46 @@
           <a href="#servicios" class="btn btn-outline">Ver servicios</a>
         </div>
 
-        <!-- Info Pills -->
-        <div class="flex flex-wrap gap-2 opacity-0 animate-fade-in-up" style="animation-delay: 0.5s; animation-fill-mode: forwards;">
+        <div class="flex flex-wrap items-center gap-4 opacity-0" data-animate style="animation-delay: 0.5s; animation-fill-mode: forwards;">
           <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-bg-surface border border-border-light rounded-full text-sm text-text-secondary">
             <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Colegiada nº AN-01452
+            Colegiada AN-01452
           </span>
           <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-bg-surface border border-border-light rounded-full text-sm text-text-secondary">
             <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
-            Centro de Córdoba
+            Confidencialidad garantizada
           </span>
         </div>
       </div>
 
-      <!-- Image - Forma original pero menos alta -->
-      <div class="order-1 lg:order-2 relative opacity-0 animate-fade-in-up" style="animation-delay: 0.3s; animation-fill-mode: forwards;">
-        <div class="absolute -inset-3 lg:-inset-4 border border-border-light/50 rounded-t-full rounded-b-[2rem] hidden md:block"></div>
+      <!-- Image Column -->
+      <div class="order-1 lg:order-2 relative opacity-0" data-animate style="animation-delay: 0.3s; animation-fill-mode: forwards;">
+        <div class="absolute -inset-3 lg:-inset-5 border border-border-light/40 rounded-t-full rounded-b-[2.5rem] hidden lg:block" aria-hidden="true"></div>
         
-        <!-- Aspect ratio reducido de 4/5 a 3/4 para menos altura -->
-        <div class="relative aspect-[3/4] max-w-xs mx-auto lg:max-w-sm overflow-hidden rounded-t-full rounded-b-[2rem] shadow-xl">
+        <div class="relative aspect-[4/3] sm:aspect-[3/2] lg:aspect-[1/1] overflow-hidden rounded-t-full rounded-b-[2.5rem] shadow-2xl shadow-sage/5">
           <img
-            src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1200&q=80"
+            src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80"
             alt="María Ángeles Mata - Psicóloga en Córdoba"
-            class="w-full h-full object-cover grayscale-[15%] hover:grayscale-0 transition-all duration-700 hover:scale-105"
-            width="450"
+            class="w-full h-full object-cover grayscale-[10%] hover:grayscale-0 transition-all duration-700 hover:scale-105"
+            width="600"
             height="600"
             loading="eager"
             fetchpriority="high"
           />
         </div>
 
-        <!-- Floating Card - reposicionado -->
-        <div class="absolute -bottom-3 -left-3 lg:-left-5 bg-bg-surface px-4 py-3 rounded-xl shadow-lg border border-border-light opacity-0 animate-fade-in-up" style="animation-delay: 0.6s; animation-fill-mode: forwards;">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-sage/10 flex items-center justify-center">
-              <svg class="w-5 h-5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <span class="font-serif text-xl text-text-primary leading-none">15+</span>
-              <p class="text-xs text-text-secondary">Años de experiencia</p>
-            </div>
+        <!-- Location badge -->
+        <div class="absolute bottom-4 left-4 lg:bottom-6 lg:left-6 bg-bg-surface/95 backdrop-blur-sm px-4 py-2.5 rounded-xl shadow-lg border border-border-light opacity-0" data-animate style="animation-delay: 0.5s; animation-fill-mode: forwards;">
+          <div class="flex items-center gap-2 text-text-primary">
+            <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+            </svg>
+            <span class="text-sm font-medium">C/ Rodríguez Sánchez, Córdoba</span>
           </div>
         </div>
       </div>
@@ -89,17 +89,11 @@
 
 <style>
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   
-  .animate-fade-in-up {
+  [data-animate] {
     animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 </style>

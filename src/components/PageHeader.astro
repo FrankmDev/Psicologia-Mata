@@ -10,12 +10,11 @@ const { label, title, highlight, description } = Astro.props;
 ---
 
 <header class="section-sm bg-text-primary relative overflow-hidden">
-  <!-- Background effects -->
-  <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;"></div>
-  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sage/5 to-transparent"></div>
+  <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;" aria-hidden="true"></div>
+  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sage/5 to-transparent" aria-hidden="true"></div>
   
   <div class="container-elegant relative z-10">
-    <div class="inline-flex items-center gap-3 mb-5 px-4 py-1.5 bg-white/5 rounded-full border border-white/10">
+    <div class="section-label-dark mb-5">
       <div class="w-4 h-px bg-sage/50"></div>
       <span class="text-xs text-sage/80 font-medium tracking-wider uppercase">{label}</span>
     </div>

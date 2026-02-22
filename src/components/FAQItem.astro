@@ -10,9 +10,9 @@ const { question, index, class: className = '' } = Astro.props;
 
 <details class={`group bg-bg-surface rounded-xl border border-border-light transition-all duration-300 hover:border-sage/20 hover:shadow-sm open:shadow-md open:border-sage/20 open:bg-sage/[0.02] ${className}`}>
   <summary class="flex cursor-pointer items-center justify-between gap-4 p-5 lg:p-6 select-none list-none">
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 min-w-0">
       {index !== undefined && (
-        <span class="flex items-center justify-center w-7 h-7 rounded-full bg-sage/10 text-sage text-xs font-semibold shrink-0 transition-colors group-hover:bg-sage group-hover:text-white">
+        <span class="flex items-center justify-center w-7 h-7 rounded-full bg-sage/10 text-sage text-xs font-semibold shrink-0 transition-colors group-hover:bg-sage group-hover:text-white group-open:bg-sage group-open:text-white">
           {String(index + 1).padStart(2, '0')}
         </span>
       )}
@@ -20,18 +20,19 @@ const { question, index, class: className = '' } = Astro.props;
         {question}
       </h3>
     </div>
-    <div class="w-9 h-9 rounded-full bg-bg-muted flex items-center justify-center shrink-0 group-hover:bg-sage/10 transition-all duration-300 group-open:bg-sage group-open:rotate-180">
+    <div class="w-9 h-9 rounded-full bg-bg-muted flex items-center justify-center shrink-0 transition-all duration-300 group-hover:bg-sage/10 group-open:bg-sage group-open:rotate-180">
       <svg 
         class="w-4 h-4 text-text-secondary group-hover:text-sage transition-colors group-open:text-white" 
         fill="none" 
         viewBox="0 0 24 24" 
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
       </svg>
     </div>
   </summary>
-  <div class="px-5 lg:px-6 pb-5 lg:pb-6 pl-[3.25rem] lg:pl-[3.75rem] text-text-secondary text-sm leading-relaxed animate-fade-in">
+  <div class="px-5 lg:px-6 pb-5 lg:pb-6 pl-[3.25rem] lg:pl-[3.75rem] text-body animate-fade-in">
     <slot />
   </div>
 </details>
