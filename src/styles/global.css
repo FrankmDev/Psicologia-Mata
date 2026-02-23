@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-base: #FAFAF9;
+  --color-bg-base: #f6f4f2;
   --color-bg-surface: #FFFFFF;
   --color-bg-muted: #F3F2F0;
   --color-text-primary: #1E2420;
   --color-text-secondary: #58615A;
   --color-text-tertiary: #89908B;
-  --color-accent-primary: #869D8A;
-  --color-accent-primary-hover: #718775;
+  --color-accent-primary: #707f62;
+  --color-accent-primary-hover: #5a6650;
   --color-accent-secondary: #D6CFC7;
   --color-border-light: rgba(30, 36, 32, 0.06);
   --color-border-medium: rgba(30, 36, 32, 0.12);
   --color-charcoal: #1E2420;
   --color-ivory: #FAFAF9;
   --color-cream: #F8F6F3;
-  --color-sage: #869D8A;
-  --color-sage-dark: #718775;
+  --color-sage: #707f62;
+  --color-sage-dark: #5a6650;
   --color-mist: #C5CBC7;
   --color-stone: #8B9088;
 
@@ -53,7 +53,7 @@
   }
 
   ::selection {
-    background-color: rgba(134, 157, 138, 0.2);
+    background-color: rgba(112, 127, 98, 0.2);
   }
 }
 
@@ -128,7 +128,7 @@
   .divider-sage {
     width: 3rem;
     height: 1px;
-    background-color: rgba(134, 157, 138, 0.5);
+    background-color: rgba(112, 127, 98, 0.5);
   }
 
   /* BUTTONS */

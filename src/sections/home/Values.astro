@@ -1,38 +1,75 @@
 ---
+const values = [
+  {
+    title: 'Confidencialidad',
+    description: 'Todo lo que compartes permanece en un espacio seguro y privado.',
+    icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z',
+  },
+  {
+    title: 'Compromiso',
+    description: 'Acompañamiento constante en cada paso de tu camino terapéutico.',
+    icon: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Rigor',
+    description: 'Técnicas basadas en evidencia científica y formación continua.',
+    icon: 'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5',
+  },
+  {
+    title: 'Empatía',
+    description: 'Escucha activa y comprensión profunda de tu situación.',
+    icon: 'M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z',
+  },
+];
 ---
 
-<section class="bg-sage relative overflow-hidden" id="valores">
+<section class="bg-sage relative overflow-hidden py-20 lg:py-28" id="valores">
   <div class="absolute inset-0 bg-grain opacity-[0.03]" aria-hidden="true"></div>
+  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" aria-hidden="true"></div>
+  <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" aria-hidden="true"></div>
   
-  <div class="container-elegant relative z-10 py-16 lg:py-20">
-    <div class="max-w-3xl mx-auto text-center opacity-0" data-animate>
-      <!-- Decorative opener -->
-      <div class="flex justify-center mb-8">
-        <div class="w-px h-12 bg-white/20"></div>
+  <div class="container-elegant relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div class="opacity-0" data-animate>
+        <p class="text-white/50 text-sm uppercase tracking-[0.2em] mb-4">Mi compromiso</p>
+        <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-6">
+          Principios que guían cada <span class="italic font-light">sesión</span>
+        </h2>
+        <p class="text-white/70 text-lg leading-relaxed mb-8">
+          Un entorno seguro donde construir la confianza necesaria para el trabajo terapéutico.
+        </p>
+        
+        <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 rounded-full text-sm font-medium text-white hover:bg-white hover:text-sage transition-all duration-300">
+          <span>Conoce mi enfoque</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+          </svg>
+        </a>
       </div>
       
-      <p class="text-white/50 text-sm uppercase tracking-[0.2em] mb-6">Mi compromiso</p>
-      
-      <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-white leading-[1.3] mb-8">
-        Tu bienestar merece un espacio de 
-        <span class="italic font-light">confidencialidad</span>, 
-        <span class="italic font-light">compromiso</span>, 
-        <span class="italic font-light">rigor</span> 
-        y 
-        <span class="italic font-light">empatía</span>
-      </h2>
-      
-      <p class="text-white/60 text-base lg:text-lg leading-relaxed max-w-xl mx-auto mb-10">
-        Cuatro principios que guían cada sesión y construyen la confianza necesaria para el trabajo terapéutico.
-      </p>
-      
-      <!-- Decorative closer -->
-      <div class="flex justify-center items-center gap-4">
-        <div class="w-8 h-px bg-white/20"></div>
-        <svg class="w-5 h-5 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-        <div class="w-8 h-px bg-white/20"></div>
+      <div class="space-y-4">
+        {values.map((value, index) => (
+          <div 
+            class="group flex items-start gap-4 p-4 rounded-xl transition-all duration-300 hover:bg-white/5 opacity-0"
+            data-animate
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <div class="shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white transition-all duration-300 group-hover:bg-white group-hover:text-sage">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={value.icon} />
+              </svg>
+            </div>
+            
+            <div class="flex-1 pt-1">
+              <h3 class="font-serif text-lg text-white mb-1 group-hover:text-white/90 transition-colors">
+                {value.title}
+              </h3>
+              <p class="text-white/60 text-sm leading-relaxed">
+                {value.description}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   </div>

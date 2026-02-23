@@ -2,9 +2,37 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ServiceCard from '../components/ServiceCard.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { allServices } from '../data/services';
+
+const serviceImages: Record<string, string> = {
+  individual: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1200&q=80',
+  pareja: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80',
+  familiar: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=800&q=80',
+  evaluacion: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80',
+  cognitiva: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80',
+};
+
+const stats = [
+  { value: '15+', label: 'Años de experiencia' },
+  { value: '500+', label: 'Pacientes atendidos' },
+  { value: '50min', label: 'Por sesión' },
+];
+
+const faqs = [
+  {
+    question: '¿Cuánto dura una sesión de terapia?',
+    answer: 'Las sesiones de terapia individual duran 50 minutos. Las sesiones de pareja duran 60 minutos y las familiares 75 minutos.',
+  },
+  {
+    question: '¿Necesito acudir cada semana?',
+    answer: 'La frecuencia se determina según tus necesidades. Generalmente empezamos con sesiones semanales y ajustamos según tu progreso.',
+  },
+  {
+    question: '¿Cómo sé qué servicio necesito?',
+    answer: 'En la primera consulta valoramos tu situación y te recomiendo el enfoque más adecuado.',
+  },
+];
 ---
 
 <Layout 
@@ -21,13 +49,132 @@ import { allServices } from '../data/services';
       description="Terapia individual, de pareja y familiar en Córdoba. Atención presencial y a domicilio."
     />
 
-    <section class="section bg-ivory" aria-labelledby="services-heading">
-      <div class="container-elegant max-w-4xl">
-        <h2 id="services-heading" class="sr-only">Nuestros servicios</h2>
+    <section class="bg-bg-base">
+      <div class="container-elegant">
+        <div class="grid grid-cols-3 gap-4 lg:gap-8 py-8 lg:py-12 border-b border-border-light">
+          {stats.map((stat, index) => (
+            <div 
+              class="text-center opacity-0"
+              data-animate
+              style={`animation-delay: ${index * 0.1}s`}
+            >
+              <div class="font-serif text-2xl lg:text-4xl text-sage">{stat.value}</div>
+              <div class="text-[10px] lg:text-xs text-text-tertiary uppercase tracking-wider mt-1">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {allServices.map((service, index) => {
+      const isEven = index % 2 === 0;
+      return (
+        <section 
+          id={service.id}
+          class={`section relative overflow-hidden ${isEven ? 'bg-bg-base' : 'bg-bg-surface'}`}
+        >
+          <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent" aria-hidden="true"></div>
+          
+          <div class="container-elegant">
+            <div class={`grid lg:grid-cols-12 gap-8 lg:gap-16 items-center ${!isEven ? 'lg:flex-row-reverse' : ''}`}>
+              <div class={`lg:col-span-6 relative ${!isEven ? 'lg:order-2' : ''}`}>
+                <div class="absolute -top-4 -left-2 lg:-left-4 font-serif text-[120px] lg:text-[180px] text-sage/5 leading-none select-none pointer-events-none" aria-hidden="true">
+                  {service.number}
+                </div>
+                
+                <div class="relative">
+                  <span class="text-xs text-sage font-medium uppercase tracking-wider">Servicio {service.number}</span>
+                  <h2 class="font-serif text-3xl lg:text-5xl text-text-primary mt-3 mb-6 leading-tight">
+                    {service.title.split(' ').slice(0, -1).join(' ')} <span class="text-sage italic">{service.title.split(' ').slice(-1)}</span>
+                  </h2>
+                  
+                  <p class="text-body text-base lg:text-lg leading-relaxed mb-6 max-w-lg">
+                    {service.description}
+                  </p>
+                  
+                  <div class="flex flex-wrap gap-2 mb-6">
+                    {service.approaches.map((approach) => (
+                      <span class="text-xs px-3 py-1.5 bg-sage/10 text-sage rounded-full border border-sage/20">
+                        {approach}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <div class="flex items-center gap-6">
+                    <a href="/contact" class="btn btn-primary">
+                      <span>Reservar sesión</span>
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+                      </svg>
+                    </a>
+                    <span class="text-sm text-text-tertiary">{service.duration}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class={`lg:col-span-6 ${!isEven ? 'lg:order-1' : ''}`}>
+                <div class="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[3/2] shadow-xl shadow-charcoal/10">
+                  <img 
+                    src={serviceImages[service.id]} 
+                    alt={service.title}
+                    class="w-full h-full object-cover"
+                    width="800"
+                    height="600"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-charcoal/40 via-charcoal/10 to-transparent"></div>
+                  
+                  <div class="absolute bottom-4 left-4 lg:bottom-6 lg:left-6">
+                    <div class="w-12 h-12 lg:w-14 lg:h-14 rounded-xl bg-white/95 backdrop-blur-sm flex items-center justify-center text-sage shadow-lg">
+                      <Fragment set:html={service.icon} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    })}
+
+    <section class="section bg-bg-muted" aria-labelledby="faq-heading">
+      <div class="container-elegant max-w-3xl">
+        <div class="text-center mb-10 opacity-0" data-animate>
+          <div class="section-label inline-flex mb-4">
+            <div class="w-5 h-px bg-sage"></div>
+            <span class="eyebrow !mb-0 text-xs">FAQ</span>
+            <div class="w-5 h-px bg-sage"></div>
+          </div>
+          <h2 id="faq-heading" class="font-serif text-2xl lg:text-3xl text-text-primary">
+            Preguntas <span class="italic text-sage">frecuentes</span>
+          </h2>
+        </div>
         
-        <div class="space-y-6">
-          {allServices.map((service, index) => (
-            <ServiceCard {...service} index={index} />
+        <div class="space-y-3">
+          {faqs.map((faq, index) => (
+            <div 
+              class="bg-bg-surface border border-border-light rounded-xl overflow-hidden opacity-0"
+              data-animate
+              style={`animation-delay: ${index * 0.1}s`}
+            >
+              <details class="group">
+                <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+                  <h3 class="font-serif text-base text-text-primary group-hover:text-sage transition-colors pr-4">
+                    {faq.question}
+                  </h3>
+                  <div class="w-7 h-7 rounded-full bg-bg-muted flex items-center justify-center shrink-0 transition-colors group-hover:bg-sage/10">
+                    <svg class="w-4 h-4 text-text-tertiary transition-transform duration-300 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                    </svg>
+                  </div>
+                </summary>
+                <div class="px-5 pb-5">
+                  <p class="text-body text-sm leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              </details>
+            </div>
           ))}
         </div>
       </div>
@@ -36,22 +183,16 @@ import { allServices } from '../data/services';
     <section class="section bg-sage relative overflow-hidden" aria-labelledby="cta-heading">
       <div class="absolute inset-0 bg-grain opacity-[0.03]" aria-hidden="true"></div>
       <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ivory/20 to-transparent" aria-hidden="true"></div>
-      <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ivory/20 to-transparent" aria-hidden="true"></div>
       
       <div class="container-elegant relative text-center">
         <div class="max-w-2xl mx-auto">
-          <div class="mb-6">
-            <div class="inline-flex items-center gap-3 px-4 py-2 border border-ivory/20 rounded-full">
-              <div class="w-1.5 h-1.5 rounded-full bg-ivory animate-pulse"></div>
-              <span class="text-xs font-medium tracking-widest uppercase text-ivory/70">Sin compromiso</span>
-            </div>
-          </div>
-          
-          <h2 id="cta-heading" class="font-serif text-3xl lg:text-4xl text-ivory mb-4">¿No sabes qué servicio necesitas?</h2>
-          <p class="text-ivory/70 max-w-md mx-auto mb-8 leading-relaxed">
-            En la primera consulta valoramos tu situación y te recomiendo el enfoque más adecuado para ti.
+          <h2 id="cta-heading" class="font-serif text-3xl lg:text-4xl text-ivory mb-4 opacity-0" data-animate>
+            ¿Listo para empezar?
+          </h2>
+          <p class="text-ivory/70 max-w-md mx-auto mb-8 leading-relaxed opacity-0" data-animate style="animation-delay: 0.1s">
+            La primera consulta es una oportunidad para conocernos y valorar cómo puedo ayudarte.
           </p>
-          <a href="/contact" class="btn btn-light">
+          <a href="/contact" class="btn btn-light opacity-0" data-animate style="animation-delay: 0.2s">
             <span>Pedir consulta</span>
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />

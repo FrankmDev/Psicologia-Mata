@@ -4,6 +4,11 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import { blogPostsList } from '../../data/blog';
+
+const featuredPost = blogPostsList[0];
+const recentPosts = blogPostsList.slice(1);
+
+const categories = [...new Set(blogPostsList.map(post => post.category))];
 ---
 
 <Layout 
@@ -20,48 +25,76 @@ import { blogPostsList } from '../../data/blog';
       description="Artículos sobre psicología, salud mental y crecimiento personal escritos desde la experiencia clínica."
     />
 
-    <section class="section bg-bg-muted">
-      <div class="container-elegant">
-        <div class="space-y-6">
-          {blogPostsList.map((post, index) => (
-            <article class="opacity-0" data-animate style={`animation-delay: ${index * 0.1}s`}>
-              <a href={`/blog/${post.slug}`} class="group block bg-bg-surface rounded-2xl overflow-hidden border border-border-light transition-all duration-500 hover:shadow-card-hover hover:-translate-y-1">
-                <div class="flex flex-col md:flex-row">
-                  <div class="md:w-2/5 lg:w-1/3 relative overflow-hidden">
-                    <div class="aspect-[16/10] md:aspect-auto md:h-full md:absolute md:inset-0">
-                      <img 
-                        src={post.image} 
-                        alt={post.title}
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        width="400"
-                        height="250"
-                        loading={index === 0 ? "eager" : "lazy"}
-                      />
-                      <div class="absolute inset-0 bg-gradient-to-r from-transparent to-bg-surface/20 hidden md:block" aria-hidden="true"></div>
-                    </div>
-                  </div>
+    <section class="section bg-bg-muted relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent" aria-hidden="true"></div>
+      <div class="absolute top-1/4 right-0 w-[30vw] h-[30vw] bg-sage/5 rounded-full blur-[100px] translate-x-1/2 pointer-events-none" aria-hidden="true"></div>
+      <div class="absolute bottom-1/4 left-0 w-[25vw] h-[25vw] bg-accent-secondary/10 rounded-full blur-[80px] -translate-x-1/2 pointer-events-none" aria-hidden="true"></div>
+      
+      <div class="container-elegant relative z-10">
+        
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-12 opacity-0" data-animate>
+          <span class="text-xs text-text-tertiary uppercase tracking-wider">Temas:</span>
+          {categories.map((category) => (
+            <span class="px-3 py-1.5 bg-bg-surface border border-border-light rounded-full text-xs text-text-secondary">
+              {category}
+            </span>
+          ))}
+        </div>
+
+        <article class="mb-16 opacity-0" data-animate style="animation-delay: 0.1s">
+          <a href={`/blog/${featuredPost.slug}`} class="group block">
+            <div class="relative bg-bg-surface rounded-2xl overflow-hidden border border-border-light shadow-sm hover:shadow-xl hover:shadow-sage/5 transition-all duration-500">
+              <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-sage/0 via-sage to-sage/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+              
+              <div class="grid lg:grid-cols-2">
+                <div class="relative aspect-[16/10] lg:aspect-auto lg:h-[400px] overflow-hidden">
+                  <img 
+                    src={featuredPost.image} 
+                    alt={featuredPost.title}
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    width="800"
+                    height="500"
+                    loading="eager"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-bg-surface via-bg-surface/30 to-transparent" aria-hidden="true"></div>
                   
-                  <div class="flex-1 p-6 lg:p-8 flex flex-col justify-center">
-                    <div class="flex items-center gap-3 mb-3">
+                  <div class="absolute top-4 left-4 flex items-center gap-2">
+                    <span class="px-3 py-1.5 bg-sage text-white text-xs font-medium tracking-wider uppercase rounded-full">
+                      Destacado
+                    </span>
+                  </div>
+                </div>
+                
+                <div class="p-8 lg:p-10 flex flex-col justify-center relative">
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-sage/5 rounded-full blur-3xl group-hover:bg-sage/10 transition-colors duration-500" aria-hidden="true"></div>
+                  
+                  <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-4">
                       <span class="px-3 py-1 bg-sage/10 text-sage text-xs font-medium tracking-wider uppercase rounded-full">
-                        {post.category}
+                        {featuredPost.category}
                       </span>
-                      <span class="w-1 h-1 rounded-full bg-text-tertiary/40" aria-hidden="true"></span>
-                      <span class="text-sm text-text-tertiary">{post.readTime}</span>
+                      <span class="flex items-center gap-1.5 text-sm text-text-tertiary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {featuredPost.readTime}
+                      </span>
                     </div>
                     
-                    <h2 class="font-serif text-xl lg:text-2xl text-text-primary mb-3 group-hover:text-sage transition-colors duration-300 leading-snug">
-                      {post.title}
+                    <h2 class="font-serif text-2xl lg:text-3xl text-text-primary mb-4 group-hover:text-sage transition-colors duration-300 leading-snug">
+                      {featuredPost.title}
                     </h2>
                     
-                    <p class="text-body line-clamp-2 mb-4 max-w-2xl">
-                      {post.excerpt}
+                    <p class="text-body leading-relaxed mb-6 max-w-xl">
+                      {featuredPost.excerpt}
                     </p>
                     
-                    <div class="flex items-center justify-between pt-4 border-t border-border-light">
-                      <time class="text-sm text-text-tertiary" datetime={post.date}>{post.date}</time>
-                      <div class="flex items-center gap-2 text-sm font-medium text-sage">
-                        <span>Leer artículo</span>
+                    <div class="flex items-center justify-between pt-5 border-t border-border-light">
+                      <time class="text-sm text-text-tertiary" datetime={featuredPost.date}>
+                        {featuredPost.date}
+                      </time>
+                      <div class="flex items-center gap-2 text-sm font-medium text-sage group-hover:text-sage-dark transition-colors">
+                        <span>Leer artículo completo</span>
                         <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
                         </svg>
@@ -69,9 +102,105 @@ import { blogPostsList } from '../../data/blog';
                     </div>
                   </div>
                 </div>
-              </a>
-            </article>
-          ))}
+              </div>
+            </div>
+          </a>
+        </article>
+
+        {recentPosts.length > 0 && (
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {recentPosts.map((post, index) => (
+              <article class="opacity-0" data-animate style={`animation-delay: ${0.15 + index * 0.08}s`}>
+                <a href={`/blog/${post.slug}`} class="group block h-full">
+                  <div class="relative bg-bg-surface rounded-2xl overflow-hidden border border-border-light transition-all duration-500 hover:shadow-xl hover:shadow-sage/5 hover:border-sage/20 h-full flex flex-col">
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-sage/5 rounded-bl-[3rem] transition-all duration-500 group-hover:w-24 group-hover:h-24 group-hover:bg-sage/10" aria-hidden="true"></div>
+                    
+                    <div class="relative aspect-[16/10] overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        width="400"
+                        height="250"
+                        loading="lazy"
+                      />
+                      <div class="absolute inset-0 bg-gradient-to-t from-bg-surface/60 to-transparent" aria-hidden="true"></div>
+                      
+                      <div class="absolute bottom-3 left-3">
+                        <span class="px-2.5 py-1 bg-bg-surface/90 backdrop-blur-sm text-sage text-xs font-medium tracking-wider uppercase rounded-full">
+                          {post.category}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div class="flex-1 p-6 flex flex-col">
+                      <div class="flex items-center gap-2 text-xs text-text-tertiary mb-3">
+                        <time datetime={post.date}>{post.dateShort}</time>
+                        <span class="w-1 h-1 rounded-full bg-text-tertiary/40" aria-hidden="true"></span>
+                        <span class="flex items-center gap-1">
+                          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {post.readTime}
+                        </span>
+                      </div>
+                      
+                      <h3 class="font-serif text-lg text-text-primary mb-3 group-hover:text-sage transition-colors duration-300 leading-snug flex-1">
+                        {post.title}
+                      </h3>
+                      
+                      <p class="text-sm text-text-secondary line-clamp-2 mb-4">
+                        {post.excerpt}
+                      </p>
+                      
+                      <div class="flex items-center gap-2 text-sm font-medium text-sage pt-4 border-t border-border-light">
+                        <span>Leer más</span>
+                        <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-sage/0 via-sage to-sage/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true"></div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+
+    <section class="section bg-sage relative overflow-hidden">
+      <div class="absolute inset-0 bg-grain opacity-[0.03]" aria-hidden="true"></div>
+      <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ivory/20 to-transparent" aria-hidden="true"></div>
+      <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-ivory/20 to-transparent" aria-hidden="true"></div>
+      
+      <div class="container-elegant relative z-10">
+        <div class="max-w-2xl mx-auto text-center">
+          <div class="mb-6">
+            <div class="inline-flex items-center gap-3 px-4 py-2 border border-ivory/20 rounded-full backdrop-blur-sm bg-ivory/5">
+              <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+              </svg>
+              <span class="text-xs font-medium tracking-widest uppercase text-ivory/80">Aprende más</span>
+            </div>
+          </div>
+          
+          <h2 class="font-serif text-3xl lg:text-4xl text-ivory leading-tight mb-4">
+            ¿Tienes dudas sobre <span class="italic">terapia</span>?
+          </h2>
+          
+          <p class="text-ivory/70 max-w-md mx-auto mb-8 leading-relaxed">
+            Cada persona es única. Si tienes preguntas específicas o quieres saber si la terapia es para ti, puedo ayudarte.
+          </p>
+          
+          <a href="/contact" class="btn btn-light">
+            <span>Hacer una consulta</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
