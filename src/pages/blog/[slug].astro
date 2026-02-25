@@ -18,98 +18,101 @@ if (!post) {
 const title = `${post.title} | María Ángeles Mata`;
 ---
 
-<Layout title={title} description={post.excerpt} image={post.image} type="article">
+<Layout title={title} description={post.excerpt}>
   <Header activePage="Blog" />
   
   <main id="main-content">
-    <article>
-      <header class="section-sm bg-charcoal relative overflow-hidden">
-        <div class="absolute inset-0 bg-grain opacity-[0.02]" aria-hidden="true"></div>
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sage/5 to-transparent" aria-hidden="true"></div>
+    
+    <!-- Header del artículo -->
+    <section class="pt-12 pb-8 bg-charcoal text-cream">
+      <div class="container-editorial">
         
-        <div class="container-elegant relative">
-          <nav class="mb-5" aria-label="Migas de pan">
-            <ol class="flex items-center gap-2 text-sm text-sage/60">
-              <li><a href="/" class="hover:text-sage transition-colors">Inicio</a></li>
-              <li class="text-sage/30" aria-hidden="true">/</li>
-              <li><a href="/blog" class="hover:text-sage transition-colors">Blog</a></li>
-              <li class="text-sage/30" aria-hidden="true">/</li>
-              <li class="text-sage/80" aria-current="page">{post.category}</li>
-            </ol>
-          </nav>
-          
+        <!-- Breadcrumbs -->
+        <nav class="mb-6" aria-label="Migas de pan">
+          <ol class="flex items-center gap-2 text-xs text-cream/50">
+            <li><a href="/" class="hover:text-cream transition-colors">Inicio</a></li>
+            <li class="text-cream/30">/</li>
+            <li><a href="/blog" class="hover:text-cream transition-colors">Blog</a></li>
+            <li class="text-cream/30">/</li>
+            <li class="text-cream/70">{post.category}</li>
+          </ol>
+        </nav>
+        
+        <div class="max-w-3xl" data-reveal>
           <div class="flex items-center gap-3 mb-4">
-            <span class="text-caption text-sage/70 px-3 py-1 bg-sage/10 rounded-full">{post.category}</span>
-            <span class="text-xs text-mist/40">{post.date}</span>
-            <span class="text-xs text-mist/40">· {post.readTime}</span>
+            <span class="tag">{post.category}</span>
+            <span class="text-xs text-cream/50">{post.date}</span>
+            <span class="text-xs text-cream/50">· {post.readTime}</span>
           </div>
           
-          <h1 class="text-headline text-ivory mb-5 max-w-3xl leading-tight">{post.title}</h1>
-          <p class="text-body-lg text-mist/50 max-w-2xl">{post.excerpt}</p>
-        </div>
-      </header>
-      
-      <div class="relative -mt-8 mx-4 lg:mx-auto max-w-5xl">
-        <div class="aspect-[21/9] overflow-hidden rounded-2xl shadow-2xl">
-          <img 
-            src={post.image} 
-            alt={post.title} 
-            class="w-full h-full object-cover"
-            width="1200"
-            height="514"
-            loading="eager"
-          />
+          <h1 class="font-serif text-3xl lg:text-4xl text-cream mb-4 leading-tight">
+            {post.title}
+          </h1>
+          
+          <p class="text-cream/60 text-base leading-relaxed">
+            {post.excerpt}
+          </p>
         </div>
       </div>
-      
-      <div class="section bg-ivory">
-        <div class="max-w-2xl mx-auto px-6 lg:px-8">
-          <div 
-            class="prose prose-lg prose-slate max-w-none
-              prose-headings:font-serif prose-headings:text-charcoal prose-headings:font-normal
-              prose-h2:text-2xl prose-h2:mt-16 prose-h2:mb-5 prose-h2:leading-tight
-              prose-h3:text-xl prose-h3:mt-10 prose-h3:mb-4 prose-h3:leading-snug
-              prose-p:text-stone/80 prose-p:leading-[1.8] prose-p:mb-6 prose-p:text-[15px]
-              prose-a:text-sage prose-a:no-underline hover:prose-a:underline prose-a:font-medium
-              prose-strong:text-charcoal prose-strong:font-medium
-              prose-ul:my-8 prose-ul:space-y-3
-              prose-li:text-stone/80 prose-li:marker:text-sage
-              prose-blockquote:border-l-4 prose-blockquote:border-sage prose-blockquote:bg-sage/5 prose-blockquote:py-5 prose-blockquote:px-6 prose-blockquote:rounded-r-xl prose-blockquote:my-12 prose-blockquote:not-italic
-              prose-figure:my-14 prose-figcaption:text-sm prose-figcaption:text-stone/50 prose-figcaption:text-center prose-figcaption:mt-4
-              prose-img:rounded-2xl prose-img:shadow-lg prose-img:my-10"
-            set:html={post.content}
-          />
-          
-          <footer class="mt-16 pt-10 border-t border-border-light">
-            <div class="card p-6 flex flex-col sm:flex-row items-center sm:items-start gap-5">
-              <div class="w-14 h-14 rounded-full bg-sage/10 flex items-center justify-center shrink-0">
-                <span class="font-serif text-xl text-sage">M</span>
-              </div>
-              <div class="text-center sm:text-left">
-                <p class="font-serif text-lg text-charcoal mb-1">María Ángeles Mata</p>
-                <p class="text-sm text-stone/60 mb-2">Psicóloga General Sanitaria · Colegiada nº AN-01452</p>
-                <p class="text-sm text-stone/70 leading-relaxed">Especialista en terapia individual, de pareja y familiar. 15+ años de experiencia.</p>
-              </div>
+    </section>
+    
+    <!-- Imagen destacada -->
+    <div class="relative -mt-4 mx-4 lg:mx-auto max-w-4xl" data-reveal>
+      <div class="aspect-[21/9] rounded-xl overflow-hidden shadow-xl">
+        <img 
+          src={post.image} 
+          alt={post.title} 
+          class="w-full h-full object-cover"
+          width="1200"
+          height="514"
+          loading="eager"
+        />
+      </div>
+    </div>
+    
+    <!-- Contenido -->
+    <section class="section-sm bg-cream">
+      <div class="max-w-2xl mx-auto px-5">
+        <div 
+          class="prose prose-slate max-w-none
+            prose-headings:font-serif prose-headings:text-charcoal prose-headings:font-normal
+            prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-h2:leading-tight
+            prose-h3:text-lg prose-h3:mt-8 prose-h3:mb-3 prose-h3:leading-snug
+            prose-p:text-stone prose-p:leading-[1.8] prose-p:mb-5 prose-p:text-[15px]
+            prose-a:text-sage prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-charcoal prose-strong:font-medium
+            prose-ul:my-6 prose-ul:space-y-2
+            prose-li:text-stone prose-li:marker:text-sage prose-li:text-[15px]
+            prose-blockquote:border-l-2 prose-blockquote:border-sage prose-blockquote:bg-sage/5 prose-blockquote:py-4 prose-blockquote:px-5 prose-blockquote:rounded-r-lg prose-blockquote:my-8 prose-blockquote:not-italic
+            prose-img:rounded-lg prose-img:shadow-md prose-img:my-6"
+          set:html={post.content}
+        />
+        
+        <!-- Autor -->
+        <footer class="mt-12 pt-8 border-t border-border">
+          <div class="card p-5 flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-sage/10 flex items-center justify-center shrink-0">
+              <span class="font-serif text-lg text-sage">M</span>
             </div>
-          </footer>
-          
-          <div class="mt-10 pt-8 border-t border-border-light">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              <div>
-                <p class="text-sm text-stone/50 mb-3">¿Te ha resultado útil?</p>
-                <a href="/contact" class="btn btn-primary btn-sm">Reservar consulta</a>
-              </div>
-              <a href="/blog" class="text-sm font-medium text-sage hover:text-sage-dark flex items-center gap-2">
-                <svg class="w-4 h-4 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-                </svg>
-                <span>Más artículos</span>
-              </a>
+            <div>
+              <p class="font-serif text-base text-charcoal">María Ángeles Mata</p>
+              <p class="text-xs text-gray">Psicóloga General Sanitaria · Colegiada nº AN-01452</p>
             </div>
           </div>
+        </footer>
+        
+        <!-- Navegación inferior -->
+        <div class="mt-8 pt-6 border-t border-border flex items-center justify-between">
+          <a href="/contact" class="btn btn-sage text-xs">Reservar consulta</a>
+          <a href="/blog" class="text-xs font-medium text-sage hover:text-charcoal flex items-center gap-1.5 transition-colors">
+            <svg class="w-3.5 h-3.5 rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+            </svg>
+            <span>Más artículos</span>
+          </a>
         </div>
       </div>
-    </article>
+    </section>
   </main>
   
   <Footer />

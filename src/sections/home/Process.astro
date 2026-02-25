@@ -1,98 +1,62 @@
 ---
 const steps = [
-  {
-    number: '01',
-    title: 'Primera sesión',
-    subtitle: 'Conocernos',
-    description: 'Un espacio para compartir tu historia, preocupaciones y expectativas.',
-    icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z',
-  },
-  {
-    number: '02',
-    title: 'Evaluación',
-    subtitle: 'Entenderte',
-    description: 'Definimos juntos los objetivos terapéuticos y trazamos un plan adaptado.',
-    icon: 'M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.667 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.667M5.25 4.5l-.1.667A2.25 2.25 0 005.25 6h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.667L9.75 4.5m0 0l.1-.667A2.25 2.25 0 0112 2.25c1.197 0 2.24.808 2.5 1.917l.1.667',
-  },
-  {
-    number: '03',
-    title: 'Intervención',
-    subtitle: 'Trabajar',
-    description: 'Sesiones prácticas con herramientas concretas y efectivas.',
-    icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z',
-  },
-  {
-    number: '04',
-    title: 'Seguimiento',
-    subtitle: 'Crecer',
-    description: 'Evaluamos tu progreso y ajustamos el camino contigo.',
-    icon: 'M4.5 12.75l6 6 9-13.5',
-  },
+  { number: '01', title: 'Primera sesión', subtitle: 'Conocernos', description: 'Compartes tu historia y expectativas en un ambiente de confianza.' },
+  { number: '02', title: 'Evaluación', subtitle: 'Entenderte', description: 'Definimos objetivos terapéuticos y un plan adaptado a ti.' },
+  { number: '03', title: 'Intervención', subtitle: 'Trabajar', description: 'Sesiones prácticas con herramientas basadas en evidencia.' },
+  { number: '04', title: 'Seguimiento', subtitle: 'Crecer', description: 'Evaluamos progreso y ajustamos para mantener tu evolución.' },
 ];
 ---
 
-<section class="section bg-bg-muted relative overflow-hidden" id="proceso">
-  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent" aria-hidden="true"></div>
-  
-  <div class="container-elegant relative z-10">
-    <div class="max-w-xl mb-12 lg:mb-16 opacity-0" data-animate>
-      <div class="section-label mb-5 w-fit">
-        <div class="w-4 h-px bg-sage"></div>
-        <span class="eyebrow !mb-0 text-xs">Proceso terapéutico</span>
+<section class="section bg-cream" id="proceso">
+  <div class="container-editorial">
+    
+    <!-- Header centrado -->
+    <div class="text-center max-w-xl mx-auto mb-12">
+      <div class="justify-center mb-3" data-reveal>
+        <span class="label-section">Proceso terapéutico</span>
       </div>
-      <h2 class="font-serif text-3xl lg:text-4xl text-text-primary leading-tight mb-4">
-        Un camino hacia tu <span class="italic text-sage">bienestar</span>
+      <h2 class="title-section mb-4" data-reveal data-reveal-delay="100">
+        Un camino hacia tu <em>bienestar</em>
       </h2>
-      <p class="text-body">
-        Cada etapa está diseñada para acompañarte de forma progresiva y respetuosa con tu ritmo.
+      <p class="text-body text-sm" data-reveal data-reveal-delay="200">
+        Cada etapa diseñada para acompañarte progresivamente.
       </p>
     </div>
 
-    <div class="relative">
-      <div class="hidden lg:block absolute left-[calc(12.5%+28px)] right-[calc(12.5%+28px)] top-10 h-0.5" aria-hidden="true">
-        <div class="w-full h-full bg-gradient-to-r from-sage/0 via-sage/40 to-sage/0"></div>
-        <div class="absolute inset-0 flex items-center justify-between">
-          <div class="w-8 h-0.5 bg-sage/60"></div>
-          <div class="w-8 h-0.5 bg-sage/60"></div>
-          <div class="w-8 h-0.5 bg-sage/60"></div>
+    <!-- Proceso conectado -->
+    <div class="relative" data-reveal data-reveal-delay="300">
+      
+      <!-- Línea conectora -->
+      <div class="hidden lg:block absolute top-[52px] left-[12.5%] right-[12.5%] h-px bg-sage/20">
+        <div class="absolute inset-0 flex justify-between px-[15%]">
+          <div class="w-1.5 h-1.5 rounded-full bg-sage/40 mt-[-2px]"></div>
+          <div class="w-1.5 h-1.5 rounded-full bg-sage/40 mt-[-2px]"></div>
+          <div class="w-1.5 h-1.5 rounded-full bg-sage/40 mt-[-2px]"></div>
         </div>
       </div>
       
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         {steps.map((step, index) => (
-          <div 
-            class="group relative opacity-0"
-            data-animate 
-            style={`animation-delay: ${index * 0.12}s`}
-          >
-            <article class="relative bg-bg-surface border border-border-light rounded-2xl p-6 transition-all duration-500 hover:shadow-xl hover:shadow-sage/5 hover:border-sage/20 h-full flex flex-col items-center text-center">
+          <div class="group text-center">
+            <div class="card p-6 h-full">
+              
+              <!-- Número -->
               <div class="relative mb-5">
-                <div class="w-16 h-16 rounded-full bg-sage/10 border-2 border-sage/30 flex items-center justify-center text-sage transition-all duration-300 group-hover:bg-sage group-hover:text-white group-hover:border-sage">
-                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d={step.icon} />
-                  </svg>
-                </div>
-                <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-bg-surface border border-sage text-[10px] font-bold text-sage flex items-center justify-center">
-                  {step.number}
+                <div class="w-14 h-14 mx-auto rounded-full border-2 border-sage/20 flex items-center justify-center transition-all group-hover:border-sage group-hover:bg-sage">
+                  <span class="font-serif text-lg text-sage group-hover:text-cream transition-colors">{step.number}</span>
                 </div>
               </div>
               
-              <div class="mb-2">
-                <span class="text-[10px] text-text-tertiary uppercase tracking-wider">{step.subtitle}</span>
-              </div>
-              
-              <h3 class="font-serif text-lg text-text-primary group-hover:text-sage transition-colors duration-300 mb-3">
-                {step.title}
-              </h3>
-              
-              <p class="text-body text-sm leading-relaxed flex-1">
-                {step.description}
-              </p>
-            </article>
+              <p class="text-[10px] text-sage uppercase tracking-wide mb-1">{step.subtitle}</p>
+              <h3 class="font-serif text-xl text-charcoal mb-2 group-hover:text-sage transition-colors">{step.title}</h3>
+              <p class="text-body text-xs leading-relaxed">{step.description}</p>
+            </div>
             
             {index < steps.length - 1 && (
-              <div class="lg:hidden flex items-center justify-center py-2" aria-hidden="true">
-                <div class="w-px h-6 bg-gradient-to-b from-sage/40 to-sage/0"></div>
+              <div class="lg:hidden flex justify-center py-3">
+                <svg class="w-4 h-4 text-sage/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
               </div>
             )}
           </div>
@@ -100,29 +64,35 @@ const steps = [
       </div>
     </div>
     
-    <div class="mt-10 lg:mt-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-8 border-t border-border-light opacity-0" data-animate style="animation-delay: 0.6s">
-      <div class="flex items-center gap-6">
-        <div class="flex items-center gap-2 text-sm text-text-secondary">
-          <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span>50 minutos</span>
+    <!-- Info bottom -->
+    <div class="mt-10 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-sage/10 flex items-center justify-center">
+            <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-charcoal">50 minutos</p>
+            <p class="text-[10px] text-gray">por sesión</p>
+          </div>
         </div>
-        <div class="w-px h-4 bg-border-light hidden sm:block"></div>
-        <div class="flex items-center gap-2 text-sm text-text-secondary">
-          <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-          </svg>
-          <span>Horario flexible</span>
+        
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-lg bg-sage/10 flex items-center justify-center">
+            <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-charcoal">Lunes a Viernes</p>
+            <p class="text-[10px] text-gray">9:00 - 20:00</p>
+          </div>
         </div>
       </div>
       
-      <a href="/contact" class="btn btn-primary">
-        <span>Empezar mi proceso</span>
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-        </svg>
-      </a>
+      <a href="/contact" class="btn btn-sage text-xs">Empezar mi proceso</a>
     </div>
   </div>
 </section>

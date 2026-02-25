@@ -13,106 +13,77 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 inset-x-0 z-50 transition-all duration-500" id="header">
-  <div class="absolute inset-0 bg-bg-base/80 backdrop-blur-xl border-b border-border-light/50" id="header-bg"></div>
+<header class="fixed top-0 inset-x-0 z-50" id="header">
+  <div class="absolute inset-0 bg-cream/0 backdrop-blur-0 transition-all duration-300" id="header-bg"></div>
 
-  <div class="container-elegant relative">
+  <div class="container-wide relative">
     <div class="flex items-center justify-between h-16 lg:h-20">
-      <a href="/" class="flex items-center gap-3 group" aria-label="María Ángeles Mata - Inicio">
-        <div class="w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-sage/10 flex items-center justify-center transition-all duration-300 group-hover:bg-sage group-hover:scale-105">
-          <span class="font-serif text-base lg:text-lg text-sage group-hover:text-white italic transition-colors">M</span>
+      
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2.5 group relative z-10">
+        <div class="w-9 h-9 rounded-lg bg-sage/10 flex items-center justify-center group-hover:bg-sage transition-colors">
+          <span class="font-serif text-base text-sage group-hover:text-cream italic transition-colors">M</span>
         </div>
         <div class="hidden sm:block">
-          <span class="font-serif text-sm lg:text-base text-text-primary tracking-tight block leading-tight">María Ángeles Mata</span>
-          <span class="text-[10px] lg:text-xs text-text-secondary tracking-wide">Psicóloga Clínica</span>
+          <span class="font-serif text-sm text-charcoal block leading-tight">María Ángeles Mata</span>
+          <span class="text-[10px] text-gray uppercase tracking-wider">Psicóloga</span>
         </div>
       </a>
 
-      <nav class="hidden lg:flex items-center" aria-label="Navegación principal">
-        <div class="flex items-center gap-1 bg-bg-muted/50 rounded-full p-1 border border-border-light/50">
-          {navLinks.map((link) => (
-            <a
-              href={link.href}
-              class={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                activePage === link.label 
-                  ? "bg-bg-surface text-text-primary shadow-sm" 
-                  : "text-text-secondary hover:text-text-primary hover:bg-bg-surface/50"
-              }`}
-              aria-current={activePage === link.label ? "page" : undefined}
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </nav>
-
-      <div class="hidden lg:block">
-        <a href="/contact" class="btn btn-primary btn-sm">
-          <span>Reservar cita</span>
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-          </svg>
-        </a>
-      </div>
-
-      <button
-        class="lg:hidden relative z-50 p-2 text-text-primary flex items-center justify-center w-10 h-10 rounded-full hover:bg-bg-muted transition-colors"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        id="menu-toggle"
-      >
-        <div class="flex flex-col justify-center items-center gap-1.5 w-5 h-5">
-          <span class="w-5 h-0.5 bg-current transition-all duration-300 origin-center block" id="menu-line-1"></span>
-          <span class="w-5 h-0.5 bg-current transition-all duration-300 origin-center block" id="menu-line-2"></span>
-        </div>
-      </button>
-    </div>
-  </div>
-
-  <div
-    class="lg:hidden fixed inset-0 bg-bg-base/98 backdrop-blur-2xl z-40 opacity-0 pointer-events-none transition-all duration-500"
-    id="mobile-menu"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Menú de navegación"
-  >
-    <div class="flex flex-col h-full pt-24 pb-8 container-elegant">
-      <nav class="flex flex-col gap-2 mt-8" aria-label="Navegación móvil">
-        {navLinks.map((link, index) => (
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-8 relative z-10">
+        {navLinks.map((link) => (
           <a
             href={link.href}
-            class={`px-4 py-3 rounded-xl text-lg font-medium transition-all duration-300 ${
-              activePage === link.label
-                ? "bg-sage/10 text-sage"
-                : "text-text-primary hover:bg-bg-muted"
+            class={`text-sm transition-colors ${
+              activePage === link.label ? "text-charcoal font-medium" : "text-gray hover:text-charcoal"
             }`}
-            style={`animation-delay: ${index * 0.05}s`}
-            aria-current={activePage === link.label ? "page" : undefined}
           >
             {link.label}
           </a>
         ))}
       </nav>
 
-      <div class="mt-auto flex flex-col gap-4">
-        <a href="/contact" class="btn btn-primary btn-full">
-          <span>Reservar cita</span>
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+      <!-- CTA -->
+      <div class="hidden lg:flex items-center gap-3 relative z-10">
+        <a href="tel:+34661471971" class="w-8 h-8 rounded-full border border-border flex items-center justify-center text-gray hover:text-sage hover:border-sage/30 transition-colors">
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
           </svg>
         </a>
-        <a href="tel:+34661471971" class="text-center text-text-secondary hover:text-text-primary transition-colors text-sm py-2">
-          Llamar: 661 471 971
-        </a>
+        <a href="/contact" class="btn btn-sage text-[10px] py-2.5 px-4">Reservar</a>
+      </div>
+
+      <!-- Mobile Toggle -->
+      <button class="lg:hidden relative z-10 p-2" id="menu-toggle" aria-label="Menu">
+        <div class="flex flex-col gap-1 w-5">
+          <span class="w-5 h-0.5 bg-charcoal transition-transform origin-center" id="menu-line-1"></span>
+          <span class="w-5 h-0.5 bg-charcoal transition-transform origin-center" id="menu-line-2"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="lg:hidden fixed inset-0 bg-cream z-40 opacity-0 pointer-events-none transition-opacity" id="mobile-menu">
+    <div class="container-wide pt-24">
+      <nav class="flex flex-col gap-1">
+        {navLinks.map((link) => (
+          <a href={link.href} class="py-3 text-xl font-serif text-charcoal hover:text-sage transition-colors">
+            {link.label}
+          </a>
+        ))}
+      </nav>
+      <div class="mt-8 pt-8 border-t border-border">
+        <a href="/contact" class="btn btn-sage w-full justify-center">Reservar consulta</a>
       </div>
     </div>
   </div>
 </header>
 
-<div class="h-16 lg:h-20" aria-hidden="true"></div>
+<div class="h-16 lg:h-20"></div>
 
 <script>
-  const header = document.getElementById("header");
   const headerBg = document.getElementById("header-bg");
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
@@ -121,43 +92,25 @@ const navLinks = [
   let menuOpen = false;
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 10) {
-      headerBg?.classList.add("shadow-sm");
-      headerBg?.classList.replace("bg-bg-base/80", "bg-bg-base/95");
+    if (window.scrollY > 20) {
+      headerBg?.classList.add('bg-cream/90', 'backdrop-blur-xl', 'shadow-sm');
     } else {
-      headerBg?.classList.remove("shadow-sm");
-      headerBg?.classList.replace("bg-bg-base/95", "bg-bg-base/80");
+      headerBg?.classList.remove('bg-cream/90', 'backdrop-blur-xl', 'shadow-sm');
     }
   }, { passive: true });
 
-  function toggleMenu() {
+  menuToggle?.addEventListener("click", () => {
     menuOpen = !menuOpen;
     if (menuOpen) {
       mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
       document.body.style.overflow = "hidden";
-      menuToggle?.setAttribute("aria-expanded", "true");
-      if (line1 && line2) {
-        line1.style.transform = "translateY(4px) rotate(45deg)";
-        line2.style.transform = "translateY(-4px) rotate(-45deg)";
-      }
+      line1 && (line1.style.transform = "translateY(3px) rotate(45deg)");
+      line2 && (line2.style.transform = "translateY(-3px) rotate(-45deg)");
     } else {
       mobileMenu?.classList.add("opacity-0", "pointer-events-none");
       document.body.style.overflow = "";
-      menuToggle?.setAttribute("aria-expanded", "false");
-      if (line1 && line2) {
-        line1.style.transform = "none";
-        line2.style.transform = "none";
-      }
+      line1 && (line1.style.transform = "none");
+      line2 && (line2.style.transform = "none");
     }
-  }
-
-  menuToggle?.addEventListener("click", toggleMenu);
-  mobileMenu?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => { if (menuOpen) toggleMenu(); });
-  });
-
-  // Close on escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && menuOpen) toggleMenu();
   });
 </script>

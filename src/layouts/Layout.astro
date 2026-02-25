@@ -4,37 +4,9 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
-  image?: string;
-  type?: string;
 }
 
-const {
-  title,
-  description = "María Ángeles Mata — Psicóloga General Sanitaria en Córdoba. Terapia individual, de pareja y familiar.",
-  image = "/og-image.jpg",
-  type = "website",
-} = Astro.props;
-
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://psicologamata.es");
-
-const schemaOrg = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  name: "María Ángeles Mata - Psicóloga Clínica",
-  description,
-  url: "https://psicologamata.es",
-  telephone: "+34661471971",
-  email: "mangelesmatacala@hotmail.com",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "C/ Rodríguez Sánchez, 22",
-    addressLocality: "Córdoba",
-    postalCode: "14003",
-    addressCountry: "ES"
-  },
-  priceRange: "€€",
-  openingHours: "Mo-Fr 09:00-20:00"
-};
+const { title, description = "María Ángeles Mata — Psicóloga en Córdoba" } = Astro.props;
 ---
 
 <!doctype html>
@@ -42,91 +14,49 @@ const schemaOrg = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#FDFCFA" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href={canonicalURL} />
     
-    <!-- Open Graph -->
-    <meta property="og:type" content={type} />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(image, Astro.site || "https://psicologamata.es")} />
-    <meta property="og:locale" content="es_ES" />
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    
-    <!-- Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
-    
-    <style is:inline>
-      @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
-          animation-duration: 0.01ms !important;
-          transition-duration: 0.01ms !important;
-        }
-      }
-    </style>
   </head>
   
-  <body class="bg-bg-base text-text-primary antialiased">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-text-primary focus:text-bg-base focus:rounded-lg text-sm">
+  <body class="bg-cream text-charcoal antialiased selection:bg-sage/20">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-3 focus:py-2 focus:bg-charcoal focus:text-cream focus:rounded-lg focus:text-xs">
       Saltar al contenido
     </a>
     
     <slot />
     
-    <div id="scroll-progress" class="fixed top-0 left-0 h-0.5 bg-sage z-50 origin-left scale-x-0 transition-transform"></div>
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] z-50 bg-sage origin-left scale-x-0 transition-transform duration-100"></div>
   </body>
 </html>
 
 <script>
-  // Scroll Progress
+  // Scroll progress
   const progress = document.getElementById('scroll-progress');
-  
-  function updateProgress() {
-    const scrollTop = window.scrollY;
+  window.addEventListener('scroll', () => {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    if (progress) {
-      progress.style.transform = `scaleX(${scrollTop / docHeight})`;
+    if (progress && docHeight > 0) {
+      progress.style.transform = `scaleX(${window.scrollY / docHeight})`;
     }
-  }
-  
-  window.addEventListener('scroll', updateProgress, { passive: true });
+  }, { passive: true });
 
-  // Global Scroll Reveal Observer
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-reveal');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+  // Reveal animations
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const delay = parseInt(entry.target.getAttribute('data-reveal-delay') || '0');
+        setTimeout(() => entry.target.classList.add('is-visible'), delay);
+        observer.unobserve(entry.target);
+      }
+    }),
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
   );
 
-  function initRevealElements() {
-    document.querySelectorAll('[data-animate]').forEach((el) => {
-      if (!el.classList.contains('animate-reveal')) {
-        revealObserver.observe(el);
-      }
-    });
-  }
-
-  initRevealElements();
-
-  // Re-init on page navigation
-  document.addEventListener('astro:page-load', initRevealElements);
+  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 </script>

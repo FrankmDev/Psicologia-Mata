@@ -3,51 +3,42 @@ import FAQItem from '../../components/FAQItem.astro';
 import { faqs } from '../../data/faqs';
 ---
 
-<section class="section bg-bg-base relative overflow-hidden" id="faqs">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-sage/[0.02] to-transparent" aria-hidden="true"></div>
-  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent" aria-hidden="true"></div>
-  <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent" aria-hidden="true"></div>
-  
-  <div class="container-elegant relative z-10">
-    <div class="max-w-3xl mx-auto">
-      <div class="text-center mb-12 opacity-0" data-animate>
-        <div class="section-label inline-flex mb-4">
-          <div class="w-4 h-px bg-sage"></div>
-          <span class="eyebrow !mb-0 text-xs">Preguntas frecuentes</span>
-          <div class="w-4 h-px bg-sage"></div>
-        </div>
-        
-        <h2 class="font-serif text-3xl lg:text-4xl text-text-primary leading-tight">
-          Resolvemos tus <span class="italic text-sage">dudas</span>
-        </h2>
+<section class="section bg-warm/30" id="faqs">
+  <div class="container-editorial">
+    
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div class="justify-center mb-3" data-reveal>
+        <span class="label-section">Preguntas frecuentes</span>
       </div>
       
-      <div class="space-y-3 mb-10">
-        {faqs.map((faq, index) => (
-          <div class="opacity-0" data-animate style={`animation-delay: ${index * 0.08}s`}>
-            <FAQItem question={faq.question} index={index}>
-              {faq.answer}
-            </FAQItem>
-          </div>
-        ))}
-      </div>
-      
-      <div class="relative p-8 bg-sage rounded-2xl overflow-hidden opacity-0" data-animate style="animation-delay: 0.4s">
-        <div class="absolute inset-0 opacity-5" aria-hidden="true">
-          <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 20px 20px;"></div>
+      <h2 class="title-section" data-reveal data-reveal-delay="100">
+        Resolvemos tus <em>dudas</em>
+      </h2>
+    </div>
+    
+    <!-- FAQs -->
+    <div class="max-w-2xl mx-auto space-y-3 mb-10">
+      {faqs.map((faq, index) => (
+        <div data-reveal data-reveal-delay={150 + index * 60}>
+          <FAQItem question={faq.question} index={index}>
+            {faq.answer}
+          </FAQItem>
         </div>
+      ))}
+    </div>
+    
+    <!-- CTA Card -->
+    <div class="max-w-2xl mx-auto" data-reveal data-reveal-delay="500">
+      <div class="bg-sage rounded-xl p-6 lg:p-8 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 16px 16px;"></div>
         
-        <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-5">
+        <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div class="text-center sm:text-left">
-            <p class="text-ivory/80 text-sm mb-1">¿Tienes otra pregunta?</p>
-            <p class="text-ivory font-serif text-xl">Estoy aquí para ayudarte</p>
+            <p class="text-cream/60 text-xs mb-1">¿Tienes otra pregunta?</p>
+            <p class="font-serif text-xl text-cream">Estoy aquí para ayudarte</p>
           </div>
-          <a href="/contact" class="btn btn-light flex-shrink-0">
-            <span>Contacta conmigo</span>
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-            </svg>
-          </a>
+          <a href="/contact" class="btn btn-cream text-xs shrink-0">Contacta conmigo</a>
         </div>
       </div>
     </div>

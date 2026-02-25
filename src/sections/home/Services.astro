@@ -8,103 +8,99 @@ const serviceImages = [
 ];
 ---
 
-<section class="section bg-bg-base relative overflow-hidden" id="servicios">
-  <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border-medium to-transparent" aria-hidden="true"></div>
-  <div class="absolute bottom-0 left-1/4 w-80 h-80 bg-sage/5 rounded-full blur-[100px]" aria-hidden="true"></div>
-  
-  <div class="container-elegant relative z-10">
-    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 opacity-0" data-animate>
-      <div>
-        <div class="section-label mb-5 w-fit">
-          <div class="w-4 h-px bg-sage"></div>
-          <span class="eyebrow !mb-0 text-xs">Áreas de Especialidad</span>
+<section class="section bg-warm/50" id="servicios">
+  <div class="container-wide">
+    
+    <!-- Header alineado -->
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-10">
+      <div data-reveal>
+        <div class="mb-3">
+          <span class="label-section">Áreas de especialidad</span>
         </div>
-        <h2 class="font-serif text-3xl lg:text-4xl text-text-primary leading-tight">
-          Acompañamiento <span class="italic text-sage">especializado</span>
+        <h2 class="title-section">
+          Acompañamiento <em>especializado</em>
         </h2>
       </div>
       
-      <a href="/services" class="btn btn-outline btn-sm self-start lg:self-auto group/btn">
-        <span>Ver todos</span>
-        <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-        </svg>
-      </a>
+      <div class="flex items-center gap-6" data-reveal data-reveal-delay="100">
+        <p class="text-body max-w-xs hidden xl:block text-sm">
+          Cada servicio diseñado para tus necesidades específicas.
+        </p>
+        <a href="/services" class="btn btn-outline text-xs py-2.5 px-5">Ver todos</a>
+      </div>
     </div>
 
-    <div class="relative">
-      <div class="flex gap-6 overflow-x-auto pb-4 lg:pb-0 lg:overflow-visible scrollbar-hide -mx-4 px-4 lg:mx-0 lg:px-0">
-        {mainServices.map((service, index) => (
-          <a 
-            href="/services" 
-            class="group relative shrink-0 w-[280px] lg:w-[calc(33.333%-16px)] lg:shrink opacity-0 cursor-pointer"
-            data-animate
-            style={`animation-delay: ${(index + 1) * 0.12}s`}
-          >
-            <article class="relative bg-bg-surface border border-border-light rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-sage/5 hover:border-sage/20 h-full flex flex-col">
-              <div class="relative h-52 overflow-hidden">
-                <img 
-                  src={serviceImages[index]} 
-                  alt={service.title}
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  width="400"
-                  height="300"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
-                <div class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent"></div>
-                
-                <div class="absolute top-4 left-4 w-11 h-11 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center text-sage transition-all duration-300 group-hover:bg-sage group-hover:text-white">
-                  <Fragment set:html={service.icon} />
-                </div>
-                
-                <div class="absolute bottom-4 left-4 right-4">
-                  <h3 class="font-serif text-xl text-white group-hover:text-sage transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                </div>
+    <!-- Grid compacto -->
+    <div class="grid md:grid-cols-3 gap-5">
+      {mainServices.map((service, index) => (
+        <a href="/services" class="group block" data-reveal data-reveal-delay={100 + index * 100}>
+          <article class="card h-full flex flex-col">
+            
+            <!-- Imagen más compacta -->
+            <div class="relative h-48 overflow-hidden">
+              <img 
+                src={serviceImages[index]} 
+                alt={service.title}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                width="400"
+                height="300"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent"></div>
+              
+              <div class="absolute top-3 left-3 w-9 h-9 rounded-lg bg-cream/95 flex items-center justify-center text-sage shadow-sm">
+                <Fragment set:html={service.icon} />
               </div>
               
-              <div class="p-5 flex flex-col flex-1">
-                <p class="text-body text-sm leading-relaxed mb-4 flex-1">
-                  {service.shortDescription}
-                </p>
-                
-                <div class="flex items-center justify-between pt-4 border-t border-border-light">
-                  <div class="flex items-center gap-1.5 text-xs text-text-tertiary">
-                    <svg class="w-3.5 h-3.5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{service.duration}</span>
-                  </div>
-                  
-                  <span class="flex items-center gap-1.5 text-xs font-medium text-sage group-hover:gap-2 transition-all">
-                    Ver más
-                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-                    </svg>
-                  </span>
+              <h3 class="absolute bottom-3 left-3 right-3 font-serif text-lg text-cream">{service.title}</h3>
+            </div>
+            
+            <div class="p-5 flex flex-col flex-1">
+              <p class="text-body text-sm leading-relaxed mb-4 flex-1">
+                {service.shortDescription}
+              </p>
+              
+              <div class="flex items-center justify-between pt-4 border-t border-border">
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span class="text-xs text-gray">{service.duration}</span>
                 </div>
+                
+                <span class="flex items-center gap-1 text-xs font-medium text-sage group-hover:gap-2 transition-all">
+                  Ver más
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+                  </svg>
+                </span>
               </div>
-            </article>
-          </a>
-        ))}
-      </div>
-      
-      <div class="flex lg:hidden items-center justify-center gap-1.5 mt-4" aria-hidden="true">
-        {mainServices.map((_, index) => (
-          <div class={`w-2 h-2 rounded-full transition-colors ${index === 0 ? 'bg-sage' : 'bg-border-light'}`}></div>
-        ))}
+            </div>
+          </article>
+        </a>
+      ))}
+    </div>
+    
+    <!-- Stats más compactos -->
+    <div class="mt-12 pt-8 border-t border-border" data-reveal data-reveal-delay="400">
+      <div class="grid grid-cols-4 gap-4">
+        <div class="text-center">
+          <p class="font-serif text-3xl text-sage">15+</p>
+          <p class="text-[10px] text-gray uppercase tracking-wide mt-1">Años</p>
+        </div>
+        <div class="text-center">
+          <p class="font-serif text-3xl text-sage">800+</p>
+          <p class="text-[10px] text-gray uppercase tracking-wide mt-1">Pacientes</p>
+        </div>
+        <div class="text-center">
+          <p class="font-serif text-3xl text-sage">98%</p>
+          <p class="text-[10px] text-gray uppercase tracking-wide mt-1">Satisfacción</p>
+        </div>
+        <div class="text-center">
+          <p class="font-serif text-3xl text-sage">5</p>
+          <p class="text-[10px] text-gray uppercase tracking-wide mt-1">Especialidades</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
-<style>
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-</style>
