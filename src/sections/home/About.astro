@@ -1,98 +1,120 @@
 ---
 const credentials = [
-  { year: "2008", title: "Licenciatura Psicología", institution: "Universidad de Granada" },
-  { year: "2010", title: "Máster Psicología Clínica", institution: "Universidad de Málaga" },
-  { year: "2015", title: "Especialización Terapia Pareja", institution: "EFT" },
-  { year: "2024", title: "Formación continua", institution: "Tercera generación" },
-];
-
-const stats = [
-  { value: "15+", label: "Años experiencia" },
-  { value: "800+", label: "Pacientes" },
-  { value: "98%", label: "Satisfacción" },
+  {
+    year: "2008",
+    title: "Licenciatura en Psicología",
+    institution: "Universidad de Granada",
+  },
+  {
+    year: "2010",
+    title: "Máster en Psicología Clínica",
+    institution: "Universidad de Málaga",
+  },
+  { year: "2015", title: "Especialización Terapia de Pareja", institution: "EFT" },
+  {
+    year: "2024",
+    title: "Formación Continua",
+    institution: "Terapias de Tercera Generación",
+  },
 ];
 ---
 
-<section class="section bg-cream" id="sobre-mi">
+<section class="section bg-alabaster relative" id="sobre-mi">
   <div class="container-editorial">
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
-      
-      <!-- Imagen -->
-      <div class="relative" data-reveal="right">
-        <div class="relative max-w-md">
-          <div class="absolute -inset-2 border border-border rounded-lg"></div>
-          
-          <div class="relative aspect-[4/5] rounded-lg overflow-hidden shadow-md">
+
+    <!-- Introducción con tipografía gigante -->
+    <div class="max-w-4xl mx-auto text-center mb-20 lg:mb-32">
+      <div data-reveal>
+        <span class="label-section">María Ángeles Mata</span>
+      </div>
+      <h2 class="title-section mt-8" data-reveal data-reveal-delay="100">
+        "La terapia no es magia. Es un espacio donde puedes dejar de fingir que todo va bien, <em class="text-olive italic">y empezar a sentir que realmente lo está.</em>"
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
+
+      <!-- Imagen Editorial -->
+      <div class="relative h-full" data-reveal="left" data-reveal-delay="200">
+        <div class="relative w-full max-w-md mx-auto h-full flex flex-col">
+          <!-- Decoración de fondo -->
+          <div class="absolute -inset-4 bg-stone/20 rounded-[40px] hidden md:block rotate-[-3deg] z-0"></div>
+
+          <div class="img-reveal-wrapper flex-1 rounded-[30px] overflow-hidden z-10 relative shadow-2xl shadow-ink/5 min-h-[500px]">
             <img
               src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=85"
-              alt="María Ángeles Mata"
-              class="w-full h-full object-cover"
+              alt="María Ángeles Mata - Psicóloga"
+              class="w-full h-full object-cover filter grayscale-[20%] sepia-[15%] brightness-105 transition-all duration-1000 hover:grayscale-0 hover:scale-105"
               width="500"
-              height="625"
+              height="666"
               loading="lazy"
             />
           </div>
-          
-          <!-- Quote -->
-          <div class="absolute -bottom-6 left-6 right-6 bg-white p-5 rounded-lg shadow-lg border border-border">
-            <svg class="w-6 h-6 text-sage/20 mb-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+
+          <!-- Sello flotante -->
+          <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-olive rounded-full flex items-center justify-center p-2 z-20 shadow-xl hidden md:flex animate-[spin_20s_linear_infinite]">
+            <svg viewBox="0 0 100 100" class="w-full h-full text-alabaster overflow-visible">
+              <path id="textPath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="transparent" />
+              <text font-family="Manrope" font-size="11" font-weight="600" letter-spacing="2.5" fill="currentColor">
+                <textPath href="#textPath" startOffset="0%">
+                  PSICOLOGÍA CLÍNICA • CÓRDOBA •
+                </textPath>
+              </text>
             </svg>
-            <p class="font-serif text-base text-charcoal italic leading-snug">"La terapia es un viaje conjunto hacia el bienestar"</p>
           </div>
         </div>
       </div>
 
-      <!-- Contenido -->
-      <div class="lg:pt-4">
-        <div class="mb-4" data-reveal>
-          <span class="label-section">Sobre mí</span>
-        </div>
+      <!-- Contenido de texto -->
+      <div class="flex flex-col justify-between" data-reveal="right" data-reveal-delay="300">
 
-        <h2 class="title-section mb-5" data-reveal data-reveal-delay="100">
-          Tu psicóloga <em>en Córdoba</em>
-        </h2>
+        <div>
+          <div class="mb-8">
+            <span class="text-label-sm text-olive">Sobre mí</span>
+          </div>
 
-        <div class="space-y-4 text-body mb-8" data-reveal data-reveal-delay="200">
-          <p>
-            Soy María Ángeles Mata, psicóloga colegiada con más de 15 años de experiencia ayudando a personas a superar sus dificultades emocionales.
-          </p>
-          <p>
-            Mi enfoque combina rigurosidad científica con trato humano. Creo que la terapia es un espacio colaborativo donde exploramos juntos qué te bloquea.
-          </p>
-        </div>
+          <h3 class="title-section mb-8">
+            Un enfoque <em class="text-olive italic">clínico y humano</em>
+          </h3>
 
-        <!-- Stats -->
-        <div class="flex items-center gap-10 mb-8 pb-8 border-b border-border" data-reveal data-reveal-delay="300">
-          {stats.map((stat) => (
-            <div>
-              <span class="font-serif text-3xl text-sage">{stat.value}</span>
-              <p class="text-[11px] text-gray uppercase tracking-wide mt-0.5">{stat.label}</p>
+          <div class="space-y-6 mb-12">
+            <p class="text-body-sm">
+              Llevo más de 15 años acompañando a personas que, como tú, decidieron que merecían sentirse mejor. No busco "arreglarte" — busco que descubras que ya tienes dentro todo lo necesario.
+            </p>
+            <p class="text-body-sm">
+              Combino lo que dice la ciencia con lo que siente el corazón. La terapia no es un manual: es una conversación honesta donde tú pones tu historia y yo pongo mi experiencia.
+            </p>
+          </div>
+
+          <!-- Trayectoria Académica -->
+          <div class="mb-12">
+            <div class="flex items-center gap-4 mb-6">
+              <span class="text-label-sm text-taupe">Formación</span>
+              <span class="h-[1px] flex-1 bg-border-delicate"></span>
             </div>
-          ))}
-        </div>
 
-        <!-- Formación -->
-        <div class="mb-8" data-reveal data-reveal-delay="400">
-          <h3 class="text-[11px] text-gray uppercase tracking-wide mb-4">Formación académica</h3>
-          <div class="space-y-3">
-            {credentials.map((cred) => (
-              <div class="flex items-center gap-3">
-                <span class="text-[10px] font-mono font-medium text-sage bg-sage/10 px-2 py-0.5 rounded">{cred.year}</span>
-                <div>
-                  <p class="text-sm font-medium text-charcoal">{cred.title}</p>
-                  <p class="text-xs text-gray">{cred.institution}</p>
+            <div class="space-y-3">
+              {credentials.map((cred) => (
+                <div class="flex items-baseline gap-4">
+                  <span class="text-label-xs text-olive w-10 shrink-0">
+                    {cred.year}
+                  </span>
+                  <span class="text-body-sm text-ink">
+                    {cred.title}
+                    <span class="text-taupe"> — {cred.institution}</span>
+                  </span>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
-        <div data-reveal data-reveal-delay="500">
+        <div>
           <a href="/contact" class="btn btn-sage">
-            <span>Conóceme en consulta</span>
+            Descubre cómo puedo ayudarte
           </a>
         </div>
+
       </div>
     </div>
   </div>

@@ -1,0 +1,70 @@
+---
+// Button component - Reusable button with variants
+// Usage:
+// <Button variant="primary" href="/contact">Text</Button>
+// <Button variant="outline" type="submit">Submit</Button>
+
+import Icon from './Icon.astro';
+
+type IconName = 'user' | 'users' | 'home' | 'phone' | 'mail' | 'location' | 'mapPin' | 'clock' | 'calendar' | 'brain' | 'heart' | 'sparkles' | 'plus' | 'minus' | 'check' | 'chevronRight' | 'chevronLeft' | 'chevronDown' | 'arrowRight' | 'arrowLeft' | 'externalLink' | 'menu' | 'x' | 'linkedin' | 'document' | 'quote' | 'chat' | 'chatBubble' | 'send';
+
+interface Props {
+  variant?: 'primary' | 'outline' | 'white' | 'dark';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  icon?: IconName;
+  iconPosition?: 'left' | 'right';
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  class: className = '',
+  icon,
+  iconPosition = 'right'
+} = Astro.props;
+
+// Base classes
+const baseClasses = 'inline-flex items-center justify-center gap-2.5 font-sans font-medium uppercase tracking-[0.15em] transition-all duration-500 relative overflow-hidden group';
+
+// Size variants
+const sizeClasses = {
+  sm: 'px-5 py-2.5 text-[0.625rem]',
+  md: 'px-8 py-4 text-[0.6875rem]',
+  lg: 'px-10 py-5 text-xs'
+};
+
+// Style variants
+const variantClasses = {
+  primary: 'bg-olive text-alabaster border border-olive hover:border-ink rounded-full',
+  outline: 'bg-transparent text-ink border border-border-strong hover:bg-ink hover:text-alabaster hover:border-ink rounded-full',
+  white: 'bg-alabaster text-ink border border-alabaster hover:bg-terracotta hover:text-alabaster hover:border-terracotta rounded-full',
+  dark: 'bg-charcoal text-alabaster border border-charcoal hover:bg-terracotta hover:border-terracotta rounded-full'
+};
+
+// Shine effect - uses CSS custom properties for animation
+const shineClasses = 'before:content-[""] before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent before:transition-all before:duration-700 before:z-[2] hover:before:left-full before:pointer-events-none';
+
+// After fill effect
+const fillClasses = 'after:content-[""] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-ink after:z-[-1] after:scale-y-0 after:origin-bottom after:transition-transform after:duration-500 hover:after:scale-y-100';
+
+const classes = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${shineClasses} ${fillClasses} ${className}`;
+---
+
+{href ? (
+  <a href={href} class={classes}>
+    {icon && iconPosition === 'left' && <Icon name={icon} class="w-4 h-4" />}
+    <slot />
+    {icon && iconPosition === 'right' && <Icon name={icon} class="w-4 h-4" />}
+  </a>
+) : (
+  <button type={type} class={classes}>
+    {icon && iconPosition === 'left' && <Icon name={icon} class="w-4 h-4" />}
+    <slot />
+    {icon && iconPosition === 'right' && <Icon name={icon} class="w-4 h-4" />}
+  </button>
+)}

@@ -1,46 +1,60 @@
 ---
-import FAQItem from '../../components/FAQItem.astro';
-import { faqs } from '../../data/faqs';
+import FAQItem from "../../components/FAQItem.astro";
+import { faqs } from "../../data/faqs";
 ---
 
-<section class="section bg-warm/30" id="faqs">
-  <div class="container-editorial">
+<section class="section bg-cream relative" id="faqs">
+  <!-- Sutil textura de fondo -->
+  <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMDIiIHN0cm9rZS13aWR0aD0iMC41Ij48L3BhdGg+Cjwvc3ZnPg==')] opacity-[0.15] mix-blend-multiply pointer-events-none"></div>
+
+  <div class="container-editorial relative z-10">
     
-    <!-- Header -->
-    <div class="text-center mb-10">
-      <div class="justify-center mb-3" data-reveal>
-        <span class="label-section">Preguntas frecuentes</span>
+    <!-- Encabezado -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 lg:mb-32">
+      <div data-reveal class="max-w-2xl">
+        <div class="mb-8">
+          <span class="label-section">Dudas Frecuentes</span>
+        </div>
+        <h2 class="title-section">
+          Claridad antes de <em class="text-olive italic">empezar</em>
+        </h2>
       </div>
-      
-      <h2 class="title-section" data-reveal data-reveal-delay="100">
-        Resolvemos tus <em>dudas</em>
-      </h2>
+      <div class="flex items-end lg:justify-end" data-reveal data-reveal-delay="100">
+        <p class="text-body-sm max-w-sm lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-olive pl-6 lg:pl-0 lg:pr-6">
+          Resolver tus dudas iniciales es parte del proceso de construir la confianza necesaria para la terapia.
+        </p>
+      </div>
     </div>
-    
-    <!-- FAQs -->
-    <div class="max-w-2xl mx-auto space-y-3 mb-10">
+
+    <!-- Lista de FAQs -->
+    <div class="max-w-4xl mx-auto border-t border-ink/20">
       {faqs.map((faq, index) => (
-        <div data-reveal data-reveal-delay={150 + index * 60}>
+        <div data-reveal data-reveal-delay={index * 100}>
           <FAQItem question={faq.question} index={index}>
             {faq.answer}
           </FAQItem>
         </div>
       ))}
     </div>
-    
-    <!-- CTA Card -->
-    <div class="max-w-2xl mx-auto" data-reveal data-reveal-delay="500">
-      <div class="bg-sage rounded-xl p-6 lg:p-8 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 16px 16px;"></div>
-        
-        <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div class="text-center sm:text-left">
-            <p class="text-cream/60 text-xs mb-1">¿Tienes otra pregunta?</p>
-            <p class="font-serif text-xl text-cream">Estoy aquí para ayudarte</p>
-          </div>
-          <a href="/contact" class="btn btn-cream text-xs shrink-0">Contacta conmigo</a>
-        </div>
+
+    <!-- CTA secundario -->
+    <div
+      class="mt-24 pt-12 border-t border-border-delicate flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
+      data-reveal
+      data-reveal-delay="300"
+    >
+      <div>
+        <p class="text-label-sm text-taupe mb-2">
+          ¿No encuentras lo que buscas?
+        </p>
+        <p class="text-title-sm text-ink">
+          Escríbeme directamente
+        </p>
       </div>
+      <a href="/contact" class="btn btn-outline">
+        Contactar ahora
+      </a>
     </div>
+    
   </div>
 </section>

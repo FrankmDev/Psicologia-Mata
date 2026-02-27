@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Schema from '../components/Schema.astro';
 import Hero from '../sections/home/Hero.astro';
 import Services from '../sections/home/Services.astro';
 import About from '../sections/home/About.astro';
@@ -13,6 +14,27 @@ import FAQ from '../sections/home/FAQ.astro';
 
 const title = "María Ángeles Mata — Psicóloga en Córdoba | Terapia Individual y de Pareja";
 const description = "Psicóloga General Sanitaria en Córdoba con 15+ años de experiencia. Especialista en terapia individual, de pareja y familiar. Primera consulta sin compromiso.";
+
+const localBusinessData = {
+  name: "María Ángeles Mata - Psicóloga Clínica",
+  description: "Psicóloga General Sanitaria en Córdoba especializada en terapia individual, de pareja y familiar con más de 15 años de experiencia.",
+  url: "https://psicologia-mata.es",
+  telephone: "+34 661 471 971",
+  email: "mangelesmatacala@hotmail.com",
+  address: {
+    streetAddress: "C/ Rodríguez Sánchez, 22",
+    addressLocality: "Córdoba",
+    postalCode: "14003",
+    addressCountry: "ES"
+  },
+  image: "https://psicologia-mata.es/favicon.svg",
+  priceRange: "€€",
+  openingHours: ["Mo-Fr 09:00-20:00"]
+};
+
+const breadcrumbData = [
+  { name: "Inicio", url: "https://psicologia-mata.es/" }
+];
 ---
 
 <Layout 
@@ -20,6 +42,10 @@ const description = "Psicóloga General Sanitaria en Córdoba con 15+ años de e
   description={description}
   type="website"
 >
+  <Schema slot="schema" type="localbusiness" data={localBusinessData} />
+  <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
+  <Schema slot="schema" type="webpage" data={{ name: title, description, url: "https://psicologia-mata.es/" }} />
+  
   <Header activePage="Inicio" />
   
   <main id="main-content" role="main">

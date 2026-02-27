@@ -1,0 +1,80 @@
+---
+// OptimizedImage component - Wrapper for optimized image loading
+// Uses native img with srcset for responsive images
+// For external images (Unsplash), uses URL parameters for optimization
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: 'eager' | 'lazy';
+  decoding?: 'async' | 'sync' | 'auto';
+  class?: string;
+  sizes?: string;
+  quality?: number;
+  fit?: 'crop' | 'clip' | 'max' | 'scale';
+  format?: 'auto' | 'webp' | 'jpeg' | 'png';
+}
+
+const {
+  src,
+  alt,
+  width = 800,
+  height,
+  loading = 'lazy',
+  decoding = 'async',
+  class: className = '',
+  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px',
+  quality = 80,
+  fit = 'crop',
+  format = 'auto'
+} = Astro.props;
+
+// Check if it's an external Unsplash image
+const isUnsplash = src.includes('images.unsplash.com');
+
+// Generate optimized Unsplash URL with parameters
+function getOptimizedUnsplashUrl(originalUrl: string, w: number, q: number, f: string, fitMode: string): string {
+  const url = new URL(originalUrl);
+  url.searchParams.set('w', w.toString());
+  url.searchParams.set('q', q.toString());
+  if (f !== 'auto') url.searchParams.set('fm', f);
+  url.searchParams.set('fit', fitMode);
+  url.searchParams.set('auto', 'format');
+  return url.toString();
+}
+
+// Generate srcset for responsive images
+function generateSrcset(originalUrl: string): string {
+  if (!isUnsplash) return originalUrl;
+  
+  const widths = [400, 600, 800, 1200, 1600];
+  return widths
+    .map(w => `${getOptimizedUnsplashUrl(originalUrl, w, quality, format, fit)} ${w}w`)
+    .join(', ');
+}
+
+// Get the optimized src
+const optimizedSrc = isUnsplash 
+  ? getOptimizedUnsplashUrl(src, width, quality, format, fit)
+  : src;
+
+const srcset = generateSrcset(src);
+
+// Calculate aspect ratio if height not provided
+const calculatedHeight = height || Math.round(width * 0.75);
+---
+
+<img
+  src={optimizedSrc}
+  alt={alt}
+  width={width}
+  height={calculatedHeight}
+  loading={loading}
+  decoding={decoding}
+  class={className}
+  srcset={isUnsplash ? srcset : undefined}
+  sizes={isUnsplash ? sizes : undefined}
+  style={`aspect-ratio: ${width} / ${calculatedHeight};`}
+/>

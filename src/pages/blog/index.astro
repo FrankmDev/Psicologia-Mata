@@ -12,177 +12,208 @@ const categories = [...new Set(blogPostsList.map(post => post.category))];
 
 <Layout 
   title="Blog de Psicología | María Ángeles Mata"
-  description="Artículos sobre psicología, salud mental, terapia y crecimiento personal. Consejos prácticos de una psicóloga clínica con 15+ años de experiencia."
+  description="Artículos sobre psicología, salud mental, terapia y crecimiento personal. Reflexiones de una psicóloga clínica con 15+ años de experiencia."
 >
   <Header activePage="Blog" />
   
   <main id="main-content">
     
-    <!-- Header de página -->
-    <section class="pt-12 pb-8 bg-cream">
-      <div class="container-editorial">
-        <div class="max-w-2xl" data-reveal>
-          <div class="mb-4">
-            <span class="label-section">Blog</span>
-          </div>
-          <h1 class="title-section mb-4">
-            Reflexiones sobre <em>bienestar</em>
+    <!-- Hero -->
+    <section class="section bg-alabaster relative overflow-hidden" aria-labelledby="blog-heading">
+      <div class="bg-aurora"></div>
+      
+      <div class="container-editorial relative z-10">
+        <div class="max-w-4xl" data-reveal>
+          <span class="label-section mb-8">Blog</span>
+          <h1 id="blog-heading" class="title-section mb-8">
+            Reflexiones para el <em>día a día</em>
           </h1>
-          <p class="text-body">
-            Artículos sobre psicología, salud mental y crecimiento personal escritos desde la experiencia clínica.
+          <p class="text-lead text-taupe max-w-2xl mb-16">
+            Pequeñas ideas, consejos prácticos y reflexiones sobre lo que significa 
+            cuidar nuestra salud mental en el mundo real.
           </p>
+          
+          {/* Categorías */}
+          <div class="flex flex-wrap gap-3">
+            {categories.map((category) => (
+              <span class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink">
+                {category}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Categorías -->
-    <section class="pb-8 bg-cream border-b border-border">
+    <!-- Artículo Destacado - Layout Balanceado -->
+    <section class="section bg-cream relative" aria-labelledby="featured-heading">
       <div class="container-editorial">
-        <div class="flex flex-wrap items-center gap-2" data-reveal>
-          <span class="text-[11px] text-gray uppercase tracking-wide">Temas:</span>
-          {categories.map((category) => (
-            <span class="px-2.5 py-1 bg-warm/50 rounded-full text-[11px] text-stone">
-              {category}
-            </span>
-          ))}
+        
+        <div class="mb-12" data-reveal>
+          <span class="label-section">Artículo destacado</span>
         </div>
-      </div>
-    </section>
 
-    <!-- Artículo destacado -->
-    <section class="section-sm bg-cream">
-      <div class="container-editorial">
-        <div data-reveal>
-          <a href={`/blog/${featuredPost.slug}`} class="group block">
-            <article class="card overflow-hidden">
-              <div class="grid lg:grid-cols-2">
-                <div class="relative aspect-[16/10] lg:aspect-auto lg:h-[360px] overflow-hidden">
+        <article class="group" data-reveal data-reveal-delay="100">
+          <a href={`/blog/${featuredPost.slug}`} class="block">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+              
+              {/* Imagen */}
+              <div class="relative">
+                <div class="relative aspect-[4/3] overflow-hidden">
                   <img 
                     src={featuredPost.image} 
                     alt={featuredPost.title}
-                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     width="800"
-                    height="500"
+                    height="600"
                     loading="eager"
                   />
-                  <div class="absolute top-3 left-3">
-                    <span class="px-2.5 py-1 bg-sage text-cream text-[10px] font-medium uppercase tracking-wide rounded-full">
-                      Destacado
-                    </span>
-                  </div>
+                  <div class="absolute inset-0 bg-gradient-to-tr from-ink/20 via-transparent to-transparent"></div>
                 </div>
                 
-                <div class="p-6 lg:p-8 flex flex-col justify-center">
-                  <div class="flex items-center gap-3 mb-3">
-                    <span class="tag">{featuredPost.category}</span>
-                    <span class="text-xs text-gray flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      {featuredPost.readTime}
-                    </span>
-                  </div>
-                  
-                  <h2 class="font-serif text-2xl lg:text-3xl text-charcoal mb-3 group-hover:text-sage transition-colors leading-tight">
-                    {featuredPost.title}
-                  </h2>
-                  
-                  <p class="text-body text-sm mb-5 max-w-lg">
-                    {featuredPost.excerpt}
-                  </p>
-                  
-                  <div class="flex items-center justify-between pt-4 border-t border-border">
-                    <time class="text-xs text-gray">{featuredPost.date}</time>
-                    <span class="flex items-center gap-1.5 text-xs font-medium text-sage group-hover:gap-2 transition-all">
-                      Leer artículo
-                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-                      </svg>
-                    </span>
-                  </div>
+                {/* Categoría */}
+                <div class="absolute top-4 left-4">
+                  <span class="px-4 py-2 bg-alabaster/95 backdrop-blur-sm text-label text-olive">
+                    {featuredPost.category}
+                  </span>
                 </div>
               </div>
-            </article>
+              
+              {/* Contenido */}
+              <div>
+                <div class="flex items-center gap-4 mb-6">
+                  <span class="text-label-sm text-taupe">{featuredPost.date}</span>
+                  <span class="w-8 h-[1px] bg-border-strong"></span>
+                  <span class="text-label-sm text-olive">{featuredPost.readTime} de lectura</span>
+                </div>
+
+                <h2 id="featured-heading" class="font-serif text-3xl lg:text-4xl text-ink mb-6 group-hover:text-olive transition-colors duration-500 leading-tight">
+                  {featuredPost.title}
+                </h2>
+
+                <p class="text-body text-taupe mb-8 leading-relaxed">
+                  {featuredPost.excerpt}
+                </p>
+
+                <span class="inline-flex items-center gap-3 text-label text-ink group-hover:text-olive transition-colors duration-300">
+                  <span>Leer artículo</span>
+                  <span class="w-10 h-10 rounded-full border border-current flex items-center justify-center group-hover:bg-olive group-hover:border-olive group-hover:text-alabaster transition-all duration-500">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+                    </svg>
+                  </span>
+                </span>
+              </div>
+            </div>
           </a>
-        </div>
+        </article>
+
       </div>
     </section>
 
-    <!-- Artículos recientes -->
-    <section class="section-sm bg-warm/30">
+    <!-- Artículos Recientes - Grid Simétrico -->
+    <section class="section bg-alabaster relative" aria-labelledby="recent-heading">
       <div class="container-editorial">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 border-b border-border-strong pb-8">
+          <div data-reveal>
+            <span class="label-section mb-6">Más artículos</span>
+            <h2 id="recent-heading" class="title-section">
+              Para seguir <em class="text-olive italic">aprendiendo</em>
+            </h2>
+          </div>
+          <div data-reveal data-reveal-delay="100">
+            <p class="text-body-sm text-taupe max-w-sm">
+              Pequeñas dosis de psicología para aplicar en tu día a día.
+            </p>
+          </div>
+        </div>
+
+        {/* Grid de 3 columnas simétrico */}
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {recentPosts.map((post, index) => (
-            <article data-reveal data-reveal-delay={100 + index * 100}>
-              <a href={`/blog/${post.slug}`} class="group block h-full">
-                <div class="card h-full flex flex-col">
-                  <div class="relative aspect-[16/10] overflow-hidden">
-                    <img 
-                      src={post.image} 
-                      alt={post.title}
-                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      width="400"
-                      height="250"
-                      loading="lazy"
-                    />
-                    <div class="absolute bottom-3 left-3">
-                      <span class="px-2 py-0.5 bg-cream/95 text-sage text-[10px] font-medium uppercase tracking-wide rounded-full">
-                        {post.category}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div class="flex-1 p-5 flex flex-col">
-                    <div class="flex items-center gap-2 text-[11px] text-gray mb-2">
-                      <time>{post.dateShort}</time>
-                      <span class="w-1 h-1 rounded-full bg-gray"></span>
-                      <span class="flex items-center gap-1">
-                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        {post.readTime}
-                      </span>
-                    </div>
-                    
-                    <h3 class="font-serif text-lg text-charcoal mb-2 group-hover:text-sage transition-colors leading-snug flex-1">
-                      {post.title}
-                    </h3>
-                    
-                    <p class="text-xs text-stone line-clamp-2 mb-3">
-                      {post.excerpt}
-                    </p>
-                    
-                    <div class="flex items-center gap-1.5 text-xs font-medium text-sage pt-3 border-t border-border mt-auto">
-                      <span>Leer más</span>
-                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-                      </svg>
-                    </div>
-                  </div>
+            <article 
+              class="group"
+              data-reveal 
+              data-reveal-delay={index * 100}
+            >
+              <a href={`/blog/${post.slug}`} class="block">
+                {/* Imagen */}
+                <div class="relative aspect-[4/3] overflow-hidden mb-6">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
+                    width="600"
+                    height="450"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-olive/0 group-hover:bg-olive/10 transition-colors duration-500"></div>
+                </div>
+                
+                {/* Meta */}
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-label-sm text-olive">{post.category}</span>
+                  <span class="w-1 h-1 rounded-full bg-taupe"></span>
+                  <span class="text-label-sm text-taupe">{post.date}</span>
+                </div>
+                
+                {/* Título */}
+                <h3 class="font-serif text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-500 mb-4 leading-tight">
+                  {post.title}
+                </h3>
+                
+                {/* Extracto */}
+                <p class="text-body-sm text-taupe line-clamp-2 mb-6">
+                  {post.excerpt}
+                </p>
+                
+                {/* Link */}
+                <div class="flex items-center gap-2 text-label-sm text-ink group-hover:text-olive transition-colors duration-300">
+                  <span>Leer</span>
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+                  </svg>
                 </div>
               </a>
             </article>
           ))}
         </div>
+
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="py-12 bg-sage">
-      <div class="container-editorial">
-        <div class="max-w-xl mx-auto text-center" data-reveal>
-          <h2 class="font-serif text-2xl text-cream mb-3">
-            ¿Tienes dudas sobre <em class="text-warm-light">terapia</em>?
+    <!-- CTA Final -->
+    <section class="section bg-charcoal text-alabaster relative overflow-hidden" aria-labelledby="cta-heading">
+      <div class="absolute inset-0">
+        <div class="absolute top-0 right-0 w-[60vw] h-[60vw] bg-gradient-to-bl from-olive/20 to-transparent rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-gradient-to-tr from-terracotta/15 to-transparent rounded-full blur-[100px]"></div>
+      </div>
+      
+      <div class="container-editorial relative z-10">
+        <div class="max-w-4xl mx-auto text-center" data-reveal>
+          
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full border border-alabaster/20 mb-10">
+            <svg class="w-6 h-6 text-terracotta-light" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+            </svg>
+          </div>
+
+          <span class="label-section !text-terracotta-light mb-8">¿Necesitas hablar?</span>
+          <h2 id="cta-heading" class="title-section !text-alabaster mb-8">
+            Los artículos ayudan, <em class="!text-terracotta-light italic">pero a veces necesitamos más</em>
           </h2>
-          <p class="text-cream/70 text-sm mb-6">
-            Cada persona es única. Si tienes preguntas específicas o quieres saber si la terapia es para ti, puedo ayudarte.
+          <p class="text-body text-taupe-light max-w-2xl mx-auto mb-12">
+            Si sientes que lo que lees no es suficiente, quizás es momento de dar el paso. 
+            Estoy aquí para escucharte sin juzgarte.
           </p>
-          <a href="/contact" class="btn btn-cream text-xs">
-            Hacer una consulta
+          <a href="/contact" class="btn btn-outline !text-alabaster !border-border-strong/30 hover:!bg-alabaster hover:!text-ink hover:!border-alabaster">
+            Hablamos
           </a>
         </div>
       </div>
     </section>
+
   </main>
   
   <Footer />

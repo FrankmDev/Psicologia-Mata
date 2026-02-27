@@ -1,0 +1,38 @@
+---
+// RevealAnimation.astro - Client-side island for scroll animations
+// Hydrates only when visible using client:visible directive
+// This component is included in Layout.astro
+---
+
+<script>
+  // Reveal animations - runs on client
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px"
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const delayStr = entry.target.getAttribute("data-reveal-delay");
+        const delay = delayStr ? parseInt(delayStr, 10) : 0;
+        
+        setTimeout(() => {
+          entry.target.classList.add("is-visible");
+        }, delay);
+        
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all reveal elements
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    observer.observe(el);
+  });
+
+  // Observe image wrapper reveals
+  document.querySelectorAll(".img-reveal-wrapper").forEach((el) => {
+    observer.observe(el);
+  });
+</script>

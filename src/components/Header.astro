@@ -13,104 +13,182 @@ const navLinks = [
 ];
 ---
 
-<header class="fixed top-0 inset-x-0 z-50" id="header">
-  <div class="absolute inset-0 bg-cream/0 backdrop-blur-0 transition-all duration-300" id="header-bg"></div>
+<header
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-[600ms] ease-out"
+  id="header"
+>
+  <div
+    class="absolute inset-0 bg-alabaster/0 backdrop-blur-0 transition-all duration-[600ms] ease-out border-b border-transparent"
+    id="header-bg"
+  >
+  </div>
 
-  <div class="container-wide relative">
-    <div class="flex items-center justify-between h-16 lg:h-20">
+  <div class="container-editorial relative">
+    <div class="flex items-center justify-between h-20 lg:h-28">
       
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2.5 group relative z-10">
-        <div class="w-9 h-9 rounded-lg bg-sage/10 flex items-center justify-center group-hover:bg-sage transition-colors">
-          <span class="font-serif text-base text-sage group-hover:text-cream italic transition-colors">M</span>
+      <!-- Logo Minimalista -->
+      <a href="/" class="flex items-center gap-4 group relative z-50 transition-transform duration-300 hover:scale-[1.02]">
+        <div class="hidden sm:flex flex-col justify-center items-start">
+          <span class="font-serif text-[1.35rem] leading-none text-ink tracking-tight group-hover:text-olive transition-colors duration-500">María Ángeles Mata</span>
+          <span class="text-label-xs text-taupe tracking-[0.3em] mt-1.5 group-hover:text-olive/70 transition-colors duration-500">Psicología Clínica</span>
         </div>
-        <div class="hidden sm:block">
-          <span class="font-serif text-sm text-charcoal block leading-tight">María Ángeles Mata</span>
-          <span class="text-[10px] text-gray uppercase tracking-wider">Psicóloga</span>
-        </div>
+        <!-- Logo Mobile -->
+        <span class="sm:hidden font-serif text-2xl text-ink italic">M.A. Mata</span>
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-8 relative z-10">
+      <nav class="hidden lg:flex items-center gap-12 relative z-50">
         {navLinks.map((link) => (
           <a
             href={link.href}
-            class={`text-sm transition-colors ${
-              activePage === link.label ? "text-charcoal font-medium" : "text-gray hover:text-charcoal"
+            class={`relative text-label tracking-[0.15em] transition-colors duration-500 overflow-hidden group ${
+              activePage === link.label
+                ? "text-ink font-semibold"
+                : "text-taupe hover:text-ink"
             }`}
           >
-            {link.label}
+            <span class="relative z-10">{link.label}</span>
+            <span class="absolute bottom-0 left-0 w-full h-[1px] bg-ink transform origin-right scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
           </a>
         ))}
       </nav>
 
       <!-- CTA -->
-      <div class="hidden lg:flex items-center gap-3 relative z-10">
-        <a href="tel:+34661471971" class="w-8 h-8 rounded-full border border-border flex items-center justify-center text-gray hover:text-sage hover:border-sage/30 transition-colors">
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-          </svg>
+      <div class="hidden lg:flex items-center gap-8 relative z-50">
+        <a
+          href="tel:+34661471971"
+          class="text-taupe hover:text-olive transition-all duration-500 flex items-center gap-2 group hover:gap-3"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-olive/50 group-hover:bg-olive group-hover:scale-125 transition-all duration-500"></span>
+          <span class="text-label tracking-[0.1em]">661 471 971</span>
         </a>
-        <a href="/contact" class="btn btn-sage text-[10px] py-2.5 px-4">Reservar</a>
+        <a href="/contact" class="btn btn-sage py-3.5 px-8 !text-[0.6875rem] shadow-lg shadow-olive/0 hover:shadow-olive/20 transition-shadow duration-500">
+          Reservar Sesión
+        </a>
       </div>
 
       <!-- Mobile Toggle -->
-      <button class="lg:hidden relative z-10 p-2" id="menu-toggle" aria-label="Menu">
-        <div class="flex flex-col gap-1 w-5">
-          <span class="w-5 h-0.5 bg-charcoal transition-transform origin-center" id="menu-line-1"></span>
-          <span class="w-5 h-0.5 bg-charcoal transition-transform origin-center" id="menu-line-2"></span>
+      <button
+        class="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center text-ink hover:text-olive transition-colors"
+        id="menu-toggle"
+        aria-label="Menu"
+      >
+        <div class="flex flex-col gap-1.5 w-6">
+          <span class="w-6 h-[1px] bg-current transition-all origin-center duration-500 ease-out" id="menu-line-1"></span>
+          <span class="w-6 h-[1px] bg-current transition-all origin-center duration-500 ease-out" id="menu-line-2"></span>
         </div>
       </button>
     </div>
   </div>
 
   <!-- Mobile Menu -->
-  <div class="lg:hidden fixed inset-0 bg-cream z-40 opacity-0 pointer-events-none transition-opacity" id="mobile-menu">
-    <div class="container-wide pt-24">
-      <nav class="flex flex-col gap-1">
-        {navLinks.map((link) => (
-          <a href={link.href} class="py-3 text-xl font-serif text-charcoal hover:text-sage transition-colors">
+  <div
+    class="lg:hidden fixed inset-0 bg-alabaster z-40 opacity-0 pointer-events-none transition-all duration-700 ease-out"
+    id="mobile-menu"
+  >
+    <div class="absolute inset-0 bg-aurora opacity-30"></div>
+    <div class="container-editorial relative pt-32 h-full flex flex-col justify-between pb-12 z-10">
+      
+      <nav class="flex flex-col gap-6">
+        {navLinks.map((link, index) => (
+          <a
+            href={link.href}
+            class="mobile-link opacity-0 translate-y-4 font-serif text-5xl text-ink hover:text-olive transition-all duration-500 italic font-light"
+            style={`transition-delay: ${index * 100}ms`}
+          >
             {link.label}
           </a>
         ))}
       </nav>
-      <div class="mt-8 pt-8 border-t border-border">
-        <a href="/contact" class="btn btn-sage w-full justify-center">Reservar consulta</a>
+      
+      <div class="mt-8 pt-8 border-t border-border-delicate mobile-footer opacity-0 translate-y-4 transition-all duration-700 delay-300">
+        <p class="text-label-sm text-taupe mb-4">
+          Contacto Directo
+        </p>
+        <a href="tel:+34661471971" class="block font-serif text-3xl text-ink mb-8">
+          661 471 971
+        </a>
+        <a href="/contact" class="btn btn-sage w-full justify-center py-4">
+          Reservar Consulta
+        </a>
       </div>
     </div>
   </div>
 </header>
 
-<div class="h-16 lg:h-20"></div>
+<div class="h-20 lg:h-28"></div>
 
 <script>
+  const header = document.getElementById("header");
   const headerBg = document.getElementById("header-bg");
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   const line1 = document.getElementById("menu-line-1");
   const line2 = document.getElementById("menu-line-2");
+  const mobileLinks = document.querySelectorAll(".mobile-link");
+  const mobileFooter = document.querySelector(".mobile-footer");
+  
   let menuOpen = false;
+  let lastScroll = 0;
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 20) {
-      headerBg?.classList.add('bg-cream/90', 'backdrop-blur-xl', 'shadow-sm');
-    } else {
-      headerBg?.classList.remove('bg-cream/90', 'backdrop-blur-xl', 'shadow-sm');
-    }
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      const currentScroll = window.scrollY;
+      
+      // Header background
+      if (currentScroll > 20) {
+        headerBg?.classList.add("bg-alabaster/95", "backdrop-blur-xl", "border-border-delicate");
+        headerBg?.classList.remove("border-transparent");
+      } else {
+        headerBg?.classList.remove("bg-alabaster/95", "backdrop-blur-xl", "border-border-delicate");
+        headerBg?.classList.add("border-transparent");
+      }
+
+      // Hide header on scroll down, show on scroll up
+      if (currentScroll > 100 && currentScroll > lastScroll && !menuOpen) {
+        header?.classList.add("-translate-y-full");
+      } else {
+        header?.classList.remove("-translate-y-full");
+      }
+      
+      lastScroll = currentScroll;
+    },
+    { passive: true }
+  );
 
   menuToggle?.addEventListener("click", () => {
     menuOpen = !menuOpen;
+    
     if (menuOpen) {
+      // Open
       mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
       document.body.style.overflow = "hidden";
-      line1 && (line1.style.transform = "translateY(3px) rotate(45deg)");
-      line2 && (line2.style.transform = "translateY(-3px) rotate(-45deg)");
+      
+      line1 && (line1.style.transform = "translateY(3.5px) rotate(45deg)");
+      line2 && (line2.style.transform = "translateY(-3.5px) rotate(-45deg)");
+      
+      // Animate links in
+      setTimeout(() => {
+        mobileLinks.forEach(link => {
+          link.classList.remove("opacity-0", "translate-y-4");
+        });
+        mobileFooter?.classList.remove("opacity-0", "translate-y-4");
+      }, 100);
+
     } else {
+      // Close
       mobileMenu?.classList.add("opacity-0", "pointer-events-none");
       document.body.style.overflow = "";
+      
       line1 && (line1.style.transform = "none");
       line2 && (line2.style.transform = "none");
+      
+      // Reset links
+      mobileLinks.forEach(link => {
+        link.classList.add("opacity-0", "translate-y-4");
+      });
+      mobileFooter?.classList.add("opacity-0", "translate-y-4");
     }
   });
 </script>

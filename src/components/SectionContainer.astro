@@ -1,0 +1,41 @@
+---
+// SectionContainer - Reusable section wrapper with consistent styling
+// Usage:
+// <SectionContainer id="services" background="cream">
+//   Content here
+// </SectionContainer>
+
+interface Props {
+  id?: string;
+  background?: 'alabaster' | 'cream' | 'charcoal' | 'ink';
+  class?: string;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+}
+
+const {
+  id,
+  background = 'alabaster',
+  class: className = '',
+  ariaLabel,
+  ariaLabelledBy
+} = Astro.props;
+
+const bgClasses = {
+  alabaster: 'bg-alabaster',
+  cream: 'bg-cream',
+  charcoal: 'bg-charcoal text-alabaster',
+  ink: 'bg-ink text-alabaster'
+};
+
+const classes = `section ${bgClasses[background]} relative overflow-hidden ${className}`;
+---
+
+<section
+  {id}
+  class={classes}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledBy}
+>
+  <slot />
+</section>

@@ -1,0 +1,182 @@
+---
+// Schema.astro - JSON-LD Structured Data component
+// Usage: <Schema type="localbusiness" data={businessData} />
+// Supports: localbusiness, article, webpage, breadcrumbs, faqpage
+
+interface LocalBusinessData {
+  name: string;
+  description: string;
+  url: string;
+  telephone: string;
+  email?: string;
+  address: {
+    streetAddress: string;
+    addressLocality: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  image?: string;
+  priceRange?: string;
+  openingHours?: string[];
+}
+
+interface ArticleData {
+  headline: string;
+  description: string;
+  image: string;
+  datePublished: string;
+  dateModified?: string;
+  author: {
+    name: string;
+    url?: string;
+  };
+  publisher?: {
+    name: string;
+    logo: string;
+  };
+  url: string;
+}
+
+interface WebPageData {
+  name: string;
+  description: string;
+  url: string;
+  image?: string;
+}
+
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  type: 'localbusiness' | 'article' | 'webpage' | 'breadcrumbs' | 'faqpage';
+  data: LocalBusinessData | ArticleData | WebPageData | BreadcrumbItem[] | FAQItem[];
+}
+
+const { type, data } = Astro.props;
+
+const siteUrl = 'https://psicologia-mata.es';
+
+function generateLocalBusinessSchema(data: LocalBusinessData) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${data.url}#business`,
+    name: data.name,
+    description: data.description,
+    url: data.url,
+    telephone: data.telephone,
+    email: data.email,
+    address: {
+      '@type': 'PostalAddress',
+      ...data.address
+    },
+    image: data.image,
+    priceRange: data.priceRange || '€€',
+    openingHours: data.openingHours || ['Mo-Fr 09:00-20:00'],
+    sameAs: [
+      // Add social profiles here when available
+    ]
+  };
+}
+
+function generateArticleSchema(data: ArticleData) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.headline,
+    description: data.description,
+    image: data.image,
+    datePublished: data.datePublished,
+    dateModified: data.dateModified || data.datePublished,
+    author: {
+      '@type': 'Person',
+      name: data.author.name,
+      url: data.author.url
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: data.publisher?.name || 'María Ángeles Mata',
+      logo: {
+        '@type': 'ImageObject',
+        url: data.publisher?.logo || `${siteUrl}/favicon.svg`
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': data.url
+    }
+  };
+}
+
+function generateWebPageSchema(data: WebPageData) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: data.name,
+    description: data.description,
+    url: data.url,
+    image: data.image
+  };
+}
+
+function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url
+    }))
+  };
+}
+
+function generateFAQSchema(items: FAQItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  };
+}
+
+let schemaData: Record<string, unknown> | null = null;
+
+switch (type) {
+  case 'localbusiness':
+    schemaData = generateLocalBusinessSchema(data as LocalBusinessData);
+    break;
+  case 'article':
+    schemaData = generateArticleSchema(data as ArticleData);
+    break;
+  case 'webpage':
+    schemaData = generateWebPageSchema(data as WebPageData);
+    break;
+  case 'breadcrumbs':
+    schemaData = generateBreadcrumbSchema(data as BreadcrumbItem[]);
+    break;
+  case 'faqpage':
+    schemaData = generateFAQSchema(data as FAQItem[]);
+    break;
+}
+
+const schemaJson = schemaData ? JSON.stringify(schemaData) : '';
+---
+
+{schemaJson && (
+  <script type="application/ld+json" set:html={schemaJson} />
+)}

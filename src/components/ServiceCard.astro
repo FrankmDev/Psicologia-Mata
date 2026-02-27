@@ -1,4 +1,10 @@
 ---
+// ServiceCard component - Displays a service card
+// Updated to use Tailwind delay utilities instead of inline styles
+
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+
 interface Props {
   id: string;
   number: string;
@@ -6,34 +12,55 @@ interface Props {
   description: string;
   approaches: string[];
   duration: string;
-  icon?: string;
+  iconName?: 'user' | 'users' | 'brain' | 'sparkles' | 'home';
   href?: string;
   index?: number;
 }
 
-const { id, number, title, description, approaches, duration, icon, href = "/contact", index = 0 } = Astro.props;
+const { 
+  id, 
+  number, 
+  title, 
+  description, 
+  approaches, 
+  duration, 
+  iconName = 'user', 
+  href = "/contact", 
+  index = 0 
+} = Astro.props;
+
+// Map index to Tailwind delay classes
+const delayClasses = [
+  'delay-0',
+  'delay-100', 
+  'delay-200', 
+  'delay-300', 
+  'delay-400',
+  'delay-500'
+];
+
+const delayClass = delayClasses[index] || 'delay-0';
 ---
 
 <div 
   id={id} 
-  class="group relative bg-bg-surface rounded-2xl border border-border-light transition-all duration-500 ease-out hover:shadow-card-hover hover:-translate-y-1 hover:border-sage/20 overflow-hidden opacity-0"
-  data-animate
-  style={`animation-delay: ${index * 0.1}s; animation-fill-mode: forwards;`}
+  class={`group relative bg-alabaster rounded-2xl border border-border-delicate transition-all duration-500 ease-out hover:shadow-card-hover hover:-translate-y-1 hover:border-olive/20 overflow-hidden opacity-0 data-animate ${delayClass}`}
+  data-reveal
 >
-  <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sage/0 via-sage/30 to-sage/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500" aria-hidden="true"></div>
+  <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-olive/0 via-olive/30 to-olive/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500" aria-hidden="true"></div>
   
   <div class="p-6 lg:p-8">
     <div class="flex items-start gap-4 mb-5">
-      <div class="w-12 h-12 rounded-xl bg-sage/10 flex items-center justify-center text-sage flex-shrink-0 transition-all duration-300 group-hover:bg-sage group-hover:text-white group-hover:scale-105">
-        {icon && <Fragment set:html={icon} />}
+      <div class="w-12 h-12 rounded-xl bg-olive/10 flex items-center justify-center text-olive flex-shrink-0 transition-all duration-300 group-hover:bg-olive group-hover:text-alabaster group-hover:scale-105">
+        <Icon name={iconName} class="w-6 h-6" />
       </div>
       
       <div class="flex-1 min-w-0">
         <div class="flex items-center justify-between gap-3">
-          <h3 class="font-serif text-xl lg:text-2xl text-text-primary group-hover:text-sage transition-colors duration-300">
+          <h3 class="font-serif text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-300">
             {title}
           </h3>
-          <span class="font-serif text-2xl text-sage/15 group-hover:text-sage/30 transition-colors flex-shrink-0" aria-hidden="true">{number}</span>
+          <span class="font-serif text-2xl text-olive/15 group-hover:text-olive/30 transition-colors flex-shrink-0" aria-hidden="true">{number}</span>
         </div>
       </div>
     </div>
@@ -42,33 +69,51 @@ const { id, number, title, description, approaches, duration, icon, href = "/con
       {description}
     </p>
     
-    <div class="flex flex-col lg:flex-row lg:items-center gap-4 pt-5 border-t border-border-light">
+    <div class="flex flex-col lg:flex-row lg:items-center gap-4 pt-5 border-t border-border-delicate">
       <div class="flex flex-wrap gap-2 flex-1">
         {approaches.map((approach) => (
-          <span class="px-3 py-1 bg-bg-muted text-text-secondary text-xs rounded-full border border-border-light group-hover:border-sage/15 group-hover:bg-sage/5 transition-colors">
+          <span class="px-3 py-1 bg-cream text-taupe text-xs rounded-full border border-border-delicate group-hover:border-olive/15 group-hover:bg-olive/5 transition-colors">
             {approach}
           </span>
         ))}
       </div>
       
-      <div class="flex items-center gap-4 lg:border-l lg:border-border-light lg:pl-5">
-        <div class="flex items-center gap-1.5 text-sm text-text-secondary">
-          <svg class="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+      <div class="flex items-center gap-4 lg:border-l lg:border-border-delicate lg:pl-5">
+        <div class="flex items-center gap-1.5 text-sm text-taupe">
+          <Icon name="clock" class="w-4 h-4 text-olive" strokeWidth={1.5} />
           <span>{duration}</span>
         </div>
         
-        <a 
-          href={href} 
-          class="inline-flex items-center gap-1.5 px-4 py-2 bg-text-primary text-bg-base text-sm font-medium rounded-full transition-all duration-300 hover:bg-sage"
-        >
-          <span>Reservar</span>
-          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-          </svg>
-        </a>
+        <Button href={href} variant="primary" size="sm" icon="arrowRight" class="!px-4 !py-2 !text-xs">
+          Reservar
+        </Button>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  /* Animation for service cards */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .data-animate {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  /* Delay utilities */
+  .delay-0 { animation-delay: 0ms; }
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+</style>
