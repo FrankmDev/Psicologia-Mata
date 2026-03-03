@@ -30,7 +30,7 @@ const navLinks = [
       <a href="/" class="flex items-center gap-4 group relative z-50 transition-transform duration-300 hover:scale-[1.02]">
         <div class="hidden sm:flex flex-col justify-center items-start">
           <span class="font-serif text-[1.35rem] leading-none text-ink tracking-tight group-hover:text-olive transition-colors duration-500">María Ángeles Mata</span>
-          <span class="text-label-xs text-taupe tracking-[0.3em] mt-1.5 group-hover:text-olive/70 transition-colors duration-500">Psicología Clínica</span>
+          <span class="text-label-xs text-charcoal tracking-[0.3em] mt-1.5 group-hover:text-olive/70 transition-colors duration-500">Psicología Clínica</span>
         </div>
         <!-- Logo Mobile -->
         <span class="sm:hidden font-serif text-2xl text-ink italic">M.A. Mata</span>
@@ -44,7 +44,7 @@ const navLinks = [
             class={`relative text-label tracking-[0.15em] transition-colors duration-500 overflow-hidden group ${
               activePage === link.label
                 ? "text-ink font-semibold"
-                : "text-taupe hover:text-ink"
+                : "text-charcoal hover:text-ink"
             }`}
           >
             <span class="relative z-10">{link.label}</span>
@@ -57,7 +57,7 @@ const navLinks = [
       <div class="hidden lg:flex items-center gap-8 relative z-50">
         <a
           href="tel:+34661471971"
-          class="text-taupe hover:text-olive transition-all duration-500 flex items-center gap-2 group hover:gap-3"
+          class="text-charcoal hover:text-olive transition-all duration-500 flex items-center gap-2 group hover:gap-3"
         >
           <span class="w-1.5 h-1.5 rounded-full bg-olive/50 group-hover:bg-olive group-hover:scale-125 transition-all duration-500"></span>
           <span class="text-label tracking-[0.1em]">661 471 971</span>
@@ -102,7 +102,7 @@ const navLinks = [
       </nav>
       
       <div class="mt-8 pt-8 border-t border-border-delicate mobile-footer opacity-0 translate-y-4 transition-all duration-700 delay-300">
-        <p class="text-label-sm text-taupe mb-4">
+        <p class="text-label-sm text-charcoal mb-4">
           Contacto Directo
         </p>
         <a href="tel:+34661471971" class="block font-serif text-3xl text-ink mb-8">
@@ -119,21 +119,21 @@ const navLinks = [
 <div class="h-20 lg:h-28"></div>
 
 <script>
-  const header = document.getElementById("header");
-  const headerBg = document.getElementById("header-bg");
-  const menuToggle = document.getElementById("menu-toggle");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const line1 = document.getElementById("menu-line-1");
-  const line2 = document.getElementById("menu-line-2");
-  const mobileLinks = document.querySelectorAll(".mobile-link");
-  const mobileFooter = document.querySelector(".mobile-footer");
-  
-  let menuOpen = false;
-  let lastScroll = 0;
+  function initHeader() {
+    const header = document.getElementById("header");
+    const headerBg = document.getElementById("header-bg");
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const line1 = document.getElementById("menu-line-1");
+    const line2 = document.getElementById("menu-line-2");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+    const mobileFooter = document.querySelector(".mobile-footer");
+    
+    let menuOpen = false;
+    let lastScroll = 0;
 
-  window.addEventListener(
-    "scroll",
-    () => {
+    // Scroll handler
+    const handleScroll = () => {
       const currentScroll = window.scrollY;
       
       // Header background
@@ -153,42 +153,59 @@ const navLinks = [
       }
       
       lastScroll = currentScroll;
-    },
-    { passive: true }
-  );
+    };
 
-  menuToggle?.addEventListener("click", () => {
-    menuOpen = !menuOpen;
+    // Cleanup previous listeners
+    window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     
-    if (menuOpen) {
-      // Open
-      mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
-      document.body.style.overflow = "hidden";
-      
-      line1 && (line1.style.transform = "translateY(3.5px) rotate(45deg)");
-      line2 && (line2.style.transform = "translateY(-3.5px) rotate(-45deg)");
-      
-      // Animate links in
-      setTimeout(() => {
-        mobileLinks.forEach(link => {
-          link.classList.remove("opacity-0", "translate-y-4");
-        });
-        mobileFooter?.classList.remove("opacity-0", "translate-y-4");
-      }, 100);
+    // Run once on init
+    handleScroll();
 
-    } else {
-      // Close
-      mobileMenu?.classList.add("opacity-0", "pointer-events-none");
-      document.body.style.overflow = "";
+    // Menu toggle handler
+    const handleMenuToggle = () => {
+      menuOpen = !menuOpen;
       
-      line1 && (line1.style.transform = "none");
-      line2 && (line2.style.transform = "none");
-      
-      // Reset links
-      mobileLinks.forEach(link => {
-        link.classList.add("opacity-0", "translate-y-4");
-      });
-      mobileFooter?.classList.add("opacity-0", "translate-y-4");
-    }
-  });
+      if (menuOpen) {
+        // Open
+        mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "hidden";
+        
+        line1 && (line1.style.transform = "translateY(3.5px) rotate(45deg)");
+        line2 && (line2.style.transform = "translateY(-3.5px) rotate(-45deg)");
+        
+        // Animate links in
+        setTimeout(() => {
+          mobileLinks.forEach(link => {
+            link.classList.remove("opacity-0", "translate-y-4");
+          });
+          mobileFooter?.classList.remove("opacity-0", "translate-y-4");
+        }, 100);
+
+      } else {
+        // Close
+        mobileMenu?.classList.add("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "";
+        
+        line1 && (line1.style.transform = "none");
+        line2 && (line2.style.transform = "none");
+        
+        // Reset links
+        mobileLinks.forEach(link => {
+          link.classList.add("opacity-0", "translate-y-4");
+        });
+        mobileFooter?.classList.add("opacity-0", "translate-y-4");
+      }
+    };
+
+    // Cleanup previous listener and add new one
+    menuToggle?.removeEventListener("click", handleMenuToggle);
+    menuToggle?.addEventListener("click", handleMenuToggle);
+  }
+
+  // Initialize on first load
+  initHeader();
+  
+  // Re-initialize on each page transition
+  document.addEventListener("astro:page-load", initHeader);
 </script>

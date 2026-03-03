@@ -12,28 +12,28 @@ const { question, index, class: className = "" } = Astro.props;
   class={`group border-b border-ink/20 open:border-olive/50 transition-colors duration-500 ${className}`}
 >
   <summary
-    class="flex cursor-pointer items-center justify-between gap-8 py-8 lg:py-10 select-none list-none"
+    class="flex cursor-pointer items-center justify-between gap-4 sm:gap-8 py-6 sm:py-8 lg:py-10 select-none list-none"
   >
-    <div class="flex items-center gap-6 md:gap-12 min-w-0 flex-1">
+    <div class="flex items-center gap-3 sm:gap-6 md:gap-12 min-w-0 flex-1">
       {
         index !== undefined && (
-          <span class="text-label text-olive shrink-0 w-8 md:w-12">
+          <span class="text-label text-olive shrink-0 w-6 sm:w-8 md:w-12 text-[0.625rem] sm:text-xs">
             0{index + 1}
           </span>
         )
       }
       <h3
-        class="font-serif text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-300 pr-4 leading-[1.2]"
+        class="font-serif text-lg sm:text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-300 pr-2 sm:pr-4 leading-[1.2]"
       >
         {question}
       </h3>
     </div>
     
     <div
-      class="shrink-0 w-10 h-10 rounded-full border border-ink/20 flex items-center justify-center group-hover:bg-ink group-hover:border-ink text-taupe group-hover:text-alabaster transition-all duration-500 group-open:rotate-[135deg] group-open:bg-ink group-open:text-alabaster group-open:border-ink"
+      class="shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-ink/20 flex items-center justify-center group-hover:bg-ink group-hover:border-ink text-ink group-hover:text-alabaster transition-all duration-500 group-open:rotate-[135deg] group-open:bg-ink group-open:text-alabaster group-open:border-ink"
     >
       <svg
-        class="w-4 h-4"
+        class="w-3.5 h-3.5 sm:w-4 sm:h-4"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -48,7 +48,7 @@ const { question, index, class: className = "" } = Astro.props;
   </summary>
   
   <div
-    class="pb-10 pl-[4.5rem] md:pl-24 text-body text-taupe max-w-3xl"
+    class="pb-6 sm:pb-10 pl-[3.5rem] sm:pl-[4.5rem] md:pl-24 text-body text-charcoal max-w-3xl text-sm sm:text-base"
   >
     <slot />
   </div>

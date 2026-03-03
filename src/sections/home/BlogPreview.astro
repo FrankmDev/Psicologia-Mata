@@ -39,33 +39,33 @@ const previewPosts = blogPostsList.slice(0, 3);
               {/* Número / Categoría */}
               <div class="w-full lg:w-24 shrink-0 flex items-center gap-4 lg:gap-0">
                 <span class="text-label text-olive w-8">0{index + 1}</span>
-                <span class="lg:hidden text-label-xs text-taupe uppercase tracking-wider">{post.category}</span>
+                <span class="lg:hidden text-label-xs text-charcoal uppercase tracking-wider">{post.category}</span>
               </div>
 
               {/* Contenido */}
               <div class="flex-1 min-w-0">
                 <div class="hidden lg:flex items-center gap-4 mb-3">
-                  <span class="text-label-xs text-taupe uppercase tracking-[0.15em]">{post.category}</span>
+                  <span class="text-label-xs text-charcoal uppercase tracking-[0.15em]">{post.category}</span>
                   <span class="w-8 h-[1px] bg-border-delicate"></span>
-                  <span class="text-label-xs text-taupe/70">{post.date}</span>
+                  <span class="text-label-xs text-charcoal/70">{post.date}</span>
                 </div>
 
                 <h3 class="font-serif text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-500 leading-tight mb-3">
                   {post.title}
                 </h3>
 
-                <p class="text-body-sm text-taupe line-clamp-2 max-w-2xl">
+                <p class="text-body-sm text-charcoal line-clamp-2 max-w-2xl">
                   {post.excerpt}
                 </p>
               </div>
 
               {/* Fecha en móvil */}
               <div class="lg:hidden">
-                <span class="text-label-xs text-taupe/70">{post.date}</span>
+                <span class="text-label-xs text-charcoal/70">{post.date}</span>
               </div>
 
               {/* Arrow */}
-              <div class="hidden lg:flex shrink-0 w-12 h-12 rounded-full border border-border-strong items-center justify-center text-taupe group-hover:bg-ink group-hover:border-ink group-hover:text-alabaster group-hover:scale-110 transition-all duration-500">
+              <div class="hidden lg:flex shrink-0 w-12 h-12 rounded-full border border-border-strong items-center justify-center text-ink group-hover:bg-ink group-hover:border-ink group-hover:text-alabaster group-hover:scale-110 transition-all duration-500">
                 <svg class="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
                 </svg>

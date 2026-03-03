@@ -58,9 +58,10 @@
     color: var(--color-ink);
   }
 
-  h1 { font-size: clamp(3rem, 8vw, 6.5rem); }
-  h2 { font-size: clamp(2.25rem, 5vw, 4.5rem); }
-  h3 { font-size: clamp(1.75rem, 3.5vw, 3rem); }
+  h1 { font-size: clamp(2.5rem, 6vw + 1rem, 5rem); }
+  h2 { font-size: clamp(2rem, 4vw + 0.5rem, 3.5rem); }
+  h3 { font-size: clamp(1.5rem, 3vw + 0.25rem, 2.25rem); }
+  h4 { font-size: clamp(1.25rem, 2vw + 0.25rem, 1.5rem); }
 
   a {
     text-decoration: none;
@@ -89,20 +90,20 @@
    CLASES PERSONALIZADAS
    ============================================ */
 
-/* Contenedores */
+/* Contenedores - Padding fluido */
 .container-editorial {
   width: 100%;
   max-width: 80rem;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
 }
 
 @media (min-width: 1024px) {
   .container-editorial {
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: clamp(2rem, 5vw, 4rem);
+    padding-right: clamp(2rem, 5vw, 4rem);
   }
 }
 
@@ -115,29 +116,15 @@
   padding-right: 1.5rem;
 }
 
-/* Secciones */
+/* Secciones - Padding fluido */
 .section {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-}
-
-@media (min-width: 1024px) {
-  .section {
-    padding-top: 10rem;
-    padding-bottom: 10rem;
-  }
+  padding-top: clamp(4rem, 8vw, 8rem);
+  padding-bottom: clamp(4rem, 8vw, 8rem);
 }
 
 .section-sm {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-@media (min-width: 1024px) {
-  .section-sm {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
+  padding-top: clamp(3rem, 5vw, 5rem);
+  padding-bottom: clamp(3rem, 5vw, 5rem);
 }
 
 /* Elementos Editoriales */
@@ -161,25 +148,14 @@
   opacity: 0.6;
 }
 
+/* Títulos de sección fluidos */
 .title-section {
   font-family: var(--font-serif);
-  font-size: 3.75rem;
+  font-size: clamp(1.875rem, 4vw + 0.5rem, 3.5rem);
   font-weight: 300;
   color: var(--color-ink);
   line-height: 1.1;
   letter-spacing: -0.02em;
-}
-
-@media (max-width: 1024px) {
-  .title-section {
-    font-size: 2.75rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .title-section {
-    font-size: 2.25rem;
-  }
 }
 
 .title-section em {
@@ -189,9 +165,10 @@
   font-family: var(--font-serif);
 }
 
+/* Texto de cuerpo fluido */
 .text-body {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: clamp(0.9375rem, 1vw + 0.75rem, 1.0625rem);
   line-height: 1.8;
   letter-spacing: 0.01em;
   color: var(--color-charcoal);
@@ -562,10 +539,10 @@
   text-transform: uppercase;
 }
 
-/* Cuerpo de texto */
+/* Cuerpo de texto fluido */
 .text-body-sm {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
   line-height: 1.7;
   font-weight: 300;
   color: var(--color-charcoal);
@@ -573,50 +550,32 @@
 
 .text-lead {
   font-family: var(--font-sans);
-  font-size: 1.0625rem;
+  font-size: clamp(1rem, 1vw + 0.875rem, 1.25rem);
   line-height: 1.7;
   font-weight: 300;
   color: var(--color-charcoal);
 }
 
-/* Títulos de sección (font-serif) */
+/* Títulos fluidos (font-serif) */
 .text-title-sm {
   font-family: var(--font-serif);
-  font-size: 1.5rem;
+  font-size: clamp(1.25rem, 2vw + 0.5rem, 1.5rem);
   line-height: 1.2;
   font-weight: 400;
 }
 
-@media (min-width: 1024px) {
-  .text-title-sm {
-    font-size: 1.75rem;
-  }
-}
-
 .text-title {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
+  font-size: clamp(1.5rem, 2.5vw + 0.5rem, 2rem);
   line-height: 1.15;
   font-weight: 400;
 }
 
-@media (min-width: 1024px) {
-  .text-title {
-    font-size: 2rem;
-  }
-}
-
 .text-title-lg {
   font-family: var(--font-serif);
-  font-size: 2rem;
+  font-size: clamp(1.75rem, 3vw + 0.5rem, 2.5rem);
   line-height: 1.1;
   font-weight: 400;
-}
-
-@media (min-width: 1024px) {
-  .text-title-lg {
-    font-size: 2.5rem;
-  }
 }
 
 /* Colores de texto consistentes */

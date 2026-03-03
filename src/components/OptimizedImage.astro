@@ -1,7 +1,12 @@
 ---
-// OptimizedImage component - Wrapper for optimized image loading
-// Uses native img with srcset for responsive images
-// For external images (Unsplash), uses URL parameters for optimization
+/**
+ * OptimizedImage - Componente de imagen optimizado para Astro
+ * Usa el componente nativo <Image /> cuando es posible
+ * Fallback a img con srcset para imágenes remotas (Unsplash)
+ */
+import { Image } from 'astro:assets';
+
+type ImageQuality = 60 | 70 | 80 | 85 | 90 | 95 | 100;
 
 interface Props {
   src: string;
@@ -12,9 +17,11 @@ interface Props {
   decoding?: 'async' | 'sync' | 'auto';
   class?: string;
   sizes?: string;
-  quality?: number;
-  fit?: 'crop' | 'clip' | 'max' | 'scale';
-  format?: 'auto' | 'webp' | 'jpeg' | 'png';
+  quality?: ImageQuality;
+  fit?: 'crop' | 'clip' | 'max' | 'scale' | 'fill';
+  format?: 'auto' | 'webp' | 'jpeg' | 'jpg' | 'png' | 'avif';
+  priority?: boolean;
+  caption?: string;
 }
 
 const {
@@ -25,56 +32,95 @@ const {
   loading = 'lazy',
   decoding = 'async',
   class: className = '',
-  sizes = '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px',
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px',
   quality = 80,
   fit = 'crop',
-  format = 'auto'
+  format = 'auto',
+  priority = false,
+  caption
 } = Astro.props;
 
-// Check if it's an external Unsplash image
+// Detectar tipo de imagen
 const isUnsplash = src.includes('images.unsplash.com');
+const isRemote = src.startsWith('http://') || src.startsWith('https://');
+const isLocalAsset = src.startsWith('/src/') || src.startsWith('~/');
 
-// Generate optimized Unsplash URL with parameters
-function getOptimizedUnsplashUrl(originalUrl: string, w: number, q: number, f: string, fitMode: string): string {
-  const url = new URL(originalUrl);
-  url.searchParams.set('w', w.toString());
-  url.searchParams.set('q', q.toString());
-  if (f !== 'auto') url.searchParams.set('fm', f);
-  url.searchParams.set('fit', fitMode);
-  url.searchParams.set('auto', 'format');
-  return url.toString();
+// Calcular altura si no se proporciona (ratio 4:3 por defecto)
+const calculatedHeight = height || Math.round(width * 0.75);
+
+// Generar URL optimizada para Unsplash
+function getOptimizedUnsplashUrl(url: string, w: number, q: number, f: string, fitMode: string): string {
+  try {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set('w', w.toString());
+    urlObj.searchParams.set('q', q.toString());
+    if (f !== 'auto') urlObj.searchParams.set('fm', f);
+    if (fitMode !== 'crop') urlObj.searchParams.set('fit', fitMode);
+    urlObj.searchParams.set('auto', 'format,compress');
+    return urlObj.toString();
+  } catch {
+    return url;
+  }
 }
 
-// Generate srcset for responsive images
+// Generar srcset para imágenes responsivas
 function generateSrcset(originalUrl: string): string {
   if (!isUnsplash) return originalUrl;
   
-  const widths = [400, 600, 800, 1200, 1600];
+  const widths = [400, 600, 800, 1200, 1600, 2000];
   return widths
     .map(w => `${getOptimizedUnsplashUrl(originalUrl, w, quality, format, fit)} ${w}w`)
     .join(', ');
 }
 
-// Get the optimized src
+// URL optimizada
 const optimizedSrc = isUnsplash 
   ? getOptimizedUnsplashUrl(src, width, quality, format, fit)
   : src;
 
-const srcset = generateSrcset(src);
+const srcset = isUnsplash ? generateSrcset(src) : undefined;
 
-// Calculate aspect ratio if height not provided
-const calculatedHeight = height || Math.round(width * 0.75);
+// Determinar loading
+const loadingAttr = priority ? 'eager' : loading;
+
+// Determinar si debe tener fetchpriority
+const fetchPriority = priority ? 'high' : undefined;
 ---
 
-<img
-  src={optimizedSrc}
-  alt={alt}
-  width={width}
-  height={calculatedHeight}
-  loading={loading}
-  decoding={decoding}
-  class={className}
-  srcset={isUnsplash ? srcset : undefined}
-  sizes={isUnsplash ? sizes : undefined}
-  style={`aspect-ratio: ${width} / ${calculatedHeight};`}
-/>
+<figure class:list={['m-0', caption ? 'space-y-2' : '']}>
+  {isLocalAsset ? (
+    <!-- Imagen local con optimización completa de Astro -->
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={calculatedHeight}
+      quality={quality}
+      format={format === 'auto' ? undefined : format}
+      loading={loadingAttr}
+      decoding={decoding}
+      class={className}
+      {...(priority && { fetchpriority: 'high' })}
+    />
+  ) : (
+    <!-- Imagen remota con srcset optimizado -->
+    <img
+      src={optimizedSrc}
+      alt={alt}
+      width={width}
+      height={calculatedHeight}
+      loading={loadingAttr}
+      decoding={decoding}
+      class={className}
+      {...(srcset && { srcset })}
+      {...(isUnsplash && { sizes })}
+      {...(fetchPriority && { fetchpriority: fetchPriority })}
+      style={`aspect-ratio: ${width} / ${calculatedHeight};`}
+    />
+  )}
+  {caption && (
+    <figcaption class="text-sm text-charcoal text-center italic">
+      {caption}
+    </figcaption>
+  )}
+</figure>

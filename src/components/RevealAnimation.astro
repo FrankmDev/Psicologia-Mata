@@ -1,38 +1,115 @@
 ---
-// RevealAnimation.astro - Client-side island for scroll animations
-// Hydrates only when visible using client:visible directive
-// This component is included in Layout.astro
+/**
+ * RevealAnimation - Componente de animaciones de scroll
+ * Usa IntersectionObserver eficiente con RAF para rendimiento óptimo
+ * No requiere hidratación - el script se ejecuta en el cliente directamente
+ */
 ---
 
 <script>
-  // Reveal animations - runs on client
-  const observerOptions = {
-    threshold: 0.15,
-    rootMargin: "0px 0px -50px 0px"
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const delayStr = entry.target.getAttribute("data-reveal-delay");
-        const delay = delayStr ? parseInt(delayStr, 10) : 0;
-        
-        setTimeout(() => {
-          entry.target.classList.add("is-visible");
-        }, delay);
-        
-        observer.unobserve(entry.target);
+  (function initRevealAnimations() {
+    'use strict';
+    
+    // Configuración
+    const CONFIG = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px',
+      once: true // Solo animar una vez
+    };
+    
+    let observer: IntersectionObserver | null = null;
+    let isInitialized = false;
+    
+    // Debounce utility
+    function debounce<T extends (...args: unknown[]) => void>(fn: T, delay: number) {
+      let timeoutId: ReturnType<typeof setTimeout>;
+      return (...args: Parameters<T>) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => fn(...args), delay);
+      };
+    }
+    
+    // Inicializar animaciones
+    function init() {
+      if (isInitialized || typeof window === 'undefined') return;
+      
+      const elements = document.querySelectorAll('[data-reveal], .img-reveal-wrapper');
+      if (elements.length === 0) return;
+      
+      // Limpiar observer anterior si existe
+      if (observer) {
+        observer.disconnect();
       }
+      
+      // Crear nuevo observer
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delayStr = entry.target.getAttribute('data-reveal-delay');
+            const delay = delayStr ? parseInt(delayStr, 10) : 0;
+            
+            // Usar requestAnimationFrame para sincronizar con el render
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                entry.target.classList.add('is-visible');
+              }, delay);
+            });
+            
+            // Dejar de observar si solo animamos una vez
+            if (CONFIG.once) {
+              observer?.unobserve(entry.target);
+            }
+          } else if (!CONFIG.once) {
+            entry.target.classList.remove('is-visible');
+          }
+        });
+      }, {
+        threshold: CONFIG.threshold,
+        rootMargin: CONFIG.rootMargin
+      });
+      
+      // Observar elementos
+      elements.forEach((el) => {
+        el.classList.remove('is-visible');
+        observer?.observe(el);
+      });
+      
+      isInitialized = true;
+    }
+    
+    // Cleanup eficiente
+    function cleanup() {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+      isInitialized = false;
+    }
+    
+    // Inicializar
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    
+    // Reinicializar en transiciones de página (View Transitions)
+    document.addEventListener('astro:page-load', () => {
+      cleanup();
+      // Pequeño delay para asegurar que el DOM está listo
+      requestAnimationFrame(init);
     });
-  }, observerOptions);
-
-  // Observe all reveal elements
-  document.querySelectorAll("[data-reveal]").forEach((el) => {
-    observer.observe(el);
-  });
-
-  // Observe image wrapper reveals
-  document.querySelectorAll(".img-reveal-wrapper").forEach((el) => {
-    observer.observe(el);
-  });
+    
+    // Cleanup antes de cambiar de página
+    document.addEventListener('astro:before-swap', cleanup);
+    
+    // Reinicializar si cambia el tamaño de ventana (para elementos nuevos)
+    const debouncedInit = debounce(() => {
+      cleanup();
+      init();
+    }, 250);
+    
+    window.addEventListener('resize', debouncedInit);
+    
+  })();
 </script>

@@ -1,0 +1,129 @@
+---
+/**
+ * CTASection - Sección de llamada a la acción reutilizable
+ * Versátil para usarse al final de páginas o secciones
+ */
+
+interface Props {
+  label?: string;
+  title: string;
+  highlight?: string;
+  description?: string;
+  primaryAction: {
+    text: string;
+    href: string;
+    icon?: boolean;
+  };
+  secondaryAction?: {
+    text: string;
+    href: string;
+    icon?: string;
+  };
+  variant?: 'default' | 'dark' | 'light';
+  centered?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  title,
+  highlight,
+  description,
+  primaryAction,
+  secondaryAction,
+  variant = 'default',
+  centered = true,
+  class: className = ''
+} = Astro.props;
+
+const variants = {
+  default: 'bg-cream',
+  dark: 'bg-charcoal text-alabaster',
+  light: 'bg-alabaster'
+};
+
+const titleClass = variant === 'dark' ? '!text-alabaster' : '';
+const highlightClass = variant === 'dark' ? '!text-terracotta-light' : '';
+const descClass = variant === 'dark' ? 'text-taupe-light' : 'text-charcoal';
+const labelClass = variant === 'dark' ? '!text-terracotta-light' : '';
+---
+
+<section class:list={['section relative overflow-hidden', variants[variant], className]}>
+  <!-- Fondo decorativo para variant dark -->
+  {variant === 'dark' && (
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute -top-1/2 -right-1/4 w-[80vw] h-[80vw] rounded-full bg-ink blur-[120px] opacity-50"></div>
+      {centered && (
+        <div class="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-terracotta/10 blur-[80px]"></div>
+      )}
+    </div>
+  )}
+  
+  <div class:list={['container-editorial relative z-10', centered && 'text-center']}>
+    <div class:list={['max-w-4xl', centered && 'mx-auto']} data-reveal>
+      
+      {label && (
+        <div class="mb-8">
+          {centered ? (
+            <div class="inline-flex items-center gap-4">
+              <span class="w-8 h-[1px] bg-olive/60"></span>
+              <span class:list={['label-section !m-0', labelClass]}>{label}</span>
+              <span class="w-8 h-[1px] bg-olive/60"></span>
+            </div>
+          ) : (
+            <span class:list={['label-section !m-0', labelClass]}>{label}</span>
+          )}
+        </div>
+      )}
+      
+      <h2 class:list={['title-section mb-8', titleClass]}>
+        {title}
+        {highlight && (
+          <em class:list={['italic', highlightClass]}>{highlight}</em>
+        )}
+      </h2>
+      
+      {description && (
+        <p class:list={['text-body max-w-2xl mb-12', descClass, centered && 'mx-auto']}>
+          {description}
+        </p>
+      )}
+      
+      <div class="flex flex-col sm:flex-row items-center gap-4 justify-center">
+        <a 
+          href={primaryAction.href} 
+          class:list={[
+            'btn group',
+            variant === 'dark' ? 'btn-outline !text-alabaster !border-border-strong/30 hover:!bg-alabaster hover:!text-ink' : 'btn-sage'
+          ]}
+        >
+          <span>{primaryAction.text}</span>
+          {primaryAction.icon && (
+            <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
+            </svg>
+          )}
+        </a>
+        
+        {secondaryAction && (
+          <a 
+            href={secondaryAction.href}
+            class:list={[
+              'btn group',
+              variant === 'dark' 
+                ? '!bg-transparent !border-border-strong/30 !text-alabaster hover:!bg-terracotta hover:!text-alabaster hover:!border-terracotta' 
+                : 'btn-outline'
+            ]}
+          >
+            {secondaryAction.icon === 'phone' && (
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+            )}
+            <span>{secondaryAction.text}</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>

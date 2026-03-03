@@ -3,82 +3,82 @@
 ---
 
 <section
-  class="min-h-screen flex items-center bg-alabaster relative overflow-hidden pt-4"
+  class="min-h-[100dvh] flex items-center bg-alabaster relative overflow-hidden pt-4"
   aria-label="Introducción"
 >
   <!-- Fondo Aurora -->
   <div class="bg-aurora"></div>
 
-  <div class="container-editorial relative z-10 pt-6 pb-16 lg:pt-8">
-    <div class="grid lg:grid-cols-12 gap-x-12 gap-y-16 items-center">
+  <div class="container-editorial relative z-10 pt-8 pb-12 sm:pt-6 sm:pb-16 lg:pt-8">
+    <div class="grid lg:grid-cols-12 gap-x-8 lg:gap-x-12 gap-y-10 lg:gap-y-16 items-center">
 
       <!-- Contenido principal -->
-      <div class="lg:col-span-7 z-20 flex flex-col justify-center relative">
+      <div class="lg:col-span-7 z-20 flex flex-col justify-center relative order-2 lg:order-1">
         <!-- Detalle de línea decorativa -->
-        <div class="absolute -left-12 lg:-left-24 top-0 w-[1px] h-full bg-border-delicate hidden md:block"></div>
+        <div class="absolute -left-8 lg:-left-24 top-0 w-[1px] h-full bg-border-delicate hidden md:block"></div>
 
-        <div class="mb-10" data-reveal>
-          <span class="label-section">Psicología Clínica en Córdoba</span>
+        <div class="mb-6 sm:mb-10" data-reveal>
+          <span class="label-section text-[0.625rem] sm:text-label-sm">Psicología Clínica en Córdoba</span>
         </div>
 
         <h1
-          class="font-serif text-[clamp(3.5rem,7vw,5rem)] lg:text-[5.5rem] font-light text-ink leading-[0.95] mb-10 tracking-tight"
+          class="font-serif text-[clamp(2.75rem,10vw,5rem)] lg:text-[clamp(4rem,6vw,5.5rem)] font-light text-ink leading-[0.95] mb-6 sm:mb-10 tracking-tight"
         >
           <div data-reveal data-reveal-delay="100">Encuentra</div>
-          <div data-reveal data-reveal-delay="200" class="flex items-center gap-4 lg:gap-8 mt-2">
-            <span class="h-[1px] w-12 lg:w-24 bg-ink opacity-30"></span>
+          <div data-reveal data-reveal-delay="200" class="flex items-center gap-3 sm:gap-4 lg:gap-8 mt-1 sm:mt-2">
+            <span class="h-[1px] w-8 sm:w-12 lg:w-24 bg-ink opacity-30 shrink-0"></span>
             <em class="font-light text-olive">tu equilibrio</em>
           </div>
-          <div data-reveal data-reveal-delay="300" class="mt-2">interior.</div>
+          <div data-reveal data-reveal-delay="300" class="mt-1 sm:mt-2">interior.</div>
         </h1>
 
-        <div class="max-w-xl pl-0 md:pl-8 border-l border-transparent md:border-border-strong mb-12">
-          <p class="text-lead" data-reveal data-reveal-delay="400">
+        <div class="max-w-xl pl-0 md:pl-8 border-l border-transparent md:border-border-strong mb-8 sm:mb-12">
+          <p class="text-lead text-sm sm:text-base" data-reveal data-reveal-delay="400">
             Cuando todo pesa demasiado, no tienes que atravesarlo solo. Soy María Ángeles Mata, y estoy aquí para acompañarte en ese primer paso hacia sentirte mejor.
           </p>
         </div>
 
         <div
-          class="flex flex-wrap items-center gap-8"
+          class="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-8"
           data-reveal
           data-reveal-delay="500"
         >
-          <a href="/contact" class="btn btn-sage">
+          <a href="/contact" class="btn btn-sage text-[0.6875rem] sm:text-xs py-3 px-6 sm:py-4 sm:px-8">
             <span>Quiero hablar contigo</span>
           </a>
 
-          <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-3">
-              <span class="w-1 h-1 rounded-full bg-olive"></span>
-              <span class="text-label-xs text-taupe">Terapia Individual</span>
+          <div class="flex flex-col gap-1.5 sm:gap-2">
+            <div class="flex items-center gap-2 sm:gap-3">
+              <span class="w-1 h-1 rounded-full bg-olive shrink-0"></span>
+              <span class="text-label-xs text-charcoal text-[0.625rem] sm:text-xs">Terapia Individual</span>
             </div>
-            <div class="flex items-center gap-3">
-              <span class="w-1 h-1 rounded-full bg-olive"></span>
-              <span class="text-label-xs text-taupe">Terapia de Pareja</span>
+            <div class="flex items-center gap-2 sm:gap-3">
+              <span class="w-1 h-1 rounded-full bg-olive shrink-0"></span>
+              <span class="text-label-xs text-charcoal text-[0.625rem] sm:text-xs">Terapia de Pareja</span>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Composición de Imagen (Asimétrica y Editorial) -->
-      <div class="lg:col-span-5 relative mt-12 lg:mt-0">
+      <div class="lg:col-span-5 relative mt-6 lg:mt-0 order-1 lg:order-2">
 
         <!-- Elemento decorativo texto vertical -->
         <div
-          class="absolute -right-8 top-1/2 -translate-y-1/2 rotate-180 [writing-mode:vertical-rl] text-label-xs text-taupe opacity-60 z-30 hidden xl:block"
+          class="absolute -right-4 lg:-right-8 top-1/2 -translate-y-1/2 rotate-180 [writing-mode:vertical-rl] text-label-xs text-ink opacity-40 z-30 hidden xl:block text-[0.625rem]"
           data-reveal="right"
           data-reveal-delay="700"
         >
           Córdoba, España — Consulta Presencial
         </div>
 
-        <div class="relative w-full max-w-[420px] mx-auto lg:ml-auto lg:mr-0" data-reveal="right" data-reveal-delay="300">
+        <div class="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] mx-auto lg:ml-auto lg:mr-0" data-reveal="right" data-reveal-delay="300">
 
           <!-- Capa trasera decorativa -->
-          <div class="absolute -inset-y-8 -inset-x-4 bg-stone/20 rounded-t-full hidden md:block backdrop-blur-sm z-0 group-hover:bg-stone/30 transition-colors duration-700"></div>
+          <div class="absolute -inset-y-6 sm:-inset-y-8 -inset-x-3 sm:-inset-x-4 bg-stone/20 rounded-t-full hidden sm:block backdrop-blur-sm z-0 group-hover:bg-stone/30 transition-colors duration-700"></div>
 
           <!-- Contenedor de la imagen con Reveal Mask -->
-          <div class="img-reveal-wrapper rounded-t-full rounded-b-[100px] overflow-hidden aspect-[3/4] z-10 relative shadow-2xl shadow-ink/5 group">
+          <div class="img-reveal-wrapper rounded-t-full rounded-b-[60px] sm:rounded-b-[100px] overflow-hidden aspect-[3/4] z-10 relative shadow-2xl shadow-ink/5 group">
             <img
               src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=85"
               alt="María Ángeles Mata - Psicóloga Clínica"
@@ -93,16 +93,16 @@
 
           <!-- Etiqueta Flotante Minimalista -->
           <div
-            class="absolute -bottom-10 -left-4 md:-left-12 bg-alabaster p-6 lg:p-8 border border-border-delicate z-20 shadow-xl shadow-ink/5 flex items-center gap-6 hover:border-olive/30 hover:shadow-2xl hover:shadow-ink/10 transition-all duration-500"
+            class="absolute -bottom-6 sm:-bottom-10 -left-2 sm:-left-4 lg:-left-12 bg-alabaster p-4 sm:p-6 lg:p-8 border border-border-delicate z-20 shadow-xl shadow-ink/5 flex items-center gap-3 sm:gap-6 hover:border-olive/30 hover:shadow-2xl hover:shadow-ink/10 transition-all duration-500 max-w-[calc(100%-1rem)]"
             data-reveal
             data-reveal-delay="600"
           >
             <div>
-              <p class="font-serif text-4xl lg:text-5xl text-ink leading-none mb-1">15+</p>
+              <p class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ink leading-none">15+</p>
             </div>
-            <div class="h-10 w-[1px] bg-border-strong"></div>
+            <div class="h-8 sm:h-10 w-[1px] bg-border-strong shrink-0"></div>
             <div>
-              <p class="text-label-sm text-taupe leading-relaxed">
+              <p class="text-label-xs text-charcoal leading-relaxed text-[0.625rem] sm:text-xs">
                 Años acompañando<br />a personas como tú
               </p>
             </div>

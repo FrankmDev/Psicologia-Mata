@@ -1,28 +1,50 @@
 ---
+/**
+ * PageHeader - Encabezado de página reutilizable
+ * Usado en páginas de servicios, contacto, blog, etc.
+ */
+
 interface Props {
   label: string;
   title: string;
-  highlight: string;
-  description: string;
+  highlight?: string;
+  description?: string;
+  align?: 'left' | 'center';
+  variant?: 'default' | 'dark';
+  class?: string;
 }
 
-const { label, title, highlight, description } = Astro.props;
+const {
+  label,
+  title,
+  highlight,
+  description,
+  align = 'left',
+  variant = 'default',
+  class: className = ''
+} = Astro.props;
+
+const isDark = variant === 'dark';
+const alignClass = align === 'center' ? 'text-center mx-auto' : 'text-left';
+const maxWidthClass = align === 'center' ? 'max-w-4xl mx-auto' : 'max-w-4xl';
 ---
 
-<header class="section-sm bg-text-primary relative overflow-hidden">
-  <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;" aria-hidden="true"></div>
-  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sage/5 to-transparent" aria-hidden="true"></div>
-  
-  <div class="container-elegant relative z-10">
-    <div class="section-label-dark mb-5">
-      <div class="w-4 h-px bg-sage/50"></div>
-      <span class="text-xs text-sage/80 font-medium tracking-wider uppercase">{label}</span>
-    </div>
-    
-    <h1 class="font-serif text-3xl lg:text-4xl xl:text-5xl text-white leading-tight mb-4 max-w-3xl">
-      {title} <span class="italic text-sage">{highlight}</span>
-    </h1>
-    
-    <p class="text-white/50 text-lg leading-relaxed max-w-xl">{description}</p>
-  </div>
-</header>
+<div class:list={[maxWidthClass, alignClass, className]} data-reveal>
+  <span class:list={['label-section mb-8 block', isDark && '!text-terracotta-light']}>
+    {label}
+  </span>
+  <h1 class:list={['title-section mb-8', isDark && '!text-alabaster']}>
+    {title}
+    {highlight && (
+      <em class:list={['italic', isDark ? '!text-terracotta-light' : 'text-olive']}>
+        {highlight}
+      </em>
+    )}
+  </h1>
+  {description && (
+    <p class:list={['text-lead max-w-2xl', isDark ? '!text-taupe-light' : 'text-charcoal']}>
+      {description}
+    </p>
+  )}
+  <slot />
+</div>
