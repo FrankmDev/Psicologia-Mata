@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { ClientRouter } from 'astro:transitions';
+// import { ClientRouter } from 'astro:transitions'; // Desactivado para evitar caché
 import RevealAnimation from '../components/RevealAnimation.astro';
 
 interface Props {
@@ -40,6 +40,11 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Desactivar caché en desarrollo -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="theme-color" content="#F7F5F0" />
     <meta name="msapplication-TileColor" content="#F7F5F0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -111,7 +116,7 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <slot name="schema" />
     
     <!-- View Transitions -->
-    <ClientRouter />
+    <!-- <ClientRouter /> --> <!-- Desactivado para evitar caché -->
   </head>
 
   <body class="antialiased selection:bg-stone/50 bg-alabaster">

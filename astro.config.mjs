@@ -10,11 +10,8 @@ export default defineConfig({
   // Build output directory
   outDir: './dist',
   
-  // Prefetch configuration for instant navigation
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'viewport'
-  },
+  // Prefetch configuration - desactivado para evitar caché en desarrollo
+  prefetch: false,
   
   // Vite configuration
   vite: {
@@ -73,9 +70,8 @@ export default defineConfig({
   // Compress HTML output
   compressHTML: true,
   
-  // Experimental features
+  // Experimental features - desactivado para evitar caché en desarrollo
   experimental: {
-    // Client prerender for faster page loads
-    clientPrerender: true
+    clientPrerender: false
   }
 });

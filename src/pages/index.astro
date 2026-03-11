@@ -6,6 +6,8 @@ import Schema from '../components/Schema.astro';
 import TherapyProcess from '../components/TherapyProcess.astro';
 import CTASection from '../components/CTASection.astro';
 import OptimizedImage from '../components/OptimizedImage.astro';
+import { Image } from 'astro:assets';
+import mariaAngelesMata from '../assets/maria-angeles-mata.jpeg';
 import { mainServices } from '../data/services';
 import { faqs } from '../data/faqs';
 import { blogPostsList } from '../data/blog';
@@ -16,7 +18,7 @@ const description = "Psicóloga General Sanitaria en Córdoba con 15+ años de e
 const previewPosts = blogPostsList.slice(0, 3);
 
 const localBusinessData = {
-  name: "María Ángeles Mata - Psicóloga Clínica",
+  name: "María Ángeles Mata - Psicóloga Sanitaria",
   description: "Psicóloga General Sanitaria en Córdoba especializada en terapia individual, de pareja y familiar con más de 15 años de experiencia.",
   url: "https://psicologia-mata.es",
   telephone: "+34 661 471 971",
@@ -168,7 +170,7 @@ const values = [
               <div class="img-reveal-wrapper rounded-t-full rounded-b-[100px] overflow-hidden aspect-[3/4] z-10 relative shadow-2xl shadow-ink/5 group img-lcp">
                 <OptimizedImage
                   src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format,compress&fit=crop&w=600&q=65&fm=avif"
-                  alt="María Ángeles Mata - Psicóloga Clínica"
+                  alt="María Ángeles Mata - Psicóloga Sanitaria"
                   width={600}
                   height={800}
                   loading="eager"
@@ -298,14 +300,15 @@ const values = [
             <div class="relative w-full max-w-md mx-auto h-full flex flex-col">
               <div class="absolute -inset-4 bg-stone/20 rounded-[40px] hidden md:block rotate-[-3deg] z-0"></div>
 
-              <div class="img-reveal-wrapper flex-1 rounded-[30px] overflow-hidden z-10 relative shadow-2xl shadow-ink/5 min-h-[500px]">
-                <OptimizedImage
-                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=85"
+              <div class="img-reveal-wrapper flex-1 rounded-[30px] overflow-hidden z-10 relative shadow-2xl shadow-ink/5">
+                <Image
+                  src={mariaAngelesMata}
                   alt="María Ángeles Mata - Psicóloga"
                   width={500}
                   height={666}
                   loading="lazy"
                   class="w-full h-full object-cover filter grayscale-[20%] sepia-[15%] brightness-105 transition-all duration-1000 hover:grayscale-0 hover:scale-105"
+                  style="min-height: 100%; aspect-ratio: 3/4;"
                 />
               </div>
 
