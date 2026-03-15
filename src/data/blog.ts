@@ -1,3 +1,12 @@
+import type { ImageMetadata } from 'astro';
+
+// Import images
+import autoestima from '../assets/autoestima.avif';
+import terapiaPareja2 from '../assets/terapia-pareja-2.avif';
+import estres from '../assets/estres.avif';
+import apunte from '../assets/apunte.avif';
+import psicologia from '../assets/psicologia.avif';
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -6,7 +15,7 @@ export interface BlogPost {
   dateShort: string;
   readTime: string;
   category: string;
-  image: string;
+  image: ImageMetadata;
   content: string;
 }
 
@@ -19,12 +28,12 @@ export const blogPosts: Record<string, BlogPost> = {
     dateShort: "15 Ene",
     readTime: "5 min",
     category: "Bienestar",
-    image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=80",
+    image: autoestima,
     content: `
       <p class="text-xl leading-relaxed text-charcoal mb-8">La gente suele pensar que ir a terapia es para cuando "estás mal". Pero la verdad es que la terapia es para cualquiera que quiera entenderse mejor, sentirse mejor, o simplemente tener un espacio donde no tener que cuidar lo que dice.</p>
       
       <figure class="my-12">
-        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80" alt="Espacio tranquilo para reflexión" class="w-full rounded-2xl shadow-lg" />
+        <img src="${psicologia.src}" alt="Espacio tranquilo para reflexión" class="w-full rounded-2xl shadow-lg" loading="lazy" />
         <figcaption class="text-sm text-ink mt-3 text-center">A veces necesitamos simplemente un lugar donde poder ser nosotros mismos</figcaption>
       </figure>
       
@@ -72,12 +81,12 @@ export const blogPosts: Record<string, BlogPost> = {
     dateShort: "8 Ene",
     readTime: "7 min",
     category: "Relaciones",
-    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+    image: terapiaPareja2,
     content: `
       <p class="text-xl leading-relaxed text-charcoal mb-8">"Hablamos pero no nos entendemos". Lo escucho constantemente en consulta. Y la verdad es que hablar no siempre es comunicar. A veces hablamos más para defendernos que para entendernos.</p>
       
       <figure class="my-12">
-        <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80" alt="Pareja conversando" class="w-full rounded-2xl shadow-lg" />
+        <img src="${autoestima.src}" alt="Pareja conversando" class="w-full rounded-2xl shadow-lg" loading="lazy" />
         <figcaption class="text-sm text-ink mt-3 text-center">La comunicación real implica escuchar, no solo hablar</figcaption>
       </figure>
       
@@ -134,12 +143,12 @@ export const blogPosts: Record<string, BlogPost> = {
     dateShort: "2 Ene",
     readTime: "6 min",
     category: "Salud Mental",
-    image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80",
+    image: estres,
     content: `
       <p class="text-xl leading-relaxed text-charcoal mb-8">La ansiedad no es un defecto. Es una respuesta natural que se ha vuelto demasiado sensible. Tu cerebro está intentando protegerte, pero está detectando peligros donde no los hay. Entender esto ya es el primer paso.</p>
       
       <figure class="my-12">
-        <img src="https://images.unsplash.com/photo-1447452001602-7090c7ab2db3?auto=format&fit=crop&w=1200&q=80" alt="Persona practicando mindfulness" class="w-full rounded-2xl shadow-lg" />
+        <img src="${apunte.src}" alt="Persona practicando mindfulness" class="w-full rounded-2xl shadow-lg" loading="lazy" />
         <figcaption class="text-sm text-ink mt-3 text-center">La respiración es tu aliada más poderosa contra la ansiedad</figcaption>
       </figure>
       
@@ -181,12 +190,12 @@ export const blogPosts: Record<string, BlogPost> = {
     dateShort: "28 Dic",
     readTime: "6 min",
     category: "Crecimiento Personal",
-    image: "https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=800&q=80",
+    image: apunte,
     content: `
       <p class="text-xl leading-relaxed text-charcoal mb-8">La autoestima no es sentirse el mejor del mundo. Es simplemente aceptarte como eres: con tus fallos, con tus aciertos, con tu historia. Es dejar de ser tu peor crítico.</p>
       
       <figure class="my-12">
-        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80" alt="Persona reflexionando" class="w-full rounded-2xl shadow-lg" />
+        <img src="${estres.src}" alt="Persona reflexionando" class="w-full rounded-2xl shadow-lg" loading="lazy" />
         <figcaption class="text-sm text-ink mt-3 text-center">Quererse no es egoísmo, es necesario</figcaption>
       </figure>
       

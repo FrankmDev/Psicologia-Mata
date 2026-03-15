@@ -7,16 +7,22 @@ import TherapyProcess from '../components/TherapyProcess.astro';
 import CTASection from '../components/CTASection.astro';
 import Schema from '../components/Schema.astro';
 import { allServices } from '../data/services';
+import { Image } from 'astro:assets';
+import terapiaIndividual from '../assets/terapia-individual.avif';
+import terapiaPareja from '../assets/terapia-pareja.avif';
+import terapiaFamilia from '../assets/terapia-familia.avif';
+import evaluacion from '../assets/evaluacion.avif';
+import cognitiva from '../assets/estimulacion-cognitiva.avif';
 
 const title = "Servicios de Psicología en Córdoba | María Ángeles Mata";
 const description = "Servicios profesionales de psicología en Córdoba: terapia individual, de pareja, familiar, evaluación neuropsicológica y estimulación cognitiva. Más de 15 años de experiencia.";
 
-const serviceImages: Record<string, string> = {
-  individual: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1200&q=80',
-  pareja: 'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80',
-  familiar: 'https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1200&q=80',
-  evaluacion: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=1200&q=80',
-  cognitiva: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80',
+const serviceImages: Record<string, ImageMetadata> = {
+  individual: terapiaIndividual,
+  pareja: terapiaPareja,
+  familiar: terapiaFamilia,
+  evaluacion: evaluacion,
+  cognitiva: cognitiva,
 };
 
 const serviceContent: Record<string, {
@@ -142,12 +148,14 @@ const faqSchemaData = faqs.map(faq => ({
                   <div class={`absolute -inset-4 border border-olive/20 transition-transform duration-700 ease-out ${isEven ? 'group-hover:translate-x-3' : 'group-hover:-translate-x-3'}`}></div>
                   
                   <div class={`relative img-reveal-wrapper aspect-[3/4] overflow-hidden transition-transform duration-700 ease-out ${isEven ? 'group-hover:translate-x-3' : 'group-hover:-translate-x-3'}`}>
-                    <img 
+                    <Image 
                       src={serviceImages[service.id]} 
                       alt={service.title}
-                      class="w-full h-full object-cover filter grayscale-[20%] sepia-[5%] group-hover:grayscale-0 group-hover:sepia-0 transition-all duration-700 group-hover:scale-105"
-                      width="600"
-                      height="800"
+                      class="absolute inset-0 w-full h-full object-cover filter grayscale-[20%] sepia-[5%] group-hover:grayscale-0 group-hover:sepia-0 transition-all duration-700 group-hover:scale-105"
+                      width={600}
+                      densities={[1.5, 2]}
+                      format="avif"
+                      quality="max"
                       loading={index === 0 ? 'eager' : 'lazy'}
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-ink/30 via-ink/5 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>

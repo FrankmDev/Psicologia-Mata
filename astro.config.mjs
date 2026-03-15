@@ -10,16 +10,19 @@ export default defineConfig({
   // Build output directory
   outDir: './dist',
   
-  // Prefetch configuration - desactivado para evitar caché en desarrollo
+  // Prefetch configuration
   prefetch: false,
+
+  // Server configuration
+  server: {
+    port: 4321,
+  },
   
   // Vite configuration
   vite: {
     plugins: [tailwindcss()],
     build: {
-      // Enable CSS minification
       cssMinify: true,
-      // Minify JS for production
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -27,37 +30,19 @@ export default defineConfig({
           drop_debugger: true
         }
       },
-      // Rollup options for better chunking
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            // Separate vendor chunks for better caching
-            'animations': ['./src/components/RevealAnimation.astro']
-          }
-        }
-      }
+      sourcemap: false,
     },
-    // Optimize deps for faster dev
-    optimizeDeps: {
-      include: []
-    },
-    // Enable source maps for debugging (disable in production if needed)
-    sourcemap: false
   },
   
   // Image optimization configuration
   image: {
-    // Default service for image optimization
     service: {
       entrypoint: 'astro/assets/services/sharp',
       config: {
-        // Limit concurrent image processing
         limitInputPixels: 268402689,
-        // Default quality for images (lower for better performance)
         quality: 75
       }
     },
-    // Remote image patterns for external images
     remotePatterns: [
       {
         protocol: 'https',
@@ -70,7 +55,7 @@ export default defineConfig({
   // Compress HTML output
   compressHTML: true,
   
-  // Experimental features - desactivado para evitar caché en desarrollo
+  // Experimental features
   experimental: {
     clientPrerender: false
   }

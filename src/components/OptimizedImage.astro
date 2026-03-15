@@ -90,7 +90,7 @@ const loadingAttr = priority ? 'eager' : loading;
 const fetchPriority = priority ? 'high' : undefined;
 ---
 
-<figure class:list={['m-0', caption ? 'space-y-2' : '']} style="contain: layout;">
+<figure class:list={['m-0', caption ? 'space-y-2' : '']">
   {isLocalAsset ? (
     <!-- Imagen local con optimización completa de Astro -->
     <Image
@@ -118,7 +118,7 @@ const fetchPriority = priority ? 'high' : undefined;
       {...(srcset && { srcset })}
       {...(isUnsplash && { sizes })}
       {...(fetchPriority && { fetchpriority: fetchPriority })}
-      style={`aspect-ratio: ${width} / ${calculatedHeight}; content-visibility: auto;`}
+      style={`aspect-ratio: ${width} / ${calculatedHeight};`}
     />
   )}
   {caption && (

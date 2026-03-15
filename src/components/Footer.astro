@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import whiteLogo from '../assets/white-logo.webp';
 const currentYear = new Date().getFullYear();
 
 const navLinks = [
@@ -15,7 +17,7 @@ const legalLinks = [
 ];
 ---
 
-<footer class="bg-ink text-alabaster relative overflow-hidden">
+<footer class="bg-ink text-alabaster relative">
   
   <!-- Fondo con patrón sutil -->
   <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23f8f5f0\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
@@ -32,9 +34,17 @@ const legalLinks = [
       
       <!-- Brand - Columna principal -->
       <div class="lg:col-span-5">
-        <a href="/" class="inline-block mb-6 group">
-          <span class="font-serif text-2xl lg:text-3xl text-alabaster tracking-tight group-hover:text-cream transition-colors duration-500">María Ángeles Mata</span>
-          <span class="block text-label-xs text-alabaster/60 tracking-[0.25em] mt-2 uppercase">Psicología Clínica</span>
+        <a href="/" class="inline-block mb-6 group transition-transform duration-300 hover:scale-[1.02]">
+          <Image 
+            src={whiteLogo} 
+            alt="María Ángeles Mata - Psicología Clínica" 
+            width={170}
+            densities={[1.5, 2]}
+            format="webp"
+            quality="max"
+            loading="lazy"
+            class="w-[160px] sm:w-[140px] lg:w-[170px] h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          />
         </a>
         
         <p class="font-serif text-lg lg:text-xl text-alabaster/80 leading-relaxed max-w-sm mb-8">

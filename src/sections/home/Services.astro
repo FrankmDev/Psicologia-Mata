@@ -1,10 +1,14 @@
 ---
 import { mainServices } from '../../data/services';
+import { Image } from 'astro:assets';
+import terapiaIndividual from '../../assets/terapia-individual.avif';
+import terapiaPareja from '../../assets/terapia-pareja.avif';
+import terapiaFamilia from '../../assets/terapia-familia.avif';
 
 const serviceImages = [
-  'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=800&q=80',
+  terapiaIndividual,
+  terapiaPareja,
+  terapiaFamilia,
 ];
 ---
 
@@ -51,12 +55,14 @@ const serviceImages = [
             
             <!-- Imagen principal con efecto editorial -->
             <div class="relative mb-6 sm:mb-8 img-reveal-wrapper aspect-[4/5] overflow-hidden bg-cream">
-              <img
+              <Image
                 src={serviceImages[index]}
                 alt={service.title}
-                class="w-full h-full object-cover filter grayscale-[30%] sepia-[10%] group-hover:grayscale-0 group-hover:sepia-0 group-hover:scale-105 transition-all duration-1000 ease-out"
-                width="400"
-                height="500"
+                class="absolute inset-0 w-full h-full object-cover filter grayscale-[30%] sepia-[10%] group-hover:grayscale-0 group-hover:sepia-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+                width={400}
+                densities={[1.5, 2]}
+                format="avif"
+                quality="max"
                 loading={index === 0 ? "eager" : "lazy"}
               />
               <!-- Overlay sutil -->

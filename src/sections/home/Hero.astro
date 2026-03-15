@@ -1,10 +1,12 @@
 ---
-
+import { Image } from 'astro:assets';
+import psicologia from '../../assets/psicologia.avif';
 ---
 
 <section
-  class="min-h-[100dvh] flex items-center bg-alabaster relative overflow-hidden pt-4"
+  class="min-h-screen flex items-center bg-alabaster relative pt-4"
   aria-label="Introducción"
+  style="min-height: 100vh; min-height: 100dvh;"
 >
   <!-- Fondo Aurora -->
   <div class="bg-aurora"></div>
@@ -72,19 +74,21 @@
           Córdoba, España — Consulta Presencial
         </div>
 
-        <div class="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] mx-auto lg:ml-auto lg:mr-0" data-reveal="right" data-reveal-delay="300">
+        <div class="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] mx-auto lg:ml-auto lg:mr-0" data-reveal="right" data-reveal-delay="100">
 
           <!-- Capa trasera decorativa -->
           <div class="absolute -inset-y-6 sm:-inset-y-8 -inset-x-3 sm:-inset-x-4 bg-stone/20 rounded-t-full hidden sm:block backdrop-blur-sm z-0 group-hover:bg-stone/30 transition-colors duration-700"></div>
 
           <!-- Contenedor de la imagen con Reveal Mask -->
           <div class="img-reveal-wrapper rounded-t-full rounded-b-[60px] sm:rounded-b-[100px] overflow-hidden aspect-[3/4] z-10 relative shadow-2xl shadow-ink/5 group">
-            <img
-              src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=800&q=85"
+            <Image
+              src={psicologia}
               alt="María Ángeles Mata - Psicóloga Sanitaria"
-              class="w-full h-full object-cover scale-105 transition-all duration-[1.5s] group-hover:scale-100 group-hover:opacity-100 mix-blend-multiply opacity-90"
-              width="600"
-              height="800"
+              class="absolute inset-0 w-full h-full object-cover scale-105 transition-all duration-[1.5s] group-hover:scale-100 group-hover:opacity-100 mix-blend-multiply opacity-90"
+              width={600}
+              densities={[1.5, 2]}
+              format="avif"
+              quality="max"
               loading="eager"
             />
             <!-- Overlay de color para integrar con el tema -->

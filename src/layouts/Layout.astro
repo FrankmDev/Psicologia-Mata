@@ -2,12 +2,15 @@
 import "../styles/global.css";
 // import { ClientRouter } from 'astro:transitions'; // Desactivado para evitar caché
 import RevealAnimation from '../components/RevealAnimation.astro';
+import { getImage } from 'astro:assets';
+import ogLogoSrc from '../assets/logo.avif';
 
 interface Props {
   title: string;
   description?: string;
   type?: 'website' | 'article';
   image?: string;
+  ogImage?: string;
   canonical?: string;
   noindex?: boolean;
   author?: string;
@@ -19,7 +22,8 @@ const {
   title, 
   description = "María Ángeles Mata — Psicóloga en Córdoba. Terapia individual, de pareja y familiar con 15+ años de experiencia.",
   type = 'website',
-  image = 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1200&q=80',
+  image = '/favicon.avif',
+  ogImage,
   canonical,
   noindex = false,
   author = 'María Ángeles Mata',
@@ -29,14 +33,20 @@ const {
 
 const siteUrl = 'https://psicologia-mata.es';
 const canonicalUrl = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
-const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+
+// Generar una versión PNG del logo para máxima compatibilidad con Open Graph
+const optimizedOgImage = await getImage({ src: ogLogoSrc, format: 'png', width: 1200 });
+
+const ogImageUrl = ogImage 
+    ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`)
+    : `${siteUrl}${optimizedOgImage.src}`;
 
 // Precargar recursos críticos
 // Nota: Las fuentes de Google se cargan vía CSS para evitar errores 404 con URLs específicas
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -76,8 +86,8 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     </noscript>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/avif" href="/favicon.avif" />
+    <link rel="apple-touch-icon" href="/favicon.avif" />
     
     <!-- SEO Meta Tags -->
     <title>{title}</title>
@@ -95,7 +105,7 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={ogImage} />
+    <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="es_ES" />
@@ -108,7 +118,7 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <meta name="twitter:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:creator" content="@psicologamata" />
     <meta name="twitter:site" content="@psicologamata" />
     
@@ -135,21 +145,20 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     <!-- Inline critical CSS para evitar CLS -->
     <style is:inline>
       /* Critical CSS para prevenir layout shifts */
-      html { scroll-behavior: smooth; }
       body { 
         font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         background-color: #F7F5F0;
         color: #1B1E19;
-        overflow-x: hidden;
+        /* overflow-x: hidden eliminado - causa scroll pegajoso */
       }
       /* Ocultar contenido hasta que las fuentes carguen */
       .fonts-loaded body {
         font-family: 'Manrope', system-ui, sans-serif;
       }
-      /* Contenedor principal para evitar CLS */
+      /* Contenedor principal - SIN contain para evitar scroll pegajoso */
       #main-content {
         min-height: 100vh;
-        contain: layout style paint;
+        /* contain eliminado - causa problemas de scroll */
       }
     </style>
 
@@ -196,5 +205,28 @@ const ogImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
     document.addEventListener("astro:before-swap", () => {
       window.removeEventListener("scroll", onScroll);
     }, { once: true });
+  })();
+
+  // Smooth scroll solo para navegación por anclas (no afecta scroll manual)
+  (function initSmoothAnchorScroll() {
+    document.addEventListener('click', (e) => {
+      const link = (e.target as HTMLElement)?.closest('a[href^="#"]');
+      if (!link) return;
+      
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      
+      const target = document.querySelector(targetId);
+      if (!target) return;
+      
+      // Respetar prefers-reduced-motion
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      e.preventDefault();
+      target.scrollIntoView({ 
+        behavior: prefersReduced ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    });
   })();
 </script>

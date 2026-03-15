@@ -71,10 +71,21 @@
         if (toReveal.length > 0) {
           rafId = requestAnimationFrame(() => {
             toReveal.forEach(({ target, delay }) => {
-              if (delay === 0) {
+              // Aplicar will-change justo antes de la animación
+              target.style.willChange = 'opacity, transform';
+              
+              const applyVisible = () => {
                 target.classList.add('is-visible');
+                // Remover will-change después de la animación para liberar GPU
+                setTimeout(() => {
+                  target.style.willChange = 'auto';
+                }, 1100); // Un poco más que la duración de la transición (1s)
+              };
+              
+              if (delay === 0) {
+                applyVisible();
               } else {
-                setTimeout(() => target.classList.add('is-visible'), delay);
+                setTimeout(applyVisible, delay);
               }
             });
           });

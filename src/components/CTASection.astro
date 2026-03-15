@@ -94,7 +94,9 @@ const labelClass = variant === 'dark' ? '!text-terracotta-light' : '';
           href={primaryAction.href} 
           class:list={[
             'btn group',
-            variant === 'dark' ? 'btn-outline !text-alabaster !border-border-strong/30 hover:!bg-alabaster hover:!text-ink' : 'btn-sage'
+            variant === 'dark' 
+              ? '!bg-alabaster !text-ink !border-alabaster hover:!bg-transparent hover:!text-alabaster' 
+              : 'btn-sage'
           ]}
         >
           <span>{primaryAction.text}</span>

@@ -1,17 +1,17 @@
 ---
-
+import { Image } from 'astro:assets';
+import terapiaMesa from '../../assets/terapia.avif';
 ---
 
 <section class="relative overflow-hidden bg-ink" id="contacto-cta">
   <!-- Imagen con overlay más sutil -->
   <div class="absolute inset-0 z-0">
     <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/60 z-10"></div>
-    <img
-      src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80"
-      alt="Bosque con luz natural"
-      class="w-full h-full object-cover mix-blend-luminosity opacity-30"
-      width="1600"
-      height="800"
+    <Image
+      src={terapiaMesa}
+      alt="Conversación en terapia"
+      class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-30"
+      width={1600}
       loading="lazy"
       aria-hidden="true"
     />

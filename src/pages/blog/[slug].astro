@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Schema from '../../components/Schema.astro';
 import CTASection from '../../components/CTASection.astro';
 import { blogPosts, getPostBySlug, blogPostsList } from '../../data/blog';
+import { Image } from 'astro:assets';
 
 export function getStaticPaths() {
   return Object.keys(blogPosts).map(slug => ({ params: { slug } }));
@@ -52,7 +53,7 @@ const relatedPosts = blogPostsList
 const articleData = {
   headline: post.title,
   description: post.excerpt,
-  image: post.image,
+  image: post.image.src,
   datePublished: datePublished,
   dateModified: datePublished,
   author: {
@@ -61,7 +62,7 @@ const articleData = {
   },
   publisher: {
     name: "María Ángeles Mata - Psicóloga",
-    logo: "https://psicologia-mata.es/favicon.svg"
+    logo: "https://psicologia-mata.es/favicon.avif"
   },
   url: canonicalUrl
 };
@@ -85,7 +86,7 @@ const shareUrls = {
   {title} 
   description={post.excerpt}
   type="article"
-  image={post.image}
+  image={post.image.src}
   canonical={`/blog/${slug}`}
   publishedTime={datePublished}
 >
@@ -106,7 +107,7 @@ const shareUrls = {
       
       <!-- Background Image with Overlay -->
       <div class="absolute inset-0">
-        <img 
+        <Image 
           src={post.image} 
           alt="" 
           class="w-full h-full object-cover opacity-40 scale-105"
@@ -341,7 +342,7 @@ const shareUrls = {
                 <article class="group" data-reveal data-reveal-delay={index * 100}>
                   <a href={`/blog/${relatedPost.slug}`} class="block">
                     <div class="relative aspect-[16/10] overflow-hidden mb-6">
-                      <img 
+                      <Image 
                         src={relatedPost.image} 
                         alt={relatedPost.title}
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -598,6 +599,8 @@ const shareUrls = {
     let ticking = false;
     
     function updateProgress() {
+      if (!articleContent || !progressBar) return;
+      
       const articleRect = articleContent.getBoundingClientRect();
       const articleTop = articleRect.top + window.scrollY;
       const articleHeight = articleRect.height;
@@ -633,6 +636,8 @@ const shareUrls = {
     let ticking = false;
     
     function toggleSidebar() {
+      if (!articleContent || !sidebar) return;
+      
       const articleRect = articleContent.getBoundingClientRect();
       const isVisible = articleRect.top < window.innerHeight / 2 && articleRect.bottom > window.innerHeight / 2;
       

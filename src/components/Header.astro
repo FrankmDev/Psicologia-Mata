@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import horizontalLogo from '../assets/horizontal-logo.avif';
+
 interface Props {
   activePage?: string;
 }
@@ -26,14 +29,18 @@ const navLinks = [
   <div class="container-editorial relative">
     <div class="flex items-center justify-between h-20 lg:h-28">
       
-      <!-- Logo Minimalista -->
+      <!-- Logo -->
       <a href="/" class="flex items-center gap-4 group relative z-50 transition-transform duration-300 hover:scale-[1.02]">
-        <div class="hidden sm:flex flex-col justify-center items-start">
-          <span class="font-serif text-[1.35rem] leading-none text-ink tracking-tight group-hover:text-olive transition-colors duration-500">María Ángeles Mata</span>
-          <span class="text-label-xs text-charcoal tracking-[0.3em] mt-1.5 group-hover:text-olive/70 transition-colors duration-500">Psicología Clínica</span>
-        </div>
-        <!-- Logo Mobile -->
-        <span class="sm:hidden font-serif text-2xl text-ink italic">M.A. Mata</span>
+        <Image 
+          src={horizontalLogo} 
+          alt="María Ángeles Mata - Psicología Clínica" 
+          width={170}
+          densities={[1.5, 2]}
+          format="avif"
+          quality="max"
+          loading="eager"
+          class="w-[160px] sm:w-[140px] lg:w-[170px] h-auto object-contain"
+        />
       </a>
 
       <!-- Desktop Nav -->
@@ -208,4 +215,14 @@ const navLinks = [
   
   // Re-initialize on each page transition
   document.addEventListener("astro:page-load", initHeader);
+  
+  // Asegurar que el scroll siempre esté habilitado al cargar la página
+  // (por si el menú quedó abierto en una navegación anterior)
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenu = document.getElementById("mobile-menu");
+    const isMenuOpen = mobileMenu && !mobileMenu.classList.contains("opacity-0");
+    if (!isMenuOpen) {
+      document.body.style.overflow = "";
+    }
+  });
 </script>

@@ -35,12 +35,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Optimización para rendimiento de scroll */
-    content-visibility: auto;
-    contain-intrinsic-size: 0 500px;
   }
 
   body {
@@ -50,9 +46,8 @@
     line-height: 1.6;
     font-size: 16px;
     font-weight: 300;
-    overflow-x: hidden;
-    /* Contain para aislamiento de layout */
-    contain: layout style;
+    /* overflow-x: hidden eliminado - causa problemas de scroll en iOS */
+    /* contain eliminado - causa scroll pegajoso */
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -285,6 +280,8 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  /* Optimización: contain para aislar el contexto de renderizado */
+  contain: layout style paint;
 }
 .bg-aurora::before, .bg-aurora::after {
   content: '';
@@ -293,8 +290,12 @@
   height: 60vw;
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.15;
-  animation: float-aurora 20s infinite alternate ease-in-out;
+  opacity: 0.12;
+  /* Animación más suave y con menos keyframes */
+  animation: float-aurora 25s infinite alternate ease-in-out;
+  /* Optimización: forzar capa GPU solo para los pseudo-elementos */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 .bg-aurora::before {
   top: -20%;
@@ -310,11 +311,11 @@
   height: 50vw;
 }
 
+/* Animación simplificada para reducir repaints */
 @keyframes float-aurora {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(5%, 5%) scale(1.1); }
-  66% { transform: translate(-5%, 10%) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(3%, 3%, 0) scale(1.05); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
 /* Animaciones Reveal Ultra Suaves */
@@ -323,12 +324,15 @@
   transform: translateY(30px);
   transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
               transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  /* will-change eliminado - causa problemas de scroll sticky */
+  /* Solo se aplica dinámicamente cuando el elemento está cerca del viewport */
 }
 
 [data-reveal].is-visible {
   opacity: 1;
   transform: translateY(0);
+  /* will-change se remueve después de la animación para liberar GPU */
+  will-change: auto;
 }
 
 [data-reveal="left"] {
@@ -594,19 +598,17 @@
    OPTIMIZACIONES DE RENDIMIENTO
    ============================================ */
 
-/* Containment para secciones grandes - mejora render performance */
+/* Containment REMOVIDO - causaba problemas de scroll sticky */
+/* Las secciones NO deben tener contain para permitir scroll fluido */
 .section,
 .section-sm {
-  content-visibility: auto;
-  contain-intrinsic-size: 0 500px;
-  contain: layout style paint;
+  /* contain eliminado - causa scroll pegajoso en combinación con will-change */
 }
 
-/* Optimización para imágenes LCP */
+/* Optimización para imágenes LCP - SIN will-change ni contain */
 .img-lcp {
   content-visibility: visible !important;
-  will-change: transform;
-  contain: layout style;
+  /* will-change y contain eliminados - causan scroll pegajoso */
 }
 
 /* Reducir motion para usuarios que lo prefieren */
@@ -640,8 +642,8 @@
   }
 }
 
-/* GPU acceleration para elementos animados */
-[data-reveal],
+/* GPU acceleration - SOLO para botones y cards, NO para data-reveal */
+/* [data-reveal] eliminado - causa scroll pegajoso al crear demasiadas capas GPU */
 .btn,
 .card,
 .card-hover {
@@ -658,26 +660,26 @@
   will-change: opacity;
 }
 
-/* Contain para cards y componentes interactivos */
-.card,
+/* Contain REMOVIDO de cards y botones - causa scroll pegajoso */
+/* .card,
 .card-hover,
 .btn {
   contain: layout style;
-}
+} */
 
 /* Optimización de imágenes */
 img {
-  /* Prevent layout shifts */
-  height: auto;
-  max-width: 100%;
-  /* Performance hints */
-  content-visibility: auto;
+  /* Prevent layout shifts (REMOVIDO: Las reglas sin layer sobreescribían a Tailwind) */
+  /* height: auto; */
+  /* max-width: 100%; */
+  /* Performance hints - content-visibility puede causar problemas de scroll */
+  /* content-visibility: auto; */ /* DESACTIVADO: causa saltos de scroll */
 }
 
-/* Lazy loading hint */
+/* Lazy loading hint - SIN content-visibility para evitar problemas de scroll */
 img[loading="lazy"] {
-  content-visibility: auto;
-  contain-intrinsic-size: 300px 200px;
+  /* content-visibility: auto; */ /* DESACTIVADO: causa saltos de scroll */
+  /* contain-intrinsic-size se elimina ya que content-visibility está desactivado */
 }
 
 /* Optimización para el hero (LCP) */
