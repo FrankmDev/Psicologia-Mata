@@ -9,7 +9,8 @@
         }
       ],
       "destination": "https://www.matacalapsicologia.es/:path*",
-      "permanent": true
+      "permanent": true,
+      "statusCode": 308
     }
   ]
 }
