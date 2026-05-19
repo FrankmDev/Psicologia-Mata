@@ -46,7 +46,7 @@ export const faqs: FAQ[] = [
   },
   {
     question: "¿Dónde está la consulta de psicología en Córdoba?",
-    answer: "La consulta presencial está en C/ Rodríguez Sánchez, 22, en el centro de Córdoba (CP 14003), con fácil acceso en transporte público. También ofrezco sesiones online para quienes prefieran la comodidad del hogar o vivan fuera de Córdoba capital. El horario de atención es de lunes a viernes de 9:00 a 20:00."
+    answer: "La consulta presencial está en C/ Rodríguez Sánchez, 9, en el centro de Córdoba (CP 14003), con fácil acceso en transporte público. También ofrezco sesiones online para quienes prefieran la comodidad del hogar o vivan fuera de Córdoba capital. El horario de atención es de lunes a viernes de 9:00 a 20:00."
   },
   {
     question: "¿Cómo puedo pedir cita con la psicóloga en Córdoba?",

@@ -74,7 +74,7 @@ export const contactInfo: ContactInfo[] = [
   {
     icon: "location",
     label: "Consulta",
-    value: "C/ Rodríguez Sánchez, 22",
+    value: "C/ Rodríguez Sánchez, 9",
     subvalue: "14003 Córdoba"
   }
 ];
