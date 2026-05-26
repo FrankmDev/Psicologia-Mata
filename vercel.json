@@ -6,6 +6,12 @@
       "destination": "https://matacalapsicologia.es/:path*",
       "permanent": true,
       "statusCode": 308
+    },
+    {
+      "source": "/favicon.ico",
+      "destination": "https://matacalapsicologia.es/favicon-32x32.png",
+      "permanent": true,
+      "statusCode": 308
     }
   ],
   "headers": [
@@ -15,6 +21,15 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    },
+    {
+      "source": "/(favicon\\.avif|favicon-32x32\\.png|apple-touch-icon\\.png|icon-192x192\\.png|icon-512x512\\.png|site\\.webmanifest)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     }

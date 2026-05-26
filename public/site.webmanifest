@@ -1,21 +1,28 @@
 {
-  "name": "María Ángeles Mata - Psicóloga en Córdoba",
+  "name": "María Ángeles Mata — Psicóloga en Córdoba",
   "short_name": "Psicóloga Mata",
-  "description": "Psicóloga en Córdoba. Terapia individual, de pareja y familiar. Amplia experiencia.",
-  "start_url": "/",
+  "description": "Psicóloga en Córdoba. Terapia individual, de pareja y familiar. Presencial y online.",
+  "start_url": "https://matacalapsicologia.es/",
+  "scope": "https://matacalapsicologia.es/",
+  "id": "https://matacalapsicologia.es/",
   "display": "standalone",
-  "background_color": "#FAFAF9",
+  "background_color": "#F7F5F0",
   "theme_color": "#707f62",
   "orientation": "portrait-primary",
-  "scope": "/",
   "lang": "es",
   "dir": "ltr",
   "icons": [
     {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
       "src": "/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/icon-512x512.png",
@@ -24,19 +31,5 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["health", "medical", "wellness"],
-  "screenshots": [
-    {
-      "src": "/screenshot-wide.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide"
-    },
-    {
-      "src": "/screenshot-narrow.png",
-      "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow"
-    }
-  ]
+  "categories": ["health", "medical", "wellness"]
 }

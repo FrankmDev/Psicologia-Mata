@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Página no encontrada | María Ángeles Mata';
+const description = 'La página que buscas no existe. Vuelve al inicio o contacta con la consulta de psicología en Córdoba.';
+---
+
+<Layout {title} {description} noindex={true} canonical="/404/">
+  <Header />
+  <main id="main-content" class="min-h-[60vh] flex items-center justify-center">
+    <div class="container-editorial text-center py-24">
+      <p class="text-label text-olive mb-4">Error 404</p>
+      <h1 class="title-section mb-6">Esta página no existe</h1>
+      <p class="text-body text-charcoal mb-10 max-w-md mx-auto">
+        Puede que el enlace esté desactualizado. Prueba desde el inicio o escríbeme si necesitas ayuda.
+      </p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/" class="btn btn-sage">Ir al inicio</a>
+        <a href="/contacto/" class="btn btn-outline">Contactar</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>
