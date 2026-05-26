@@ -9,7 +9,7 @@
     },
     {
       "source": "/favicon.ico",
-      "destination": "https://matacalapsicologia.es/favicon-32x32.png",
+      "destination": "https://matacalapsicologia.es/favicon.avif",
       "statusCode": 308
     }
   ],
