@@ -1,16 +1,15 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.matacalapsicologia.es" }],
       "destination": "https://matacalapsicologia.es/:path*",
-      "permanent": true,
       "statusCode": 308
     },
     {
       "source": "/favicon.ico",
       "destination": "https://matacalapsicologia.es/favicon-32x32.png",
-      "permanent": true,
       "statusCode": 308
     }
   ],
