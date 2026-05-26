@@ -2,12 +2,7 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.matacalapsicologia.es"
-        }
-      ],
+      "has": [{ "type": "host", "value": "www.matacalapsicologia.es" }],
       "destination": "https://matacalapsicologia.es/:path*",
       "permanent": true,
       "statusCode": 308

@@ -39,9 +39,17 @@ const normalizedCanonicalPath = canonical
   : Astro.url.pathname === '/'
     ? '/'
     : `${Astro.url.pathname.replace(/\/$/, '')}/`;
-const canonicalUrl = normalizedCanonicalPath.startsWith('http')
-  ? normalizedCanonicalPath
-  : absoluteUrl(normalizedCanonicalPath);
+
+/** Siempre dominio apex (sin www), aunque el build se sirva desde otro host. */
+const canonicalUrl = (() => {
+  if (normalizedCanonicalPath.startsWith('http')) {
+    const parsed = new URL(normalizedCanonicalPath);
+    parsed.hostname = new URL(SITE_URL).hostname;
+    parsed.protocol = 'https:';
+    return parsed.toString();
+  }
+  return absoluteUrl(normalizedCanonicalPath);
+})();
 
 // Generar una versión PNG del logo para máxima compatibilidad con Open Graph
 const optimizedOgImage = await getImage({ src: ogLogoSrc, format: 'png', width: 1200 });

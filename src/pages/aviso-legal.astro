@@ -3,13 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHeader from '../components/PageHeader.astro';
+import { SITE_URL } from '../config/site';
 
 const title = "Aviso Legal | María Ángeles Mata - Psicóloga en Córdoba";
 const description = "Aviso legal de la consulta de psicología de María Ángeles Mata en Córdoba. Información profesional, sanitaria y normativa aplicable.";
 
 const breadcrumbData = [
-  { name: "Inicio", url: "https://matacalapsicologia.es/" },
-  { name: "Aviso Legal", url: "https://matacalapsicologia.es/aviso-legal/" }
+  { name: "Inicio", url: `${SITE_URL}/` },
+  { name: "Aviso Legal", url: `${SITE_URL}/aviso-legal/` }
 ];
 ---
 
