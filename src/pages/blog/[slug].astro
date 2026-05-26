@@ -6,6 +6,7 @@ import Schema from '../../components/Schema.astro';
 import CTASection from '../../components/CTASection.astro';
 import { blogPosts, getPostBySlug, blogPostsList } from '../../data/blog';
 import { Image } from 'astro:assets';
+import { SITE_URL, absoluteUrl } from '../../config/site';
 
 export function getStaticPaths() {
   return Object.keys(blogPosts).map(slug => ({ params: { slug } }));
@@ -19,7 +20,7 @@ if (!post) {
 }
 
 const title = post.seoTitle ?? `${post.title} | Blog de psicología en Córdoba`;
-const canonicalUrl = `https://www.matacalapsicologia.es/blog/${slug}/`;
+const canonicalUrl = absoluteUrl(`/blog/${slug}/`);
 
 // Parse date
 function parseDate(dateStr: string): string {
@@ -58,18 +59,18 @@ const articleData = {
   dateModified: datePublished,
   author: {
     name: "María Ángeles Mata Cala",
-    url: "https://www.matacalapsicologia.es#person"
+    url: `${SITE_URL}/#person`
   },
   publisher: {
     name: "María Ángeles Mata - Psicóloga",
-    logo: "https://www.matacalapsicologia.es/favicon.avif"
+    logo: `${SITE_URL}/favicon.avif`
   },
   url: canonicalUrl
 };
 
 const breadcrumbData = [
-  { name: "Inicio", url: "https://www.matacalapsicologia.es/" },
-  { name: "Blog", url: "https://www.matacalapsicologia.es/blog/" },
+  { name: "Inicio", url: absoluteUrl('/') },
+  { name: "Blog", url: absoluteUrl('/blog/') },
   { name: post.title, url: canonicalUrl }
 ];
 

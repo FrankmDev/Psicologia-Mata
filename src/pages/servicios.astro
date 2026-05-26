@@ -13,9 +13,11 @@ import terapiaPareja from '../assets/terapia-pareja.avif';
 import terapiaFamilia from '../assets/terapia-familiar.avif';
 import evaluacion from '../assets/evaluacion.avif';
 import cognitiva from '../assets/estimulacion-cognitiva.avif';
+import { SITE_URL } from '../config/site';
 
-const title = "Terapia individual, de pareja y online en Córdoba | Servicios de Psicología";
-const description = "Servicios de psicología en Córdoba: terapia individual, terapia de pareja, terapia familiar, evaluación neuropsicológica y atención online. Primera consulta sin compromiso.";
+const title = "Servicios de psicología en Córdoba | Individual, pareja y online";
+const description = "Terapia individual, de pareja y familiar, evaluación neuropsicológica y estimulación cognitiva en Córdoba o online. Psicóloga colegiada con enfoque basado en evidencia.";
+const keywords = "terapia individual córdoba, terapia de pareja, terapia familiar, evaluación neuropsicológica, psicólogo online, servicios psicología córdoba";
 
 const serviceImages: Record<string, ImageMetadata> = {
   individual: terapiaIndividual,
@@ -76,7 +78,7 @@ const faqs = [
   }
 ];
 
-const SITE = "https://www.matacalapsicologia.es";
+const SITE = SITE_URL;
 
 // Schema data
 const breadcrumbData = [
@@ -90,7 +92,7 @@ const faqSchemaData = faqs.map(faq => ({
 }));
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} {keywords} canonical="/servicios/">
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
   <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE}/servicios/` }} />
   <Schema slot="schema" type="faqpage" data={faqSchemaData} />

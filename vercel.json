@@ -5,12 +5,23 @@
       "has": [
         {
           "type": "host",
-          "value": "matacalapsicologia.es"
+          "value": "www.matacalapsicologia.es"
         }
       ],
-      "destination": "https://www.matacalapsicologia.es/:path*",
+      "destination": "https://matacalapsicologia.es/:path*",
       "permanent": true,
       "statusCode": 308
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
     }
   ]
 }

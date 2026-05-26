@@ -7,11 +7,13 @@ import ContactInfoCard from '../components/ContactInfoCard.astro';
 import CTASection from '../components/CTASection.astro';
 import Schema from '../components/Schema.astro';
 import Icon from '../components/Icon.astro';
+import { SITE_URL } from '../config/site';
 
-const title = "Contacto | Reserva tu cita con una psicóloga en Córdoba";
-const description = "Reserva tu cita con María Ángeles Mata, psicóloga en Córdoba. Atención presencial y terapia online, respuesta en menos de 24 horas.";
+const title = "Contacto | Cita con psicóloga en Córdoba (presencial y online)";
+const description = "Pide cita con María Ángeles Mata, psicóloga en Córdoba: consulta en Rodríguez Sánchez 9 o terapia online. Teléfono, email y formulario. Respuesta en menos de 24 h.";
+const keywords = "cita psicólogo córdoba, contacto psicóloga, consulta psicología córdoba, terapia online cita, psicóloga rodríguez sánchez";
 
-const SITE = "https://www.matacalapsicologia.es";
+const SITE = SITE_URL;
 
 const breadcrumbData = [
   { name: "Inicio", url: `${SITE}/` },
@@ -25,7 +27,7 @@ const contactPageData = {
 };
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} {keywords} canonical="/contacto/">
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
   <Schema slot="schema" type="webpage" data={contactPageData} />
   <Header activePage="Contacto" />

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.matacalapsicologia.es/sitemap-index.xml
+# Canonical host: https://matacalapsicologia.es (sin www)
+Sitemap: https://matacalapsicologia.es/sitemap-index.xml

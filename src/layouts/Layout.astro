@@ -4,10 +4,12 @@ import "../styles/global.css";
 import RevealAnimation from '../components/RevealAnimation.astro';
 import { getImage } from 'astro:assets';
 import ogLogoSrc from '../assets/logo.avif';
+import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, absoluteUrl } from '../config/site';
 
 interface Props {
   title: string;
   description?: string;
+  keywords?: string;
   type?: 'website' | 'article';
   image?: string;
   ogImage?: string;
@@ -20,18 +22,18 @@ interface Props {
 
 const { 
   title, 
-  description = "María Ángeles Mata — Psicóloga en Córdoba. Terapia individual, de pareja y familiar con amplia experiencia.",
+  description = DEFAULT_DESCRIPTION,
+  keywords,
   type = 'website',
   image = '/favicon.avif',
   ogImage,
   canonical,
   noindex = false,
-  author = 'María Ángeles Mata',
+  author = 'María Ángeles Mata Cala',
   publishedTime,
   modifiedTime
 } = Astro.props;
 
-const siteUrl = 'https://www.matacalapsicologia.es';
 const normalizedCanonicalPath = canonical
   ? canonical
   : Astro.url.pathname === '/'
@@ -39,15 +41,15 @@ const normalizedCanonicalPath = canonical
     : `${Astro.url.pathname.replace(/\/$/, '')}/`;
 const canonicalUrl = normalizedCanonicalPath.startsWith('http')
   ? normalizedCanonicalPath
-  : `${siteUrl}${normalizedCanonicalPath}`;
+  : absoluteUrl(normalizedCanonicalPath);
 
 // Generar una versión PNG del logo para máxima compatibilidad con Open Graph
 const optimizedOgImage = await getImage({ src: ogLogoSrc, format: 'png', width: 1200 });
 
 const ogImageCandidate = ogImage || image;
 const ogImageUrl = ogImageCandidate 
-    ? (ogImageCandidate.startsWith('http') ? ogImageCandidate : `${siteUrl}${ogImageCandidate}`)
-    : `${siteUrl}${optimizedOgImage.src}`;
+  ? (ogImageCandidate.startsWith('http') ? ogImageCandidate : absoluteUrl(ogImageCandidate))
+  : absoluteUrl(optimizedOgImage.src);
 
 // Precargar recursos críticos
 // Nota: Las fuentes de Google se cargan vía CSS para evitar errores 404 con URLs específicas
@@ -96,7 +98,12 @@ const ogImageUrl = ogImageCandidate
     <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
     <meta name="author" content={author} />
+    <meta name="geo.region" content="ES-CO" />
+    <meta name="geo.placename" content="Córdoba" />
+    <meta name="geo.position" content="37.8882;-4.7794" />
+    <meta name="ICBM" content="37.8882, -4.7794" />
     {noindex ? (
       <meta name="robots" content="noindex, follow" />
     ) : (
@@ -113,7 +120,8 @@ const ogImageUrl = ogImageCandidate
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:site_name" content="María Ángeles Mata - Psicóloga" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:locale:alternate" content="es_ES" />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
     {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
     

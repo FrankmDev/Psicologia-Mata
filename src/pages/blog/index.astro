@@ -7,11 +7,13 @@ import CTASection from '../../components/CTASection.astro';
 import Schema from '../../components/Schema.astro';
 import { blogPostsList } from '../../data/blog';
 import { Image } from 'astro:assets';
+import { SITE_URL } from '../../config/site';
 
-const SITE = "https://www.matacalapsicologia.es";
+const SITE = SITE_URL;
 
-const title = "Blog de psicología en Córdoba | Ansiedad, pareja y terapia online";
-const description = "Artículos de psicología sobre ansiedad, autoestima, relaciones y terapia online escritos por María Ángeles Mata, psicóloga en Córdoba.";
+const title = "Blog de psicología | Ansiedad, pareja y bienestar emocional";
+const description = "Artículos de psicología sobre ansiedad, pareja, comunicación y autoestima por María Ángeles Mata, psicóloga en Córdoba. Consejos basados en evidencia.";
+const keywords = "blog psicología, ansiedad, terapia de pareja, autoestima, salud mental, psicóloga córdoba";
 
 const featuredPost = blogPostsList[0];
 const recentPosts = blogPostsList.slice(1);
@@ -24,7 +26,7 @@ const breadcrumbData = [
 ];
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} {keywords} canonical="/blog/">
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
   <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE}/blog/` }} />
   <Header activePage="Blog" />

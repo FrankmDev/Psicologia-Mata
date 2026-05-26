@@ -4,9 +4,11 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
+const SITE = 'https://matacalapsicologia.es';
+
 export default defineConfig({
-  // Site configuration
-  site: 'https://www.matacalapsicologia.es',
+  site: SITE,
+  trailingSlash: 'always',
 
   // Build output directory
   outDir: './dist',
@@ -20,18 +22,43 @@ export default defineConfig({
     '/contact': '/contacto',
   },
 
-  integrations: [sitemap({
-    i18n: {
-      defaultLocale: 'es',
-      locales: {
-        es: 'es-ES',
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: 'es',
+        locales: {
+          es: 'es-ES',
+        },
       },
-    },
-    filter: (page) => {
-      const excludedPages = ['/404', '/privacidad/', '/aviso-legal/', '/cookies/'];
-      return !excludedPages.some((excludedPage) => page.includes(excludedPage));
-    },
-  })],
+      filter: (page) => {
+        const excluded = [
+          '/404',
+          '/privacidad',
+          '/aviso-legal',
+          '/cookies',
+        ];
+        return !excluded.some((path) => page.includes(path));
+      },
+      serialize(item) {
+        const pathname = new URL(item.url).pathname;
+        const entry = { ...item };
+
+        if (pathname === '/') {
+          return { ...entry, priority: 1, changefreq: 'weekly' };
+        }
+        if (pathname === '/servicios/' || pathname === '/contacto/') {
+          return { ...entry, priority: 0.9, changefreq: 'monthly' };
+        }
+        if (pathname === '/blog/') {
+          return { ...entry, priority: 0.85, changefreq: 'weekly' };
+        }
+        if (pathname.startsWith('/blog/') && pathname.length > '/blog/'.length) {
+          return { ...entry, priority: 0.7, changefreq: 'monthly' };
+        }
+        return { ...entry, priority: 0.5, changefreq: 'yearly' };
+      },
+    }),
+  ],
 
   // Server configuration
   server: {

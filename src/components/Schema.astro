@@ -97,9 +97,11 @@ interface Props {
   data: LocalBusinessData | ArticleData | WebPageData | BreadcrumbItem[] | FAQItem[] | PersonData;
 }
 
+import { SITE_URL } from '../config/site';
+
 const { type, data } = Astro.props;
 
-const siteUrl = 'https://www.matacalapsicologia.es';
+const siteUrl = SITE_URL;
 
 function generateLocalBusinessSchema(data: LocalBusinessData) {
   const schema: Record<string, unknown> = {
