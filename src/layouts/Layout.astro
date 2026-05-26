@@ -59,6 +59,19 @@ const ogImageUrl = ogImageCandidate
   ? (ogImageCandidate.startsWith('http') ? ogImageCandidate : absoluteUrl(ogImageCandidate))
   : absoluteUrl(optimizedOgImage.src);
 
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${SITE_URL}/#website`,
+  name: SITE_NAME,
+  url: SITE_URL,
+  inLanguage: 'es-ES',
+  publisher: {
+    '@type': 'MedicalBusiness',
+    '@id': `${SITE_URL}/#business`
+  }
+};
+
 // Precargar recursos críticos
 // Nota: Las fuentes de Google se cargan vía CSS para evitar errores 404 con URLs específicas
 ---
@@ -81,8 +94,8 @@ const ogImageUrl = ogImageCandidate
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
     
     <!-- Prefetch para navegación inmediata -->
-    <link rel="prefetch" href="/servicios" />
-    <link rel="prefetch" href="/contacto" />
+    <link rel="prefetch" href="/servicios/" />
+    <link rel="prefetch" href="/contacto/" />
     
 
     <!-- Fuentes con display=swap para evitar render blocking -->
@@ -117,9 +130,12 @@ const ogImageUrl = ogImageCandidate
     {noindex ? (
       <meta name="robots" content="noindex, follow" />
     ) : (
-      <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     )}
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" href={canonicalUrl} hreflang="es-ES" />
+    <link rel="alternate" href={canonicalUrl} hreflang="x-default" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
@@ -145,6 +161,7 @@ const ogImageUrl = ogImageCandidate
     <meta name="twitter:site" content="@psicologamata" />
     
     <!-- Structured Data Slot -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
     <slot name="schema" />
     
     <!-- View Transitions -->

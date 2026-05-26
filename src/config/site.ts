@@ -1,10 +1,10 @@
 /** Canonical production URL (apex, no www). */
 export const SITE_URL = 'https://matacalapsicologia.es';
 
-export const SITE_NAME = 'María Ángeles Mata — Psicóloga en Córdoba';
+export const SITE_NAME = 'María Ángeles Mata | Psicóloga en Córdoba y online';
 
 export const DEFAULT_DESCRIPTION =
-  'Psicóloga en Córdoba: terapia individual, de pareja y familiar, evaluación neuropsicológica y sesiones online. Primera consulta sin compromiso.';
+  'Psicóloga en Córdoba y online: terapia individual, de pareja y familiar, evaluación neuropsicológica y estimulación cognitiva. Primera consulta sin compromiso.';
 
 /** Build absolute URL. Pages get a trailing slash; static assets (with extension) do not. */
 export function absoluteUrl(path: string = '/'): string {

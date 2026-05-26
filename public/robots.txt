@@ -3,3 +3,7 @@ Allow: /
 
 # Canonical host: https://matacalapsicologia.es (sin www)
 Sitemap: https://matacalapsicologia.es/sitemap-index.xml
+
+# AI discovery
+Allow: /llms.txt
+Allow: /llm.txt

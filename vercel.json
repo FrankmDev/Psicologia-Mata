@@ -11,6 +11,51 @@
       "source": "/favicon.ico",
       "destination": "https://matacalapsicologia.es/favicon.avif",
       "statusCode": 308
+    },
+    {
+      "source": "/services",
+      "destination": "https://matacalapsicologia.es/servicios/",
+      "statusCode": 308
+    },
+    {
+      "source": "/contact",
+      "destination": "https://matacalapsicologia.es/contacto/",
+      "statusCode": 308
+    },
+    {
+      "source": "/servicios",
+      "destination": "https://matacalapsicologia.es/servicios/",
+      "statusCode": 308
+    },
+    {
+      "source": "/blog",
+      "destination": "https://matacalapsicologia.es/blog/",
+      "statusCode": 308
+    },
+    {
+      "source": "/contacto",
+      "destination": "https://matacalapsicologia.es/contacto/",
+      "statusCode": 308
+    },
+    {
+      "source": "/privacidad",
+      "destination": "https://matacalapsicologia.es/privacidad/",
+      "statusCode": 308
+    },
+    {
+      "source": "/aviso-legal",
+      "destination": "https://matacalapsicologia.es/aviso-legal/",
+      "statusCode": 308
+    },
+    {
+      "source": "/cookies",
+      "destination": "https://matacalapsicologia.es/cookies/",
+      "statusCode": 308
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "https://matacalapsicologia.es/blog/:slug/",
+      "statusCode": 308
     }
   ],
   "headers": [

@@ -30,6 +30,7 @@ interface LocalBusinessData {
   services?: string[];
   socialProfiles?: string[];
   foundingDate?: string;
+  founderName?: string;
 }
 
 interface ArticleData {
@@ -104,16 +105,20 @@ const { type, data } = Astro.props;
 const siteUrl = SITE_URL;
 
 function generateLocalBusinessSchema(data: LocalBusinessData) {
+  const businessUrl = data.url.replace(/\/$/, '');
+  const businessId = `${businessUrl}/#business`;
+  const personId = `${businessUrl}/#person`;
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': ['LocalBusiness', 'MedicalBusiness', 'ProfessionalService'],
-    '@id': `${data.url}#business`,
+    '@type': ['MedicalBusiness', 'LocalBusiness', 'ProfessionalService'],
+    '@id': businessId,
     name: data.name,
     ...(data.legalName && { legalName: data.legalName }),
     description: data.description,
     url: data.url,
     telephone: data.telephone,
     email: data.email,
+    inLanguage: 'es-ES',
     address: {
       '@type': 'PostalAddress',
       ...data.address
@@ -129,13 +134,36 @@ function generateLocalBusinessSchema(data: LocalBusinessData) {
     paymentAccepted: ['Cash', 'Credit Card', 'Bank Transfer'],
     currenciesAccepted: 'EUR',
     areaServed: data.serviceArea || 'Córdoba, España',
+    availableLanguage: ['es'],
     ...(data.foundingDate && { foundingDate: data.foundingDate }),
+    ...(data.founderName && {
+      founder: {
+        '@type': 'Person',
+        name: data.founderName,
+        '@id': personId
+      }
+    }),
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: data.telephone,
       contactType: 'appointment booking',
       availableLanguage: ['es'],
       areaServed: 'ES'
+    },
+    potentialAction: {
+      '@type': 'ReserveAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${data.url.replace(/\/$/, '')}/contacto/`,
+        actionPlatform: [
+          'https://schema.org/DesktopWebPlatform',
+          'https://schema.org/MobileWebPlatform'
+        ]
+      },
+      result: {
+        '@type': 'Reservation',
+        name: 'Solicitud de primera consulta'
+      }
     }
   };
 
@@ -170,6 +198,15 @@ function generateLocalBusinessSchema(data: LocalBusinessData) {
         }
       }))
     };
+    schema.availableService = data.services.map(service => ({
+      '@type': 'MedicalTherapy',
+      name: service,
+        provider: {
+          '@type': 'MedicalBusiness',
+          '@id': businessId
+        },
+      areaServed: data.serviceArea || 'Córdoba, España'
+    }));
   }
 
   return schema;
@@ -186,6 +223,7 @@ function generateArticleSchema(data: ArticleData) {
     image: articleImage,
     datePublished: data.datePublished,
     dateModified: data.dateModified || data.datePublished,
+    inLanguage: 'es-ES',
     author: {
       '@type': 'Person',
       name: data.author.name,
@@ -202,6 +240,12 @@ function generateArticleSchema(data: ArticleData) {
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': data.url
+    },
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      name: 'María Ángeles Mata | Psicóloga en Córdoba y online',
+      url: siteUrl
     }
   };
 }
@@ -213,7 +257,14 @@ function generateWebPageSchema(data: WebPageData) {
     name: data.name,
     description: data.description,
     url: data.url,
-    image: data.image
+    image: data.image,
+    inLanguage: 'es-ES',
+    isPartOf: {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      name: 'María Ángeles Mata | Psicóloga en Córdoba y online',
+      url: siteUrl
+    }
   };
 }
 
@@ -246,10 +297,11 @@ function generateFAQSchema(items: FAQItem[]) {
 }
 
 function generatePersonSchema(data: PersonData) {
+  const personUrl = data.url.replace(/\/$/, '');
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    '@id': `${data.url}#person`,
+    '@id': `${personUrl}/#person`,
     name: data.name,
     url: data.url,
     jobTitle: data.jobTitle || 'Psicóloga General Sanitaria',
@@ -257,10 +309,11 @@ function generatePersonSchema(data: PersonData) {
     telephone: data.telephone,
     email: data.email,
     image: data.image,
+    inLanguage: 'es-ES',
     sameAs: data.sameAs || [],
     worksFor: {
       '@type': 'MedicalBusiness',
-      '@id': `${data.url}#business`
+      '@id': `${personUrl}/#business`
     }
   };
 

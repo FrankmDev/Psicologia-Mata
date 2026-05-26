@@ -33,9 +33,6 @@ export default defineConfig({
       filter: (page) => {
         const excluded = [
           '/404',
-          '/privacidad',
-          '/aviso-legal',
-          '/cookies',
         ];
         return !excluded.some((path) => page.includes(path));
       },
