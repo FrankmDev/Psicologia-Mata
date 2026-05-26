@@ -10,8 +10,8 @@ import { Image } from 'astro:assets';
 
 const SITE = "https://www.matacalapsicologia.es";
 
-const title = "Blog de Psicología en Córdoba | Artículos sobre Salud Mental";
-const description = "Artículos sobre psicología, ansiedad, terapia de pareja y autoestima escritos por María Ángeles Mata, psicóloga colegiada en Córdoba (AN 12177).";
+const title = "Blog de psicología en Córdoba | Ansiedad, pareja y terapia online";
+const description = "Artículos de psicología sobre ansiedad, autoestima, relaciones y terapia online escritos por María Ángeles Mata, psicóloga en Córdoba.";
 
 const featuredPost = blogPostsList[0];
 const recentPosts = blogPostsList.slice(1);
@@ -20,13 +20,13 @@ const categories = [...new Set(blogPostsList.map(post => post.category))];
 
 const breadcrumbData = [
   { name: "Inicio", url: `${SITE}/` },
-  { name: "Blog", url: `${SITE}/blog` }
+  { name: "Blog", url: `${SITE}/blog/` }
 ];
 ---
 
 <Layout {title} {description}>
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
-  <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE}/blog` }} />
+  <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE}/blog/` }} />
   <Header activePage="Blog" />
   
   <main id="main-content">
@@ -40,7 +40,7 @@ const breadcrumbData = [
           label="Blog"
           title="Reflexiones para el"
           highlight="día a día"
-          description="Pequeñas ideas, consejos prácticos y reflexiones sobre lo que significa cuidar nuestra salud mental en el mundo real."
+          description="Artículos claros y prácticos sobre ansiedad, pareja, autoestima y terapia, escritos desde una consulta de psicología en Córdoba y pensados también para quien busca apoyo online."
         >
           {/* Categorías */}
           <div class="flex flex-wrap gap-3 mt-16">
@@ -196,7 +196,7 @@ const breadcrumbData = [
       title="Los artículos ayudan,"
       highlight="pero a veces necesitamos más"
       description="Si sientes que lo que lees no es suficiente, quizás es momento de dar el paso. Estoy aquí para escucharte sin juzgarte."
-      primaryAction={{ text: "Hablamos", href: "/contact" }}
+      primaryAction={{ text: "Hablamos", href: "/contacto" }}
       variant="dark"
     />
 

@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import PageHeader from '../components/PageHeader.astro';
 
 const title = "Política de Cookies | María Ángeles Mata - Psicóloga en Córdoba";
-const description = "Política de cookies de María Ángeles Mata. Información sobre el uso de cookies en www.matacalapsicologia.es.";
+const description = "Política de cookies de la consulta de psicología de María Ángeles Mata. Información sobre el uso de cookies en matacalapsicologia.es.";
 
 const breadcrumbData = [
   { name: "Inicio", url: "https://www.matacalapsicologia.es/" },
@@ -13,7 +13,7 @@ const breadcrumbData = [
 ];
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} noindex={true}>
   <Header activePage="" />
   
   <main id="main-content">
@@ -39,7 +39,7 @@ const breadcrumbData = [
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">1. ¿Qué son las Cookies?</h2>
           <p class="text-body text-charcoal mb-4">
-            Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo (ordenador, tablet, móvil) cuando visitas un sitio web.。它们 permiten al sitio recordar tus preferencias y mejorar tu experiencia de navegación.
+            Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo (ordenador, tablet o móvil) cuando visitas un sitio web. Permiten recordar tus preferencias y mejorar tu experiencia de navegación.
           </p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">2. Tipos de Cookies que Utilizamos</h2>
@@ -113,7 +113,7 @@ const breadcrumbData = [
           <p class="text-body text-charcoal mb-4">
             Para preguntas sobre nuestra política de cookies, contacta a través de:<br />
             <strong>Email:</strong> mangelesmatacala@hotmail.com<br />
-            <strong>Teléfono:</strong> +34 661 471 971
+            <strong>Teléfono:</strong> +34 697 733 060
           </p>
 
           <div class="mt-16 pt-8 border-t border-border-delicate">

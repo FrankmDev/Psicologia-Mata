@@ -18,8 +18,8 @@ if (!post) {
   return Astro.redirect('/404');
 }
 
-const title = `${post.seoTitle ?? post.title} | Psicóloga en Córdoba`;
-const canonicalUrl = `https://www.matacalapsicologia.es/blog/${slug}`;
+const title = post.seoTitle ?? `${post.title} | Blog de psicología en Córdoba`;
+const canonicalUrl = `https://www.matacalapsicologia.es/blog/${slug}/`;
 
 // Parse date
 function parseDate(dateStr: string): string {
@@ -52,7 +52,7 @@ const relatedPosts = blogPostsList
 
 const articleData = {
   headline: post.title,
-  description: post.excerpt,
+  description: post.seoDescription ?? post.excerpt,
   image: post.image.src,
   datePublished: datePublished,
   dateModified: datePublished,
@@ -69,7 +69,7 @@ const articleData = {
 
 const breadcrumbData = [
   { name: "Inicio", url: "https://www.matacalapsicologia.es/" },
-  { name: "Blog", url: "https://www.matacalapsicologia.es/blog" },
+  { name: "Blog", url: "https://www.matacalapsicologia.es/blog/" },
   { name: post.title, url: canonicalUrl }
 ];
 
@@ -86,8 +86,8 @@ const shareUrls = {
   {title}
   description={post.seoDescription ?? post.excerpt}
   type="article"
-  image={post.image.src}
-  canonical={`/blog/${slug}`}
+  ogImage={post.image.src}
+  canonical={`/blog/${slug}/`}
   publishedTime={datePublished}
 >
   <Schema slot="schema" type="article" data={articleData} />
@@ -248,7 +248,7 @@ const shareUrls = {
                 <div class="flex items-center gap-4">
                   <a href="/contacto" class="text-label text-olive hover:text-ink transition-colors">Contactar</a>
                   <span class="text-charcoal">·</span>
-                  <a href="/services" class="text-label text-olive hover:text-ink transition-colors">Servicios</a>
+                  <a href="/servicios" class="text-label text-olive hover:text-ink transition-colors">Servicios</a>
                 </div>
               </div>
             </div>
@@ -389,8 +389,8 @@ const shareUrls = {
       title="La terapia puede"
       highlight="ayudarte"
       description="Si este contenido resuena contigo, quizás es el momento de dar el siguiente paso. Estoy aquí para acompañarte."
-      primaryAction={{ text: "Solicitar información", href: "/contact" }}
-      secondaryAction={{ text: "661 471 971", href: "tel:+34661471971", icon: "phone" }}
+      primaryAction={{ text: "Solicitar información", href: "/contacto" }}
+      secondaryAction={{ text: "697 733 060", href: "tel:+34697733060", icon: "phone" }}
       variant="light"
       centered={true}
     />
@@ -540,6 +540,50 @@ const shareUrls = {
   .article-body strong {
     color: #1B1E19;
     font-weight: 500;
+  }
+
+  .article-body sup {
+    font-size: 0.72em;
+    vertical-align: super;
+    margin-left: 0.1rem;
+  }
+
+  .article-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    min-width: 640px;
+    background: #FFFCF8;
+    border: 1px solid rgba(27, 30, 25, 0.08);
+  }
+
+  .article-body thead {
+    background-color: #EBE5DB;
+  }
+
+  .article-body th,
+  .article-body td {
+    text-align: left;
+    vertical-align: top;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid rgba(27, 30, 25, 0.08);
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .article-body th {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 1.1rem;
+    color: #1B1E19;
+  }
+
+  .article-body tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .article-body .overflow-x-auto {
+    overflow-x: auto;
+    margin: 2.5rem 0;
   }
   
   .article-body blockquote {

@@ -62,8 +62,8 @@ export const contactInfo: ContactInfo[] = [
   {
     icon: "phone",
     label: "Teléfono",
-    value: "661 471 971",
-    href: "tel:+34661471971"
+    value: "697 733 060",
+    href: "tel:+34697733060"
   },
   {
     icon: "mail",

@@ -5,7 +5,7 @@ import Footer from '../components/Footer.astro';
 import PageHeader from '../components/PageHeader.astro';
 
 const title = "Política de Privacidad | María Ángeles Mata - Psicóloga en Córdoba";
-const description = "Política de privacidad de María Ángeles Mata, psicóloga en Córdoba. Cómo protegemos tus datos personales según el RGPD.";
+const description = "Política de privacidad de la consulta de psicología de María Ángeles Mata en Córdoba. Información sobre protección de datos y RGPD.";
 
 const breadcrumbData = [
   { name: "Inicio", url: "https://www.matacalapsicologia.es/" },
@@ -13,7 +13,7 @@ const breadcrumbData = [
 ];
 ---
 
-<Layout {title} {description}>
+<Layout {title} {description} noindex={true}>
   <Header activePage="" />
   
   <main id="main-content">
@@ -42,8 +42,8 @@ const breadcrumbData = [
             <strong>María Ángeles Mata Cala</strong><br />
             Psicóloga<br />
             Colegiada AN 12177<br />
-            Dirección: C/ Rodríguez Sánchez, 22, 14003 Córdoba<br />
-            Teléfono: +34 661 471 971<br />
+            Dirección: C/ Rodríguez Sánchez, 9, 14003 Córdoba<br />
+            Teléfono: +34 697 733 060<br />
             Email: mangelesmatacala@hotmail.com
           </p>
 

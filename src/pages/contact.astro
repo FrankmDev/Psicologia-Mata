@@ -8,20 +8,20 @@ import CTASection from '../components/CTASection.astro';
 import Schema from '../components/Schema.astro';
 import Icon from '../components/Icon.astro';
 
-const title = "Contacto | Psicóloga en Córdoba - María Ángeles Mata";
-const description = "Contacta con María Ángeles Mata, psicóloga en Córdoba capital. Reserva tu primera consulta sin compromiso: por teléfono, email o formulario. Te respondo en menos de 24h.";
+const title = "Contacto | Reserva tu cita con una psicóloga en Córdoba";
+const description = "Reserva tu cita con María Ángeles Mata, psicóloga en Córdoba. Atención presencial y terapia online, respuesta en menos de 24 horas.";
 
 const SITE = "https://www.matacalapsicologia.es";
 
 const breadcrumbData = [
   { name: "Inicio", url: `${SITE}/` },
-  { name: "Contacto", url: `${SITE}/contacto` }
+  { name: "Contacto", url: `${SITE}/contacto/` }
 ];
 
 const contactPageData = {
   name: title,
   description,
-  url: `${SITE}/contacto`
+  url: `${SITE}/contacto/`
 };
 ---
 
@@ -41,7 +41,7 @@ const contactPageData = {
           label="Contacto"
           title="Dar el primer paso es lo más"
           highlight="difícil"
-          description="Si has llegado hasta aquí, algo dentro de ti sabe que mereces sentirte mejor. Yo estoy aquí para escucharte. Sin juzgarte, sin prisas."
+          description="Si estás buscando psicóloga en Córdoba o prefieres empezar con terapia online, puedes escribirme por teléfono, email o formulario. Respondo personalmente en menos de 24 horas."
         />
       </div>
     </section>
@@ -65,10 +65,10 @@ const contactPageData = {
               <div class="mb-10">
                 <span class="text-label text-olive mb-6 block">Escríbeme</span>
                 <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-ink">
-                  Cuéntame qué te trae aquí
+                  Reserva tu primera consulta
                 </h2>
                 <p class="text-body-sm sm:text-body text-charcoal mt-4">
-                  No tienes que tenerlo todo claro. Solo escribe lo que sientas. Te responderé lo antes posible. Disponible para sesiones online y presenciales.
+                  No tienes que tenerlo todo claro. Cuéntame qué te preocupa y vemos si la terapia presencial en Córdoba o la modalidad online encajan contigo.
                 </p>
               </div>
               
@@ -173,7 +173,7 @@ const contactPageData = {
       title="A veces es más fácil"
       highlight="llamar"
       description="No pasa nada si no sabes qué decir. Solo di 'hola' y ya empezamos. Estoy aquí para escucharte."
-      primaryAction={{ text: "661 471 971", href: "tel:+34661471971", icon: false }}
+      primaryAction={{ text: "697 733 060", href: "tel:+34697733060", icon: false }}
       variant="dark"
     />
 

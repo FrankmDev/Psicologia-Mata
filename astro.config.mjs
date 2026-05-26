@@ -27,7 +27,10 @@ export default defineConfig({
         es: 'es-ES',
       },
     },
-    filter: (page) => !page.includes('/404'),
+    filter: (page) => {
+      const excludedPages = ['/404', '/privacidad/', '/aviso-legal/', '/cookies/'];
+      return !excludedPages.some((excludedPage) => page.includes(excludedPage));
+    },
   })],
 
   // Server configuration

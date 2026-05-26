@@ -131,10 +131,9 @@ function generateLocalBusinessSchema(data: LocalBusinessData) {
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: data.telephone,
-      contactType: 'customer service',
-      availableLanguage: 'Spanish',
-      areaServed: 'ES',
-      contactOption: 'TollFree'
+      contactType: 'appointment booking',
+      availableLanguage: ['es'],
+      areaServed: 'ES'
     }
   };
 
@@ -175,12 +174,14 @@ function generateLocalBusinessSchema(data: LocalBusinessData) {
 }
 
 function generateArticleSchema(data: ArticleData) {
+  const articleImage = data.image.startsWith('http') ? data.image : `${siteUrl}${data.image}`;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: data.headline,
     description: data.description,
-    image: data.image,
+    image: articleImage,
     datePublished: data.datePublished,
     dateModified: data.dateModified || data.datePublished,
     author: {

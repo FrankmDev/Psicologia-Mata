@@ -14,8 +14,8 @@ import terapiaFamilia from '../assets/terapia-familiar.avif';
 import evaluacion from '../assets/evaluacion.avif';
 import cognitiva from '../assets/estimulacion-cognitiva.avif';
 
-const title = "Servicios de Psicología en Córdoba | Terapia Individual y de Pareja";
-const description = "Psicología en Córdoba: terapia individual, de pareja, familiar, evaluación neuropsicológica y estimulación cognitiva. Presencial y online. Primera consulta sin compromiso.";
+const title = "Terapia individual, de pareja y online en Córdoba | Servicios de Psicología";
+const description = "Servicios de psicología en Córdoba: terapia individual, terapia de pareja, terapia familiar, evaluación neuropsicológica y atención online. Primera consulta sin compromiso.";
 
 const serviceImages: Record<string, ImageMetadata> = {
   individual: terapiaIndividual,
@@ -81,7 +81,7 @@ const SITE = "https://www.matacalapsicologia.es";
 // Schema data
 const breadcrumbData = [
   { name: "Inicio", url: `${SITE}/` },
-  { name: "Servicios", url: `${SITE}/servicios` }
+  { name: "Servicios", url: `${SITE}/servicios/` }
 ];
 
 const faqSchemaData = faqs.map(faq => ({
@@ -92,7 +92,7 @@ const faqSchemaData = faqs.map(faq => ({
 
 <Layout {title} {description}>
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
-  <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE}/servicios` }} />
+  <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE}/servicios/` }} />
   <Schema slot="schema" type="faqpage" data={faqSchemaData} />
   <Header activePage="Servicios" />
   
@@ -107,7 +107,7 @@ const faqSchemaData = faqs.map(faq => ({
           label="Servicios"
           title="Cada persona necesita"
           highlight="algo diferente"
-          description="No hay fórmulas mágicas, pero sí un espacio donde puedas ser tú mismo. Te cuento cómo trabajo en cada tipo de terapia."
+          description="Psicología presencial en Córdoba y terapia online para ansiedad, autoestima, pareja, familia y evaluación neuropsicológica con un enfoque cercano y basado en evidencia."
         >
           <!-- Navegación tipo índice -->
           <div class="flex flex-wrap gap-x-8 gap-y-4 mt-16">
@@ -453,8 +453,8 @@ const faqSchemaData = faqs.map(faq => ({
       title="¿Te gustaría que"
       highlight="habláramos?"
       description="La primera consulta es simplemente una conversación. Sin compromiso, sin presión. Solo tú y yo, viendo si puedo ayudarte."
-      primaryAction={{ text: "Pedir cita", href: "/contact", icon: true }}
-      secondaryAction={{ text: "Llamar", href: "tel:+34661471971", icon: "phone" }}
+      primaryAction={{ text: "Pedir cita", href: "/contacto", icon: true }}
+      secondaryAction={{ text: "Llamar", href: "tel:+34697733060", icon: "phone" }}
     />
 
   </main>

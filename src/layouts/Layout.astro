@@ -32,13 +32,21 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://www.matacalapsicologia.es';
-const canonicalUrl = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
+const normalizedCanonicalPath = canonical
+  ? canonical
+  : Astro.url.pathname === '/'
+    ? '/'
+    : `${Astro.url.pathname.replace(/\/$/, '')}/`;
+const canonicalUrl = normalizedCanonicalPath.startsWith('http')
+  ? normalizedCanonicalPath
+  : `${siteUrl}${normalizedCanonicalPath}`;
 
 // Generar una versión PNG del logo para máxima compatibilidad con Open Graph
 const optimizedOgImage = await getImage({ src: ogLogoSrc, format: 'png', width: 1200 });
 
-const ogImageUrl = ogImage 
-    ? (ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`)
+const ogImageCandidate = ogImage || image;
+const ogImageUrl = ogImageCandidate 
+    ? (ogImageCandidate.startsWith('http') ? ogImageCandidate : `${siteUrl}${ogImageCandidate}`)
     : `${siteUrl}${optimizedOgImage.src}`;
 
 // Precargar recursos críticos
@@ -51,10 +59,6 @@ const ogImageUrl = ogImage
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Desactivar caché en desarrollo -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
     <meta name="theme-color" content="#F7F5F0" />
     <meta name="msapplication-TileColor" content="#F7F5F0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -94,7 +98,7 @@ const ogImageUrl = ogImage
     <meta name="description" content={description} />
     <meta name="author" content={author} />
     {noindex ? (
-      <meta name="robots" content="noindex, nofollow" />
+      <meta name="robots" content="noindex, follow" />
     ) : (
       <meta name="robots" content="index, follow, max-image-preview:large" />
     )}

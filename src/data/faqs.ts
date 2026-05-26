@@ -50,7 +50,7 @@ export const faqs: FAQ[] = [
   },
   {
     question: "¿Cómo puedo pedir cita con la psicóloga en Córdoba?",
-    answer: "Puedes contactarme por teléfono (661 471 971), por email (mangelesmatacala@hotmail.com) o a través del formulario de contacto de esta web. Respondo en menos de 24 horas. La primera consulta es sin compromiso: hablamos de lo que te trae, te explico cómo trabajo y decidimos juntos si tiene sentido comenzar."
+    answer: "Puedes contactarme por teléfono (697 733 060), por email (mangelesmatacala@hotmail.com) o a través del formulario de contacto de esta web. Respondo en menos de 24 horas. La primera consulta es sin compromiso: hablamos de lo que te trae, te explico cómo trabajo y decidimos juntos si tiene sentido comenzar."
   }
 ];
 
