@@ -39,6 +39,7 @@
       
       const elements = document.querySelectorAll('[data-reveal], .img-reveal-wrapper');
       if (elements.length === 0) return;
+      document.documentElement.classList.add('reveal-ready');
       
       // Cancelar cualquier RAF pendiente
       if (rafId) {

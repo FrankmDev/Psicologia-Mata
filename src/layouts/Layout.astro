@@ -112,9 +112,9 @@ const websiteSchema = {
       />
     </noscript>
 
-    <!-- Favicon principal en AVIF; PNG reservado como fallback de compatibilidad. -->
-    <link rel="icon" href={absoluteUrl('/favicon.avif')} type="image/avif" />
-    <link rel="alternate icon" href={absoluteUrl('/favicon-32x32.png')} type="image/png" sizes="32x32" />
+    <!-- Favicon: usar el icono exacto en formato clásico y PNG compatible. -->
+    <link rel="icon" href={absoluteUrl('/favicon.ico')} sizes="32x32" />
+    <link rel="icon" href={absoluteUrl('/favicon-32x32.png')} type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href={absoluteUrl('/apple-touch-icon.png')} sizes="180x180" />
     <link rel="manifest" href={absoluteUrl('/site.webmanifest')} />
     

@@ -8,11 +8,6 @@
       "statusCode": 308
     },
     {
-      "source": "/favicon.ico",
-      "destination": "https://matacalapsicologia.es/favicon.avif",
-      "statusCode": 308
-    },
-    {
       "source": "/services",
       "destination": "https://matacalapsicologia.es/servicios/",
       "statusCode": 308
@@ -69,7 +64,7 @@
       ]
     },
     {
-      "source": "/(favicon\\.avif|favicon-32x32\\.png|apple-touch-icon\\.png|icon-192x192\\.png|icon-512x512\\.png|site\\.webmanifest)",
+      "source": "/(favicon\\.ico|favicon\\.avif|favicon-32x32\\.png|apple-touch-icon\\.png|icon-192x192\\.png|icon-512x512\\.png|site\\.webmanifest)",
       "headers": [
         {
           "key": "Cache-Control",
