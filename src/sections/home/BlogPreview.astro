@@ -19,7 +19,7 @@ const previewPosts = blogPostsList.slice(0, 3);
       </div>
 
       <div data-reveal data-reveal-delay="100">
-        <a href="/blog" class="btn btn-outline">
+        <a href="/blog/" class="btn btn-outline">
           Ver todos los artículos
         </a>
       </div>
@@ -33,7 +33,7 @@ const previewPosts = blogPostsList.slice(0, 3);
           data-reveal
           data-reveal-delay={index * 100}
         >
-          <a href={`/blog/${post.slug}`} class="block py-10 lg:py-12">
+          <a href={`/blog/${post.slug}/`} class="block py-10 lg:py-12">
             <div class="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-12">
 
               {/* Número / Categoría */}

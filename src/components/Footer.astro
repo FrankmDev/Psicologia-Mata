@@ -1,20 +1,32 @@
 ---
 import { Image } from 'astro:assets';
 import whiteLogo from '../assets/white-logo.webp';
+import { allServices } from '../data/services';
+import { blogPostsList } from '../data/blog';
 const currentYear = new Date().getFullYear();
 
 const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/servicios", label: "Servicios" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/servicios/", label: "Servicios" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/contacto/", label: "Contacto" },
 ];
 
 const legalLinks = [
-  { href: "/privacidad", label: "Privacidad" },
-  { href: "/aviso-legal", label: "Aviso Legal" },
-  { href: "/cookies", label: "Cookies" },
+  { href: "/privacidad/", label: "Privacidad" },
+  { href: "/aviso-legal/", label: "Aviso Legal" },
+  { href: "/cookies/", label: "Cookies" },
 ];
+
+const footerServices = allServices.map((service) => ({
+  href: `/servicios/#${service.id}`,
+  label: service.title,
+}));
+
+const footerArticles = blogPostsList.slice(0, 5).map((post) => ({
+  href: `/blog/${post.slug}/`,
+  label: post.title,
+}));
 ---
 
 <footer class="bg-ink text-alabaster relative">
@@ -118,6 +130,45 @@ const legalLinks = [
       </div>
 
     </div>
+
+    <!-- Enlazado interno SEO -->
+    <nav class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 mb-12 lg:mb-16" aria-label="Enlaces internos principales">
+      <div class="lg:col-span-4">
+        <h3 class="text-label-sm text-terracotta-light mb-5 tracking-wider uppercase">Servicios de psicología</h3>
+        <ul class="space-y-3">
+          {footerServices.map((link) => (
+            <li>
+              <a href={link.href} class="text-body-sm text-alabaster/70 hover:text-terracotta-light transition-colors duration-300">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-5">
+        <h3 class="text-label-sm text-terracotta-light mb-5 tracking-wider uppercase">Artículos de psicología</h3>
+        <ul class="space-y-3">
+          {footerArticles.map((link) => (
+            <li>
+              <a href={link.href} class="text-body-sm text-alabaster/70 hover:text-terracotta-light transition-colors duration-300">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h3 class="text-label-sm text-terracotta-light mb-5 tracking-wider uppercase">Páginas clave</h3>
+        <ul class="space-y-3">
+          <li><a href="/servicios/" class="text-body-sm text-alabaster/70 hover:text-terracotta-light transition-colors duration-300">Psicología presencial y online</a></li>
+          <li><a href="/blog/" class="text-body-sm text-alabaster/70 hover:text-terracotta-light transition-colors duration-300">Blog de psicología</a></li>
+          <li><a href="/contacto/" class="text-body-sm text-alabaster/70 hover:text-terracotta-light transition-colors duration-300">Pedir cita en Córdoba u online</a></li>
+          <li><a href="/privacidad/" class="text-body-sm text-alabaster/70 hover:text-terracotta-light transition-colors duration-300">Política de privacidad</a></li>
+        </ul>
+      </div>
+    </nav>
 
     <!-- Divider elegante -->
     <div class="flex items-center gap-4 mb-8">

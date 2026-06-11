@@ -16,12 +16,6 @@ export default defineConfig({
   // Prefetch configuration
   prefetch: false,
 
-  // Integrations
-  redirects: {
-    '/services': '/servicios',
-    '/contact': '/contacto',
-  },
-
   integrations: [
     sitemap({
       i18n: {
@@ -33,9 +27,6 @@ export default defineConfig({
       filter: (page) => {
         const excluded = [
           '/404',
-          '/aviso-legal/',
-          '/cookies/',
-          '/privacidad/',
         ];
         return !excluded.some((path) => page.includes(path));
       },
@@ -54,6 +45,9 @@ export default defineConfig({
         }
         if (pathname.startsWith('/blog/') && pathname.length > '/blog/'.length) {
           return { ...entry, priority: 0.7, changefreq: 'monthly' };
+        }
+        if (pathname === '/aviso-legal/' || pathname === '/cookies/' || pathname === '/privacidad/') {
+          return { ...entry, priority: 0.2, changefreq: 'yearly' };
         }
         return { ...entry, priority: 0.5, changefreq: 'yearly' };
       },

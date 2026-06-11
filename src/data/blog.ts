@@ -25,11 +25,160 @@ export interface BlogPost {
 }
 
 export const blogPosts: Record<string, BlogPost> = {
+  "atencion-plena-mindfulness-psicologia": {
+    slug: "atencion-plena-mindfulness-psicologia",
+    title: "Atención plena: qué es, para qué sirve y cómo integrarla en terapia",
+    seoTitle: "Atención plena y mindfulness: guía psicológica profesional",
+    seoDescription: "Guía psicológica sobre atención plena y mindfulness: beneficios, límites, ejercicios prácticos y cuándo trabajarlo en terapia presencial u online.",
+    excerpt: "La atención plena no consiste en dejar la mente en blanco. Es aprender a relacionarte de otra manera con tus pensamientos, emociones y sensaciones para responder con más claridad.",
+    date: "11 Junio 2026",
+    dateShort: "11 Jun",
+    readTime: "12 min",
+    category: "Atención plena",
+    image: apunte,
+    content: `
+      <p class="text-xl leading-relaxed text-charcoal mb-8">La atención plena, también conocida como <em>mindfulness</em>, se ha popularizado mucho en los últimos años. A veces se presenta como una técnica rápida para relajarse, pero en psicología conviene entenderla con más precisión: es una forma de entrenar la atención para observar lo que ocurre en el presente, con menos juicio automático y más capacidad de respuesta. No busca eliminar pensamientos ni emociones, sino cambiar la manera en que nos relacionamos con ellos.</p>
+
+      <figure class="my-12">
+        <img src="${apunte.src}" alt="Cuaderno de trabajo para practicar atención plena en terapia" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+        <figcaption class="text-sm text-ink mt-3 text-center">La atención plena se entrena mejor cuando pasa de ser una idea bonita a una práctica concreta y revisable.</figcaption>
+      </figure>
+
+      <div class="bg-cream border border-border-delicate rounded-2xl p-6 my-10">
+        <p class="text-base text-charcoal mb-0"><strong>Idea clave:</strong> practicar atención plena no significa resignarse, desconectar ni aguantarlo todo. Significa notar antes lo que está pasando por dentro para elegir una respuesta más útil. Por eso puede integrarse dentro de la <a href="/servicios/">terapia individual</a>, el trabajo con ansiedad, la autoestima y los procesos de cambio personal.</p>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Qué es realmente la atención plena</h2>
+
+      <p>La atención plena combina tres elementos: <strong>presencia</strong>, <strong>observación</strong> y <strong>actitud de apertura</strong>. En lugar de funcionar en piloto automático, la persona aprende a reconocer pensamientos, emociones, sensaciones corporales e impulsos antes de dejarse arrastrar por ellos. El National Center for Complementary and Integrative Health la describe como una práctica de conciencia del momento presente sin juicio, que puede formar parte de programas estructurados como la reducción del estrés basada en mindfulness o la terapia cognitiva basada en mindfulness.<sup><a href="#ref-m1">1</a></sup></p>
+
+      <p>En consulta, esto suele traducirse en preguntas muy concretas: ¿qué noto en el cuerpo cuando aparece la ansiedad?, ¿qué pensamiento se repite?, ¿qué hago para escapar de esa sensación?, ¿esa respuesta me ayuda a largo plazo o solo me alivia durante unos minutos? Desde ahí se puede trabajar con más claridad.</p>
+
+      <blockquote>
+        <p>La atención plena no apaga la vida interior. Ayuda a verla con suficiente distancia como para no obedecer cada pensamiento como si fuera una orden.</p>
+      </blockquote>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Mindfulness no es dejar la mente en blanco</h2>
+
+      <p>Una de las ideas que más frustración genera es pensar que practicar mindfulness exige no pensar. La mente produce pensamientos igual que el cuerpo produce sensaciones. El objetivo no es vaciarla, sino notar cuándo se ha ido al futuro, al pasado o a la autocrítica, y volver de forma amable al punto de anclaje: la respiración, el cuerpo, un sonido o una tarea sencilla.</p>
+
+      <div class="overflow-x-auto my-10">
+        <table>
+          <thead>
+            <tr>
+              <th>Creencia común</th>
+              <th>Enfoque psicológico más útil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"Tengo que relajarme siempre".</td>
+              <td>La calma puede aparecer, pero el objetivo es observar y responder mejor, no forzar una emoción concreta.</td>
+            </tr>
+            <tr>
+              <td>"Si pienso, lo estoy haciendo mal".</td>
+              <td>Notar que estás pensando ya forma parte de la práctica. Ese momento de darse cuenta es el entrenamiento.</td>
+            </tr>
+            <tr>
+              <td>"Mindfulness sirve para evitar el malestar".</td>
+              <td>Sirve para acercarte al malestar con más recursos, sin convertir cada emoción incómoda en una urgencia.</td>
+            </tr>
+            <tr>
+              <td>"Con meditar unos días debería bastar".</td>
+              <td>Como cualquier habilidad psicológica, necesita repetición, ajuste y aplicación a situaciones reales.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Para qué puede ayudar en la vida diaria</h2>
+
+      <p>La investigación sobre mindfulness es amplia y también heterogénea. No todo sirve para todo, ni todos los estudios tienen la misma calidad. Aun así, las revisiones clínicas señalan beneficios especialmente relevantes en estrés, ansiedad, síntomas depresivos, dolor y sueño, con matices importantes según el tipo de intervención y la persona.<sup><a href="#ref-m1">1</a></sup><sup><a href="#ref-m2">2</a></sup></p>
+
+      <div class="grid md:grid-cols-3 gap-6 my-8">
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Ansiedad</h3>
+          <p class="text-sm text-charcoal">Ayuda a detectar la activación corporal, la anticipación y las conductas de evitación antes de que el miedo dirija todo el día. Si este es tu caso, puede interesarte leer sobre <a href="/blog/ansiedad-persistente-tratamiento-psicologico/">ansiedad persistente</a> y <a href="/blog/gestion-ansiedad/">gestión de la ansiedad</a>.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Estrés</h3>
+          <p class="text-sm text-charcoal">Entrena pequeñas pausas entre estímulo y respuesta. Esa pausa puede cambiar cómo contestas, cómo descansas y cómo organizas tus límites.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Autoestima</h3>
+          <p class="text-sm text-charcoal">Permite observar la autocrítica sin fusionarte con ella. No elimina la voz crítica de golpe, pero ayuda a responderle de una forma más justa. Puedes ampliar este tema en el artículo sobre <a href="/blog/autoestima-saludable/">autoestima saludable</a>.</p>
+        </div>
+      </div>
+
+      <figure class="my-12">
+        <img src="${psicologia.src}" alt="Sesión de psicología donde se integra mindfulness y regulación emocional" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+        <figcaption class="text-sm text-ink mt-3 text-center">En terapia, mindfulness se adapta a la historia y a los objetivos de cada persona.</figcaption>
+      </figure>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Qué dice la evidencia y qué límites conviene tener presentes</h2>
+
+      <p>Una revisión publicada en <em>JAMA Internal Medicine</em> encontró evidencia moderada de mejora en ansiedad, depresión y dolor en programas de meditación, aunque con efectos variables y sin convertir la práctica en una solución universal.<sup><a href="#ref-m2">2</a></sup> Otros análisis recogidos por NCCIH indican que las intervenciones basadas en mindfulness pueden ser mejores que no recibir tratamiento y, en algunos casos, comparables a tratamientos establecidos, pero también advierten de sesgos, resultados mixtos y falta de seguimiento a largo plazo en parte de la literatura.<sup><a href="#ref-m1">1</a></sup></p>
+
+      <p>Esto es importante porque la atención plena no debería venderse como una receta milagrosa. Puede ser una herramienta valiosa dentro de un plan terapéutico, especialmente cuando se combina con evaluación clínica, objetivos claros y trabajo sobre pensamientos, emociones, conducta y contexto. Si hay ansiedad intensa, trauma, depresión, ataques de pánico o riesgo para la seguridad, lo adecuado es pedir una valoración profesional y no sustituir la atención psicológica o médica por una práctica aislada.</p>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Tres ejercicios sencillos para empezar</h2>
+
+      <p>Si nunca has practicado, conviene empezar con ejercicios breves. Lo importante no es hacerlo perfecto, sino repetirlo lo suficiente como para conocer tu patrón interno.</p>
+
+      <div class="space-y-6 my-8">
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">1. Respiración como ancla durante tres minutos</h3>
+          <p class="text-charcoal text-sm">Siéntate con los pies apoyados. Lleva la atención a la entrada y salida del aire. Cuando aparezcan pensamientos, nómbralos de forma simple: "preocupación", "recuerdo", "planificación". Después vuelve a la respiración sin discutir con la mente.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">2. Escaneo corporal breve</h3>
+          <p class="text-charcoal text-sm">Recorre mentalmente rostro, cuello, hombros, pecho, abdomen, manos y piernas. No intentes cambiar nada al principio. Observa tensión, temperatura, presión o movimiento. Este ejercicio ayuda a detectar señales tempranas de estrés.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">3. Una actividad cotidiana con atención plena</h3>
+          <p class="text-charcoal text-sm">Elige una acción diaria, como ducharte, caminar o tomar café. Durante dos minutos, vuelve a los sentidos: textura, olor, sonido, temperatura y movimiento. Cuando la mente se vaya, vuelve a lo que estás haciendo.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Cómo se trabaja la atención plena en terapia</h2>
+
+      <p>En un proceso psicológico, mindfulness no se plantea como una tarea genérica para todo el mundo. Se ajusta a la dificultad principal y a la historia de la persona. En <a href="/servicios/">terapia individual</a>, puede servir para reconocer el ciclo de ansiedad, reducir la rumiación, trabajar la autocrítica o aprender a sostener emociones sin reaccionar de forma impulsiva. En algunos procesos de <a href="/blog/comunicacion-pareja/">comunicación en pareja</a>, también ayuda a detectar defensividad, tono, retirada o necesidad de tener razón antes de que la conversación se convierta en una escalada.</p>
+
+      <p>El criterio profesional es fundamental: no todas las personas se benefician de los mismos ejercicios, y algunas necesitan primero estabilización, psicoeducación o intervención más estructurada. La práctica debe estar al servicio del objetivo terapéutico, no convertirse en una obligación más que cumplir.</p>
+
+      <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
+        <p class="text-lg font-medium text-charcoal mb-2">¿Quieres aprender a regularte sin pelearte contigo?</p>
+        <p class="text-charcoal mb-4">Si la ansiedad, el estrés o la autocrítica están ocupando demasiado espacio, podemos valorar qué herramientas tienen sentido para tu caso. Atiendo en consulta presencial en Córdoba y también en formato online.</p>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Solicitar información <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">También puede interesarte</h2>
+
+      <ul class="space-y-3 my-8">
+        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona</a></li>
+        <li><a href="/blog/gestion-ansiedad/">Cómo gestionar la ansiedad cuando el cuerpo se activa</a></li>
+        <li><a href="/blog/autoestima-saludable/">Baja autoestima: señales y cómo empezar a trabajarla</a></li>
+        <li><a href="/blog/beneficios-terapia-individual/">Beneficios de la terapia individual</a></li>
+        <li><a href="/blog/comunicacion-pareja/">Comunicación en pareja: qué hacer cuando hablar no sirve</a></li>
+        <li><a href="/blog/terapia-de-pareja-cuando-empezar/">Terapia de pareja: cuándo empezar y qué esperar</a></li>
+        <li><a href="/servicios/">Ver servicios de psicología presencial y online</a></li>
+        <li><a href="/contacto/">Contactar para pedir información</a></li>
+      </ul>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Referencias y fuentes</h2>
+
+      <ol class="space-y-3 my-8 text-base">
+        <li id="ref-m1">National Center for Complementary and Integrative Health. <a href="https://www.nccih.nih.gov/health/meditation-and-mindfulness-effectiveness-and-safety" target="_blank" rel="noopener noreferrer">Meditation and Mindfulness: Effectiveness and Safety</a>.</li>
+        <li id="ref-m2">Goyal M, Singh S, Sibinga EMS, et al. <a href="https://pubmed.ncbi.nlm.nih.gov/24395196/" target="_blank" rel="noopener noreferrer">Meditation Programs for Psychological Stress and Well-being: A Systematic Review and Meta-analysis</a>. <em>JAMA Internal Medicine</em>. 2014.</li>
+        <li id="ref-m3">Hoge EA, Bui E, Mete M, et al. <a href="https://pubmed.ncbi.nlm.nih.gov/36102337/" target="_blank" rel="noopener noreferrer">Mindfulness-Based Stress Reduction vs Escitalopram for the Treatment of Adults With Anxiety Disorders</a>. <em>JAMA Psychiatry</em>. 2022.</li>
+      </ol>
+    `
+  },
   "ansiedad-persistente-tratamiento-psicologico": {
     slug: "ansiedad-persistente-tratamiento-psicologico",
     title: "Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona",
     seoTitle: "Ansiedad persistente y tratamiento psicológico en Córdoba",
-    seoDescription: "Guía profesional sobre síntomas, evaluación y tratamiento psicológico de la ansiedad. Consulta presencial en Córdoba y terapia online con enfoque basado en evidencia.",
+    seoDescription: "Síntomas, evaluación y tratamiento psicológico de la ansiedad. Consulta presencial en Córdoba y terapia online con enfoque basado en evidencia.",
     excerpt: "No toda ansiedad necesita terapia, pero cuando empieza a ocupar demasiado espacio en tu vida conviene entender qué está pasando y qué abordajes tienen más respaldo científico.",
     date: "26 Mayo 2026",
     dateShort: "26 May",
@@ -168,7 +317,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
         <p class="text-lg font-medium text-charcoal mb-2">¿Cuándo pedir ayuda profesional?</p>
         <p class="text-charcoal mb-4">Si la ansiedad te está quitando sueño, energía, concentración o libertad para hacer vida normal, merece una valoración seria. Si buscas una psicóloga para ansiedad en Córdoba o prefieres trabajar online, el objetivo no es solo “aguantar mejor”, sino entender el patrón y reducirlo de forma estable.</p>
-        <a href="/contacto" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Solicitar información <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Solicitar información <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
       </div>
 
       <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Referencias y fuentes</h2>
@@ -305,7 +454,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
         <p class="text-lg font-medium text-charcoal mb-2">¿Cuándo tiene sentido consultar?</p>
         <p class="text-charcoal mb-4">Si notáis que os queréis pero no conseguís entenderos, o si una crisis os ha dejado sin forma útil de hablar, una valoración profesional puede orientaros. Si estáis buscando terapia de pareja en Córdoba, presencial u online, el primer objetivo no es forzar acuerdos rápidos, sino entender si todavía hay base para trabajar y cómo hacerlo bien.</p>
-        <a href="/contacto" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Solicitar primera valoración <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Solicitar primera valoración <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
       </div>
 
       <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Referencias y fuentes</h2>
@@ -322,7 +471,7 @@ export const blogPosts: Record<string, BlogPost> = {
   "beneficios-terapia-individual": {
     slug: "beneficios-terapia-individual",
     title: "¿Por qué la terapia individual funciona?",
-    seoTitle: "Terapia individual en Córdoba: beneficios y cuándo puede ayudarte",
+    seoTitle: "Terapia individual en Córdoba: beneficios y ayuda",
     seoDescription: "Descubre cómo la terapia individual puede ayudarte con ansiedad, autoestima y bienestar emocional en una consulta de psicología en Córdoba u online.",
     excerpt: "No se trata de tener a alguien que te diga qué hacer. Se trata de tener un espacio donde puedas ser tú mismo, sin filtros, sin prisas.",
     date: "15 Enero 2025",
@@ -370,14 +519,14 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
         <p class="text-lg font-medium text-charcoal mb-2">¿Tienes dudas sobre la terapia?</p>
         <p class="text-charcoal mb-4">Pregunta lo que necesites. La primera consulta es simplemente una conversación para ver si encajamos.</p>
-        <a href="/contacto" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Hablamos <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Hablamos <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
       </div>
     `
   },
   "comunicacion-pareja": {
     slug: "comunicacion-pareja",
     title: "Cuando hablar no sirve de nada",
-    seoTitle: "Problemas de comunicación en pareja: cómo mejorarlos en terapia",
+    seoTitle: "Comunicación en pareja: cómo mejorarla en terapia",
     seoDescription: "Claves para mejorar la comunicación en pareja con ayuda psicológica. Terapia de pareja en Córdoba y sesiones online.",
     excerpt: "Hablan, hablan, pero no se entienden. Si esto te suena familiar, no estás solo. La comunicación en pareja puede mejorar, pero no de la forma que piensas.",
     date: "8 Enero 2025",
@@ -434,14 +583,14 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
         <p class="text-charcoal font-medium mb-2">¿Sientes que vuestra comunicación se ha roto?</p>
         <p class="text-charcoal mb-4">La terapia de pareja no es para cuando todo está perdido. Es para cuando queréis intentarlo de verdad.</p>
-        <a href="/contacto" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Saber más <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Saber más <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
       </div>
     `
   },
   "gestion-ansiedad": {
     slug: "gestion-ansiedad",
     title: "Cuando el pecho aprieta",
-    seoTitle: "Cómo gestionar la ansiedad: técnicas psicológicas que sí ayudan",
+    seoTitle: "Gestionar la ansiedad: técnicas psicológicas útiles",
     seoDescription: "Técnicas psicológicas para gestionar la ansiedad en el día a día. Atención profesional en Córdoba y terapia online.",
     excerpt: "La ansiedad no es debilidad. Es tu cuerpo intentando protegerte de algo que percibe como peligroso. Aquí te cuento cómo puedes ayudarte a ti mismo.",
     date: "2 Enero 2025",
@@ -483,7 +632,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
         <p class="text-charcoal font-medium mb-2">¿La ansiedad te está controlando?</p>
         <p class="text-charcoal mb-4">No tienes que pasar por esto solo. La terapia puede darte herramientas específicas para recuperar tu vida.</p>
-        <a href="/contacto" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Hablamos <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Hablamos <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
       </div>
     `
   },
@@ -560,7 +709,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
         <p class="text-lg font-medium text-charcoal mb-2">¿Quieres trabajar en tu relación contigo mismo?</p>
         <p class="text-charcoal mb-4">La terapia es un espacio seguro para aprender a quererte de verdad, no solo a soportarte.</p>
-        <a href="/contacto" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Hablamos <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Hablamos <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
       </div>
     `
   }

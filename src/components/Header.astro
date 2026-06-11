@@ -10,9 +10,9 @@ const { activePage = "" } = Astro.props;
 
 const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/servicios", label: "Servicios" },
-  { href: "/blog", label: "Blog" },
-  { href: "/contacto", label: "Contacto" },
+  { href: "/servicios/", label: "Servicios" },
+  { href: "/blog/", label: "Blog" },
+  { href: "/contacto/", label: "Contacto" },
 ];
 ---
 
@@ -69,7 +69,7 @@ const navLinks = [
           <span class="w-1.5 h-1.5 rounded-full bg-olive/50 group-hover:bg-olive group-hover:scale-125 transition-all duration-500"></span>
           <span class="text-label tracking-[0.1em]">697 733 060</span>
         </a>
-        <a href="/contacto" class="btn btn-sage py-3.5 px-8 shadow-lg shadow-olive/0 hover:shadow-olive/20 transition-shadow duration-500">
+        <a href="/contacto/" class="btn btn-sage py-3.5 px-8 shadow-lg shadow-olive/0 hover:shadow-olive/20 transition-shadow duration-500">
           Reservar Sesión
         </a>
       </div>
@@ -115,7 +115,7 @@ const navLinks = [
         <a href="tel:+34697733060" class="block font-serif text-2xl sm:text-3xl text-ink mb-8">
           697 733 060
         </a>
-        <a href="/contacto" class="btn btn-sage w-full justify-center py-4">
+        <a href="/contacto/" class="btn btn-sage w-full justify-center py-4">
           Reservar Consulta
         </a>
       </div>

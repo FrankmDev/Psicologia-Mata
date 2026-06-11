@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHeader from '../components/PageHeader.astro';
+import Schema from '../components/Schema.astro';
 import { SITE_URL } from '../config/site';
 
 const title = "Política de Cookies | María Ángeles Mata - Psicóloga en Córdoba";
@@ -14,7 +15,9 @@ const breadcrumbData = [
 ];
 ---
 
-<Layout {title} {description} noindex={true}>
+<Layout {title} {description} canonical="/cookies/">
+  <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
+  <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE_URL}/cookies/` }} />
   <Header activePage="" />
   
   <main id="main-content">
@@ -118,8 +121,8 @@ const breadcrumbData = [
           </p>
 
           <div class="mt-16 pt-8 border-t border-border-delicate">
-            <a href="/privacidad" class="btn btn-outline me-4 mb-4">Política de Privacidad</a>
-            <a href="/aviso-legal" class="btn btn-outline">Aviso Legal</a>
+            <a href="/privacidad/" class="btn btn-outline me-4 mb-4">Política de Privacidad</a>
+            <a href="/aviso-legal/" class="btn btn-outline">Aviso Legal</a>
           </div>
 
         </div>
