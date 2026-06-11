@@ -9,22 +9,314 @@ import estres from '../assets/estres.avif';
 import apunte from '../assets/apunte.avif';
 import terapiaFamilia from '../assets/terapia-familia.avif';
 import psicologia from '../assets/psicologia.avif';
+import estimulacionCognitiva from '../assets/estimulacion-cognitiva.avif';
+import evaluacion from '../assets/evaluacion.avif';
 
 export interface BlogPost {
   slug: string;
   title: string;
   seoTitle?: string;
   seoDescription?: string;
+  keywords?: string;
   excerpt: string;
   date: string;
   dateShort: string;
   readTime: string;
   category: string;
   image: ImageMetadata;
+  faq?: {
+    question: string;
+    answer: string;
+  }[];
   content: string;
 }
 
 export const blogPosts: Record<string, BlogPost> = {
+  "ansiedad-personas-mayores": {
+    slug: "ansiedad-personas-mayores",
+    title: "Ansiedad en personas mayores: señales, causas y cómo ayudar",
+    seoTitle: "Ansiedad en personas mayores: síntomas y tratamiento psicológico",
+    seoDescription: "Ansiedad en personas mayores: síntomas, causas, señales de alarma y tratamiento psicológico. Guía profesional para mayores y familias.",
+    keywords: "ansiedad en personas mayores, ansiedad mayores, sintomas ansiedad ancianos, ansiedad tercera edad, psicologia mayores cordoba, terapia ansiedad mayores",
+    excerpt: "La ansiedad en la vejez no siempre aparece como nerviosismo evidente. A veces se expresa como insomnio, quejas físicas, irritabilidad, miedo a salir o preocupación constante por la salud.",
+    date: "11 Junio 2026",
+    dateShort: "11 Jun",
+    readTime: "14 min",
+    category: "Ansiedad",
+    image: estimulacionCognitiva,
+    faq: [
+      {
+        question: "¿La ansiedad es normal en la tercera edad?",
+        answer: "Puede ser normal preocuparse ante pérdidas, enfermedad o cambios vitales. No es normal que el miedo limite de forma sostenida la vida, el descanso, la autonomía o las relaciones."
+      },
+      {
+        question: "¿Puede confundirse con problemas físicos?",
+        answer: "Sí. Palpitaciones, opresión, mareo, molestias digestivas o falta de aire pueden aparecer en ansiedad, pero también en problemas médicos. Por eso es importante valorar ambos planos."
+      },
+      {
+        question: "¿La terapia funciona en personas mayores?",
+        answer: "Sí, siempre que se adapte a la persona: ritmo, salud, historia, apoyos, objetivos y posibles limitaciones sensoriales o cognitivas. La edad no impide aprender estrategias nuevas."
+      },
+      {
+        question: "¿Debe participar la familia?",
+        answer: "A veces ayuda mucho, especialmente si hay evitación, dependencia o sobrecarga. La participación debe respetar la autonomía y confidencialidad de la persona mayor."
+      }
+    ],
+    content: `
+      <p class="text-xl leading-relaxed text-charcoal mb-8">La ansiedad en personas mayores merece una mirada cuidadosa. No basta con decir “es normal por la edad” ni conviene interpretar cualquier preocupación como un trastorno. En la vejez pueden convivir cambios de salud, duelos, jubilación, soledad, responsabilidades de cuidado y miedo a perder autonomía. Todo eso puede activar ansiedad, pero también puede ocultarla detrás de síntomas físicos, alteraciones del sueño o cambios de conducta que la familia no siempre reconoce como malestar emocional.</p>
+
+      <figure class="my-12">
+        <img src="${estimulacionCognitiva.src}" alt="Persona mayor realizando una actividad cognitiva acompañada en consulta" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+        <figcaption class="text-sm text-ink mt-3 text-center">En personas mayores, la ansiedad se entiende mejor desde una perspectiva psicológica, médica, familiar y social.</figcaption>
+      </figure>
+
+      <div class="bg-cream border border-border-delicate rounded-2xl p-6 my-10">
+        <p class="text-base text-charcoal mb-0"><strong>Idea clave:</strong> la ansiedad no forma parte inevitable del envejecimiento. Si interfiere en el sueño, las salidas, las relaciones, el apetito, la salud o la autonomía, conviene pedir una valoración profesional. Un abordaje psicológico puede ayudar a recuperar seguridad, rutinas y calidad de vida, especialmente cuando se coordina con la atención médica si hay enfermedades o medicación de por medio.</p>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Por qué la ansiedad en mayores suele pasar desapercibida</h2>
+
+      <p>Muchas personas mayores no dicen “tengo ansiedad”. Es más frecuente escuchar frases como “no duermo”, “me noto acelerado”, “no quiero molestar”, “me da miedo caerme”, “me preocupa cualquier dolor” o “ya no salgo porque no me siento seguro”. La ansiedad puede expresarse a través del cuerpo, de la evitación o de una preocupación constante por la salud, la familia, el dinero o la propia independencia.</p>
+
+      <p>El National Institute of Mental Health recuerda que la ansiedad ocasional forma parte de la vida, pero los trastornos de ansiedad implican más que preocupación puntual: la ansiedad no desaparece, aparece en muchas situaciones y puede empeorar con el tiempo.<sup><a href="#ref-am1">1</a></sup> En mayores, esa diferencia es especialmente importante porque los síntomas pueden atribuirse por error a “cosas de la edad”, a una personalidad preocupada o a problemas físicos sin explorar el componente emocional.</p>
+
+      <blockquote>
+        <p>Envejecer no significa vivir con miedo. La prudencia protege; la ansiedad, cuando manda, estrecha la vida.</p>
+      </blockquote>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Síntomas frecuentes de ansiedad en personas mayores</h2>
+
+      <p>La ansiedad puede aparecer de forma mental, corporal y conductual. Mirar las tres dimensiones ayuda a no quedarse solo con el síntoma más visible.</p>
+
+      <div class="grid md:grid-cols-3 gap-6 my-8">
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Pensamientos</h3>
+          <p class="text-sm text-charcoal">Preocupación difícil de cortar, anticipación de desgracias, miedo a enfermar, temor a caerse, inseguridad para decidir o necesidad constante de que alguien confirme que todo está bien.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Cuerpo</h3>
+          <p class="text-sm text-charcoal">Palpitaciones, opresión en el pecho, tensión muscular, temblor, molestias digestivas, sensación de falta de aire, cansancio, sueño ligero o despertares con inquietud.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Conducta</h3>
+          <p class="text-sm text-charcoal">Evitar salir, abandonar actividades, llamar repetidamente a familiares, revisar síntomas, pedir acompañamiento para todo o reducir cada vez más la vida cotidiana.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Ansiedad normal, ansiedad clínica y señales de alarma</h2>
+
+      <p>Sentir inquietud ante una operación, una caída reciente, una pérdida o un cambio de vivienda puede ser comprensible. La pregunta clínica no es si la persona se preocupa, sino cuánto dura esa preocupación, cuánto sufrimiento genera y cuánto limita su vida.</p>
+
+      <div class="overflow-x-auto my-10">
+        <table>
+          <thead>
+            <tr>
+              <th>Situación</th>
+              <th>Puede ser una reacción esperable</th>
+              <th>Conviene pedir valoración</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sueño</td>
+              <td>Duerme peor unos días por un problema concreto.</td>
+              <td>Insomnio persistente, despertares con angustia o miedo a acostarse.</td>
+            </tr>
+            <tr>
+              <td>Salidas</td>
+              <td>Sale con más cautela tras una caída o enfermedad.</td>
+              <td>Deja de salir, evita transporte, citas, compras o reuniones por miedo.</td>
+            </tr>
+            <tr>
+              <td>Salud</td>
+              <td>Consulta por síntomas nuevos o relevantes.</td>
+              <td>Revisa el cuerpo de forma constante o busca tranquilidad médica repetida sin alivio duradero.</td>
+            </tr>
+            <tr>
+              <td>Familia</td>
+              <td>Pide apoyo en un momento difícil.</td>
+              <td>Necesita confirmación continua, teme quedarse solo o se angustia si no responden al momento.</td>
+            </tr>
+            <tr>
+              <td>Ánimo</td>
+              <td>Está triste o preocupado tras una pérdida.</td>
+              <td>Aparecen desesperanza, aislamiento intenso, abandono del autocuidado o ideas de no querer vivir.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="bg-terracotta/10 border border-terracotta/20 rounded-2xl p-6 my-10">
+        <p class="text-base text-charcoal mb-0"><strong>Atención:</strong> si hay dolor torácico, dificultad respiratoria intensa, desorientación, cambios bruscos de conducta, caídas, consumo problemático de alcohol o fármacos, o ideas de hacerse daño, hay que buscar atención sanitaria urgente. La psicoterapia no sustituye una valoración médica cuando los síntomas pueden tener una causa orgánica o existe riesgo.</p>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Factores que pueden aumentar la ansiedad en la vejez</h2>
+
+      <p>La Organización Mundial de la Salud señala que la salud mental en edades avanzadas depende tanto del entorno físico y social como de experiencias previas y estresores propios del envejecimiento. Entre esos factores aparecen el duelo, la pérdida de capacidad funcional, la jubilación, la reducción de ingresos, el edadismo, la soledad, el aislamiento social, las enfermedades crónicas, la demencia, el ictus, el cáncer, las condiciones neurológicas y la sobrecarga de cuidado.<sup><a href="#ref-am2">2</a></sup></p>
+
+      <p>Algunos factores habituales en consulta son:</p>
+
+      <ul class="space-y-3 my-8">
+        <li><strong>Cambios de salud:</strong> diagnósticos recientes, dolor, miedo a recaídas, pérdida de movilidad o dependencia de medicación.</li>
+        <li><strong>Duelos y pérdidas:</strong> fallecimiento de pareja, amistades, hermanos o pérdida de roles que daban identidad.</li>
+        <li><strong>Soledad no elegida:</strong> vivir solo, tener menos red social o sentir que no se quiere “dar trabajo” a la familia.</li>
+        <li><strong>Jubilación y sentido vital:</strong> pasar de una rutina clara a días poco estructurados, con menos reconocimiento externo.</li>
+        <li><strong>Sobrecarga del cuidador:</strong> cuidar a una pareja con enfermedad crónica o deterioro cognitivo puede generar alerta constante.</li>
+        <li><strong>Experiencias previas:</strong> una historia de ansiedad, trauma, inseguridad o pérdidas acumuladas puede reactivarse en etapas de vulnerabilidad.</li>
+      </ul>
+
+      <figure class="my-12">
+        <img src="${evaluacion.src}" alt="Evaluación psicológica para comprender síntomas de ansiedad y salud emocional" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+        <figcaption class="text-sm text-ink mt-3 text-center">Una buena evaluación distingue ansiedad, depresión, duelo, deterioro cognitivo, efectos de medicación y problemas médicos.</figcaption>
+      </figure>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Soledad, aislamiento y ansiedad: una relación importante</h2>
+
+      <p>La soledad no es solo estar sin compañía. Una persona puede vivir acompañada y sentirse sola, o vivir sola y tener una red significativa. En mayores, la OMS considera la soledad y el aislamiento social factores de riesgo clave para problemas de salud mental; además, estima que afectan aproximadamente a una cuarta parte de las personas mayores.<sup><a href="#ref-am2">2</a></sup></p>
+
+      <p>Cuando la ansiedad se une a la soledad, aparece un círculo difícil: cuanto más miedo siento, menos salgo; cuanto menos salgo, menos confianza tengo; cuanto menos contacto tengo, más amenazante parece el mundo. Por eso el tratamiento no debería centrarse únicamente en “pensar en positivo”. También debe reconstruir rutinas, exposición gradual, vínculos, actividad y sensación de competencia.</p>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Cómo diferenciar ansiedad, depresión y deterioro cognitivo</h2>
+
+      <p>En personas mayores es frecuente que ansiedad, depresión, duelo y problemas cognitivos se solapen. Una persona ansiosa puede estar más distraída, olvidar citas o bloquearse ante tareas sencillas. Una persona deprimida puede parecer apagada, lenta o desmotivada. Y una persona con deterioro cognitivo puede mostrarse inquieta porque no entiende bien lo que ocurre o porque se siente insegura.</p>
+
+      <p>Por eso conviene evaluar, no etiquetar. La valoración psicológica explora síntomas, historia personal, rutinas, red de apoyo, sueño, alimentación, consumo de alcohol, medicación, enfermedades, pérdidas recientes y cambios cognitivos. Si aparecen señales neurológicas o médicas, lo adecuado es coordinar con atención primaria, geriatría, neurología o psiquiatría.</p>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Tratamiento psicológico de la ansiedad en personas mayores</h2>
+
+      <p>Las guías clínicas recomiendan adaptar el tratamiento a la gravedad, al funcionamiento de la persona, a sus preferencias y a sus circunstancias. NICE, por ejemplo, plantea un modelo de atención escalonada para el trastorno de ansiedad generalizada y el trastorno de pánico en adultos, con intervenciones de menor a mayor intensidad según necesidad clínica.<sup><a href="#ref-am3">3</a></sup></p>
+
+      <p>En terapia, el trabajo puede incluir:</p>
+
+      <div class="space-y-6 my-8">
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">1. Psicoeducación clara y sin infantilizar</h3>
+          <p class="text-charcoal text-sm">Entender qué es la ansiedad, por qué aparece en el cuerpo y cómo se mantiene reduce miedo y vergüenza. La explicación debe respetar la experiencia de vida de la persona mayor.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">2. Regulación fisiológica</h3>
+          <p class="text-charcoal text-sm">Respiración, relajación muscular, atención plena adaptada, higiene del sueño y rutinas de descanso. Si quieres ampliar esta parte, puedes leer la guía sobre <a href="/blog/atencion-plena-mindfulness-psicologia/">atención plena en psicología</a>.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">3. Trabajo con preocupaciones</h3>
+          <p class="text-charcoal text-sm">Diferenciar problemas reales de anticipaciones, ordenar decisiones, reducir comprobaciones y aprender a responder a la incertidumbre sin quedar atrapado en ella.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">4. Exposición gradual y recuperación de actividades</h3>
+          <p class="text-charcoal text-sm">Volver poco a poco a salir, caminar, llamar, acudir a citas, retomar aficiones o participar en actividades sociales, con objetivos realistas y medibles.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">5. Apoyo familiar bien ajustado</h3>
+          <p class="text-charcoal text-sm">La familia puede ayudar mucho, pero también puede reforzar la evitación sin querer. La clave es acompañar sin sustituir toda autonomía posible.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Qué puede hacer la familia sin aumentar la ansiedad</h2>
+
+      <p>La familia suele moverse entre dos extremos: quitar importancia al malestar o sobreproteger. Ninguno ayuda demasiado. Minimizar hace que la persona se sienta incomprendida; resolverlo todo por ella puede confirmar la idea de que no es capaz.</p>
+
+      <div class="overflow-x-auto my-10">
+        <table>
+          <thead>
+            <tr>
+              <th>Mejor evitar</th>
+              <th>Más útil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>“No pienses en eso”.</td>
+              <td>“Entiendo que te asuste. Vamos a ver qué parte podemos resolver hoy”.</td>
+            </tr>
+            <tr>
+              <td>Hacer todas las gestiones por la persona.</td>
+              <td>Acompañar, dividir pasos y dejar que conserve la parte que sí puede hacer.</td>
+            </tr>
+            <tr>
+              <td>Responder a cada llamada de comprobación con más comprobación.</td>
+              <td>Acordar horarios, planes y mensajes claros que den seguridad sin alimentar el ciclo.</td>
+            </tr>
+            <tr>
+              <td>Forzar exposición brusca.</td>
+              <td>Planificar salidas graduales, previsibles y repetidas, celebrando avances pequeños.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Ejercicios prácticos para empezar con seguridad</h2>
+
+      <p>Estos ejercicios no sustituyen la terapia, pero pueden servir como primer paso si la ansiedad es leve o como apoyo entre sesiones.</p>
+
+      <div class="space-y-6 my-8">
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Mapa de preocupaciones</h3>
+          <p class="text-charcoal text-sm">Escribe dos columnas: “problemas que puedo abordar” y “miedos que estoy anticipando”. En la primera, define un paso concreto. En la segunda, practica posponer la preocupación y volver a una actividad.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Escalera de confianza</h3>
+          <p class="text-charcoal text-sm">Elige una actividad evitada y ordénala en pasos: bajar al portal, caminar cinco minutos, comprar algo pequeño, visitar a alguien. Repite cada paso hasta que resulte manejable antes de subir al siguiente.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Rutina de cierre del día</h3>
+          <p class="text-charcoal text-sm">Antes de dormir, anota tres cosas: qué me preocupó, qué hice para cuidarme y qué queda para mañana. La mente descansa mejor cuando no intenta resolverlo todo en la cama.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Cuándo pedir ayuda profesional</h2>
+
+      <p>Conviene consultar cuando la ansiedad dura varias semanas, limita la vida diaria, altera el sueño, provoca evitación, genera dependencia constante de la familia o aparece junto a tristeza intensa, irritabilidad, pérdida de apetito, consumo de alcohol o medicación sin supervisión. También cuando la familia nota un cambio claro y la persona insiste en que “no pasa nada”, pero ha dejado de hacer cosas que antes sostenían su bienestar.</p>
+
+      <p>En <a href="/servicios/">terapia individual</a>, el objetivo no es convertir a la persona mayor en alguien “sin preocupaciones”, sino ayudarla a recuperar margen de decisión, seguridad y vida cotidiana. Si la ansiedad es persistente, también puede ayudarte el artículo sobre <a href="/blog/ansiedad-persistente-tratamiento-psicologico/">ansiedad persistente y tratamiento psicológico</a> y la guía sobre <a href="/blog/gestion-ansiedad/">cómo gestionar la ansiedad cuando el cuerpo se activa</a>.</p>
+
+      <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
+        <p class="text-lg font-medium text-charcoal mb-2">¿La ansiedad está reduciendo tu vida o la de una persona cercana?</p>
+        <p class="text-charcoal mb-4">Podemos valorar qué está ocurriendo y qué tipo de ayuda encaja mejor. Atiendo en consulta presencial en Córdoba y también online cuando el formato es adecuado para la persona.</p>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Solicitar información <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Preguntas frecuentes</h2>
+
+      <div class="space-y-6 my-8">
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿La ansiedad es normal en la tercera edad?</h3>
+          <p class="text-charcoal text-sm">Puede ser normal preocuparse ante pérdidas, enfermedad o cambios vitales. No es normal que el miedo limite de forma sostenida la vida, el descanso, la autonomía o las relaciones.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿Puede confundirse con problemas físicos?</h3>
+          <p class="text-charcoal text-sm">Sí. Palpitaciones, opresión, mareo, molestias digestivas o falta de aire pueden aparecer en ansiedad, pero también en problemas médicos. Por eso es importante valorar ambos planos.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿La terapia funciona en personas mayores?</h3>
+          <p class="text-charcoal text-sm">Sí, siempre que se adapte a la persona: ritmo, salud, historia, apoyos, objetivos y posibles limitaciones sensoriales o cognitivas. La edad no impide aprender estrategias nuevas.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿Debe participar la familia?</h3>
+          <p class="text-charcoal text-sm">A veces ayuda mucho, especialmente si hay evitación, dependencia o sobrecarga. La participación debe respetar la autonomía y confidencialidad de la persona mayor.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">También puede interesarte</h2>
+
+      <ul class="space-y-3 my-8">
+        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona</a></li>
+        <li><a href="/blog/gestion-ansiedad/">Cómo gestionar la ansiedad cuando el cuerpo se activa</a></li>
+        <li><a href="/blog/atencion-plena-mindfulness-psicologia/">Atención plena: qué es y cómo integrarla en terapia</a></li>
+        <li><a href="/blog/beneficios-terapia-individual/">Beneficios de la terapia individual</a></li>
+        <li><a href="/servicios/">Servicios de psicología presencial y online</a></li>
+        <li><a href="/contacto/">Contactar para solicitar información</a></li>
+      </ul>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Referencias y fuentes</h2>
+
+      <ol class="space-y-3 my-8 text-base">
+        <li id="ref-am1">National Institute of Mental Health. <a href="https://www.nimh.nih.gov/health/topics/anxiety-disorders" target="_blank" rel="noopener noreferrer">Anxiety Disorders</a>. Última revisión: diciembre de 2024.</li>
+        <li id="ref-am2">World Health Organization. <a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-of-older-adults" target="_blank" rel="noopener noreferrer">Mental health of older adults</a>.</li>
+        <li id="ref-am3">National Institute for Health and Care Excellence. <a href="https://www.nice.org.uk/guidance/cg113" target="_blank" rel="noopener noreferrer">Generalised anxiety disorder and panic disorder in adults: management</a>. Clinical guideline CG113.</li>
+        <li id="ref-am4">Gould RL, Coulson MC, Howard RJ. <a href="https://pubmed.ncbi.nlm.nih.gov/21709684/" target="_blank" rel="noopener noreferrer">Cognitive behavioral therapy for anxiety disorders in older people: a meta-analysis and meta-regression of randomized controlled trials</a>. <em>Journal of the American Geriatrics Society</em>. 2012.</li>
+      </ol>
+    `
+  },
   "atencion-plena-mindfulness-psicologia": {
     slug: "atencion-plena-mindfulness-psicologia",
     title: "Atención plena: qué es, para qué sirve y cómo integrarla en terapia",

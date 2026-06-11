@@ -92,6 +92,7 @@ const shareUrls = {
 <Layout
   {title}
   description={post.seoDescription ?? post.excerpt}
+  keywords={post.keywords}
   type="article"
   ogImage={post.image.src}
   canonical={`/blog/${slug}/`}
@@ -99,6 +100,7 @@ const shareUrls = {
 >
   <Schema slot="schema" type="article" data={articleData} />
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
+  {post.faq && <Schema slot="schema" type="faqpage" data={post.faq} />}
   
   <Header activePage="Blog" />
   
