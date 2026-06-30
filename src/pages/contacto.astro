@@ -74,7 +74,7 @@ const contactPageData = {
                 </p>
               </div>
               
-              <form class="space-y-6" action="#" method="POST">
+              <form id="contact-form" class="space-y-6" action="/api/contact" method="POST">
                 <div class="grid sm:grid-cols-2 gap-6">
                   <div class="group">
                     <label for="nombre" class="block text-label text-charcoal mb-3 group-focus-within:text-olive transition-colors">
@@ -101,6 +101,17 @@ const contactPageData = {
                       class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
                     />
                   </div>
+                </div>
+
+                <div class="hidden" aria-hidden="true">
+                  <label for="website">Web</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
                 </div>
                 
                 <div class="group">
@@ -152,16 +163,38 @@ const contactPageData = {
                     required
                   ></textarea>
                 </div>
+
+                <label class="flex items-start gap-3 text-body-sm text-charcoal">
+                  <input
+                    type="checkbox"
+                    name="privacidad"
+                    value="aceptada"
+                    class="mt-1 h-4 w-4 border-border-strong accent-olive"
+                    required
+                  />
+                  <span>
+                    Acepto que mis datos se utilicen para responder a esta consulta, según la
+                    <a href="/privacidad/" class="text-olive hover:underline underline-offset-2">política de privacidad</a>.
+                  </span>
+                </label>
                 
                 <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                  <button type="submit" class="btn btn-sage w-full sm:w-auto group">
-                    <span>Enviar mensaje</span>
+                  <button type="submit" class="btn btn-sage w-full sm:w-auto group" data-submit-button>
+                    <span data-submit-label>Enviar mensaje</span>
                     <Icon name="send" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p class="text-label-sm text-charcoal">
                     Te respondo en menos de 24h. <a href="/privacidad/" class="text-olive hover:underline underline-offset-2">Privacidad garantizada</a>.
                   </p>
                 </div>
+
+                <p
+                  id="contact-form-status"
+                  class="text-body-sm"
+                  role="status"
+                  aria-live="polite"
+                  hidden
+                ></p>
               </form>
             </div>
           </div>
@@ -183,3 +216,69 @@ const contactPageData = {
   
   <Footer />
 </Layout>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('contact-form-status');
+  const submitButton = form?.querySelector('[data-submit-button]');
+  const submitLabel = form?.querySelector('[data-submit-label]');
+
+  const setStatus = (message, type) => {
+    if (!status) return;
+    status.hidden = false;
+    status.textContent = message;
+    status.classList.remove('text-olive', 'text-terracotta', 'text-charcoal');
+    status.classList.add(type === 'success' ? 'text-olive' : 'text-terracotta');
+  };
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!(form instanceof HTMLFormElement) || !form.checkValidity()) {
+      form?.reportValidity();
+      return;
+    }
+
+    if (submitButton instanceof HTMLButtonElement) {
+      submitButton.disabled = true;
+      submitButton.classList.add('opacity-70', 'cursor-wait');
+    }
+    if (submitLabel) {
+      submitLabel.textContent = 'Enviando...';
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result?.message || 'No se ha podido enviar el mensaje.');
+      }
+
+      form.reset();
+      setStatus('Mensaje enviado correctamente. Te responderé en menos de 24 horas.', 'success');
+    } catch (error) {
+      setStatus(
+        error instanceof Error
+          ? error.message
+          : 'No se ha podido enviar el mensaje. También puedes escribir a info@matacalapsicologia.es.',
+        'error'
+      );
+    } finally {
+      if (submitButton instanceof HTMLButtonElement) {
+        submitButton.disabled = false;
+        submitButton.classList.remove('opacity-70', 'cursor-wait');
+      }
+      if (submitLabel) {
+        submitLabel.textContent = 'Enviar mensaje';
+      }
+    }
+  });
+</script>
