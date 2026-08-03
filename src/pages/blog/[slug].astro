@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import '../../styles/article.css';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Schema from '../../components/Schema.astro';
@@ -98,16 +99,18 @@ const shareUrls = {
     </div>
     
     <!-- Hero Section - Editorial Style -->
-    <section class="relative min-h-[70vh] sm:min-h-[80vh] lg:min-h-[85vh] flex flex-col justify-end bg-ink overflow-hidden" aria-labelledby="article-heading">
+    <section class="relative min-h-[55vh] sm:min-h-[62vh] lg:min-h-[68vh] flex flex-col justify-end bg-ink overflow-hidden" aria-labelledby="article-heading">
       
       <!-- Background Image with Overlay -->
       <div class="absolute inset-0">
         <Image 
           src={post.image} 
           alt="" 
-          class="w-full h-full object-cover opacity-40 scale-105"
+          class="w-full h-full object-cover object-[center_30%] opacity-45 scale-105"
           aria-hidden="true"
-          quality={100}
+          quality={90}
+          widths={[800, 1200, 1600]}
+          sizes="100vw"
         />
         <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/30"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-ink/60 via-transparent to-ink/60"></div>
@@ -202,8 +205,8 @@ const shareUrls = {
       </div>
       
       <!-- Main Content -->
-      <div class="container-editorial py-12 sm:py-16 lg:py-24">
-        <div class="max-w-3xl mx-auto px-4 sm:px-0">
+      <div class="container-editorial py-12 sm:py-16 lg:py-20 xl:py-24">
+        <div class="article-layout px-1 sm:px-2">
           
           <!-- Article Body with Custom Typography -->
           <div 
@@ -213,32 +216,26 @@ const shareUrls = {
           />
           
           <!-- Tags -->
-          <div class="mt-16 pt-10 border-t border-border-delicate">
-            <div class="flex flex-wrap items-center gap-3">
-              <span class="text-label-sm text-ink">Etiquetas:</span>
+          <div class="mt-14 pt-8 border-t border-border-delicate">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="text-label-sm text-taupe mr-1">Etiquetas</span>
               <a
                 href={getCategoryUrl(post.category)}
-                class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors"
+                class="px-3.5 py-1.5 bg-cream border border-border-delicate text-label-sm text-ink rounded-full hover:border-olive hover:text-olive transition-colors"
               >
                 {post.category}
               </a>
               <a
                 href="/blog/"
-                class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors"
+                class="px-3.5 py-1.5 bg-cream border border-border-delicate text-label-sm text-ink rounded-full hover:border-olive hover:text-olive transition-colors"
               >
                 Psicología
-              </a>
-              <a
-                href={getCategoryUrl('Bienestar')}
-                class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors"
-              >
-                Bienestar
               </a>
             </div>
           </div>
           
           <!-- Author Box -->
-          <footer class="mt-16 p-8 lg:p-10 bg-cream border border-border-delicate relative overflow-hidden">
+          <footer class="mt-12 p-6 sm:p-8 lg:p-10 bg-cream border border-border-delicate rounded-2xl relative overflow-hidden">
             <!-- Decorative -->
             <div class="absolute top-0 right-0 w-32 h-32 bg-olive/5 rounded-bl-full"></div>
             
@@ -417,267 +414,6 @@ const shareUrls = {
 </Layout>
 
 <style>
-  /* Custom Article Typography - CSS Puro */
-  .article-body {
-    color: #2A2E28;
-    font-size: 1.0625rem;
-    line-height: 1.8;
-  }
-  
-  @media (min-width: 640px) {
-    .article-body {
-      font-size: 1.125rem;
-    }
-  }
-  
-  .article-body > p {
-    margin-bottom: 1.5rem;
-  }
-  
-  .article-body > p:first-of-type {
-    font-size: 1.125rem;
-    color: #1B1E19;
-    line-height: 1.7;
-    margin-bottom: 2rem;
-    font-weight: 400;
-  }
-  
-  @media (min-width: 640px) {
-    .article-body > p:first-of-type {
-      font-size: 1.35rem;
-    }
-  }
-  
-  .article-body > p:first-of-type::first-letter {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 3rem;
-    float: left;
-    margin-right: 0.75rem;
-    margin-top: -0.25rem;
-    color: #626B5D;
-    font-weight: 300;
-    line-height: 1;
-  }
-  
-  @media (min-width: 640px) {
-    .article-body > p:first-of-type::first-letter {
-      font-size: 4rem;
-      margin-right: 1rem;
-    }
-  }
-  
-  .article-body h2 {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1.5rem;
-    color: #1B1E19;
-    margin-top: 3rem;
-    margin-bottom: 1.25rem;
-    line-height: 1.2;
-  }
-  
-  @media (min-width: 640px) {
-    .article-body h2 {
-      font-size: 1.75rem;
-      margin-top: 4rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .article-body h2 {
-      font-size: 2rem;
-    }
-  }
-  
-  .article-body h3 {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1.25rem;
-    color: #1B1E19;
-    margin-top: 2.5rem;
-    margin-bottom: 0.875rem;
-    line-height: 1.25;
-  }
-  
-  @media (min-width: 640px) {
-    .article-body h3 {
-      font-size: 1.5rem;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
-    }
-  }
-  
-  @media (min-width: 1024px) {
-    .article-body h3 {
-      font-size: 1.75rem;
-    }
-  }
-  
-  .article-body ul,
-  .article-body ol {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    padding-left: 1.5rem;
-  }
-  
-  .article-body ul {
-    list-style: none;
-  }
-  
-  .article-body li {
-    position: relative;
-    padding-left: 1rem;
-    margin-bottom: 0.75rem;
-    color: #2A2E28;
-  }
-  
-  .article-body ul li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0.6em;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #626B5D;
-  }
-  
-  .article-body a {
-    color: #626B5D;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-color: rgba(98, 107, 93, 0.3);
-    transition: all 0.3s ease;
-  }
-  
-  .article-body a:hover {
-    text-decoration-color: #626B5D;
-  }
-  
-  .article-body strong {
-    color: #1B1E19;
-    font-weight: 500;
-  }
-
-  .article-body sup {
-    font-size: 0.72em;
-    vertical-align: super;
-    margin-left: 0.1rem;
-  }
-
-  .article-body table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    min-width: 640px;
-    background: #FFFCF8;
-    border: 1px solid rgba(27, 30, 25, 0.08);
-  }
-
-  .article-body thead {
-    background-color: #EBE5DB;
-  }
-
-  .article-body th,
-  .article-body td {
-    text-align: left;
-    vertical-align: top;
-    padding: 1rem 1rem;
-    border-bottom: 1px solid rgba(27, 30, 25, 0.08);
-    font-size: 0.98rem;
-    line-height: 1.65;
-  }
-
-  .article-body th {
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1.1rem;
-    color: #1B1E19;
-  }
-
-  .article-body tr:last-child td {
-    border-bottom: 0;
-  }
-
-  .article-body .overflow-x-auto {
-    overflow-x: auto;
-    margin: 2.5rem 0;
-  }
-  
-  .article-body blockquote {
-    position: relative;
-    margin: 3rem 0;
-    padding: 2rem 2rem 2rem 3rem;
-    background-color: #EBE5DB;
-    border-left: 2px solid #626B5D;
-  }
-  
-  @media (min-width: 1024px) {
-    .article-body blockquote {
-      padding: 2rem 3rem 2rem 4rem;
-    }
-  }
-  
-  .article-body blockquote::before {
-    content: '"';
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 4rem;
-    color: rgba(98, 107, 93, 0.2);
-    line-height: 1;
-  }
-  
-  .article-body blockquote p {
-    color: #1B1E19;
-    font-family: "Cormorant Garamond", Georgia, serif;
-    font-size: 1.25rem;
-    font-style: italic;
-    line-height: 1.6;
-    margin-bottom: 0;
-  }
-  
-  @media (min-width: 1024px) {
-    .article-body blockquote p {
-      font-size: 1.5rem;
-    }
-  }
-  
-  .article-body figure {
-    margin: 3rem 0;
-  }
-  
-  .article-body figure img {
-    width: 100%;
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 40px rgba(27, 30, 25, 0.1);
-  }
-  
-  .article-body figcaption {
-    text-align: center;
-    font-size: 0.875rem;
-    color: #626B5D;
-    margin-top: 1rem;
-    font-style: italic;
-  }
-  
-  /* Highlight boxes in content */
-  .article-body .bg-bg-muted {
-    background-color: #EBE5DB;
-    border: 1px solid rgba(27, 30, 25, 0.06);
-    border-radius: 0.75rem;
-    padding: 1.5rem;
-  }
-  
-  .article-body .bg-sage\/10,
-  .article-body [class*="bg-olive"],
-  .article-body [class*="bg-sage"] {
-    background-color: rgba(98, 107, 93, 0.05);
-    border: 1px solid rgba(98, 107, 93, 0.2);
-    border-radius: 1rem;
-    padding: 2rem;
-    margin: 2.5rem 0;
-  }
-  
   .writing-mode-vertical {
     writing-mode: vertical-rl;
     text-orientation: mixed;
