@@ -573,3 +573,110 @@
     margin-right: -2.5rem;
   }
 }
+
+/* Table of contents */
+.article-toc {
+  margin: 0 0 2.75rem;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: linear-gradient(135deg, var(--color-cream) 0%, rgba(247, 245, 240, 0.85) 100%);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 1.25rem;
+}
+
+.article-toc__label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-olive);
+  margin-bottom: 1rem;
+}
+
+.article-toc__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 1;
+  column-gap: 2rem;
+}
+
+@media (min-width: 640px) {
+  .article-toc__list {
+    columns: 2;
+  }
+}
+
+.article-toc__list li {
+  position: relative;
+  padding-left: 0;
+  margin-bottom: 0.55rem;
+  break-inside: avoid;
+}
+
+.article-toc__list li::before {
+  display: none;
+}
+
+.article-toc__list a {
+  display: inline-block;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.article-toc__list a:hover {
+  color: var(--color-olive);
+  border-bottom-color: rgba(98, 107, 93, 0.35);
+}
+
+/* Checklist (non-link bullet lists) */
+.article-body .article-checklist {
+  margin: 1.75rem 0;
+}
+
+.article-body .article-checklist li {
+  padding-left: 1.25rem;
+}
+
+/* Heading anchor offset */
+.article-body h2[id],
+.article-body h3[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Category archive cards */
+.blog-category-card__image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: var(--color-cream);
+}
+
+.blog-category-card__image > div {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blog-category-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.blog-category-card:hover .blog-category-card__image img {
+  transform: scale(1.04);
+}
+
+.writing-mode-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}

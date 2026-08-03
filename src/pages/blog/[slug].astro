@@ -5,7 +5,7 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Schema from '../../components/Schema.astro';
 import CTASection from '../../components/CTASection.astro';
-import { blogPosts, getPostBySlug, blogPostsList, getCategoryUrl, formatBlogDateISO } from '../../data/blog';
+import { blogPosts, getPostBySlug, blogPostsList, getCategoryUrl, formatBlogDateISO8601, processArticleContent, resolvePostImageUrl } from '../../data/blog';
 import { Image } from 'astro:assets';
 import mariaAngelesMata from '../../assets/maria-angeles-mata.jpeg';
 import { SITE_URL, absoluteUrl } from '../../config/site';
@@ -24,8 +24,43 @@ if (!post) {
 const title = post.seoTitle ?? `${post.title} | Blog de psicología en Córdoba`;
 const canonicalUrl = absoluteUrl(`/blog/${slug}/`);
 
-const datePublished = formatBlogDateISO(post.date);
+const datePublished = formatBlogDateISO8601(post.date);
 const dateModified = datePublished;
+const postImageUrl = resolvePostImageUrl(post.image, SITE_URL);
+const categoryUrl = absoluteUrl(getCategoryUrl(post.category));
+
+const { html: articleHtml, toc: articleToc } = processArticleContent(post.content);
+const wordCount = articleHtml.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+const keywordTags = post.keywords
+  ? [...new Set(post.keywords.split(',').map((k) => k.trim()).filter(Boolean))].slice(0, 8)
+  : [];
+
+const articleData = {
+  headline: post.title,
+  description: post.seoDescription ?? post.excerpt,
+  image: postImageUrl,
+  datePublished: datePublished,
+  dateModified: dateModified,
+  articleSection: post.category,
+  keywords: keywordTags,
+  wordCount,
+  author: {
+    name: "María Ángeles Mata Cala",
+    url: absoluteUrl('/sobre-mi/')
+  },
+  publisher: {
+    name: "María Ángeles Mata - Psicóloga",
+    logo: `${SITE_URL}/favicon-32x32.png`
+  },
+  url: canonicalUrl
+};
+
+const breadcrumbData = [
+  { name: "Inicio", url: absoluteUrl('/') },
+  { name: "Blog", url: absoluteUrl('/blog/') },
+  { name: post.category, url: categoryUrl },
+  { name: post.title, url: canonicalUrl }
+];
 
 // Get prev/next posts
 const currentIndex = blogPostsList.findIndex(p => p.slug === slug);
@@ -43,28 +78,8 @@ const fallbackRelatedPosts = blogPostsList
 
 const relatedPosts = [...sameCategoryPosts, ...fallbackRelatedPosts];
 
-const articleData = {
-  headline: post.title,
-  description: post.seoDescription ?? post.excerpt,
-  image: post.image.src,
-  datePublished: datePublished,
-  dateModified: dateModified,
-  author: {
-    name: "María Ángeles Mata Cala",
-    url: absoluteUrl('/sobre-mi/')
-  },
-  publisher: {
-    name: "María Ángeles Mata - Psicóloga",
-    logo: `${SITE_URL}/favicon-32x32.png`
-  },
-  url: canonicalUrl
-};
-
-const breadcrumbData = [
-  { name: "Inicio", url: absoluteUrl('/') },
-  { name: "Blog", url: absoluteUrl('/blog/') },
-  { name: post.title, url: canonicalUrl }
-];
+const prevUrl = prevPost ? absoluteUrl(`/blog/${prevPost.slug}/`) : undefined;
+const nextUrl = nextPost ? absoluteUrl(`/blog/${nextPost.slug}/`) : undefined;
 
 // Share URLs
 const shareUrls = {
@@ -80,10 +95,14 @@ const shareUrls = {
   description={post.seoDescription ?? post.excerpt}
   keywords={post.keywords}
   type="article"
-  ogImage={post.image.src}
+  ogImage={postImageUrl}
   canonical={`/blog/${slug}/`}
   publishedTime={datePublished}
   modifiedTime={dateModified}
+  articleSection={post.category}
+  articleTags={keywordTags}
+  prevUrl={prevUrl}
+  nextUrl={nextUrl}
 >
   <Schema slot="schema" type="article" data={articleData} />
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
@@ -105,7 +124,7 @@ const shareUrls = {
       <div class="absolute inset-0">
         <Image 
           src={post.image} 
-          alt="" 
+          alt={post.title}
           class="w-full h-full object-cover object-[center_30%] opacity-45 scale-105"
           aria-hidden="true"
           quality={90}
@@ -134,15 +153,15 @@ const shareUrls = {
             <li class="text-alabaster/20">/</li>
             <li><a href="/blog/" class="hover:text-alabaster transition-colors duration-300">Blog</a></li>
             <li class="text-alabaster/20">/</li>
-            <li class="text-terracotta-light">{post.category}</li>
+            <li><a href={getCategoryUrl(post.category)} class="hover:text-alabaster transition-colors duration-300 text-terracotta-light">{post.category}</a></li>
           </ol>
         </nav>
         
         <!-- Category & Meta -->
         <div class="flex flex-wrap items-center gap-3 sm:gap-6 mb-6 sm:mb-8" data-reveal data-reveal-delay="100">
-          <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-terracotta/20 text-terracotta-light text-label-xs rounded-full">
+          <a href={getCategoryUrl(post.category)} class="px-3 sm:px-4 py-1.5 sm:py-2 bg-terracotta/20 text-terracotta-light text-label-xs rounded-full hover:bg-terracotta/30 transition-colors">
             {post.category}
-          </span>
+          </a>
           <div class="flex items-center gap-2 sm:gap-4 text-label-xs text-alabaster/60">
             <span class="flex items-center gap-1.5 sm:gap-2">
               <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -207,12 +226,25 @@ const shareUrls = {
       <!-- Main Content -->
       <div class="container-editorial py-12 sm:py-16 lg:py-20 xl:py-24">
         <div class="article-layout px-1 sm:px-2">
+
+          {articleToc.length >= 3 && (
+            <nav class="article-toc" aria-label="Contenido del artículo">
+              <span class="article-toc__label">En este artículo</span>
+              <ol class="article-toc__list">
+                {articleToc.map((item) => (
+                  <li>
+                    <a href={`#${item.id}`}>{item.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
           
           <!-- Article Body with Custom Typography -->
           <div 
             id="article-content"
             class="article-body"
-            set:html={post.content}
+            set:html={articleHtml}
           />
           
           <!-- Tags -->
@@ -229,8 +261,13 @@ const shareUrls = {
                 href="/blog/"
                 class="px-3.5 py-1.5 bg-cream border border-border-delicate text-label-sm text-ink rounded-full hover:border-olive hover:text-olive transition-colors"
               >
-                Psicología
+                Blog
               </a>
+              {keywordTags.slice(0, 4).map((tag) => (
+                <span class="px-3.5 py-1.5 bg-alabaster border border-border-delicate text-label-sm text-charcoal rounded-full">
+                  {tag}
+                </span>
+              ))}
             </div>
           </div>
           
@@ -255,7 +292,7 @@ const shareUrls = {
                 <p class="font-serif text-2xl text-ink mb-2">
                   <a href="/sobre-mi/" class="hover:text-olive transition-colors">María Ángeles Mata</a>
                 </p>
-                <p class="font-sans text-body-sm text-charcoal mb-4">Psicóloga · Colegiada nº AN 12177 · Amplia experiencia acompañando a personas en su proceso de crecimiento personal</p>
+                <p class="font-sans text-body-sm text-charcoal mb-4">Psicóloga general sanitaria · Colegiada nº AN 12177 · Terapia individual, de pareja y familiar en Córdoba y online</p>
                 <div class="flex items-center gap-4">
                   <a href="/sobre-mi/" class="text-label text-olive hover:text-ink transition-colors">Sobre mí</a>
                   <span class="text-charcoal">·</span>
@@ -370,9 +407,10 @@ const shareUrls = {
                       <span class="w-1 h-1 rounded-full bg-taupe"></span>
                       <span class="text-label-xs text-charcoal">{relatedPost.readTime}</span>
                     </div>
-                    <h3 class="font-serif text-xl text-ink group-hover:text-olive transition-colors duration-300 leading-tight">
+                    <h3 class="font-serif text-xl text-ink group-hover:text-olive transition-colors duration-300 leading-tight mb-2">
                       {relatedPost.title}
                     </h3>
+                    <p class="text-body-sm text-charcoal line-clamp-2">{relatedPost.excerpt}</p>
                   </a>
                 </article>
               ))}
@@ -398,11 +436,11 @@ const shareUrls = {
     
     <!-- CTA Final -->
     <CTASection
-      label="¿Te ha interesado?"
-      title="La terapia puede"
-      highlight="ayudarte"
-      description="Si este contenido resuena contigo, quizás es el momento de dar el siguiente paso. Estoy aquí para acompañarte."
-      primaryAction={{ text: "Solicitar información", href: "/contacto/" }}
+      label="¿Te ha resultado útil?"
+      title="Dar el paso puede ser"
+      highlight="más sencillo"
+      description="Si este artículo resuena contigo, podemos hablar con calma sobre qué te ocurre y si una primera sesión —presencial en Córdoba u online— tiene sentido para ti."
+      primaryAction={{ text: "Pedir información", href: "/contacto/" }}
       secondaryAction={{ text: "697 733 060", href: "tel:+34697733060", icon: "phone" }}
       variant="light"
       centered={true}
@@ -412,14 +450,6 @@ const shareUrls = {
   
   <Footer />
 </Layout>
-
-<style>
-  .writing-mode-vertical {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-  }
-</style>
 
 <script>
   // Reading Progress

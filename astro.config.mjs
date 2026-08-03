@@ -2,13 +2,17 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import { getBlogSitemapEntries } from './src/data/blog.ts';
+import { getBlogSitemapEntries, getCategorySitemapEntries } from './src/data/blog.ts';
 
 // https://astro.build/config
 const SITE = 'https://matacalapsicologia.es';
 
 const blogSitemapByPath = new Map(
   getBlogSitemapEntries().map((entry) => [entry.path, entry.lastmod]),
+);
+
+const categorySitemapByPath = new Map(
+  getCategorySitemapEntries().map((entry) => [entry.path, entry.lastmod]),
 );
 
 export default defineConfig({
@@ -49,10 +53,22 @@ export default defineConfig({
           return { ...entry, priority: 0.85, changefreq: 'monthly' };
         }
         if (pathname === '/blog/') {
-          return { ...entry, priority: 0.85, changefreq: 'weekly' };
+          const featuredLastmod = blogSitemapByPath.get('/blog/cuando-ir-al-psicologo/');
+          return {
+            ...entry,
+            priority: 0.85,
+            changefreq: 'weekly',
+            ...(featuredLastmod ? { lastmod: featuredLastmod } : {}),
+          };
         }
         if (pathname.startsWith('/blog/categoria/')) {
-          return { ...entry, priority: 0.75, changefreq: 'weekly' };
+          const lastmod = categorySitemapByPath.get(pathname);
+          return {
+            ...entry,
+            priority: 0.75,
+            changefreq: 'weekly',
+            ...(lastmod ? { lastmod } : {}),
+          };
         }
         if (pathname.startsWith('/blog/') && pathname.length > '/blog/'.length) {
           const lastmod = blogSitemapByPath.get(pathname);

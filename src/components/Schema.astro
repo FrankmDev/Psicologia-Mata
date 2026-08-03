@@ -48,6 +48,9 @@ interface ArticleData {
     logo: string;
   };
   url: string;
+  articleSection?: string;
+  keywords?: string[];
+  wordCount?: number;
 }
 
 interface WebPageData {
@@ -241,13 +244,16 @@ function generateArticleSchema(data: ArticleData) {
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: data.headline,
     description: data.description,
     image: articleImage,
     datePublished: data.datePublished,
     dateModified: data.dateModified || data.datePublished,
     inLanguage: 'es-ES',
+    ...(data.articleSection ? { articleSection: data.articleSection } : {}),
+    ...(data.keywords?.length ? { keywords: data.keywords.join(', ') } : {}),
+    ...(data.wordCount ? { wordCount: data.wordCount } : {}),
     author: {
       '@type': 'Person',
       name: data.author.name,

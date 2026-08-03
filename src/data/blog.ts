@@ -243,7 +243,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
       <p>Si buscas atención presencial, factores prácticos como la ubicación, el horario y la facilidad de acceso también importan: una consulta accesible facilita la constancia. Atiendo en Córdoba capital, en un espacio tranquilo y discreto en el centro de la ciudad, y también ofrezco <a href="/servicios/">terapia online</a> para quienes prefieren esa modalidad, viven en otras localidades de la provincia o combinan ambas según la etapa del proceso.</p>
 
-      <ul class="article-related">
+      <ul class="article-checklist">
         <li><strong>Formación y colegiación:</strong> verifica que la persona esté colegiada y tenga formación en psicología general sanitaria si buscas atención clínica.</li>
         <li><strong>Experiencia en tu motivo de consulta:</strong> ansiedad, pareja, familia, duelo, autoestima o evaluación requieren enfoques distintos.</li>
         <li><strong>Claridad en el proceso:</strong> un buen profesional explica objetivos, límites, confidencialidad y duración orientativa sin prometer resultados milagrosos.</li>
@@ -498,7 +498,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
       <p>Algunos factores habituales en consulta son:</p>
 
-      <ul class="article-related">
+      <ul class="article-checklist">
         <li><strong>Cambios de salud:</strong> diagnósticos recientes, dolor, miedo a recaídas, pérdida de movilidad o dependencia de medicación.</li>
         <li><strong>Duelos y pérdidas:</strong> fallecimiento de pareja, amistades, hermanos o pérdida de roles que daban identidad.</li>
         <li><strong>Soledad no elegida:</strong> vivir solo, tener menos red social o sentir que no se quiere “dar trabajo” a la familia.</li>
@@ -664,6 +664,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: "Atención plena: qué es, para qué sirve y cómo integrarla en terapia",
     seoTitle: "Atención plena y mindfulness: guía psicológica profesional",
     seoDescription: "Guía psicológica sobre atención plena y mindfulness: beneficios, límites, ejercicios prácticos y cuándo trabajarlo en terapia presencial u online.",
+    keywords: "atencion plena, mindfulness psicologia, mindfulness terapia, meditacion psicologia, tecnicas mindfulness, psicologo cordoba",
     excerpt: "La atención plena no consiste en dejar la mente en blanco. Es aprender a relacionarte de otra manera con tus pensamientos, emociones y sensaciones para responder con más claridad.",
     date: "11 Junio 2026",
     dateShort: "11 Jun",
@@ -813,6 +814,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: "Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona",
     seoTitle: "Ansiedad persistente y tratamiento psicológico en Córdoba",
     seoDescription: "Síntomas, evaluación y tratamiento psicológico de la ansiedad. Consulta presencial en Córdoba y terapia online con enfoque basado en evidencia.",
+    keywords: "ansiedad persistente, tratamiento ansiedad, terapia ansiedad cordoba, trastorno ansiedad, psicologo ansiedad, terapia cognitivo conductual ansiedad",
     excerpt: "No toda ansiedad necesita terapia, pero cuando empieza a ocupar demasiado espacio en tu vida conviene entender qué está pasando y qué abordajes tienen más respaldo científico.",
     date: "26 Mayo 2026",
     dateShort: "26 May",
@@ -978,6 +980,7 @@ export const blogPosts: Record<string, BlogPost> = {
     title: "Terapia de pareja: cuándo empezar, qué esperar y qué dice la evidencia",
     seoTitle: "Terapia de pareja en Córdoba: cuándo empezar y cómo funciona",
     seoDescription: "Artículo profesional sobre terapia de pareja: señales de alarma, objetivos, límites y evidencia científica. Atención presencial en Córdoba y sesiones online.",
+    keywords: "terapia de pareja, terapia pareja cordoba, cuando empezar terapia pareja, psicologo parejas cordoba, problemas de pareja, terapia pareja online",
     excerpt: "La terapia de pareja no sirve para decidir quién tiene razón. Sirve para entender el patrón que os atrapa, bajar la escalada y recuperar una forma de hablar que no os desgaste más.",
     date: "19 Mayo 2026",
     dateShort: "19 May",
@@ -1120,105 +1123,123 @@ export const blogPosts: Record<string, BlogPost> = {
   },
   "beneficios-terapia-individual": {
     slug: "beneficios-terapia-individual",
-    title: "¿Por qué la terapia individual funciona?",
-    seoTitle: "Terapia individual en Córdoba: beneficios y ayuda",
-    seoDescription: "Descubre cómo la terapia individual puede ayudarte con ansiedad, autoestima y bienestar emocional en una consulta de psicología en Córdoba u online.",
-    excerpt: "No se trata de tener a alguien que te diga qué hacer. Se trata de tener un espacio donde puedas ser tú mismo, sin filtros, sin prisas.",
+    title: "Beneficios de la terapia individual: por qué funciona y qué puedes esperar",
+    seoTitle: "Terapia individual en Córdoba: beneficios y qué esperar",
+    seoDescription: "Beneficios de la terapia individual explicados con claridad: qué ocurre en sesión, para quién sirve y qué puedes esperar. Psicóloga en Córdoba y online.",
+    keywords: "terapia individual, beneficios terapia psicologica, psicologo individual cordoba, terapia psicologica cordoba, primera sesion psicologo, psicologa cordoba online",
+    excerpt: "La terapia individual no consiste en recibir consejos sobre tu vida. Es un espacio para entender qué te ocurre, por qué te ocurre y qué puedes hacer al respecto.",
     date: "15 Enero 2025",
     dateShort: "15 Ene",
     readTime: "5 min",
     category: "Bienestar",
     image: terapiaFamilia,
     content: `
-      <p>La gente suele pensar que ir a terapia es para cuando "estás mal". Pero la verdad es que la terapia es para cualquiera que quiera entenderse mejor, sentirse mejor, o simplemente tener un espacio donde no tener que cuidar lo que dice.</p>
+      <p>Mucha gente llega a la terapia individual con una idea equivocada: que alguien les dirá qué hacer con su vida. En realidad, el trabajo consiste en algo más útil: entender qué te ocurre, por qué se repite y qué opciones tienes para sentirte mejor. No hace falta estar en crisis para empezar. Basta con querer un espacio donde no tengas que cuidar cada palabra ni resolverlo todo solo.</p>
 
       <div class="article-callout">
-        <p><strong>Idea clave:</strong> la terapia no consiste en recibir consejos sobre tu vida, sino en entender qué te ocurre y aprender a relacionarte mejor contigo y con los demás. Si quieres saber cuándo dar el paso, puedes leer <a href="/blog/cuando-ir-al-psicologo/">cuándo ir al psicólogo</a>.</p>
+        <p><strong>Idea clave:</strong> la terapia individual no consiste en recibir consejos sobre tu vida, sino en entender qué te ocurre y aprender a relacionarte mejor contigo y con los demás. Si quieres saber cuándo dar el paso, puedes leer <a href="/blog/cuando-ir-al-psicologo/">cuándo ir al psicólogo</a>.</p>
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${psicologia.src}" alt="Espacio tranquilo para reflexión" loading="lazy" />
-        <figcaption>A veces necesitamos simplemente un lugar donde poder ser nosotros mismos</figcaption>
+        <img src="${psicologia.src}" alt="Espacio tranquilo de consulta psicológica para terapia individual" loading="lazy" />
+        <figcaption>Un buen proceso terapéutico empieza por un espacio donde puedas hablar con honestidad y sin prisas.</figcaption>
       </figure>
       
-      <h2>Lo que realmente pasa en terapia</h2>
+      <h2>Qué ocurre realmente en terapia individual</h2>
       
-      <p>No es magia. No te voy a decir qué tienes que hacer con tu vida. Lo que hacemos es sentarnos a hablar, a entender por qué sientes lo que sientes, y a encontrar formas de que te sientas mejor.</p>
+      <p>No es magia ni un interrogatorio. Es un espacio estructurado donde se explora lo que sientes, lo que haces y lo que mantienes sin querer. A veces se trabaja con técnicas concretas; otras, con reflexión, psicoeducación o ejercicios entre sesiones. El objetivo no es que dependas de la terapia, sino que recuperes claridad y herramientas que puedas usar fuera de consulta.</p>
       
-      <p>Es un espacio donde puedes traer todo: lo que te da vergüenza, lo que no entiendes, lo que te duele. Sin juzgarte, sin prisas.</p>
+      <p>Puedes traer lo que te dé vergüenza, lo que no entiendes o lo que te duele. La confidencialidad profesional y el ritmo acordado hacen posible un trabajo honesto, sin juicio.</p>
       
       <div class="article-grid article-grid--2">
         <div class="article-card">
           <h3>Entenderte mejor</h3>
-          <p>A veces hacemos cosas y no sabemos por qué. La terapia ayuda a conectar esos puntos, a entender los patrones que repetimos sin darnos cuenta.</p>
+          <p>Muchas conductas se repiten sin que sepamos por qué. La terapia ayuda a conectar emociones, pensamientos y patrones que antes parecían inconexos.</p>
         </div>
         <div class="article-card">
-          <h3>Manejar la ansiedad</h3>
-          <p>La ansiedad no desaparece mágicamente, pero aprendes a llevarla mejor. Técnicas concretas que puedes usar cuando todo se vuelve demasiado.</p>
+          <h3>Regular la ansiedad</h3>
+          <p>La ansiedad no desaparece por desearlo, pero sí se puede aprender a gestionarla. Técnicas de regulación, exposición gradual y cambio de hábitos suelen formar parte del proceso.</p>
         </div>
         <div class="article-card">
-          <h3>Mejores relaciones</h3>
-          <p>Cuando entiendes cómo funcionas tú, entiendes mejor a los demás. Y eso cambia todo: pareja, familia, amigos, trabajo.</p>
+          <h3>Mejorar relaciones</h3>
+          <p>Cuando entiendes cómo funcionas tú, entiendes mejor a los demás. Eso cambia la comunicación en pareja, familia, amistad y trabajo.</p>
         </div>
         <div class="article-card">
-          <h3>Decidir con claridad</h3>
-          <p>Cuando sabes quién eres y qué quieres, las decisiones dejan de ser tan difíciles. Dejas de hacer caso al "deberías" y escuchas lo que tú necesitas.</p>
+          <h3>Decidir con más claridad</h3>
+          <p>Cuando sabes qué necesitas y qué te frena, las decisiones dejan de depender solo del miedo, la culpa o el “deberías”.</p>
         </div>
       </div>
-      
-      <h2>El primer paso es el más difícil</h2>
-      
-      <p>Reconocer que necesitas ayuda no es debilidad. Es inteligencia. Es cuidarte. Si estás pensando en dar este paso, ya has dado el más importante: el de admitir que mereces sentirte mejor.</p>
+
+      <h2>Para quién tiene sentido la terapia individual</h2>
+
+      <p>La terapia individual puede ayudarte si vives ansiedad persistente, baja autoestima, dificultades para poner límites, duelos, cambios vitales, conflictos relacionales o simplemente la sensación de no estar viviendo como querrías. También si quieres prevenir un empeoramiento antes de que el malestar limite más tu vida.</p>
+
+      <blockquote>
+        <p>Pedir ayuda no es debilidad. Es una forma de cuidarte con la misma seriedad con la que cuidarías a alguien a quien quieres.</p>
+      </blockquote>
+
+      <h2>Qué puedes esperar de un buen proceso</h2>
+
+      <ul class="article-checklist">
+        <li>Una primera sesión orientativa, no un compromiso indefinido.</li>
+        <li>Objetivos revisables y un plan de trabajo comprensible.</li>
+        <li>Herramientas prácticas, no solo conversación.</li>
+        <li>Confidencialidad y respeto por tu ritmo.</li>
+        <li>Posibilidad de trabajar presencial en Córdoba u online.</li>
+      </ul>
 
       <h2>También puede interesarte</h2>
 
       <ul class="article-related">
         <li><a href="/blog/cuando-ir-al-psicologo/">Cuándo ir al psicólogo: señales, mitos y primera sesión</a></li>
         <li><a href="/blog/gestion-ansiedad/">Cómo gestionar la ansiedad cuando el cuerpo se activa</a></li>
-        <li><a href="/blog/autoestima-saludable/">Baja autoestima: señales y cómo empezar a trabajarla</a></li>
+        <li><a href="/blog/autoestima-saludable/">Baja autoestima: señales y cómo trabajarla</a></li>
         <li><a href="/servicios/">Servicios de psicología presencial y online</a></li>
       </ul>
       
       <div class="article-cta">
-        <p>¿Tienes dudas sobre la terapia?</p>
-        <p>Pregunta lo que necesites. La primera consulta es simplemente una conversación para ver si encajamos.</p>
-        <a href="/contacto/">Hablamos</a>
+        <p>¿Tienes dudas sobre la terapia individual?</p>
+        <p>Podemos hablar con tranquilidad sobre qué te trae, qué formato encaja mejor contigo y qué puedes esperar de una primera sesión. Sin presión: solo una conversación honesta.</p>
+        <a href="/contacto/">Pedir información sobre terapia individual</a>
       </div>
     `
   },
   "comunicacion-pareja": {
     slug: "comunicacion-pareja",
-    title: "Cuando hablar no sirve de nada",
-    seoTitle: "Comunicación en pareja: cómo mejorarla en terapia",
-    seoDescription: "Claves para mejorar la comunicación en pareja con ayuda psicológica. Terapia de pareja en Córdoba y sesiones online.",
-    excerpt: "Hablan, hablan, pero no se entienden. Si esto te suena familiar, no estás solo. La comunicación en pareja puede mejorar, pero no de la forma que piensas.",
+    title: "Comunicación en pareja: cuando hablar no basta",
+    seoTitle: "Comunicación en pareja: cómo mejorarla con ayuda psicológica",
+    seoDescription: "Comunicación en pareja: por qué hablar no siempre basta, señales de alarma y cómo la terapia puede ayudar. Psicóloga en Córdoba y sesiones online.",
+    keywords: "comunicacion en pareja, problemas de comunicacion pareja, terapia de pareja cordoba, mejorar comunicacion pareja, psicologa parejas cordoba",
+    excerpt: "Hablan, hablan, pero no se entienden. Si esto te suena, no estás solo: la comunicación en pareja puede mejorar, pero no siempre de la forma que imaginamos.",
     date: "8 Enero 2025",
     dateShort: "8 Ene",
     readTime: "7 min",
     category: "Relaciones",
     image: terapiaPareja2,
     content: `
-      <p>"Hablamos pero no nos entendemos". Lo escucho constantemente en consulta. Y la verdad es que hablar no siempre es comunicar. A veces hablamos más para defendernos que para entendernos.</p>
+      <p>"Hablamos, pero no nos entendemos". Es una de las frases que más escucho en consulta. Y tiene sentido: hablar no siempre es comunicar. A veces lo que hacemos es defender nuestra versión, esperar nuestro turno para rebatir o repetir el mismo conflicto con distintas palabras. El resultado suele ser el mismo: más distancia, más cansancio y la sensación de estar solos incluso estando juntos.</p>
 
       <div class="article-callout">
-        <p><strong>Idea clave:</strong> comunicar no es hablar más, sino escuchar mejor. Cuando la conversación se convierte en defensa, la distancia emocional crece aunque sigáis teniendo diálogo.</p>
+        <p><strong>Idea clave:</strong> comunicar no es hablar más, sino escuchar mejor. Cuando la conversación se convierte en defensa, la distancia emocional crece aunque sigáis teniendo diálogo. Si el patrón ya está muy instalado, puede ayudarte leer sobre <a href="/blog/terapia-de-pareja-cuando-empezar/">cuándo empezar terapia de pareja</a>.</p>
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${autoestima.src}" alt="Pareja conversando" loading="lazy" />
-        <figcaption>La comunicación real implica escuchar, no solo hablar</figcaption>
+        <img src="${autoestima.src}" alt="Pareja conversando con dificultad para entenderse" loading="lazy" />
+        <figcaption>La comunicación real implica escuchar, no solo exponer tu versión de los hechos.</figcaption>
       </figure>
       
-      <h2>Por qué no nos entendemos</h2>
+      <h2>Por qué no nos entendemos aunque hablemos</h2>
       
-      <p>A menudo lo que hacemos es monólogo disfrazado de diálogo. Uno habla, el otro espera su turno para rebatir. Ninguno escucha de verdad. Y al final, ambos se sienten más solos que al principio.</p>
+      <p>Muchas discusiones de pareja no son sobre el tema superficial —la ropa, el dinero, la familia— sino sobre necesidades más profundas: sentirse escuchado, valorado, respetado o seguro. Cuando esas necesidades no se nombran, el conflicto se repite en bucle.</p>
+
+      <p>También influyen patrones aprendidos: cómo se hablaba en casa, miedo al conflicto, necesidad de tener razón o dificultad para poner límites sin atacar. Reconocer el patrón ya es un primer paso para cambiarlo.</p>
       
       <div class="article-steps">
         <div class="article-step">
           <div class="article-step-num">1</div>
           <div>
             <h3>Escuchar de verdad</h3>
-            <p>No es solo oír palabras. Es intentar entender qué siente la otra persona, aunque no estés de acuerdo. Es ponerse en su lugar antes de responder.</p>
+            <p>No es solo oír palabras. Es intentar entender qué siente la otra persona, aunque no estés de acuerdo. Ponerse en su lugar antes de responder cambia el tono de la conversación.</p>
           </div>
         </div>
         
@@ -1226,7 +1247,7 @@ export const blogPosts: Record<string, BlogPost> = {
           <div class="article-step-num">2</div>
           <div>
             <h3>Hablar de ti, no del otro</h3>
-            <p>"Tú siempre..." "Tú nunca..." eso solo hace que el otro se defienda. Prueba con "Yo me siento... cuando...". Verás la diferencia.</p>
+            <p>"Tú siempre..." o "Tú nunca..." activan la defensa. Prueba con "Yo me siento... cuando...". La diferencia suele notarse enseguida.</p>
           </div>
         </div>
         
@@ -1234,7 +1255,7 @@ export const blogPosts: Record<string, BlogPost> = {
           <div class="article-step-num">3</div>
           <div>
             <h3>Elegir el momento</h3>
-            <p>No todas las conversaciones son para cualquier momento. A veces es mejor decir "¿Podemos hablar de esto más tarde?" que soltarlo todo en medio de una discusión.</p>
+            <p>No todas las conversaciones son para cualquier instante. A veces conviene decir "¿Podemos hablar de esto más tarde?" antes que soltarlo en plena discusión.</p>
           </div>
         </div>
         
@@ -1242,10 +1263,24 @@ export const blogPosts: Record<string, BlogPost> = {
           <div class="article-step-num">4</div>
           <div>
             <h3>Validar antes de opinar</h3>
-            <p>No tienes que estar de acuerdo para entender. Un "entiendo que te sientas así" abre más puertas que todo un discurso sobre por qué no debería sentirse así.</p>
+            <p>No hace falta estar de acuerdo para entender. Un "entiendo que te sientas así" abre más puertas que un discurso sobre por qué no debería sentirse así.</p>
           </div>
         </div>
       </div>
+
+      <h2>Señales de que la comunicación necesita ayuda</h2>
+
+      <ul class="article-checklist">
+        <li>Repetís las mismas discusiones sin resolver nada.</li>
+        <li>Uno de los dos se calla para evitar el conflicto y acumula resentimiento.</li>
+        <li>Las conversaciones importantes acaban siempre en reproches o silencio.</li>
+        <li>Evitáis temas sensibles porque sabéis que escalarán.</li>
+        <li>Os sentís más compañeros de convivencia que pareja emocionalmente conectada.</li>
+      </ul>
+
+      <h2>Cuándo tiene sentido la terapia de pareja</h2>
+
+      <p>La terapia de pareja no es para cuando todo está perdido. Sirve cuando todavía hay voluntad de entenderse, pero el patrón os supera. En sesión se observa la interacción, no solo la versión individual de cada uno, y se ensayan formas más seguras de hablar y pedir lo que necesitáis.</p>
 
       <h2>También puede interesarte</h2>
 
@@ -1257,56 +1292,70 @@ export const blogPosts: Record<string, BlogPost> = {
       
       <div class="article-cta">
         <p>¿Sientes que vuestra comunicación se ha roto?</p>
-        <p>La terapia de pareja no es para cuando todo está perdido. Es para cuando queréis intentarlo de verdad.</p>
-        <a href="/contacto/">Saber más</a>
+        <p>La terapia de pareja puede ayudaros a salir del bucle antes de que el resentimiento se instale. Si buscáis apoyo en Córdoba o en formato online, el primer paso es una valoración para ver si tiene sentido continuar juntos.</p>
+        <a href="/contacto/">Solicitar información sobre terapia de pareja</a>
       </div>
     `
   },
   "gestion-ansiedad": {
     slug: "gestion-ansiedad",
-    title: "Cuando el pecho aprieta",
-    seoTitle: "Gestionar la ansiedad: técnicas psicológicas útiles",
-    seoDescription: "Técnicas psicológicas para gestionar la ansiedad en el día a día. Atención profesional en Córdoba y terapia online.",
-    excerpt: "La ansiedad no es debilidad. Es tu cuerpo intentando protegerte de algo que percibe como peligroso. Aquí te cuento cómo puedes ayudarte a ti mismo.",
+    title: "Cómo gestionar la ansiedad cuando el cuerpo se activa",
+    seoTitle: "Gestionar la ansiedad: técnicas psicológicas que funcionan",
+    seoDescription: "Técnicas psicológicas para gestionar la ansiedad en el día a día: respiración, grounding y cuándo pedir ayuda. Psicóloga en Córdoba y terapia online.",
+    keywords: "gestionar ansiedad, tecnicas ansiedad, ansiedad dia a dia, como calmar ansiedad, psicologo ansiedad cordoba, terapia ansiedad online",
+    excerpt: "La ansiedad no es debilidad: es tu cuerpo intentando protegerte. Aquí tienes técnicas concretas para regularla y señales de cuándo conviene pedir ayuda profesional.",
     date: "2 Enero 2025",
     dateShort: "2 Ene",
     readTime: "6 min",
     category: "Salud Mental",
     image: estres,
     content: `
-      <p>La ansiedad no es un defecto. Es una respuesta natural que se ha vuelto demasiado sensible. Tu cerebro está intentando protegerte, pero está detectando peligros donde no los hay. Entender esto ya es el primer paso.</p>
+      <p>La ansiedad no es un defecto de carácter. Es una respuesta de alerta que, en muchas personas, se ha vuelto demasiado sensible: el cuerpo reacciona como si hubiera peligro incluso cuando el riesgo real es bajo o inexistente. Entender esto ya cambia la relación con el síntoma: no se trata de "controlarte más", sino de aprender a regular el sistema nervioso y a dejar de alimentar el ciclo que mantiene la ansiedad.</p>
 
       <div class="article-callout">
         <p><strong>Idea clave:</strong> las técnicas de regulación ayudan más cuando se practican con regularidad y antes de que la ansiedad llegue al máximo. Si el malestar es persistente, conviene leer sobre <a href="/blog/ansiedad-persistente-tratamiento-psicologico/">ansiedad persistente y tratamiento psicológico</a>.</p>
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${apunte.src}" alt="Persona practicando mindfulness" loading="lazy" />
-        <figcaption>La respiración es tu aliada más poderosa contra la ansiedad</figcaption>
+        <img src="${apunte.src}" alt="Persona practicando técnicas de regulación para la ansiedad" loading="lazy" />
+        <figcaption>La respiración y la atención al presente son herramientas accesibles, pero requieren práctica para ser útiles en momentos de activación.</figcaption>
       </figure>
       
-      <h2>Técnicas que funcionan de verdad</h2>
+      <h2>Técnicas que puedes empezar a usar hoy</h2>
       
-      <p>No son milagros, pero funcionan si las practicas. La clave está en usarlas cuando la ansiedad está aún baja, no esperar a que sea una tormenta.</p>
+      <p>No son soluciones milagrosas, pero sí recursos que funcionan si los practicas cuando la ansiedad está aún moderada, no solo en plena crisis.</p>
       
       <div class="article-grid article-grid--3">
         <div class="article-card text-center">
-          <h3>Respirar bien</h3>
-          <p>Inhala 4 segundos, mantén 4, exhala 4. Repite varias veces. Activa tu sistema nervioso parasimpático y el cuerpo empieza a calmarse.</p>
+          <h3>Respiración diafragmática</h3>
+          <p>Inhala 4 segundos, mantén 4, exhala 6. Repite varias veces. La exhalación más larga activa el sistema parasimpático y ayuda al cuerpo a bajar la activación.</p>
         </div>
         
         <div class="article-card text-center">
-          <h3>5-4-3-2-1</h3>
-          <p>Cuando sientes que te desconectas: 5 cosas que ves, 4 que tocas, 3 que oyes, 2 que hueles, 1 que saboreas. Te devuelve al presente.</p>
+          <h3>Técnica 5-4-3-2-1</h3>
+          <p>Nombra 5 cosas que ves, 4 que tocas, 3 que oyes, 2 que hueles y 1 que saboreas. Te devuelve al presente cuando la mente se acelera o se desconecta.</p>
         </div>
         
         <div class="article-card text-center">
           <h3>Cuestionar los "y si..."</h3>
-          <p>Tu mente te dice lo peor que puede pasar. Pregúntale: ¿Cuál es la evidencia? ¿Qué le diría a un amigo en mi situación?</p>
+          <p>La mente ansiosa anticipa lo peor. Pregúntate: ¿qué evidencia tengo?, ¿qué es lo más probable?, ¿qué le diría a alguien a quien quiero en mi situación?</p>
         </div>
       </div>
-      
-      <p>Pedir ayuda no es rendirse. Es inteligente. Es cuidarte. Si la ansiedad está limitando tu vida, mereces apoyo profesional.</p>
+
+      <h2>Qué evitar cuando estás ansioso</h2>
+
+      <ul class="article-checklist">
+        <li>Evitar por completo lo que te da miedo: alivia al momento, pero suele estrechar la vida con el tiempo.</li>
+        <li>Buscar tranquilidad constante en Google o en la opinión de otros.</li>
+        <li>Automedicarte o aumentar alcohol o cafeína para "aguantar".</li>
+        <li>Reprocharte sentir ansiedad, como si fuera una falla personal.</li>
+      </ul>
+
+      <h2>Cuándo pedir ayuda profesional</h2>
+
+      <p>Conviene consultar cuando la ansiedad dura semanas, interfiere en sueño, trabajo o relaciones, o cuando evitas situaciones importantes por miedo. También si los síntomas físicos —palpitaciones, opresión, mareo, insomnio— aparecen con frecuencia y no encuentras alivio duradero.</p>
+
+      <p>En <a href="/servicios/">terapia individual</a> se trabaja el patrón completo: pensamientos, cuerpo, conductas de evitación y factores que mantienen la ansiedad. Si quieres profundizar, puedes leer <a href="/blog/atencion-plena-mindfulness-psicologia/">cómo integrar la atención plena en terapia</a>.</p>
 
       <h2>También puede interesarte</h2>
 
@@ -1317,71 +1366,80 @@ export const blogPosts: Record<string, BlogPost> = {
       </ul>
       
       <div class="article-cta">
-        <p>¿La ansiedad te está controlando?</p>
-        <p>No tienes que pasar por esto solo. La terapia puede darte herramientas específicas para recuperar tu vida.</p>
-        <a href="/contacto/">Hablamos</a>
+        <p>¿La ansiedad está limitando tu vida?</p>
+        <p>No tienes que atravesarlo solo. En consulta —presencial en Córdoba u online— podemos entender tu patrón y trabajar herramientas concretas para recuperar margen y tranquilidad.</p>
+        <a href="/contacto/">Pedir información sobre terapia para la ansiedad</a>
       </div>
     `
   },
   "autoestima-saludable": {
     slug: "autoestima-saludable",
-    title: "¿Por qué es tan difícil querernos?",
+    title: "Baja autoestima: señales, causas y cómo trabajarla",
     seoTitle: "Baja autoestima: señales y cómo trabajarla en terapia",
-    seoDescription: "Señales de baja autoestima y cómo trabajarla con ayuda psicológica. Psicóloga en Córdoba y terapia online.",
-    excerpt: "No nacemos odiándonos. Aprendemos a hacerlo. Y lo bueno es que lo que se aprende, se puede desaprender. Aquí te cuento cómo empezar.",
+    seoDescription: "Señales de baja autoestima, causas habituales y cómo trabajarla con ayuda psicológica. Psicóloga en Córdoba y terapia online.",
+    keywords: "baja autoestima, autoestima saludable, trabajar autoestima, psicologo autoestima cordoba, terapia autoestima, autocompasion",
+    excerpt: "La autoestima no es sentirse el mejor del mundo. Es aprender a relacionarte contigo con más justicia, límites y autocompasión.",
     date: "28 Diciembre 2024",
     dateShort: "28 Dic",
     readTime: "6 min",
     category: "Crecimiento Personal",
     image: autoestima,
     content: `
-      <p>La autoestima no es sentirse el mejor del mundo. Es simplemente aceptarte como eres: con tus fallos, con tus aciertos, con tu historia. Es dejar de ser tu peor crítico.</p>
+      <p>La autoestima no consiste en sentirse el mejor del mundo ni en repetirse frases positivas frente al espejo. Es, sobre todo, la forma en que te hablas, te tratas y te permites existir con tus aciertos y tus fallos. Cuando esa relación es crítica, exigente o injusta, el impacto se nota en decisiones, relaciones, trabajo y bienestar emocional.</p>
 
       <div class="article-callout">
-        <p><strong>Idea clave:</strong> la autoestima no se construye repitiéndote frases positivas, sino aprendiendo a relacionarte contigo con más justicia, límites y autocompasión.</p>
+        <p><strong>Idea clave:</strong> la autoestima no se construye repitiéndote frases positivas, sino aprendiendo a relacionarte contigo con más justicia, límites y autocompasión. Si dudas de si necesitas ayuda, puedes leer <a href="/blog/cuando-ir-al-psicologo/">cuándo ir al psicólogo</a>.</p>
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${estres.src}" alt="Persona reflexionando" loading="lazy" />
-        <figcaption>Quererse no es egoísmo, es necesario</figcaption>
+        <img src="${estres.src}" alt="Persona reflexionando sobre su relación consigo misma" loading="lazy" />
+        <figcaption>Quererse no es egoísmo: es la base desde la que puedes cuidar mejor de ti y de los demás.</figcaption>
       </figure>
       
       <h2>Cómo nos hablamos a nosotros mismos</h2>
       
-      <p>Fíjate en tu diálogo interno. ¿Serías tan duro con un amigo como lo eres contigo? Probablemente no. Esa voz crítica que llevas dentro no es la verdad, es solo un hábito que puedes cambiar.</p>
-      
-      <h2>Señales de que tu autoestima necesita cuidado</h2>
+      <p>Fíjate en tu diálogo interno. ¿Serías tan duro con un amigo como lo eres contigo? Probablemente no. Esa voz crítica no es la verdad: es un hábito aprendido, muchas veces en contextos donde solo recibías atención al equivocarte o al cumplir expectativas ajenas.</p>
 
-      <ul class="article-related">
-        <li>Te criticas constantemente, incluso por cosas pequeñas</li>
-        <li>No puedes aceptar un cumplido sin rebajarlo</li>
-        <li>Tienes miedo de intentar cosas nuevas por si fracasas</li>
-        <li>Necesitas la aprobación de otros para sentirte bien</li>
+      <p>Trabajar la autoestima implica reconocer ese patrón, cuestionarlo y practicar una forma de hablarte más justa, sin caer en lo contrario —la autoengaño o la grandiosidad—.</p>
+      
+      <h2>Señales de que tu autoestima necesita atención</h2>
+
+      <ul class="article-checklist">
+        <li>Te criticas constantemente, incluso por errores pequeños o circunstanciales.</li>
+        <li>No puedes aceptar un cumplido sin rebajarlo o desconfiar de él.</li>
+        <li>Evitas intentar cosas nuevas por miedo a fracasar o quedar mal.</li>
+        <li>Necesitas la aprobación de otros para sentirte válido o valiosa.</li>
+        <li>Pones límites débiles y luego te resentís por haber dicho que sí.</li>
+        <li>Comparas tu vida interior con la imagen exterior de los demás.</li>
       </ul>
       
-      <h2>Pequeños pasos para sentirte mejor contigo</h2>
+      <h2>Pequeños pasos para empezar a trabajarla</h2>
       
       <div class="article-grid">
         <div class="article-card">
-          <h3>1. Presta atención a tu diálogo interno</h3>
-          <p>Cuando te catches siendo duro contigo, pregúntate: "¿Le diría esto a alguien a quien quiero?" Si la respuesta es no, cambia el mensaje.</p>
+          <h3>1. Observa tu diálogo interno</h3>
+          <p>Cuando te catches siendo duro contigo, pregúntate: "¿Le diría esto a alguien a quien quiero?" Si la respuesta es no, reformula el mensaje con más justicia.</p>
         </div>
         
         <div class="article-card">
-          <h3>2. Celebra lo pequeño</h3>
-          <p>No esperes a lograr algo grande para sentirte bien. Levantarte un día difícil ya es mérito. Dímelo a ti mismo.</p>
+          <h3>2. Reconoce lo pequeño</h3>
+          <p>No esperes a lograr algo grande para validarte. Levantarte un día difícil, pedir ayuda o poner un límite ya cuenta.</p>
         </div>
         
         <div class="article-card">
-          <h3>3. Aprende a decir no</h3>
-          <p>Poner límites no es ser egoísta. Es respetarte. Y cuando te respetas tú, otros te respetan más.</p>
+          <h3>3. Practica decir no</h3>
+          <p>Poner límites no es egoísmo: es respeto hacia ti. Cuando te respetas, suele mejorar también cómo te tratan los demás.</p>
         </div>
         
         <div class="article-card">
-          <h3>4. Rodéate de gente que te sube</h3>
-          <p>Hay personas que te hacen sentir bien contigo y otras que no. Elige con quién pasas tu tiempo.</p>
+          <h3>4. Elige tu entorno</h3>
+          <p>Hay personas que te hacen sentir más en paz contigo y otras que refuerzan tu autocrítica. Presta atención a con quién pasas tu tiempo.</p>
         </div>
       </div>
+
+      <h2>Cuándo conviene la terapia</h2>
+
+      <p>Si la baja autoestima te frena en relaciones, trabajo, decisiones o autocuidado, una terapia individual puede ayudarte a entender de dónde viene ese patrón y a construir una relación más sana contigo. También puede complementarse con trabajo sobre <a href="/blog/beneficios-terapia-individual/">terapia individual</a> y <a href="/blog/atencion-plena-mindfulness-psicologia/">atención plena</a> para regular la autocrítica.</p>
 
       <h2>También puede interesarte</h2>
 
@@ -1392,9 +1450,9 @@ export const blogPosts: Record<string, BlogPost> = {
       </ul>
       
       <div class="article-cta">
-        <p>¿Quieres trabajar en tu relación contigo mismo?</p>
-        <p>La terapia es un espacio seguro para aprender a quererte de verdad, no solo a soportarte.</p>
-        <a href="/contacto/">Hablamos</a>
+        <p>¿Quieres trabajar tu relación contigo mismo?</p>
+        <p>La terapia es un espacio seguro para entender de dónde viene tu autocrítica y aprender a tratarte con más justicia. Presencial en Córdoba u online, según lo que mejor encaje contigo.</p>
+        <a href="/contacto/">Pedir información sobre terapia individual</a>
       </div>
     `
   }
@@ -1436,6 +1494,18 @@ export function formatBlogDateISO(dateStr: string): string {
   return `${year}-${month}-${day}`;
 }
 
+/** ISO 8601 completo para schema.org y Open Graph. */
+export function formatBlogDateISO8601(dateStr: string): string {
+  return `${formatBlogDateISO(dateStr)}T09:00:00+02:00`;
+}
+
+/** URL absoluta de la imagen de un artículo para schema y Open Graph. */
+export function resolvePostImageUrl(image: ImageMetadata, siteUrl: string): string {
+  const src = image.src;
+  if (src.startsWith('http')) return src;
+  return `${siteUrl}${src.startsWith('/') ? src : `/${src}`}`;
+}
+
 export const blogPostsList = Object.values(blogPosts).sort(
   (a, b) => parseBlogDate(b.date).getTime() - parseBlogDate(a.date).getTime(),
 );
@@ -1451,6 +1521,18 @@ export function getBlogSitemapEntries(): { path: string; lastmod: string }[] {
     path: `/blog/${post.slug}/`,
     lastmod: formatBlogDateISO(post.date),
   }));
+}
+
+/** lastmod de páginas de categoría según el artículo más reciente. */
+export function getCategorySitemapEntries(): { path: string; lastmod: string }[] {
+  return getBlogCategories().map((category) => {
+    const posts = getPostsByCategory(category);
+    const latestDate = posts[0]?.date ?? getFeaturedPost().date;
+    return {
+      path: `/blog/categoria/${categoryToSlug(category)}/`,
+      lastmod: formatBlogDateISO(latestDate),
+    };
+  });
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
@@ -1483,4 +1565,104 @@ export function getPostsByCategory(category: string): BlogPost[] {
 
 export function getCategoryUrl(category: string): string {
   return `/blog/categoria/${categoryToSlug(category)}/`;
+}
+
+export interface CategorySeo {
+  title: string;
+  description: string;
+  intro: string;
+}
+
+export const CATEGORY_SEO: Record<string, CategorySeo> = {
+  'Salud Mental': {
+    title: 'Salud mental | Blog de psicología en Córdoba',
+    description:
+      'Artículos sobre salud mental, bienestar emocional y cuándo pedir ayuda psicológica. Por María Ángeles Mata, psicóloga en Córdoba y online.',
+    intro:
+      'Reflexiones y guías prácticas sobre salud mental: señales de alarma, primeros pasos y cuándo tiene sentido pedir ayuda profesional.',
+  },
+  Ansiedad: {
+    title: 'Ansiedad | Blog de psicología en Córdoba',
+    description:
+      'Artículos sobre ansiedad, síntomas, tratamiento psicológico y técnicas de regulación. Psicóloga en Córdoba y terapia online.',
+    intro:
+      'Todo lo que necesitas entender sobre la ansiedad: desde síntomas y causas hasta tratamiento psicológico y herramientas para el día a día.',
+  },
+  'Atención plena': {
+    title: 'Atención plena y mindfulness | Blog de psicología',
+    description:
+      'Guías sobre atención plena y mindfulness en psicología: beneficios, ejercicios prácticos y cómo integrarlo en terapia.',
+    intro:
+      'Mindfulness con rigor clínico: qué es, para qué sirve, sus límites y cómo practicarlo dentro de un proceso terapéutico.',
+  },
+  Relaciones: {
+    title: 'Relaciones y pareja | Blog de psicología en Córdoba',
+    description:
+      'Artículos sobre comunicación en pareja, terapia de pareja y relaciones. Psicóloga en Córdoba y sesiones online.',
+    intro:
+      'Comunicación, conflictos y terapia de pareja explicados con claridad, sin juicios y con orientación práctica.',
+  },
+  Bienestar: {
+    title: 'Bienestar emocional | Blog de psicología en Córdoba',
+    description:
+      'Artículos sobre bienestar emocional, terapia individual y cuidado personal. Por María Ángeles Mata, psicóloga en Córdoba.',
+    intro:
+      'Ideas y recursos para cuidar tu bienestar emocional, entender la terapia y dar pasos concretos hacia sentirte mejor.',
+  },
+  'Crecimiento Personal': {
+    title: 'Crecimiento personal | Blog de psicología en Córdoba',
+    description:
+      'Artículos sobre autoestima, autocompasión y crecimiento personal. Psicóloga en Córdoba y terapia online.',
+    intro:
+      'Autoestima, autocompasión y cambio personal desde una mirada psicológica rigurosa y cercana.',
+  },
+};
+
+export function getCategorySeo(category: string): CategorySeo {
+  return (
+    CATEGORY_SEO[category] ?? {
+      title: `${category} | Blog de psicología en Córdoba`,
+      description: `Artículos de psicología sobre ${category.toLowerCase()} por María Ángeles Mata, psicóloga en Córdoba y online.`,
+      intro: `Artículos sobre ${category.toLowerCase()} escritos desde la consulta de psicología en Córdoba y pensados también para quien busca apoyo online.`,
+    }
+  );
+}
+
+export function slugifyHeading(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+const TOC_EXCLUDE = new Set(['Referencias y fuentes', 'También puede interesarte']);
+
+export function processArticleContent(content: string): {
+  html: string;
+  toc: { id: string; text: string }[];
+} {
+  const toc: { id: string; text: string }[] = [];
+  const usedIds = new Set<string>();
+
+  const html = content.replace(/<h2>(.*?)<\/h2>/g, (_, inner) => {
+    const text = inner.replace(/<[^>]+>/g, '').trim();
+    let id = slugifyHeading(text) || `seccion-${toc.length + 1}`;
+
+    if (usedIds.has(id)) {
+      let suffix = 2;
+      while (usedIds.has(`${id}-${suffix}`)) suffix += 1;
+      id = `${id}-${suffix}`;
+    }
+
+    usedIds.add(id);
+    if (!TOC_EXCLUDE.has(text)) {
+      toc.push({ id, text });
+    }
+
+    return `<h2 id="${id}">${inner}</h2>`;
+  });
+
+  return { html, toc };
 }
