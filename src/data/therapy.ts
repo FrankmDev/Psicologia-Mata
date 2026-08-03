@@ -50,6 +50,8 @@ export const therapyHighlights: ProcessHighlight[] = [
 /**
  * Información de contacto compartida
  */
+import { CONTACT_EMAIL, CONTACT_PHONE_E164, CONTACT_PHONE_DISPLAY, CONTACT_ADDRESS } from '../config/site';
+
 export interface ContactInfo {
   icon: string;
   label: string;
@@ -62,20 +64,20 @@ export const contactInfo: ContactInfo[] = [
   {
     icon: "phone",
     label: "Teléfono",
-    value: "697 733 060",
-    href: "tel:+34697733060"
+    value: CONTACT_PHONE_DISPLAY,
+    href: `tel:${CONTACT_PHONE_E164}`
   },
   {
     icon: "mail",
     label: "Email",
-    value: "mangelesmatacala@hotmail.com",
-    href: "mailto:mangelesmatacala@hotmail.com"
+    value: CONTACT_EMAIL,
+    href: `mailto:${CONTACT_EMAIL}`
   },
   {
     icon: "location",
     label: "Consulta",
-    value: "C/ Rodríguez Sánchez, 9",
-    subvalue: "14003 Córdoba"
+    value: CONTACT_ADDRESS.streetAddress,
+    subvalue: `${CONTACT_ADDRESS.postalCode} ${CONTACT_ADDRESS.addressLocality}`
   }
 ];
 

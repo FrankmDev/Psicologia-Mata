@@ -14,10 +14,13 @@ import terapiaFamilia from '../assets/terapia-familiar.avif';
 import evaluacion from '../assets/evaluacion.avif';
 import cognitiva from '../assets/estimulacion-cognitiva.avif';
 import { SITE_URL } from '../config/site';
+import { serviceOffers } from '../data/business';
 
-const title = "Servicios de psicología en Córdoba y online";
-const description = "Terapia individual, de pareja y familiar, evaluación neuropsicológica y estimulación cognitiva en Córdoba y online. Enfoque cercano basado en evidencia.";
-const keywords = "terapia individual córdoba, terapia de pareja, terapia familiar, evaluación neuropsicológica, psicólogo online, servicios psicología córdoba";
+const title = 'Servicios de psicología en Córdoba y online | Terapia individual y pareja';
+const description =
+  'Terapia individual, de pareja y familiar, evaluación neuropsicológica y estimulación cognitiva en Córdoba y online. Precios desde 60€. Primera consulta sin compromiso.';
+const keywords =
+  'terapia individual córdoba, terapia de pareja córdoba, terapia familiar, evaluación neuropsicológica córdoba, psicólogo online, servicios psicología córdoba';
 
 const serviceImages: Record<string, ImageMetadata> = {
   individual: terapiaIndividual,
@@ -96,6 +99,7 @@ const faqSchemaData = faqs.map(faq => ({
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
   <Schema slot="schema" type="webpage" data={{ name: title, description, url: `${SITE}/servicios/` }} />
   <Schema slot="schema" type="faqpage" data={faqSchemaData} />
+  <Schema slot="schema" type="servicecatalog" data={serviceOffers} />
   <Header activePage="Servicios" />
   
   <main id="main-content">

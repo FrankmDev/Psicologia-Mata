@@ -1,10 +1,15 @@
 ---
 import "../styles/global.css";
-// import { ClientRouter } from 'astro:transitions'; // Desactivado para evitar caché
 import RevealAnimation from '../components/RevealAnimation.astro';
-import { getImage } from 'astro:assets';
-import ogLogoSrc from '../assets/logo.avif';
-import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, absoluteUrl } from '../config/site';
+import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import {
+  SITE_URL,
+  SITE_NAME,
+  DEFAULT_DESCRIPTION,
+  DEFAULT_OG_IMAGE,
+  PUBLIC_GSC_VERIFICATION,
+  absoluteUrl,
+} from '../config/site';
 
 interface Props {
   title: string;
@@ -25,7 +30,7 @@ const {
   description = DEFAULT_DESCRIPTION,
   keywords,
   type = 'website',
-  image = '/favicon-32x32.png',
+  image = DEFAULT_OG_IMAGE,
   ogImage,
   canonical,
   noindex = false,
@@ -51,13 +56,10 @@ const canonicalUrl = (() => {
   return absoluteUrl(normalizedCanonicalPath);
 })();
 
-// Generar una versión PNG del logo para máxima compatibilidad con Open Graph
-const optimizedOgImage = await getImage({ src: ogLogoSrc, format: 'png', width: 1200 });
-
 const ogImageCandidate = ogImage || image;
-const ogImageUrl = ogImageCandidate 
-  ? (ogImageCandidate.startsWith('http') ? ogImageCandidate : absoluteUrl(ogImageCandidate))
-  : absoluteUrl(optimizedOgImage.src);
+const ogImageUrl = ogImageCandidate.startsWith('http')
+  ? ogImageCandidate
+  : absoluteUrl(ogImageCandidate);
 
 const websiteSchema = {
   '@context': 'https://schema.org',
@@ -72,8 +74,7 @@ const websiteSchema = {
   }
 };
 
-// Precargar recursos críticos
-// Nota: Las fuentes de Google se cargan vía CSS para evitar errores 404 con URLs específicas
+const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
 ---
 
 <!doctype html>
@@ -87,32 +88,12 @@ const websiteSchema = {
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Psicología Mata" />
-    
-    <!-- Preconnect a dominios externos - Critical for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://images.unsplash.com" />
-    
+
     <!-- Prefetch para navegación inmediata -->
     <link rel="prefetch" href="/servicios/" />
     <link rel="prefetch" href="/contacto/" />
-    
 
-    <!-- Fuentes con display=swap para evitar render blocking -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@200;300;400;500;600&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Manrope:wght@200;300;400;500;600&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
-
-    <!-- Favicon: usar el icono exacto en formato clásico y PNG compatible. -->
+    {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <link rel="icon" href={absoluteUrl('/favicon.ico')} sizes="32x32" />
     <link rel="icon" href={absoluteUrl('/favicon-32x32.png')} type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href={absoluteUrl('/apple-touch-icon.png')} sizes="180x180" />
@@ -168,7 +149,7 @@ const websiteSchema = {
     <!-- <ClientRouter /> --> <!-- Desactivado para evitar caché -->
   </head>
 
-  <body class="antialiased selection:bg-stone/50 bg-alabaster">
+  <body class="antialiased selection:bg-stone/50 bg-alabaster pb-14 lg:pb-0">
     
     <!-- Skip link para accesibilidad -->
     <a
@@ -180,6 +161,8 @@ const websiteSchema = {
 
     <!-- Contenido principal -->
     <slot />
+
+    <MobileStickyCTA />
     
     <!-- Inline critical CSS para evitar CLS -->
     <style is:inline>

@@ -11,6 +11,8 @@ import terapiaFamilia from '../assets/terapia-familia.avif';
 import psicologia from '../assets/psicologia.avif';
 import estimulacionCognitiva from '../assets/estimulacion-cognitiva.avif';
 import evaluacion from '../assets/evaluacion.avif';
+import primeraSesionPsicologia from '../assets/primera-sesion-psicologia.avif';
+import terapia from '../assets/terapia.avif';
 
 export interface BlogPost {
   slug: string;
@@ -32,6 +34,346 @@ export interface BlogPost {
 }
 
 export const blogPosts: Record<string, BlogPost> = {
+  "cuando-ir-al-psicologo": {
+    slug: "cuando-ir-al-psicologo",
+    title: "Cuándo ir al psicólogo: señales, mitos y qué esperar en la primera sesión",
+    seoTitle: "Cuándo ir al psicólogo: señales, mitos y qué esperar",
+    seoDescription: "¿Cuándo ir al psicólogo? Señales claras, mitos frecuentes y qué ocurre en la primera sesión. Guía profesional para pedir ayuda psicológica con confianza. Consulta presencial en Córdoba y online.",
+    keywords: "cuando ir al psicologo, señales ir al psicologo, necesito un psicologo, primera sesion psicologo, primera consulta psicologica, cuando pedir ayuda psicologica, mitos psicologia, valoracion psicologica, psicologo cordoba, psicologa cordoba, psicologo cerca de mi, terapia psicologica cordoba",
+    excerpt: "Si llevas tiempo preguntándote si necesitas un psicólogo, este artículo te ayuda a leer las señales con calma, desmontar mitos habituales y saber qué esperar antes de dar el paso.",
+    date: "3 Agosto 2026",
+    dateShort: "3 Ago",
+    readTime: "14 min",
+    category: "Salud Mental",
+    image: primeraSesionPsicologia,
+    faq: [
+      {
+        question: "¿Cómo sé si necesito un psicólogo?",
+        answer: "Suele ser el momento cuando el malestar dura semanas o meses, interfiere en sueño, trabajo, relaciones o autocuidado, o cuando evitas situaciones importantes por miedo, tristeza o agotamiento. No hace falta estar en crisis para consultar."
+      },
+      {
+        question: "¿Tengo que estar mal para ir al psicólogo?",
+        answer: "No. Muchas personas acuden para entender un malestar difuso, tomar decisiones, mejorar relaciones o prevenir un empeoramiento. La terapia no es solo para crisis graves."
+      },
+      {
+        question: "¿Cuánto dura una primera sesión de psicología?",
+        answer: "Suele durar entre 50 y 60 minutos. Es un espacio para conocernos, entender qué te trae y valorar si el enfoque y el formato encajan contigo."
+      },
+      {
+        question: "¿Puedo ir al psicólogo sin saber exactamente qué me pasa?",
+        answer: "Sí. Es muy habitual. Parte del trabajo inicial consiste precisamente en poner palabras a lo que sientes y ordenar síntomas, causas y objetivos."
+      },
+      {
+        question: "¿La terapia online funciona igual que la presencial?",
+        answer: "En muchos casos sí, siempre que haya buena conexión, privacidad y un profesional acreditado. La elección depende de tu situación, preferencias y tipo de dificultad."
+      },
+      {
+        question: "¿Cómo pedir cita con un psicólogo en Córdoba?",
+        answer: "Puedes contactar por teléfono, email o formulario web para solicitar una primera valoración. En consulta presencial se valora tu caso con calma; si prefieres empezar desde casa, también es posible en formato online."
+      }
+    ],
+    content: `
+      <p class="text-xl leading-relaxed text-charcoal mb-8">Si estás leyendo esto, probablemente ya llevas un tiempo preguntándote si necesitas un psicólogo. No porque no lo intuyas, sino porque dudas de si es “suficientemente grave”, si es el momento adecuado o si pedir ayuda significa admitir una debilidad. Muchas personas llegan a consulta después de meses —a veces años— posponiendo esa conversación. La realidad es otra: una valoración psicológica es un acto de cuidado, no de fracaso. Y cuanto antes se entiende qué está pasando, más opciones suele haber para recuperar bienestar, claridad y calidad de vida.</p>
+
+      <figure class="my-12">
+        <img src="${terapia.src}" alt="Espacio de consulta psicológica tranquilo para una primera sesión de terapia" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+        <figcaption class="text-sm text-ink mt-3 text-center">La primera sesión no es un examen: es un espacio para entender qué te trae y qué tipo de ayuda puede encajar contigo.</figcaption>
+      </figure>
+
+      <div class="bg-cream border border-border-delicate rounded-2xl p-6 my-10">
+        <p class="text-base text-charcoal mb-0"><strong>Idea clave:</strong> no necesitas una etiqueta diagnóstica para empezar. Basta con que algo te preocupe de forma sostenida, limite tu vida o te cueste más de lo que te gustaría. La terapia sirve tanto para atravesar una crisis como para entender patrones, tomar decisiones o dejar de funcionar siempre al límite. Si quieres conocer el proceso completo, puedes leer sobre los <a href="/blog/beneficios-terapia-individual/">beneficios de la terapia individual</a>.</p>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">¿Cómo saber si necesitas un psicólogo?</h2>
+
+      <p>No existe una única señal universal. Lo que importa es la combinación entre <strong>duración</strong>, <strong>intensidad</strong> e <strong>impacto en tu vida</strong>. La Organización Mundial de la Salud recuerda que la salud mental no es solo la ausencia de trastorno, sino un estado de bienestar en el que la persona puede afrontar el estrés habitual, trabajar de forma productiva y contribuir a su comunidad.<sup><a href="#ref-ci1">1</a></sup> Cuando eso se resiente de forma persistente, merece atención profesional.</p>
+
+      <div class="grid md:grid-cols-2 gap-6 my-8">
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">1. El malestar no remite</h3>
+          <p class="text-sm text-charcoal">Llevas semanas o meses con tristeza, ansiedad, irritabilidad o vacío sin encontrar alivio duradero, aunque hayas intentado descansar, hablar con alguien o “superarlo” por tu cuenta.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">2. Tu vida diaria se resiente</h3>
+          <p class="text-sm text-charcoal">Cuesta concentrarte, rendir en el trabajo o los estudios, cuidar de ti, cumplir responsabilidades o mantener rutinas básicas como dormir o alimentarte con regularidad.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">3. Evitas cada vez más</h3>
+          <p class="text-sm text-charcoal">Dejas de salir, pospones llamadas, cancelas planes o evitas situaciones por miedo, vergüenza o agotamiento. La evitación alivia al momento, pero suele estrechar la vida con el tiempo.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">4. Tus relaciones se deterioran</h3>
+          <p class="text-sm text-charcoal">Discutes más, te aislas, sientes que nadie te entiende o repites los mismos conflictos sin saber cómo salir del bucle. Si el problema es de pareja, puede ayudarte leer sobre <a href="/blog/terapia-de-pareja-cuando-empezar/">cuándo empezar terapia de pareja</a>.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">5. El cuerpo habla antes que tú</h3>
+          <p class="text-sm text-charcoal">Tensión, insomnio, palpitaciones, molestias digestivas, dolores de cabeza o cansancio constante pueden tener causas médicas, pero también emocionales. Conviene mirar ambos planos.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">6. Te cuesta tomar decisiones</h3>
+          <p class="text-sm text-charcoal">Dudas de todo, te paralizas ante cambios laborales, familiares o personales, o sientes que vives en piloto automático sin saber qué quieres.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl md:col-span-2">
+          <h3 class="font-serif text-lg text-charcoal mb-2">7. Sientes que ya no eres tú</h3>
+          <p class="text-sm text-charcoal">Te reconoces menos, has perdido ilusión por cosas que antes importaban o notas que tu forma de reaccionar no encaja con la persona que quieres ser. Esa sensación de desconexión también es motivo suficiente para consultar.</p>
+        </div>
+      </div>
+
+      <blockquote>
+        <p>Ir al psicólogo no significa que no puedas solo. Significa que has decidido no quedarte atrapado en un malestar que ya lleva demasiado tiempo ocupando espacio.</p>
+      </blockquote>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Malestar normal o momento de pedir ayuda</h2>
+
+      <p>Una de las dudas más frecuentes es saber si lo que sientes “merece” terapia. La pregunta útil no es si otros lo tienen peor, sino si <strong>tu malestar te está costando más de lo razonable</strong> y si sigue igual pese a tus intentos por manejarlo.</p>
+
+      <div class="overflow-x-auto my-10">
+        <table>
+          <thead>
+            <tr>
+              <th>Situación</th>
+              <th>Puede ser una reacción esperable</th>
+              <th>Conviene valoración psicológica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Ansiedad</td>
+              <td>Nervios antes de un examen, entrevista o cambio importante.</td>
+              <td>Preocupación constante, ataques de pánico, evitación o insomnio persistente. Puedes ampliar en <a href="/blog/ansiedad-persistente-tratamiento-psicologico/">ansiedad persistente</a>.</td>
+            </tr>
+            <tr>
+              <td>Tristeza</td>
+              <td>Tristeza tras una pérdida, decepción o etapa difícil.</td>
+              <td>Desánimo sostenido, falta de energía, desesperanza o abandono del autocuidado.</td>
+            </tr>
+            <tr>
+              <td>Estrés</td>
+              <td>Semanas intensas en el trabajo o en casa.</td>
+              <td>Agotamiento crónico, irritabilidad constante, cinismo o sensación de no poder recuperarte.</td>
+            </tr>
+            <tr>
+              <td>Relaciones</td>
+              <td>Discusión puntual por un desacuerdo concreto.</td>
+              <td>Conflictos repetidos, distancia emocional o sensación de convivir sin conexión.</td>
+            </tr>
+            <tr>
+              <td>Autoestima</td>
+              <td>Dudar ante una crítica o un error.</td>
+              <td>Autocrítica constante, miedo al fracaso o necesidad excesiva de aprobación. Ver <a href="/blog/autoestima-saludable/">baja autoestima</a>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Mitos que frenan a muchas personas</h2>
+
+      <p>Los mitos sobre la psicología siguen siendo una barrera importante. Entenderlos con claridad ayuda a decidir con más libertad.</p>
+
+      <div class="overflow-x-auto my-10">
+        <table>
+          <thead>
+            <tr>
+              <th>Mito frecuente</th>
+              <th>Lo que suele ocurrir en realidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>“Solo voy si estoy muy mal”.</td>
+              <td>Muchas personas acuden antes de la crisis para prevenir, entender patrones o mejorar su calidad de vida.</td>
+            </tr>
+            <tr>
+              <td>“Me van a juzgar o a decir que exagero”.</td>
+              <td>La consulta es un espacio de confidencialidad profesional. El objetivo no es evaluarte como persona, sino comprender qué te ocurre.</td>
+            </tr>
+            <tr>
+              <td>“Si fuera fuerte, lo resolvería solo”.</td>
+              <td>Pedir ayuda requiere lucidez. La terapia no sustituye tu capacidad: la refuerza con herramientas y perspectiva.</td>
+            </tr>
+            <tr>
+              <td>“Me van a medicar”.</td>
+              <td>El psicólogo no prescribe fármacos. Si hiciera falta valoración psiquiátrica, se orienta de forma coordinada y transparente.</td>
+            </tr>
+            <tr>
+              <td>“Una sesión debería bastar”.</td>
+              <td>La primera sesión orienta; el cambio sostenido suele requerir tiempo, práctica y seguimiento.</td>
+            </tr>
+            <tr>
+              <td>“La terapia es solo hablar”.</td>
+              <td>En un buen proceso hay evaluación, objetivos, técnicas, tareas y revisión de avances. Hablar importa, pero no es lo único.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="my-12">
+        <img src="${evaluacion.src}" alt="Valoración psicológica profesional para elegir el tipo de ayuda adecuado" class="w-full rounded-2xl shadow-lg" loading="lazy" />
+        <figcaption class="text-sm text-ink mt-3 text-center">Elegir bien al profesional y entender el proceso desde el principio facilita sentirte en buenas manos.</figcaption>
+      </figure>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Qué esperar en la primera sesión de psicología</h2>
+
+      <p>La primera sesión suele generar expectativas mezcladas: alivio por haber dado el paso, vergüenza, miedo a no saber qué decir o temor a “abrir la caja de Pandora”. Es normal. En la práctica, la primera cita es sobre todo un espacio de <strong>conocimiento mutuo</strong>, no un interrogatorio ni una prueba de si “lo estás haciendo bien”.</p>
+
+      <div class="space-y-6 my-8">
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">1. Motivo de consulta</h3>
+          <p class="text-charcoal text-sm">Te preguntaré qué te trae, desde cuándo lo notas y qué has intentado hasta ahora. No hace falta tener un discurso perfecto: basta con empezar por lo que más te pesa.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">2. Contexto vital</h3>
+          <p class="text-charcoal text-sm">Trabajo, familia, pareja, salud, duelos, cambios recientes, descanso, consumo de alcohol o sustancias y red de apoyo. Todo eso ayuda a entender el cuadro completo.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">3. Objetivos y expectativas</h3>
+          <p class="text-charcoal text-sm">Qué te gustaría conseguir: dormir mejor, tener menos ansiedad, mejorar una relación, tomar una decisión, recuperar energía o simplemente entenderte mejor.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">4. Forma de trabajo y encaje</h3>
+          <p class="text-charcoal text-sm">Explicaré cómo trabajo, qué implica el proceso y si el enfoque parece adecuado para tu situación. También podrás preguntar duración, frecuencia, confidencialidad y modalidad.</p>
+        </div>
+      </div>
+
+      <p>No tienes que contarlo todo en la primera sesión. La confianza se construye poco a poco. Lo importante es que salgas con una idea más clara de si quieres continuar y de qué camino tiene sentido para ti. En mi experiencia, muchas personas se sorprenden de lo reconfortante que resulta, por fin, poner en palabras algo que llevaban tiempo cargando solas.</p>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Cómo elegir psicólogo: qué mirar antes de pedir cita</h2>
+
+      <p>Elegir profesional no es solo cuestión de cercanía o precio. Conviene revisar formación, colegiación, experiencia en tu tipo de dificultad y sensación de encaje personal. En España, quien ejerce psicología sanitaria debe contar con la titulación y habilitación correspondientes. Puedes conocer la trayectoria y el enfoque de cada profesional en su página de <a href="/sobre-mi/">sobre mí</a> antes de contactar.</p>
+
+      <p>Si buscas atención presencial, factores prácticos como la ubicación, el horario y la facilidad de acceso también importan: una consulta accesible facilita la constancia. Atiendo en Córdoba capital, en un espacio tranquilo y discreto en el centro de la ciudad, y también ofrezco <a href="/servicios/">terapia online</a> para quienes prefieren esa modalidad, viven en otras localidades de la provincia o combinan ambas según la etapa del proceso.</p>
+
+      <ul class="space-y-3 my-8">
+        <li><strong>Formación y colegiación:</strong> verifica que la persona esté colegiada y tenga formación en psicología general sanitaria si buscas atención clínica.</li>
+        <li><strong>Experiencia en tu motivo de consulta:</strong> ansiedad, pareja, familia, duelo, autoestima o evaluación requieren enfoques distintos.</li>
+        <li><strong>Claridad en el proceso:</strong> un buen profesional explica objetivos, límites, confidencialidad y duración orientativa sin prometer resultados milagrosos.</li>
+        <li><strong>Sensación de seguridad:</strong> no necesitas sentirte “cómodo al 100 %” desde el minuto uno, pero sí respetado y escuchado.</li>
+        <li><strong>Modalidad:</strong> presencial, online o mixta. Lo importante es que puedas sostener el proceso con regularidad.</li>
+      </ul>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Presencial u online: qué conviene en cada caso</h2>
+
+      <p>La evidencia sugiere que, en muchos trastornos de ansiedad y otros problemas emocionales, la terapia online bien estructurada puede ser tan eficaz como la presencial en numerosos casos, siempre que haya buena conexión, privacidad y seguimiento profesional.<sup><a href="#ref-ci2">2</a></sup></p>
+
+      <div class="grid md:grid-cols-2 gap-6 my-8">
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Presencial</h3>
+          <p class="text-sm text-charcoal">Puede facilitar la contención, especialmente si valoras el contacto directo, vives en Córdoba o alrededores, o prefieres separar físicamente el espacio terapéutico del hogar.</p>
+        </div>
+        <div class="bg-cream p-6 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Online</h3>
+          <p class="text-sm text-charcoal">Aporta flexibilidad si tienes horarios complicados, desplazamientos difíciles o prefieres empezar desde un entorno conocido. También es una opción habitual para personas de la provincia o de otras ciudades.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Cuánto dura un proceso psicológico</h2>
+
+      <p>No hay una respuesta única. Depende de la complejidad, los objetivos, la constancia y el apoyo disponible fuera de sesión. Hay procesos breves y muy focalizados, y otros que requieren más tiempo para consolidar cambios profundos. Lo razonable es revisar avances cada cierto número de sesiones y ajustar el ritmo sin convertir la terapia en algo indefinido sin sentido.</p>
+
+      <p>Las guías clínicas recomiendan adaptar la intensidad del tratamiento a la gravedad y al deterioro funcional de la persona, empezando por intervenciones psicológicas cuando son suficientes y escalando solo si hace falta.<sup><a href="#ref-ci3">3</a></sup></p>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Qué puedes hacer antes de pedir cita</h2>
+
+      <p>Si todavía dudas, estos pasos pueden ayudarte a ganar claridad sin presionarte. No sustituyen una valoración profesional, pero suelen aclarar si el siguiente paso tiene sentido para ti:</p>
+
+      <div class="space-y-6 my-8">
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Escribe lo que te preocupa</h3>
+          <p class="text-charcoal text-sm">Durante tres días, anota momentos de malestar, qué los desencadena y qué haces para aliviarlo. Verlo en papel suele ordenar la confusión.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Pregúntate por el impacto</h3>
+          <p class="text-charcoal text-sm">¿Te afecta en sueño, trabajo, relaciones, ánimo o salud? Si la respuesta es sí en más de un área, la valoración profesional cobra más sentido.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">Habla con alguien de confianza</h3>
+          <p class="text-charcoal text-sm">No para que te digan si “mereces” terapia, sino para dejar de cargar solo con la decisión. A veces nombrar la duda ya alivia.</p>
+        </div>
+      </div>
+
+      <div class="bg-terracotta/10 border border-terracotta/20 rounded-2xl p-6 my-10">
+        <p class="text-base text-charcoal mb-0"><strong>Atención:</strong> si hay ideas de hacerse daño, desesperanza intensa, alucinaciones, consumo peligroso de alcohol o medicación, o una crisis que te desborda, no esperes a “ver si pasa”. Busca ayuda urgente a través de servicios de emergencia, atención primaria o recursos de crisis en tu zona.</p>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Cuándo pedir ayuda profesional</h2>
+
+      <p>Conviene consultar cuando el malestar es persistente, limita tu vida o aparece junto a síntomas que ya no puedes ignorar: insomnio crónico, llanto frecuente, irritabilidad constante, aislamiento, miedo que te paraliza o una sensación sostenida de no poder más. También cuando llevas tiempo diciéndote “ya iré” y la situación no mejora.</p>
+
+      <p>En <a href="/servicios/">terapia individual</a>, el primer paso es entender qué te ocurre y qué necesitas. No hace falta llegar con las respuestas: basta con la disposición a explorarlas. Si tu malestar tiene un componente de ansiedad, puede complementar este artículo la guía sobre <a href="/blog/gestion-ansiedad/">cómo gestionar la ansiedad cuando el cuerpo se activa</a> o el artículo sobre <a href="/blog/ansiedad-persistente-tratamiento-psicologico/">ansiedad persistente y tratamiento psicológico</a>.</p>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Dar el paso: más sencillo de lo que parece</h2>
+
+      <p>Muchas personas posponen la consulta porque imaginan un proceso complicado. En la práctica, pedir una primera valoración suele ser tan simple como enviar un mensaje o hacer una llamada breve para comentar qué te trae y resolver dudas prácticas: modalidad, horarios, duración de las sesiones o tipo de dificultad que quieres trabajar.</p>
+
+      <p>No tienes que saber si necesitas terapia a largo plazo. La primera sesión sirve precisamente para orientarte. Si después de leer estas señales sientes que algo de esto te representa, puede ser el momento de dejar de aplazarlo. A veces el alivio empieza simplemente por dejar de cargar solo con la decisión.</p>
+
+      <div class="bg-cream border border-border-delicate rounded-2xl p-6 my-10">
+        <p class="text-base text-charcoal mb-3"><strong>Lo que suele ocurrir al contactar:</strong></p>
+        <ul class="space-y-2 mb-0">
+          <li>Respondes a unas preguntas sencillas sobre qué te trae y qué formato prefieres.</li>
+          <li>Se acuerda una primera sesión de unos 50 minutos, presencial u online.</li>
+          <li>En esa cita se valora tu situación y se decide con calma si continuar tiene sentido.</li>
+        </ul>
+      </div>
+
+      <div class="bg-olive/10 border border-olive/20 rounded-2xl p-8 my-10">
+        <p class="text-lg font-medium text-charcoal mb-2">¿Te reconoces en alguna de estas señales?</p>
+        <p class="text-charcoal mb-4">Si llevas tiempo dándole vueltas, podemos hablar con tranquilidad sobre qué te ocurre y si una primera sesión —presencial en Córdoba u online— encaja contigo. Sin presión: solo una conversación honesta para ver si puedo ayudarte.</p>
+        <a href="/contacto/" class="inline-flex items-center gap-2 text-olive font-medium hover:underline">Pedir información sobre una primera sesión <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3"/></svg></a>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Preguntas frecuentes</h2>
+
+      <div class="space-y-6 my-8">
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿Cómo sé si necesito un psicólogo?</h3>
+          <p class="text-charcoal text-sm">Suele ser el momento cuando el malestar dura semanas o meses, interfiere en sueño, trabajo, relaciones o autocuidado, o cuando evitas situaciones importantes por miedo, tristeza o agotamiento. No hace falta estar en crisis para consultar.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿Tengo que estar mal para ir al psicólogo?</h3>
+          <p class="text-charcoal text-sm">No. Muchas personas acuden para entender un malestar difuso, tomar decisiones, mejorar relaciones o prevenir un empeoramiento. La terapia no es solo para crisis graves.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿Cuánto dura una primera sesión de psicología?</h3>
+          <p class="text-charcoal text-sm">Suele durar entre 50 y 60 minutos. Es un espacio para conocernos, entender qué te trae y valorar si el enfoque y el formato encajan contigo.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿Puedo ir al psicólogo sin saber exactamente qué me pasa?</h3>
+          <p class="text-charcoal text-sm">Sí. Es muy habitual. Parte del trabajo inicial consiste precisamente en poner palabras a lo que sientes y ordenar síntomas, causas y objetivos.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿La terapia online funciona igual que la presencial?</h3>
+          <p class="text-charcoal text-sm">En muchos casos sí, siempre que haya buena conexión, privacidad y un profesional acreditado. La elección depende de tu situación, preferencias y tipo de dificultad.</p>
+        </div>
+        <div class="bg-cream p-5 rounded-xl">
+          <h3 class="font-serif text-lg text-charcoal mb-2">¿Cómo pedir cita con un psicólogo en Córdoba?</h3>
+          <p class="text-charcoal text-sm">Puedes contactar por teléfono, email o formulario web para solicitar una primera valoración. En consulta presencial se valora tu caso con calma; si prefieres empezar desde casa, también es posible en formato online.</p>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">También puede interesarte</h2>
+
+      <ul class="space-y-3 my-8">
+        <li><a href="/blog/beneficios-terapia-individual/">¿Por qué la terapia individual funciona?</a></li>
+        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona</a></li>
+        <li><a href="/blog/gestion-ansiedad/">Cómo gestionar la ansiedad cuando el cuerpo se activa</a></li>
+        <li><a href="/blog/autoestima-saludable/">Baja autoestima: señales y cómo empezar a trabajarla</a></li>
+        <li><a href="/blog/terapia-de-pareja-cuando-empezar/">Terapia de pareja: cuándo empezar y qué esperar</a></li>
+        <li><a href="/sobre-mi/">Conoce mi forma de trabajar</a></li>
+        <li><a href="/servicios/">Servicios de psicología presencial y online</a></li>
+        <li><a href="/contacto/">Contactar para solicitar información</a></li>
+      </ul>
+
+      <h2 class="text-2xl font-serif text-charcoal mb-4 mt-12">Referencias y fuentes</h2>
+
+      <ol class="space-y-3 my-8 text-base">
+        <li id="ref-ci1">World Health Organization. <a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-strengthening-our-response" target="_blank" rel="noopener noreferrer">Mental health: strengthening our response</a>.</li>
+        <li id="ref-ci2">National Center for Biotechnology Information. <a href="https://pubmed.ncbi.nlm.nih.gov/34860613/" target="_blank" rel="noopener noreferrer">The effectiveness of telehealth versus face-to-face interventions for anxiety disorders: A systematic review and meta-analysis</a>.</li>
+        <li id="ref-ci3">National Institute for Health and Care Excellence. <a href="https://www.nice.org.uk/guidance/cg123" target="_blank" rel="noopener noreferrer">Common mental health problems: identification and pathways to care</a>. Clinical guideline CG123.</li>
+        <li id="ref-ci4">National Institute of Mental Health. <a href="https://www.nimh.nih.gov/health/topics/psychotherapies" target="_blank" rel="noopener noreferrer">Psychotherapies</a>. Última revisión: junio de 2024.</li>
+      </ol>
+    `
+  },
   "ansiedad-personas-mayores": {
     slug: "ansiedad-personas-mayores",
     title: "Ansiedad en personas mayores: señales, causas y cómo ayudar",
@@ -1007,7 +1349,58 @@ export const blogPosts: Record<string, BlogPost> = {
   }
 };
 
-export const blogPostsList = Object.values(blogPosts);
+const BLOG_MONTHS: Record<string, number> = {
+  Enero: 1,
+  Febrero: 2,
+  Marzo: 3,
+  Abril: 4,
+  Mayo: 5,
+  Junio: 6,
+  Julio: 7,
+  Agosto: 8,
+  Septiembre: 9,
+  Octubre: 10,
+  Noviembre: 11,
+  Diciembre: 12,
+};
+
+/** Parsea fechas del blog en formato «3 Agosto 2026». */
+export function parseBlogDate(dateStr: string): Date {
+  const parts = dateStr.split(' ');
+  if (parts.length !== 3) return new Date(0);
+
+  const day = Number.parseInt(parts[0], 10);
+  const month = BLOG_MONTHS[parts[1]] ?? 1;
+  const year = Number.parseInt(parts[2], 10);
+
+  return new Date(year, month - 1, day);
+}
+
+/** ISO 8601 (YYYY-MM-DD) para sitemap y metadatos. */
+export function formatBlogDateISO(dateStr: string): string {
+  const date = parseBlogDate(dateStr);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+export const blogPostsList = Object.values(blogPosts).sort(
+  (a, b) => parseBlogDate(b.date).getTime() - parseBlogDate(a.date).getTime(),
+);
+
+/** Artículo más reciente (destacado en inicio y blog). */
+export function getFeaturedPost(): BlogPost {
+  return blogPostsList[0];
+}
+
+/** Metadatos de fechas para el sitemap, ordenados por publicación. */
+export function getBlogSitemapEntries(): { path: string; lastmod: string }[] {
+  return blogPostsList.map((post) => ({
+    path: `/blog/${post.slug}/`,
+    lastmod: formatBlogDateISO(post.date),
+  }));
+}
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts[slug];
@@ -1015,4 +1408,28 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 
 export function getAllPosts(): BlogPost[] {
   return blogPostsList;
+}
+
+export function categoryToSlug(category: string): string {
+  return category
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/\s+/g, '-');
+}
+
+export function getBlogCategories(): string[] {
+  return [...new Set(blogPostsList.map((post) => post.category))];
+}
+
+export function getCategoryBySlug(slug: string): string | undefined {
+  return getBlogCategories().find((category) => categoryToSlug(category) === slug);
+}
+
+export function getPostsByCategory(category: string): BlogPost[] {
+  return blogPostsList.filter((post) => post.category === category);
+}
+
+export function getCategoryUrl(category: string): string {
+  return `/blog/categoria/${categoryToSlug(category)}/`;
 }

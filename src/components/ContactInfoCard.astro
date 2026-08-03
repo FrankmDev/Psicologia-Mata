@@ -3,6 +3,7 @@
  * ContactInfoCard - Tarjeta de información de contacto reutilizable
  */
 import Icon from './Icon.astro';
+import GoogleReviewButton from './GoogleReviewButton.astro';
 import type { ContactInfo } from '../data/therapy';
 
 interface Props {
@@ -116,6 +117,16 @@ const isDark = variant === 'dark';
           )}
         </div>
       ))}
+    </div>
+
+    <div class="mt-8 pt-8 border-t border-border-delicate">
+      <p class:list={[
+        'text-body-sm mb-4',
+        isDark ? 'text-taupe-light' : 'text-charcoal'
+      ]}>
+        Si ya has pasado por consulta, tu opinión en Google ayuda a otras personas a dar el primer paso.
+      </p>
+      <GoogleReviewButton class="w-full sm:w-auto" />
     </div>
   </div>
   

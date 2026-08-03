@@ -1,7 +1,11 @@
 ---
-import { blogPostsList } from '../../data/blog';
+import { blogPostsList, getFeaturedPost } from '../../data/blog';
 
-const previewPosts = blogPostsList.slice(0, 3);
+const featuredBlogPost = getFeaturedPost();
+const previewPosts = [
+  featuredBlogPost,
+  ...blogPostsList.filter((post) => post.slug !== featuredBlogPost.slug).slice(0, 2),
+];
 ---
 
 <section class="section bg-cream relative" id="blog">

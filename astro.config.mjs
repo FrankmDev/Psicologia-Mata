@@ -2,9 +2,14 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import { getBlogSitemapEntries } from './src/data/blog.ts';
 
 // https://astro.build/config
 const SITE = 'https://matacalapsicologia.es';
+
+const blogSitemapByPath = new Map(
+  getBlogSitemapEntries().map((entry) => [entry.path, entry.lastmod]),
+);
 
 export default defineConfig({
   site: SITE,
@@ -40,11 +45,24 @@ export default defineConfig({
         if (pathname === '/servicios/' || pathname === '/contacto/') {
           return { ...entry, priority: 0.9, changefreq: 'monthly' };
         }
+        if (pathname === '/sobre-mi/') {
+          return { ...entry, priority: 0.85, changefreq: 'monthly' };
+        }
         if (pathname === '/blog/') {
           return { ...entry, priority: 0.85, changefreq: 'weekly' };
         }
+        if (pathname.startsWith('/blog/categoria/')) {
+          return { ...entry, priority: 0.75, changefreq: 'weekly' };
+        }
         if (pathname.startsWith('/blog/') && pathname.length > '/blog/'.length) {
-          return { ...entry, priority: 0.7, changefreq: 'monthly' };
+          const lastmod = blogSitemapByPath.get(pathname);
+          const isFeatured = pathname === '/blog/cuando-ir-al-psicologo/';
+          return {
+            ...entry,
+            priority: isFeatured ? 0.85 : 0.7,
+            changefreq: isFeatured ? 'weekly' : 'monthly',
+            ...(lastmod ? { lastmod } : {}),
+          };
         }
         if (pathname === '/aviso-legal/' || pathname === '/cookies/' || pathname === '/privacidad/') {
           return { ...entry, priority: 0.2, changefreq: 'yearly' };

@@ -1,0 +1,41 @@
+---
+import { GOOGLE_REVIEW_URL } from '../config/site';
+import Icon from './Icon.astro';
+
+interface Props {
+  variant?: 'light' | 'dark';
+  class?: string;
+}
+
+const { variant = 'light', class: className = '' } = Astro.props;
+const isDark = variant === 'dark';
+---
+
+<a
+  href={GOOGLE_REVIEW_URL}
+  target="_blank"
+  rel="noopener noreferrer"
+  class:list={[
+    'group/btn inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-label transition-all duration-300',
+    isDark
+      ? 'border border-alabaster/25 text-alabaster hover:border-terracotta/60 hover:bg-terracotta/10 hover:text-terracotta-light'
+      : 'btn btn-outline',
+    className,
+  ]}
+>
+  <svg
+    class:list={['w-4 h-4 shrink-0', isDark ? 'text-terracotta-light' : 'text-olive']}
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path d="M12 2l2.39 4.84L20 7.68l-3.9 3.8.92 5.38L12 14.77l-4.02 2.09.92-5.38L5 7.68l5.61-.84L12 2z" />
+  </svg>
+  <span>Dejar una reseña en Google</span>
+  {!isDark && (
+    <Icon
+      name="externalLink"
+      class="w-4 h-4 transform transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+    />
+  )}
+</a>

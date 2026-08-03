@@ -4,8 +4,9 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Schema from '../../components/Schema.astro';
 import CTASection from '../../components/CTASection.astro';
-import { blogPosts, getPostBySlug, blogPostsList } from '../../data/blog';
+import { blogPosts, getPostBySlug, blogPostsList, getCategoryUrl, formatBlogDateISO } from '../../data/blog';
 import { Image } from 'astro:assets';
+import mariaAngelesMata from '../../assets/maria-angeles-mata.jpeg';
 import { SITE_URL, absoluteUrl } from '../../config/site';
 
 export function getStaticPaths() {
@@ -22,24 +23,8 @@ if (!post) {
 const title = post.seoTitle ?? `${post.title} | Blog de psicología en Córdoba`;
 const canonicalUrl = absoluteUrl(`/blog/${slug}/`);
 
-// Parse date
-function parseDate(dateStr: string): string {
-  const months: Record<string, string> = {
-    'Enero': '01', 'Febrero': '02', 'Marzo': '03', 'Abril': '04',
-    'Mayo': '05', 'Junio': '06', 'Julio': '07', 'Agosto': '08',
-    'Septiembre': '09', 'Octubre': '10', 'Noviembre': '11', 'Diciembre': '12'
-  };
-  const parts = dateStr.split(' ');
-  if (parts.length === 3) {
-    const day = parts[0].padStart(2, '0');
-    const month = months[parts[1]] || '01';
-    const year = parts[2];
-    return `${year}-${month}-${day}`;
-  }
-  return new Date().toISOString().split('T')[0];
-}
-
-const datePublished = parseDate(post.date);
+const datePublished = formatBlogDateISO(post.date);
+const dateModified = datePublished;
 
 // Get prev/next posts
 const currentIndex = blogPostsList.findIndex(p => p.slug === slug);
@@ -62,10 +47,10 @@ const articleData = {
   description: post.seoDescription ?? post.excerpt,
   image: post.image.src,
   datePublished: datePublished,
-  dateModified: datePublished,
+  dateModified: dateModified,
   author: {
     name: "María Ángeles Mata Cala",
-    url: `${SITE_URL}/#person`
+    url: absoluteUrl('/sobre-mi/')
   },
   publisher: {
     name: "María Ángeles Mata - Psicóloga",
@@ -97,6 +82,7 @@ const shareUrls = {
   ogImage={post.image.src}
   canonical={`/blog/${slug}/`}
   publishedTime={datePublished}
+  modifiedTime={dateModified}
 >
   <Schema slot="schema" type="article" data={articleData} />
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
@@ -230,15 +216,24 @@ const shareUrls = {
           <div class="mt-16 pt-10 border-t border-border-delicate">
             <div class="flex flex-wrap items-center gap-3">
               <span class="text-label-sm text-ink">Etiquetas:</span>
-              <span class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors cursor-pointer">
+              <a
+                href={getCategoryUrl(post.category)}
+                class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors"
+              >
                 {post.category}
-              </span>
-              <span class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors cursor-pointer">
+              </a>
+              <a
+                href="/blog/"
+                class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors"
+              >
                 Psicología
-              </span>
-              <span class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors cursor-pointer">
+              </a>
+              <a
+                href={getCategoryUrl('Bienestar')}
+                class="px-4 py-2 bg-cream border border-border-delicate text-label-sm text-ink hover:border-olive hover:text-olive transition-colors"
+              >
                 Bienestar
-              </span>
+              </a>
             </div>
           </div>
           
@@ -248,13 +243,25 @@ const shareUrls = {
             <div class="absolute top-0 right-0 w-32 h-32 bg-olive/5 rounded-bl-full"></div>
             
             <div class="relative flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <div class="w-20 h-20 rounded-full bg-olive flex items-center justify-center shrink-0">
-                <span class="font-serif text-3xl text-alabaster">M</span>
-              </div>
+              <a href="/sobre-mi/" class="shrink-0">
+                <Image
+                  src={mariaAngelesMata}
+                  alt="María Ángeles Mata - Psicóloga en Córdoba"
+                  width={80}
+                  height={80}
+                  class="w-20 h-20 rounded-full object-cover"
+                  loading="lazy"
+                  format="webp"
+                />
+              </a>
               <div class="flex-1">
-                <p class="font-serif text-2xl text-ink mb-2">María Ángeles Mata</p>
+                <p class="font-serif text-2xl text-ink mb-2">
+                  <a href="/sobre-mi/" class="hover:text-olive transition-colors">María Ángeles Mata</a>
+                </p>
                 <p class="font-sans text-body-sm text-charcoal mb-4">Psicóloga · Colegiada nº AN 12177 · Amplia experiencia acompañando a personas en su proceso de crecimiento personal</p>
                 <div class="flex items-center gap-4">
+                  <a href="/sobre-mi/" class="text-label text-olive hover:text-ink transition-colors">Sobre mí</a>
+                  <span class="text-charcoal">·</span>
                   <a href="/contacto/" class="text-label text-olive hover:text-ink transition-colors">Contactar</a>
                   <span class="text-charcoal">·</span>
                   <a href="/servicios/" class="text-label text-olive hover:text-ink transition-colors">Servicios</a>

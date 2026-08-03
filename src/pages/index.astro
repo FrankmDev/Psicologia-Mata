@@ -14,108 +14,25 @@ import Services from '../sections/home/Services.astro';
 import PressMention from '../sections/home/PressMention.astro';
 import { mainServices } from '../data/services';
 import { faqs } from '../data/faqs';
-import { blogPostsList } from '../data/blog';
+import { blogPostsList, getFeaturedPost } from '../data/blog';
+import { localBusinessData, personData, aboutCredentials } from '../data/business';
 import { SITE_URL } from '../config/site';
 
-const title = "Psicóloga en Córdoba y online | María Ángeles Mata";
-const description = "Psicóloga en Córdoba (colegiada AN 12177): terapia individual, de pareja, familiar, evaluación neuropsicológica y sesiones online. Primera consulta sin compromiso.";
-const keywords = "psicóloga córdoba, psicólogo córdoba, terapia online, terapia de pareja córdoba, terapia individual, psicología clínica, ansiedad, autoestima";
+const title = 'Psicóloga en Córdoba y online | María Ángeles Mata Cala';
+const description =
+  'Psicóloga General Sanitaria en Córdoba (AN 12177): terapia individual, de pareja y familiar, evaluación neuropsicológica y terapia online. Primera consulta sin compromiso.';
+const keywords =
+  'psicóloga córdoba, psicólogo córdoba, terapia online córdoba, terapia de pareja córdoba, terapia individual, psicología clínica, ansiedad, autoestima';
 
-const previewPosts = blogPostsList.slice(0, 3);
+const featuredBlogPost = getFeaturedPost();
+const previewPosts = [
+  featuredBlogPost,
+  ...blogPostsList.filter((post) => post.slug !== featuredBlogPost.slug).slice(0, 2),
+];
 
 const SITE = SITE_URL;
 
-const localBusinessData = {
-  name: "María Ángeles Mata - Psicóloga",
-  legalName: "María Ángeles Mata Cala",
-  description: "Psicóloga en Córdoba especializada en terapia individual, de pareja y familiar con amplia experiencia. Consulta presencial en Córdoba y online.",
-  url: SITE,
-  telephone: "+34 697 733 060",
-  email: "mangelesmatacala@hotmail.com",
-  address: {
-    streetAddress: "C/ Rodríguez Sánchez, 9",
-    addressLocality: "Córdoba",
-    postalCode: "14003",
-    addressCountry: "ES"
-  },
-  geo: {
-    latitude: 37.8882,
-    longitude: -4.7794
-  },
-  image: `${SITE}/profile.jpg`,
-  priceRange: "€€",
-  openingHours: ["Mo-Fr 09:00-20:00"],
-  serviceArea: "Córdoba, provincia de Córdoba y terapia online en España",
-  foundingDate: "2010",
-  founderName: "María Ángeles Mata Cala",
-  specialties: [
-    "Psicología Sanitaria",
-    "Terapia Cognitivo-Conductual",
-    "Terapia Individual Online",
-    "Terapia de Pareja Online",
-    "Terapia Familiar",
-    "Evaluación Neuropsicológica",
-    "Estimulación Cognitiva"
-  ],
-  services: [
-    "Terapia Individual (Presencial y Online)",
-    "Terapia de Pareja (Presencial y Online)",
-    "Terapia Familiar",
-    "Evaluación Neuropsicológica",
-    "Estimulación Cognitiva (Online y Domicilio)"
-  ],
-  socialProfiles: [
-    "https://www.instagram.com/psicologamata",
-    "https://www.facebook.com/psicologamata"
-  ]
-};
-
-const personData = {
-  name: "María Ángeles Mata Cala",
-  url: SITE,
-  jobTitle: "Psicóloga General Sanitaria",
-  description: "Psicóloga colegiada (AN 12177) en Córdoba con amplia trayectoria profesional. Especialista en terapia individual, terapia de pareja, terapia familiar y evaluación neuropsicológica.",
-  telephone: "+34 697 733 060",
-  email: "mangelesmatacala@hotmail.com",
-  image: `${SITE}/profile.jpg`,
-  sameAs: [
-    "https://www.instagram.com/psicologamata",
-    "https://www.facebook.com/psicologamata"
-  ],
-  address: {
-    streetAddress: "C/ Rodríguez Sánchez, 9",
-    addressLocality: "Córdoba",
-    postalCode: "14003",
-    addressCountry: "ES"
-  },
-  knowsAbout: [
-    "Terapia Cognitivo-Conductual",
-    "Terapia de Aceptación y Compromiso (ACT)",
-    "Mindfulness",
-    "Ansiedad y trastornos de ansiedad",
-    "Depresión",
-    "Terapia de pareja",
-    "Terapia familiar sistémica",
-    "Evaluación neuropsicológica",
-    "Estimulación cognitiva en personas mayores",
-    "Autoestima y desarrollo personal",
-    "Gestión del estrés",
-    "Habilidades sociales"
-  ],
-  credentials: [
-    { name: "Máster en Psicología General Sanitaria", year: "2025", institution: "Universidad Católica de Ávila", type: "Master" },
-    { name: "Grado en Psicología — Mención en Psicología de la Salud", year: "2023", institution: "Universidad Católica de Ávila", type: "Degree" },
-    { name: "Máster en Neuropsicología", year: "2021", institution: "Escuela de Postgrado de Psicología y Psiquiatría", type: "Master" },
-    { name: "Máster en Deterioros Cognitivos", year: "2021", institution: "Escuela de Postgrado de Psicología y Psiquiatría", type: "Master" },
-    { name: "Máster en Gerontología: Intervención Psicológica y Pedagógica", year: "2020", institution: "Universidad San Jorge", type: "Master" }
-  ],
-  licenseNumber: "AN 12177",
-  licenseOrganization: "Colegio Oficial de Psicólogos de Andalucía"
-};
-
-const breadcrumbData = [
-  { name: "Inicio", url: `${SITE}/` }
-];
+const breadcrumbData = [{ name: 'Inicio', url: `${SITE}/` }];
 
 // FAQ schema data
 const faqSchemaData = faqs.map(faq => ({
@@ -126,13 +43,7 @@ const faqSchemaData = faqs.map(faq => ({
 
 
 // Credenciales
-const credentials = [
-  { year: "2025", title: "Máster en Psicología General Sanitaria", institution: "Univ. Católica de Ávila" },
-  { year: "2023", title: "Grado en Psicología – Mención en Psicología de la Salud", institution: "Univ. Católica de Ávila" },
-  { year: "2021", title: "Máster en Neuropsicología", institution: "Escuela de Postgrado de Psicología y Psiquiatría. Reconocido por Univ. Católica de Cuyo (Argentina) y Univ. CLEA (México)" },
-  { year: "2021", title: "Máster en Deterioros Cognitivos", institution: "Escuela De Postgrado de Psicología y Psiquiatría" },
-  { year: "2020", title: "Máster en Gerontología: Intervención Psicológica y Pedagógica en la Tercera Edad", institution: "Universidad San Jorge" },
-];
+const credentials = aboutCredentials;
 
 // Valores
 const values = [

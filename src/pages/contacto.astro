@@ -7,11 +7,15 @@ import ContactInfoCard from '../components/ContactInfoCard.astro';
 import CTASection from '../components/CTASection.astro';
 import Schema from '../components/Schema.astro';
 import Icon from '../components/Icon.astro';
-import { SITE_URL } from '../config/site';
+import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import { SITE_URL, CONTACT_EMAIL, GOOGLE_MAPS_EMBED_URL, GOOGLE_MAPS_URL } from '../config/site';
+import { localBusinessData } from '../data/business';
 
-const title = "Contacto | Cita con psicóloga en Córdoba y online";
-const description = "Pide cita con María Ángeles Mata, psicóloga en Córdoba: consulta en Rodríguez Sánchez 9 y terapia online. Teléfono, email y respuesta en menos de 24 h.";
-const keywords = "cita psicólogo córdoba, contacto psicóloga, consulta psicología córdoba, terapia online cita, psicóloga rodríguez sánchez";
+const title = 'Contacto y cita | Psicóloga en Córdoba y online';
+const description =
+  'Pide cita con María Ángeles Mata, psicóloga en Córdoba (AN 12177): consulta en Rodríguez Sánchez 9 y terapia online. Teléfono, email y respuesta en menos de 24 h.';
+const keywords =
+  'cita psicólogo córdoba, contacto psicóloga, consulta psicología córdoba, terapia online cita, psicóloga rodríguez sánchez';
 
 const SITE = SITE_URL;
 
@@ -30,6 +34,7 @@ const contactPageData = {
 <Layout {title} {description} {keywords} canonical="/contacto/">
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
   <Schema slot="schema" type="webpage" data={contactPageData} />
+  <Schema slot="schema" type="localbusiness" data={localBusinessData} />
   <Header activePage="Contacto" />
   
   <main id="main-content">
@@ -202,6 +207,41 @@ const contactPageData = {
       </div>
     </section>
 
+    <section class="section bg-alabaster relative" aria-label="Ubicación de la consulta">
+      <div class="container-editorial">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          <div class="lg:col-span-4" data-reveal>
+            <span class="label-section">Consulta presencial</span>
+            <h2 class="title-section mt-8 mb-6">Cómo llegar</h2>
+            <p class="text-body-sm text-charcoal mb-4">
+              C/ Rodríguez Sánchez, 9<br />
+              14003 Córdoba
+            </p>
+            <a
+              href={GOOGLE_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-label text-olive hover:underline underline-offset-2"
+            >
+              Abrir en Google Maps
+            </a>
+          </div>
+          <div class="lg:col-span-8" data-reveal data-reveal-delay="100">
+            <div class="border border-border-delicate overflow-hidden bg-cream">
+              <iframe
+                title="Mapa de la consulta de psicología en Córdoba"
+                src={GOOGLE_MAPS_EMBED_URL}
+                class="w-full h-[320px] lg:h-[420px] border-0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA Teléfono -->
     <CTASection
       label="Si prefieres hablar"
@@ -217,7 +257,7 @@ const contactPageData = {
   <Footer />
 </Layout>
 
-<script>
+<script define:vars={{ contactEmail: CONTACT_EMAIL }}>
   const form = document.getElementById('contact-form');
   const status = document.getElementById('contact-form-status');
   const submitButton = form?.querySelector('[data-submit-button]');
@@ -264,11 +304,12 @@ const contactPageData = {
 
       form.reset();
       setStatus('Mensaje enviado correctamente. Te responderé en menos de 24 horas.', 'success');
+      window.dispatchEvent(new CustomEvent('contact-form-success'));
     } catch (error) {
       setStatus(
         error instanceof Error
           ? error.message
-          : 'No se ha podido enviar el mensaje. También puedes escribir a info@matacalapsicologia.es.',
+          : `No se ha podido enviar el mensaje. También puedes escribir a ${contactEmail}.`,
         'error'
       );
     } finally {

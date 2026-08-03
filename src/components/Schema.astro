@@ -93,9 +93,33 @@ interface PersonData {
   licenseOrganization?: string;
 }
 
+interface ServiceOfferItem {
+  name: string;
+  description: string;
+  price?: string;
+  priceCurrency?: string;
+  duration: string;
+  url: string;
+}
+
 interface Props {
-  type: 'localbusiness' | 'article' | 'webpage' | 'breadcrumbs' | 'faqpage' | 'professionalservice' | 'person';
-  data: LocalBusinessData | ArticleData | WebPageData | BreadcrumbItem[] | FAQItem[] | PersonData;
+  type:
+    | 'localbusiness'
+    | 'article'
+    | 'webpage'
+    | 'breadcrumbs'
+    | 'faqpage'
+    | 'professionalservice'
+    | 'person'
+    | 'servicecatalog';
+  data:
+    | LocalBusinessData
+    | ArticleData
+    | WebPageData
+    | BreadcrumbItem[]
+    | FAQItem[]
+    | PersonData
+    | ServiceOfferItem[];
 }
 
 import { SITE_URL } from '../config/site';
@@ -357,6 +381,29 @@ function generatePersonSchema(data: PersonData) {
   return schema;
 }
 
+function generateServiceCatalogSchema(offers: ServiceOfferItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'OfferCatalog',
+    name: 'Servicios de Psicología en Córdoba y online',
+    itemListElement: offers.map((offer, index) => ({
+      '@type': 'Offer',
+      position: index + 1,
+      url: offer.url,
+      ...(offer.price && {
+        price: offer.price,
+        priceCurrency: offer.priceCurrency || 'EUR',
+      }),
+      itemOffered: {
+        '@type': 'Service',
+        name: offer.name,
+        description: offer.description,
+        url: offer.url,
+      },
+    })),
+  };
+}
+
 let schemaData: Record<string, unknown> | null = null;
 
 switch (type) {
@@ -378,6 +425,17 @@ switch (type) {
   case 'person':
     schemaData = generatePersonSchema(data as PersonData);
     break;
+  case 'servicecatalog':
+    schemaData = generateServiceCatalogSchema(data as ServiceOfferItem[]);
+    break;
+  case 'professionalservice':
+    schemaData = null;
+    break;
+  default: {
+    const _exhaustive: never = type;
+    schemaData = null;
+    void _exhaustive;
+  }
 }
 
 const schemaJson = schemaData ? JSON.stringify(schemaData) : '';
