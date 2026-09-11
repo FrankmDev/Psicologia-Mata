@@ -31,13 +31,13 @@ export const therapyProcessSteps: ProcessStep[] = [
     number: '03',
     title: 'Intervención',
     subtitle: 'Acompañar',
-    description: 'Te doy herramientas que funcionan, para que puedas manejar lo que antes te desbordaba. Y practicamos hasta que te sientas seguro.'
+   description: 'Exploramos herramientas que pueden ayudarte a manejar lo que antes te desbordaba. Las practicamos y revisamos según tu evolución.'
   },
   {
     number: '04',
     title: 'Seguimiento',
     subtitle: 'Consolidar',
-    description: 'Cuando estés listo, espaciamos las sesiones. Mi objetivo es que un día no me necesites — y que sepas que aquí estaré si me necesitas de nuevo.'
+   description: 'Cuando tenga sentido para ti y según la evolución, podemos espaciar las sesiones. El objetivo es que desarrolles recursos propios y sepas cómo volver a pedir apoyo si lo necesitas.'
   }
 ];
 
@@ -83,6 +83,6 @@ export const contactInfo: ContactInfo[] = [
 
 export const availabilityInfo = [
   { label: "Respuesta", value: "24 horas" },
-  { label: "Confidencialidad", value: "Total" },
+  { label: "Confidencialidad", value: "Profesional" },
   { label: "Modalidad", value: "Presencial y Online" }
 ];

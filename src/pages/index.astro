@@ -48,8 +48,8 @@ const credentials = aboutCredentials;
 // Valores
 const values = [
   {
-    title: "Confidencialidad Absoluta",
-    description: "Lo que cuentes aquí, se queda aquí. Tu historia es solo tuya, y mi deber sagrado es protegerla.",
+    title: "Confidencialidad Profesional",
+    description: "La consulta se rige por el deber de confidencialidad y el secreto profesional, dentro de los límites previstos por la normativa.",
     icon: "M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
   },
   {
@@ -59,7 +59,7 @@ const values = [
   },
   {
     title: "Rigor Profesional",
-    description: "No improviso. Uso técnicas que la ciencia ha probado, aplicadas con el corazón puesto en cada sesión.",
+    description: "Selecciono procedimientos psicológicos según la valoración, los objetivos acordados y las necesidades de cada persona.",
     icon: "M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
   },
   {
@@ -154,8 +154,9 @@ const values = [
                   alt="María Ángeles Mata - Psicóloga"
                   width={600}
                   densities={[1.5, 2]}
-                  loading="eager"
-                  quality={100}
+                   loading="eager"
+                   fetchpriority="high"
+                   quality={85}
                   format="webp"
                   class="w-full h-full object-cover scale-105 transition-all duration-[1.5s] group-hover:scale-100 group-hover:opacity-100 mix-blend-multiply opacity-90"
                 />
@@ -206,7 +207,7 @@ const values = [
                   width={500}
                   densities={[1.5, 2]}
                   loading="lazy"
-                  quality={100}
+                  quality={85}
                   format="webp"
                   class="w-full h-full object-cover filter grayscale-[20%] sepia-[15%] brightness-105 transition-all duration-1000 hover:grayscale-0 hover:scale-105"
                   style="min-height: 100%; aspect-ratio: 3/4;"
@@ -284,7 +285,7 @@ const values = [
             <span class="label-section mb-10">Mis Pilares</span>
           </div>
           <h2 class="title-section" data-reveal data-reveal-delay="100">
-            La base de una terapia <em class="text-olive italic">segura y eficaz</em>
+            La base de una terapia <em class="text-olive italic">cuidada y profesional</em>
           </h2>
           <p class="text-lead mt-10 max-w-2xl mx-auto" data-reveal data-reveal-delay="200">
             Estos cuatro principios guían cada sesión. No son solo palabras: son mi compromiso contigo desde el primer día.
@@ -294,7 +295,7 @@ const values = [
         <div class="grid md:grid-cols-2 gap-8 lg:gap-16">
           {values.map((value, index) => (
             <div class="relative p-10 lg:p-14 border border-border-delicate bg-cream/30 hover:bg-cream hover:border-olive/30 transition-all duration-700 group" data-reveal data-reveal-delay={index * 150}>
-              <span class="absolute top-6 right-8 font-serif text-[6rem] leading-none text-olive/5 font-light select-none group-hover:text-olive/10 transition-colors duration-700">
+              <span aria-hidden="true" class="absolute top-6 right-8 font-serif text-[6rem] leading-none text-olive/5 font-light select-none group-hover:text-olive/10 transition-colors duration-700">
                 0{index + 1}
               </span>
 
@@ -388,7 +389,7 @@ const values = [
           alt="Conversación en terapia"
           width={1600}
           densities={[1.5, 2]}
-          quality={100}
+          quality={85}
           format="webp"
           loading="lazy"
           class="w-full h-full object-cover mix-blend-luminosity opacity-30"

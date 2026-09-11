@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import { getBlogSitemapEntries, getCategorySitemapEntries } from './src/data/blog.ts';
 
 // https://astro.build/config
-const SITE = 'https://matacalapsicologia.es';
+const SITE = 'https://matacalapsicologia.com';
 
 const blogSitemapByPath = new Map(
   getBlogSitemapEntries().map((entry) => [entry.path, entry.lastmod]),
@@ -27,12 +27,6 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      i18n: {
-        defaultLocale: 'es',
-        locales: {
-          es: 'es-ES',
-        },
-      },
       filter: (page) => {
         const excluded = [
           '/404',
@@ -43,47 +37,19 @@ export default defineConfig({
         const pathname = new URL(item.url).pathname;
         const entry = { ...item };
 
-        if (pathname === '/') {
-          return { ...entry, priority: 1, changefreq: 'weekly' };
-        }
-        if (pathname === '/servicios/' || pathname === '/contacto/') {
-          return { ...entry, priority: 0.9, changefreq: 'monthly' };
-        }
-        if (pathname === '/sobre-mi/') {
-          return { ...entry, priority: 0.85, changefreq: 'monthly' };
-        }
         if (pathname === '/blog/') {
           const featuredLastmod = blogSitemapByPath.get('/blog/cuando-ir-al-psicologo/');
-          return {
-            ...entry,
-            priority: 0.85,
-            changefreq: 'weekly',
-            ...(featuredLastmod ? { lastmod: featuredLastmod } : {}),
-          };
+          return featuredLastmod ? { ...entry, lastmod: featuredLastmod } : entry;
         }
         if (pathname.startsWith('/blog/categoria/')) {
           const lastmod = categorySitemapByPath.get(pathname);
-          return {
-            ...entry,
-            priority: 0.75,
-            changefreq: 'weekly',
-            ...(lastmod ? { lastmod } : {}),
-          };
+          return lastmod ? { ...entry, lastmod } : entry;
         }
         if (pathname.startsWith('/blog/') && pathname.length > '/blog/'.length) {
           const lastmod = blogSitemapByPath.get(pathname);
-          const isFeatured = pathname === '/blog/cuando-ir-al-psicologo/';
-          return {
-            ...entry,
-            priority: isFeatured ? 0.85 : 0.7,
-            changefreq: isFeatured ? 'weekly' : 'monthly',
-            ...(lastmod ? { lastmod } : {}),
-          };
+          return lastmod ? { ...entry, lastmod } : entry;
         }
-        if (pathname === '/aviso-legal/' || pathname === '/cookies/' || pathname === '/privacidad/') {
-          return { ...entry, priority: 0.2, changefreq: 'yearly' };
-        }
-        return { ...entry, priority: 0.5, changefreq: 'yearly' };
+        return entry;
       },
     }),
   ],

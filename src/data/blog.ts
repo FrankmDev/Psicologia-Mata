@@ -65,7 +65,7 @@ export const blogPosts: Record<string, BlogPost> = {
       },
       {
         question: "¿La terapia online funciona igual que la presencial?",
-        answer: "En muchos casos sí, siempre que haya buena conexión, privacidad y un profesional acreditado. La elección depende de tu situación, preferencias y tipo de dificultad."
+        answer: "Puede ser útil y, en determinados casos, comparable a la modalidad presencial, siempre que el formato sea adecuado, haya privacidad, conexión estable y seguimiento profesional. La elección depende de tu situación, preferencias y tipo de dificultad."
       },
       {
         question: "¿Cómo pedir cita con un psicólogo en Córdoba?",
@@ -81,7 +81,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </figure>
 
       <div class="article-callout">
-        <p><strong>Idea clave:</strong> no necesitas una etiqueta diagnóstica para empezar. Basta con que algo te preocupe de forma sostenida, limite tu vida o te cueste más de lo que te gustaría. La terapia sirve tanto para atravesar una crisis como para entender patrones, tomar decisiones o dejar de funcionar siempre al límite. Si quieres conocer el proceso completo, puedes leer sobre los <a href="/blog/beneficios-terapia-individual/">beneficios de la terapia individual</a>.</p>
+      <p><strong>Idea clave:</strong> no necesitas una etiqueta diagnóstica para empezar. Basta con que algo te preocupe de forma sostenida, limite tu vida o te cueste más de lo que te gustaría. La terapia puede ser útil para atravesar una crisis, entender patrones o tomar decisiones. Si quieres conocer el proceso completo, puedes leer sobre los <a href="/blog/beneficios-terapia-individual/">beneficios de la terapia individual</a>.</p>
       </div>
 
       <h2>¿Cómo saber si necesitas un psicólogo?</h2>
@@ -253,7 +253,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
       <h2>Presencial u online: qué conviene en cada caso</h2>
 
-      <p>La evidencia sugiere que, en muchos trastornos de ansiedad y otros problemas emocionales, la terapia online bien estructurada puede ser tan eficaz como la presencial en numerosos casos, siempre que haya buena conexión, privacidad y seguimiento profesional.<sup><a href="#ref-ci2">2</a></sup></p>
+      <p>La evidencia sugiere que, en algunos trastornos de ansiedad y otros problemas emocionales, la terapia online bien estructurada puede ofrecer resultados comparables a la presencial en determinados casos, siempre que haya buena conexión, privacidad y seguimiento profesional.<sup><a href="#ref-ci2">2</a></sup></p>
 
       <div class="article-grid article-grid--2">
         <div class="article-card">
@@ -343,7 +343,7 @@ export const blogPosts: Record<string, BlogPost> = {
         </div>
         <div class="article-card">
           <h3>¿La terapia online funciona igual que la presencial?</h3>
-          <p>En muchos casos sí, siempre que haya buena conexión, privacidad y un profesional acreditado. La elección depende de tu situación, preferencias y tipo de dificultad.</p>
+          <p>Puede ser útil y, en determinados casos, comparable a la modalidad presencial, siempre que el formato sea adecuado, haya privacidad, conexión estable y seguimiento profesional.</p>
         </div>
         <div class="article-card">
           <h3>¿Cómo pedir cita con un psicólogo en Córdoba?</h3>
@@ -397,7 +397,7 @@ export const blogPosts: Record<string, BlogPost> = {
       },
       {
         question: "¿La terapia funciona en personas mayores?",
-        answer: "Sí, siempre que se adapte a la persona: ritmo, salud, historia, apoyos, objetivos y posibles limitaciones sensoriales o cognitivas. La edad no impide aprender estrategias nuevas."
+        answer: "Puede ser útil cuando se adapta a la persona: ritmo, salud, historia, apoyos, objetivos y posibles limitaciones sensoriales o cognitivas. La edad, por sí sola, no impide aprender estrategias nuevas."
       },
       {
         question: "¿Debe participar la familia?",
@@ -630,7 +630,7 @@ export const blogPosts: Record<string, BlogPost> = {
         </div>
         <div class="article-card">
           <h3>¿La terapia funciona en personas mayores?</h3>
-          <p>Sí, siempre que se adapte a la persona: ritmo, salud, historia, apoyos, objetivos y posibles limitaciones sensoriales o cognitivas. La edad no impide aprender estrategias nuevas.</p>
+          <p>Puede ser útil cuando se adapta a la persona: ritmo, salud, historia, apoyos, objetivos y posibles limitaciones sensoriales o cognitivas. La edad, por sí sola, no impide aprender estrategias nuevas.</p>
         </div>
         <div class="article-card">
           <h3>¿Debe participar la familia?</h3>
@@ -978,7 +978,7 @@ export const blogPosts: Record<string, BlogPost> = {
   "terapia-de-pareja-cuando-empezar": {
     slug: "terapia-de-pareja-cuando-empezar",
     title: "Terapia de pareja: cuándo empezar, qué esperar y qué dice la evidencia",
-    seoTitle: "Terapia de pareja en Córdoba: cuándo empezar y cómo funciona",
+    seoTitle: "Terapia de pareja en Córdoba: cuándo empezar y cómo puede ayudar",
     seoDescription: "Artículo profesional sobre terapia de pareja: señales de alarma, objetivos, límites y evidencia científica. Atención presencial en Córdoba y sesiones online.",
     keywords: "terapia de pareja, terapia pareja cordoba, cuando empezar terapia pareja, psicologo parejas cordoba, problemas de pareja, terapia pareja online",
     excerpt: "La terapia de pareja no sirve para decidir quién tiene razón. Sirve para entender el patrón que os atrapa, bajar la escalada y recuperar una forma de hablar que no os desgaste más.",
@@ -1044,7 +1044,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-grid article-grid--3">
         <div class="article-card">
           <h3>Más que “hablar”</h3>
-          <p>Los mejores resultados aparecen cuando el proceso no se limita a ventilar emociones, sino que organiza objetivos, tareas y nuevas secuencias de interacción.</p>
+          <p>La mejoría suele ser más probable cuando el proceso no se limita a ventilar emociones, sino que organiza objetivos, tareas y nuevas secuencias de interacción.</p>
         </div>
         <div class="article-card">
           <h3>Modelos con respaldo</h3>
@@ -1056,7 +1056,7 @@ export const blogPosts: Record<string, BlogPost> = {
         </div>
       </div>
 
-      <p>En términos prácticos, esto significa que la terapia de pareja bien indicada no es “solo para salvar relaciones”. También sirve para <strong>tomar decisiones con más claridad</strong>, reparar patrones dañinos y aprender habilidades relacionales que después sostienen el cambio fuera de la consulta.<sup><a href="#ref-d">4</a></sup></p>
+      <p>En términos prácticos, esto significa que la terapia de pareja, cuando tras una valoración resulta adecuada, no es “solo para salvar relaciones”. También puede ayudar a <strong>tomar decisiones con más claridad</strong>, revisar patrones dañinos y practicar habilidades relacionales fuera de la consulta.<sup><a href="#ref-d">4</a></sup></p>
 
       <figure class="article-figure--bleed">
         <img src="${autoestima.src}" alt="Conversación consciente en pareja" loading="lazy" />
@@ -1123,7 +1123,7 @@ export const blogPosts: Record<string, BlogPost> = {
   },
   "beneficios-terapia-individual": {
     slug: "beneficios-terapia-individual",
-    title: "Beneficios de la terapia individual: por qué funciona y qué puedes esperar",
+    title: "Beneficios de la terapia individual: cómo puede ayudar y qué esperar",
     seoTitle: "Terapia individual en Córdoba: beneficios y qué esperar",
     seoDescription: "Beneficios de la terapia individual explicados con claridad: qué ocurre en sesión, para quién sirve y qué puedes esperar. Psicóloga en Córdoba y online.",
     keywords: "terapia individual, beneficios terapia psicologica, psicologo individual cordoba, terapia psicologica cordoba, primera sesion psicologo, psicologa cordoba online",
@@ -1280,7 +1280,7 @@ export const blogPosts: Record<string, BlogPost> = {
 
       <h2>Cuándo tiene sentido la terapia de pareja</h2>
 
-      <p>La terapia de pareja no es para cuando todo está perdido. Sirve cuando todavía hay voluntad de entenderse, pero el patrón os supera. En sesión se observa la interacción, no solo la versión individual de cada uno, y se ensayan formas más seguras de hablar y pedir lo que necesitáis.</p>
+      <p>La terapia de pareja no requiere esperar a una crisis extrema. Puede ser una opción cuando todavía hay voluntad de entenderse, pero el patrón os supera. En sesión se observa la interacción, no solo la versión individual de cada uno, y se ensayan formas más seguras de hablar y pedir lo que necesitáis.</p>
 
       <h2>También puede interesarte</h2>
 
@@ -1300,7 +1300,7 @@ export const blogPosts: Record<string, BlogPost> = {
   "gestion-ansiedad": {
     slug: "gestion-ansiedad",
     title: "Cómo gestionar la ansiedad cuando el cuerpo se activa",
-    seoTitle: "Gestionar la ansiedad: técnicas psicológicas que funcionan",
+    seoTitle: "Gestionar la ansiedad: técnicas psicológicas que pueden ayudar",
     seoDescription: "Técnicas psicológicas para gestionar la ansiedad en el día a día: respiración, grounding y cuándo pedir ayuda. Psicóloga en Córdoba y terapia online.",
     keywords: "gestionar ansiedad, tecnicas ansiedad, ansiedad dia a dia, como calmar ansiedad, psicologo ansiedad cordoba, terapia ansiedad online",
     excerpt: "La ansiedad no es debilidad: es tu cuerpo intentando protegerte. Aquí tienes técnicas concretas para regularla y señales de cuándo conviene pedir ayuda profesional.",
@@ -1310,7 +1310,7 @@ export const blogPosts: Record<string, BlogPost> = {
     category: "Salud Mental",
     image: estres,
     content: `
-      <p>La ansiedad no es un defecto de carácter. Es una respuesta de alerta que, en muchas personas, se ha vuelto demasiado sensible: el cuerpo reacciona como si hubiera peligro incluso cuando el riesgo real es bajo o inexistente. Entender esto ya cambia la relación con el síntoma: no se trata de "controlarte más", sino de aprender a regular el sistema nervioso y a dejar de alimentar el ciclo que mantiene la ansiedad.</p>
+      <p>La ansiedad no es un defecto de carácter. Es una respuesta de alerta que, en algunas personas, puede volverse más sensible: el cuerpo reacciona como si hubiera peligro incluso cuando el riesgo real parece bajo. Entender esto puede cambiar la relación con el síntoma: no se trata de "controlarte más", sino de explorar formas de regular la activación y el ciclo que mantiene la ansiedad.</p>
 
       <div class="article-callout">
         <p><strong>Idea clave:</strong> las técnicas de regulación ayudan más cuando se practican con regularidad y antes de que la ansiedad llegue al máximo. Si el malestar es persistente, conviene leer sobre <a href="/blog/ansiedad-persistente-tratamiento-psicologico/">ansiedad persistente y tratamiento psicológico</a>.</p>
@@ -1323,7 +1323,7 @@ export const blogPosts: Record<string, BlogPost> = {
       
       <h2>Técnicas que puedes empezar a usar hoy</h2>
       
-      <p>No son soluciones milagrosas, pero sí recursos que funcionan si los practicas cuando la ansiedad está aún moderada, no solo en plena crisis.</p>
+      <p>No son soluciones milagrosas, pero pueden ser recursos útiles si los practicas cuando la ansiedad está aún moderada, no solo en plena crisis.</p>
       
       <div class="article-grid article-grid--3">
         <div class="article-card text-center">

@@ -33,7 +33,7 @@ const {
   decoding = 'async',
   class: className = '',
   sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px',
-  quality = 100,
+  quality = 85,
   fit = 'crop',
   format = 'auto',
   priority = false,
@@ -90,7 +90,7 @@ const loadingAttr = priority ? 'eager' : loading;
 const fetchPriority = priority ? 'high' : undefined;
 ---
 
-<figure class:list={['m-0', caption ? 'space-y-2' : '']">
+<figure class:list={['m-0', caption ? 'space-y-2' : '']}>
   {isLocalAsset ? (
     <!-- Imagen local con optimización completa de Astro -->
     <Image

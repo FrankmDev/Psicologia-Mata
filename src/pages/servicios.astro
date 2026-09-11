@@ -77,7 +77,7 @@ const faqs = [
   },
   {
     question: '¿Qué técnicas usas?',
-    answer: 'Trabajo principalmente con Terapia Cognitivo-Conductual (TCC) y terapias de tercera generación como ACT y mindfulness. Técnicas que la ciencia ha probado que funcionan, pero aplicadas con sensibilidad humana.'
+    answer: 'Trabajo principalmente con Terapia Cognitivo-Conductual (TCC) y terapias de tercera generación como ACT y mindfulness. Selecciono los procedimientos según la valoración, los objetivos acordados y las necesidades de cada persona.'
   }
 ];
 
@@ -143,7 +143,7 @@ const faqSchemaData = faqs.map(faq => ({
           aria-labelledby={`service-${service.id}-heading`}
         >
           {/* Número decorativo de fondo */}
-          <span class={`absolute ${isEven ? '-right-20' : '-left-20'} top-1/2 -translate-y-1/2 font-serif text-[20rem] text-olive/[0.02] leading-none select-none pointer-events-none hidden lg:block`}>
+          <span aria-hidden="true" class={`absolute ${isEven ? '-right-20' : '-left-20'} top-1/2 -translate-y-1/2 font-serif text-[20rem] text-olive/[0.02] leading-none select-none pointer-events-none hidden lg:block`}>
             {service.number}
           </span>
           
@@ -163,11 +163,11 @@ const faqSchemaData = faqs.map(faq => ({
                       width={600}
                       densities={[1.5, 2]}
                       format="webp"
-                      quality={100}
+                      quality={85}
                       loading={index === 0 ? 'eager' : 'lazy'}
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-ink/30 via-ink/5 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500"></div>
-                    <span class="absolute top-6 left-6 text-label text-alabaster/90 mix-blend-difference">
+                    <span aria-hidden="true" class="absolute top-6 left-6 text-label text-alabaster/90 mix-blend-difference">
                       {service.number}
                     </span>
                   </div>

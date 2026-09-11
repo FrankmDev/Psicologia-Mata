@@ -49,7 +49,7 @@ const serviceImages = [
           <article class="relative h-full flex flex-col">
             
             <!-- Número grande de fondo (decorativo) -->
-            <span class="absolute -top-6 sm:-top-8 -left-1 sm:-left-4 font-serif text-[4rem] sm:text-[8rem] leading-none text-olive/[0.03] font-light select-none pointer-events-none transition-all duration-700 group-hover:text-olive/[0.06] group-hover:-translate-y-2">
+            <span aria-hidden="true" class="absolute -top-6 sm:-top-8 -left-1 sm:-left-4 font-serif text-[4rem] sm:text-[8rem] leading-none text-olive/[0.03] font-light select-none pointer-events-none transition-all duration-700 group-hover:text-olive/[0.06] group-hover:-translate-y-2">
               0{index + 1}
             </span>
             
@@ -62,7 +62,7 @@ const serviceImages = [
                 width={400}
                 densities={[1.5, 2]}
                 format="webp"
-                quality={100}
+                quality={85}
                 loading={index === 0 ? "eager" : "lazy"}
               />
               <!-- Overlay sutil -->

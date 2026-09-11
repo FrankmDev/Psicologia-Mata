@@ -12,7 +12,7 @@ export const localBusinessData = {
   name: 'María Ángeles Mata - Psicóloga',
   legalName: 'María Ángeles Mata Cala',
   description:
-    'Psicóloga en Córdoba especializada en terapia individual, de pareja y familiar con amplia experiencia. Consulta presencial en Córdoba y online.',
+    'Consulta de María Ángeles Mata Cala, psicóloga en Córdoba. Ofrece terapia individual, de pareja y familiar, con atención presencial y online.',
   url: SITE,
   telephone: CONTACT_PHONE_SCHEMA,
   email: CONTACT_EMAIL,
@@ -22,24 +22,10 @@ export const localBusinessData = {
     postalCode: CONTACT_ADDRESS.postalCode,
     addressCountry: CONTACT_ADDRESS.addressCountry,
   },
-  geo: {
-    latitude: 37.8882,
-    longitude: -4.7794,
-  },
   image: `${SITE}/profile.jpg`,
-  priceRange: '€€',
   openingHours: ['Mo-Fr 09:00-20:00'],
-  serviceArea: 'Córdoba, provincia de Córdoba y terapia online en España',
+  serviceArea: 'Córdoba, España',
   founderName: 'María Ángeles Mata Cala',
-  specialties: [
-    'Psicología Sanitaria',
-    'Terapia Cognitivo-Conductual',
-    'Terapia Individual Online',
-    'Terapia de Pareja Online',
-    'Terapia Familiar',
-    'Evaluación Neuropsicológica',
-    'Estimulación Cognitiva',
-  ],
   services: [
     'Terapia Individual (Presencial y Online)',
     'Terapia de Pareja (Presencial y Online)',
@@ -55,7 +41,7 @@ export const personData = {
   url: `${SITE}/sobre-mi/`,
   jobTitle: 'Psicóloga General Sanitaria',
   description:
-    'Psicóloga colegiada (AN 12177) en Córdoba con amplia trayectoria profesional. Especialista en terapia individual, terapia de pareja, terapia familiar y evaluación neuropsicológica.',
+    'Psicóloga colegiada (AN 12177) en Córdoba. Trabaja en terapia individual, terapia de pareja, terapia familiar y evaluación neuropsicológica.',
   telephone: CONTACT_PHONE_SCHEMA,
   email: CONTACT_EMAIL,
   image: `${SITE}/profile.jpg`,
@@ -152,7 +138,7 @@ export const serviceOffers: ServiceOffer[] = [
   },
   {
     name: 'Evaluación Neuropsicológica',
-    description: 'Diagnóstico completo con informe completo incluido.',
+    description: 'Valoración neuropsicológica mediante entrevistas y pruebas seleccionadas según el objetivo, con informe según el alcance acordado.',
     duration: '90–120 min',
     url: `${SITE}/servicios/#evaluacion`,
   },

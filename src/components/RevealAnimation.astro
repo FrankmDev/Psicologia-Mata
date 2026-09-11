@@ -9,147 +9,58 @@
 <script>
   (function initRevealAnimations() {
     'use strict';
-    
-    // Configuración optimizada para rendimiento
-    const CONFIG = {
-      threshold: 0.1,
-      rootMargin: '50px 0px 0px 0px', // Margen positivo para precargar antes de entrar en viewport
-      once: true
-    };
-    
-    let observer = null;
-    let isInitialized = false;
-    let rafId = null;
-    
-    // Throttle utility - mejor que debounce para scroll
-    function throttle(fn, limit) {
-      let inThrottle;
-      return function(...args) {
-        if (!inThrottle) {
-          fn.apply(this, args);
-          inThrottle = true;
-          setTimeout(() => inThrottle = false, limit);
-        }
-      };
-    }
-    
-    // Inicializar animaciones
+
+    let observer: IntersectionObserver | null = null;
+    let rafId: number | null = null;
+
     function init() {
-      if (isInitialized || typeof window === 'undefined') return;
-      
-      const elements = document.querySelectorAll('[data-reveal], .img-reveal-wrapper');
-      if (elements.length === 0) return;
+      if (typeof window === 'undefined' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (!('IntersectionObserver' in window)) return;
+
+      const elements = [...document.querySelectorAll<HTMLElement>('[data-reveal], .img-reveal-wrapper')];
+      const pending = elements.filter((element) => !element.classList.contains('is-visible'));
+      if (!pending.length) return;
+
       document.documentElement.classList.add('reveal-ready');
-      
-      // Cancelar cualquier RAF pendiente
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-      }
-      
-      // Limpiar observer anterior si existe
-      if (observer) {
-        observer.disconnect();
-      }
-      
-      // Crear nuevo observer con callback optimizado
+      observer?.disconnect();
       observer = new IntersectionObserver((entries) => {
-        // Procesar todas las entradas en un solo batch
-        const toReveal = [];
-        
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const delayStr = entry.target.getAttribute('data-reveal-delay');
-            const delay = delayStr ? parseInt(delayStr, 10) : 0;
-            toReveal.push({ target: entry.target, delay });
-            
-            if (CONFIG.once) {
-              observer.unobserve(entry.target);
-            }
-          }
-        });
-        
-        // Aplicar cambios en RAF para sincronizar con render
-        if (toReveal.length > 0) {
-          rafId = requestAnimationFrame(() => {
-            toReveal.forEach(({ target, delay }) => {
-              // Aplicar will-change justo antes de la animación
-              target.style.willChange = 'opacity, transform';
-              
-              const applyVisible = () => {
-                target.classList.add('is-visible');
-                // Remover will-change después de la animación para liberar GPU
-                setTimeout(() => {
-                  target.style.willChange = 'auto';
-                }, 1100); // Un poco más que la duración de la transición (1s)
-              };
-              
-              if (delay === 0) {
-                applyVisible();
-              } else {
-                setTimeout(applyVisible, delay);
-              }
-            });
+        const toReveal = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target as HTMLElement);
+
+        toReveal.forEach((target) => observer?.unobserve(target));
+        if (!toReveal.length || rafId !== null) return;
+
+        rafId = requestAnimationFrame(() => {
+          rafId = null;
+          toReveal.forEach((target) => {
+            const delay = Number.parseInt(target.dataset.revealDelay || '0', 10) || 0;
+            target.style.willChange = 'opacity, transform';
+            window.setTimeout(() => {
+              target.classList.add('is-visible');
+              window.setTimeout(() => { target.style.willChange = 'auto'; }, 1100);
+            }, delay);
           });
-        }
-      }, {
-        threshold: CONFIG.threshold,
-        rootMargin: CONFIG.rootMargin
-      });
-      
-      // Observar elementos
-      elements.forEach((el) => {
-        el.classList.remove('is-visible');
-        observer.observe(el);
-      });
-      
-      isInitialized = true;
+        });
+      }, { threshold: 0.1, rootMargin: '50px 0px 0px 0px' });
+
+      pending.forEach((element) => observer?.observe(element));
     }
-    
-    // Cleanup eficiente
+
     function cleanup() {
-      if (rafId) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      if (observer) {
-        observer.disconnect();
-        observer = null;
-      }
-      isInitialized = false;
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = null;
+      observer?.disconnect();
+      observer = null;
     }
-    
-    // Inicializar cuando el DOM esté listo
+
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
+      document.addEventListener('DOMContentLoaded', init, { once: true });
     } else {
-      // Delay para no bloquear el LCP
-      setTimeout(init, 0);
-    }
-    
-    // Reinicializar en transiciones de página
-    document.addEventListener('astro:page-load', () => {
-      cleanup();
       requestAnimationFrame(init);
-    });
-    
-    document.addEventListener('astro:before-swap', cleanup);
-    
-    // Throttled resize handler
-    const throttledInit = throttle(() => {
-      cleanup();
-      init();
-    }, 200);
-    
-    window.addEventListener('resize', throttledInit, { passive: true });
-    
-    // Cleanup en visibilitychange para ahorrar recursos
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        cleanup();
-      } else {
-        init();
-      }
-    });
-    
+    }
+
+    document.addEventListener('astro:page-load', () => requestAnimationFrame(init));
+    document.addEventListener('astro:before-swap', cleanup, { once: true });
   })();
 </script>

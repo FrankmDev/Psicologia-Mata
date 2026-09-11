@@ -40,9 +40,9 @@ const navLinks = [
           src={horizontalLogo} 
           alt="María Ángeles Mata - Psicología" 
           width={400}
-          densities={[1, 2, 3]}
+           densities={[1, 2]}
           format="webp"
-          quality={100}
+          quality={90}
           loading="eager"
           class="w-[150px] sm:w-[140px] lg:w-[170px] h-auto object-contain"
         />
@@ -58,6 +58,7 @@ const navLinks = [
                 ? "text-ink font-semibold"
                 : "text-charcoal hover:text-ink"
             }`}
+            aria-current={activePage === link.label ? "page" : undefined}
           >
             <span class="relative z-10">{link.label}</span>
             <span class="absolute bottom-0 left-0 w-full h-[1px] bg-ink transform origin-right scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
@@ -92,9 +93,12 @@ const navLinks = [
 
       <!-- Mobile Toggle -->
       <button
-        class="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center text-ink hover:text-olive transition-colors"
+        class="lg:hidden relative z-50 w-11 h-11 flex items-center justify-center text-ink hover:text-olive transition-colors"
         id="menu-toggle"
-        aria-label="Menu"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        type="button"
       >
         <div class="flex flex-col gap-1.5 w-6">
           <span class="w-6 h-[1px] bg-current transition-all origin-center duration-500 ease-out" id="menu-line-1"></span>
@@ -106,11 +110,13 @@ const navLinks = [
 
   <!-- Mobile Menu -->
   <div
-    class="lg:hidden fixed inset-0 bg-alabaster z-40 opacity-0 pointer-events-none transition-all duration-700 ease-out"
+    class="lg:hidden fixed inset-0 bg-alabaster z-40 opacity-0 invisible pointer-events-none transition-all duration-700 ease-out"
     id="mobile-menu"
+    aria-hidden="true"
+    inert
   >
     <div class="absolute inset-0 bg-aurora opacity-30"></div>
-    <div class="container-editorial relative pt-32 h-full flex flex-col justify-between pb-12 z-10">
+    <div class="container-editorial relative pt-24 sm:pt-32 h-full flex flex-col justify-between pb-[calc(2rem+env(safe-area-inset-bottom,0px))] sm:pb-[calc(3rem+env(safe-area-inset-bottom,0px))] z-10 overflow-y-auto overscroll-contain">
       
       <nav class="flex flex-col gap-6">
         {navLinks.map((link, index) => (
@@ -118,6 +124,7 @@ const navLinks = [
             href={link.href}
             class="mobile-link opacity-0 translate-y-4 font-serif text-3xl sm:text-4xl md:text-5xl text-ink hover:text-olive transition-all duration-500 italic font-light"
             style={`transition-delay: ${index * 100}ms`}
+            aria-current={activePage === link.label ? "page" : undefined}
           >
             {link.label}
           </a>
@@ -150,7 +157,10 @@ const navLinks = [
 <div class="h-16 lg:h-24"></div>
 
 <script>
+  let headerCleanup: (() => void) | undefined;
+
   function initHeader() {
+    headerCleanup?.();
     const header = document.getElementById("header");
     const headerBg = document.getElementById("header-bg");
     const menuToggle = document.getElementById("menu-toggle");
@@ -162,6 +172,7 @@ const navLinks = [
     
     let menuOpen = false;
     let lastScroll = 0;
+    const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
     // Scroll handler
     const handleScroll = () => {
@@ -186,52 +197,89 @@ const navLinks = [
       lastScroll = currentScroll;
     };
 
-    // Cleanup previous listeners
-    window.removeEventListener("scroll", handleScroll);
     window.addEventListener("scroll", handleScroll, { passive: true });
     
     // Run once on init
     handleScroll();
 
     // Menu toggle handler
-    const handleMenuToggle = () => {
-      menuOpen = !menuOpen;
-      
-      if (menuOpen) {
-        // Open
-        mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
+    const setMenuState = (open: boolean) => {
+      menuOpen = open;
+
+      menuToggle?.setAttribute("aria-expanded", String(open));
+      menuToggle?.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      mobileMenu?.setAttribute("aria-hidden", String(!open));
+
+      if (open) {
+        mobileMenu?.removeAttribute("inert");
+        mobileMenu?.classList.remove("opacity-0", "invisible", "pointer-events-none");
         document.body.style.overflow = "hidden";
-        
+
         line1 && (line1.style.transform = "translateY(3.5px) rotate(45deg)");
         line2 && (line2.style.transform = "translateY(-3.5px) rotate(-45deg)");
-        
-        // Animate links in
-        setTimeout(() => {
-          mobileLinks.forEach(link => {
-            link.classList.remove("opacity-0", "translate-y-4");
-          });
-          mobileFooter?.classList.remove("opacity-0", "translate-y-4");
-        }, 100);
 
+        requestAnimationFrame(() => {
+          mobileLinks.forEach(link => link.classList.remove("opacity-0", "translate-y-4"));
+          mobileFooter?.classList.remove("opacity-0", "translate-y-4");
+          mobileMenu?.querySelector<HTMLElement>('a[href]')?.focus();
+        });
       } else {
-        // Close
-        mobileMenu?.classList.add("opacity-0", "pointer-events-none");
+        mobileMenu?.classList.add("opacity-0", "invisible", "pointer-events-none");
+        mobileMenu?.setAttribute("inert", "");
         document.body.style.overflow = "";
-        
+
         line1 && (line1.style.transform = "none");
         line2 && (line2.style.transform = "none");
-        
-        // Reset links
-        mobileLinks.forEach(link => {
-          link.classList.add("opacity-0", "translate-y-4");
-        });
+        mobileLinks.forEach(link => link.classList.add("opacity-0", "translate-y-4"));
         mobileFooter?.classList.add("opacity-0", "translate-y-4");
+        menuToggle?.focus();
       }
     };
 
-    // Cleanup previous listener and add new one
-    menuToggle?.removeEventListener("click", handleMenuToggle);
+    const handleMenuToggle = () => {
+      setMenuState(!menuOpen);
+    };
+
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (!menuOpen) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenuState(false);
+        return;
+      }
+
+      if (event.key !== "Tab") return;
+      const focusable = [...(mobileMenu?.querySelectorAll<HTMLElement>(focusableSelector) || [])];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    const handleResize = () => {
+      if (window.matchMedia("(min-width: 1024px)").matches && menuOpen) {
+        setMenuState(false);
+      }
+    };
+
     menuToggle?.addEventListener("click", handleMenuToggle);
+    document.addEventListener("keydown", handleKeydown);
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    headerCleanup = () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+      menuToggle?.removeEventListener("click", handleMenuToggle);
+      document.removeEventListener("keydown", handleKeydown);
+      if (menuOpen) document.body.style.overflow = "";
+    };
   }
 
   // Initialize on first load

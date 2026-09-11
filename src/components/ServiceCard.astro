@@ -1,6 +1,5 @@
 ---
 // ServiceCard component - Displays a service card
-// Updated to use Tailwind delay utilities instead of inline styles
 
 import Icon from './Icon.astro';
 import Button from './Button.astro';
@@ -26,25 +25,13 @@ const {
   duration, 
   iconName = 'user', 
   href = "/contacto", 
-  index = 0 
+  index = 0
 } = Astro.props;
-
-// Map index to Tailwind delay classes
-const delayClasses = [
-  'delay-0',
-  'delay-100', 
-  'delay-200', 
-  'delay-300', 
-  'delay-400',
-  'delay-500'
-];
-
-const delayClass = delayClasses[index] || 'delay-0';
 ---
 
 <div 
   id={id} 
-  class={`group relative bg-alabaster rounded-2xl border border-border-delicate transition-all duration-500 ease-out hover:shadow-card-hover hover:-translate-y-1 hover:border-olive/20 overflow-hidden opacity-0 data-animate ${delayClass}`}
+  class="group relative bg-alabaster rounded-2xl border border-border-delicate transition-all duration-500 ease-out hover:shadow-card-hover hover:-translate-y-1 hover:border-olive/20 overflow-hidden"
   data-reveal
 >
   <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-olive/0 via-olive/30 to-olive/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500" aria-hidden="true"></div>
@@ -91,29 +78,3 @@ const delayClass = delayClasses[index] || 'delay-0';
     </div>
   </div>
 </div>
-
-<style>
-  /* Animation for service cards */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .data-animate {
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-  
-  /* Delay utilities */
-  .delay-0 { animation-delay: 0ms; }
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-</style>

@@ -1,12 +1,5 @@
 ---
-// Schema.astro - JSON-LD Structured Data component
-// Usage: <Schema type="localbusiness" data={businessData} />
-// Supports: localbusiness, article, webpage, breadcrumbs, faqpage, professionalservice
-
-interface GeoCoordinates {
-  latitude: number;
-  longitude: number;
-}
+// JSON-LD para entidades y contenidos que aparecen realmente en cada página.
 
 interface LocalBusinessData {
   name: string;
@@ -21,13 +14,9 @@ interface LocalBusinessData {
     postalCode: string;
     addressCountry: string;
   };
-  geo?: GeoCoordinates;
   image?: string;
-  priceRange?: string;
   openingHours?: string[];
   serviceArea?: string;
-  specialties?: string[];
-  services?: string[];
   socialProfiles?: string[];
   foundingDate?: string;
   founderName?: string;
@@ -45,7 +34,7 @@ interface ArticleData {
   };
   publisher?: {
     name: string;
-    logo: string;
+    logo?: string;
   };
   url: string;
   articleSection?: string;
@@ -112,7 +101,6 @@ interface Props {
     | 'webpage'
     | 'breadcrumbs'
     | 'faqpage'
-    | 'professionalservice'
     | 'person'
     | 'servicecatalog';
   data:
@@ -129,118 +117,43 @@ import { SITE_URL } from '../config/site';
 
 const { type, data } = Astro.props;
 
-const siteUrl = SITE_URL;
-
 function generateLocalBusinessSchema(data: LocalBusinessData) {
   const businessUrl = data.url.replace(/\/$/, '');
   const businessId = `${businessUrl}/#business`;
-  const personId = `${businessUrl}/#person`;
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
-    '@type': ['MedicalBusiness', 'LocalBusiness', 'ProfessionalService'],
+    '@type': 'ProfessionalService',
     '@id': businessId,
     name: data.name,
     ...(data.legalName && { legalName: data.legalName }),
     description: data.description,
     url: data.url,
     telephone: data.telephone,
-    email: data.email,
+    ...(data.email && { email: data.email }),
     inLanguage: 'es-ES',
     address: {
       '@type': 'PostalAddress',
-      ...data.address
+      ...data.address,
     },
-    image: data.image,
-    priceRange: data.priceRange || '€€',
-    openingHours: data.openingHours || ['Mo-Fr 09:00-20:00'],
-    sameAs: data.socialProfiles || [],
-    hasMap: `https://maps.google.com/?q=${encodeURIComponent(
-      `${data.address.streetAddress}, ${data.address.postalCode} ${data.address.addressLocality}, ${data.address.addressCountry}`
-    )}`,
-    isAccessibleForFree: false,
-    paymentAccepted: ['Cash', 'Credit Card', 'Bank Transfer'],
-    currenciesAccepted: 'EUR',
-    areaServed: data.serviceArea || 'Córdoba, España',
-    availableLanguage: ['es'],
+    ...(data.image && { image: data.image }),
+    ...(data.openingHours?.length && { openingHours: data.openingHours }),
+    ...(data.socialProfiles?.length && { sameAs: data.socialProfiles }),
+    ...(data.serviceArea && { areaServed: data.serviceArea }),
     ...(data.foundingDate && { foundingDate: data.foundingDate }),
     ...(data.founderName && {
       founder: {
         '@type': 'Person',
         name: data.founderName,
-        '@id': personId
-      }
-    }),
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: data.telephone,
-      contactType: 'appointment booking',
-      availableLanguage: ['es'],
-      areaServed: 'ES'
-    },
-    potentialAction: {
-      '@type': 'ReserveAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: `${data.url.replace(/\/$/, '')}/contacto/`,
-        actionPlatform: [
-          'https://schema.org/DesktopWebPlatform',
-          'https://schema.org/MobileWebPlatform'
-        ]
+        '@id': `${businessUrl}/sobre-mi/#person`,
       },
-      result: {
-        '@type': 'Reservation',
-        name: 'Solicitud de primera consulta'
-      }
-    }
+    }),
   };
-
-  // Add geo coordinates if provided
-  if (data.geo) {
-    schema.geo = {
-      '@type': 'GeoCoordinates',
-      latitude: data.geo.latitude,
-      longitude: data.geo.longitude
-    };
-  }
-
-  // Add medical specialty for better healthcare SEO
-  if (data.specialties) {
-    schema.medicalSpecialty = data.specialties.map(specialty => ({
-      '@type': 'MedicalSpecialty',
-      name: specialty
-    }));
-  }
-
-  // Add services if provided
-  if (data.services) {
-    schema.hasOfferCatalog = {
-      '@type': 'OfferCatalog',
-      name: 'Servicios de Psicología',
-      itemListElement: data.services.map((service, index) => ({
-        '@type': 'Offer',
-        position: index + 1,
-        itemOffered: {
-          '@type': 'Service',
-          name: service
-        }
-      }))
-    };
-    schema.availableService = data.services.map(service => ({
-      '@type': 'MedicalTherapy',
-      name: service,
-        provider: {
-          '@type': 'MedicalBusiness',
-          '@id': businessId
-        },
-      areaServed: data.serviceArea || 'Córdoba, España'
-    }));
-  }
 
   return schema;
 }
 
 function generateArticleSchema(data: ArticleData) {
-  const articleImage = data.image.startsWith('http') ? data.image : `${siteUrl}${data.image}`;
+  const articleImage = data.image.startsWith('http') ? data.image : `${SITE_URL}${data.image}`;
 
   return {
     '@context': 'https://schema.org',
@@ -257,26 +170,24 @@ function generateArticleSchema(data: ArticleData) {
     author: {
       '@type': 'Person',
       name: data.author.name,
-      url: data.author.url
+      ...(data.author.url ? { url: data.author.url } : {}),
     },
     publisher: {
-      '@type': 'Organization',
-      name: data.publisher?.name || 'María Ángeles Mata',
-      logo: {
-        '@type': 'ImageObject',
-        url: data.publisher?.logo || `${siteUrl}/favicon-32x32.png`
-      }
+      '@type': 'Person',
+      '@id': `${SITE_URL}/sobre-mi/#person`,
+      name: data.publisher?.name || 'María Ángeles Mata Cala',
+      url: `${SITE_URL}/sobre-mi/`,
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': data.url
+      '@id': data.url,
     },
     isPartOf: {
       '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
+      '@id': `${SITE_URL}/#website`,
       name: 'María Ángeles Mata | Psicóloga en Córdoba y online',
-      url: siteUrl
-    }
+      url: SITE_URL,
+    },
   };
 }
 
@@ -287,14 +198,14 @@ function generateWebPageSchema(data: WebPageData) {
     name: data.name,
     description: data.description,
     url: data.url,
-    image: data.image,
+    ...(data.image ? { image: data.image } : {}),
     inLanguage: 'es-ES',
     isPartOf: {
       '@type': 'WebSite',
-      '@id': `${siteUrl}/#website`,
+      '@id': `${SITE_URL}/#website`,
       name: 'María Ángeles Mata | Psicóloga en Córdoba y online',
-      url: siteUrl
-    }
+      url: SITE_URL,
+    },
   };
 }
 
@@ -306,8 +217,8 @@ function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.name,
-      item: item.url
-    }))
+      item: item.url,
+    })),
   };
 }
 
@@ -315,14 +226,14 @@ function generateFAQSchema(items: FAQItem[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: items.map(item => ({
+    mainEntity: items.map((item) => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
         '@type': 'Answer',
-        text: item.answer
-      }
-    }))
+        text: item.answer,
+      },
+    })),
   };
 }
 
@@ -334,42 +245,42 @@ function generatePersonSchema(data: PersonData) {
     '@id': `${personUrl}/#person`,
     name: data.name,
     url: data.url,
-    jobTitle: data.jobTitle || 'Psicóloga General Sanitaria',
-    description: data.description,
-    telephone: data.telephone,
-    email: data.email,
-    image: data.image,
+    ...(data.jobTitle && { jobTitle: data.jobTitle }),
+    ...(data.description && { description: data.description }),
+    ...(data.telephone && { telephone: data.telephone }),
+    ...(data.email && { email: data.email }),
+    ...(data.image && { image: data.image }),
     inLanguage: 'es-ES',
-    sameAs: data.sameAs || [],
+    ...(data.sameAs?.length && { sameAs: data.sameAs }),
     worksFor: {
-      '@type': 'MedicalBusiness',
-      '@id': `${personUrl}/#business`
-    }
+      '@type': 'ProfessionalService',
+      '@id': `${SITE_URL}/#business`,
+    },
   };
 
   if (data.address) {
     schema.address = {
       '@type': 'PostalAddress',
-      ...data.address
+      ...data.address,
     };
   }
 
-  if (data.knowsAbout) {
+  if (data.knowsAbout?.length) {
     schema.knowsAbout = data.knowsAbout;
   }
 
-  if (data.credentials && data.credentials.length > 0) {
-    schema.hasCredential = data.credentials.map(cred => ({
+  if (data.credentials?.length) {
+    schema.hasCredential = data.credentials.map((credential) => ({
       '@type': 'EducationalOccupationalCredential',
-      name: cred.name,
-      ...(cred.year && { dateCreated: cred.year }),
-      ...(cred.type && { credentialCategory: cred.type }),
-      ...(cred.institution && {
+      name: credential.name,
+      ...(credential.year && { dateCreated: credential.year }),
+      ...(credential.type && { credentialCategory: credential.type }),
+      ...(credential.institution && {
         recognizedBy: {
-          '@type': cred.type === 'license' ? 'Organization' : 'CollegeOrUniversity',
-          name: cred.institution
-        }
-      })
+          '@type': 'Organization',
+          name: credential.institution,
+        },
+      }),
     }));
   }
 
@@ -378,9 +289,7 @@ function generatePersonSchema(data: PersonData) {
       '@type': 'PropertyValue',
       name: 'Número de colegiada',
       value: data.licenseNumber,
-      ...(data.licenseOrganization && {
-        propertyID: data.licenseOrganization
-      })
+      ...(data.licenseOrganization && { propertyID: data.licenseOrganization }),
     };
   }
 
@@ -391,15 +300,17 @@ function generateServiceCatalogSchema(offers: ServiceOfferItem[]) {
   return {
     '@context': 'https://schema.org',
     '@type': 'OfferCatalog',
-    name: 'Servicios de Psicología en Córdoba y online',
+    name: 'Servicios de psicología',
     itemListElement: offers.map((offer, index) => ({
       '@type': 'Offer',
       position: index + 1,
       url: offer.url,
-      ...(offer.price && {
-        price: offer.price,
-        priceCurrency: offer.priceCurrency || 'EUR',
-      }),
+      ...(offer.price
+        ? {
+            price: offer.price,
+            priceCurrency: offer.priceCurrency || 'EUR',
+          }
+        : {}),
       itemOffered: {
         '@type': 'Service',
         name: offer.name,
@@ -434,9 +345,6 @@ switch (type) {
   case 'servicecatalog':
     schemaData = generateServiceCatalogSchema(data as ServiceOfferItem[]);
     break;
-  case 'professionalservice':
-    schemaData = null;
-    break;
   default: {
     const _exhaustive: never = type;
     schemaData = null;
@@ -447,6 +355,4 @@ switch (type) {
 const schemaJson = schemaData ? JSON.stringify(schemaData) : '';
 ---
 
-{schemaJson && (
-  <script type="application/ld+json" set:html={schemaJson} />
-)}
+{schemaJson && <script type="application/ld+json" set:html={schemaJson} />}

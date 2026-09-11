@@ -75,11 +75,11 @@ const contactPageData = {
                   Reserva tu primera consulta
                 </h2>
                 <p class="text-body-sm sm:text-body text-charcoal mt-4">
-                  No tienes que tenerlo todo claro. Cuéntame qué te preocupa y vemos si la terapia presencial en Córdoba o la modalidad online encajan contigo.
+                  No tienes que tenerlo todo claro. Cuéntame brevemente cómo puedo ayudarte y vemos si la terapia presencial en Córdoba o la modalidad online encajan contigo.
                 </p>
               </div>
               
-              <form id="contact-form" class="space-y-6" action="/api/contact" method="POST">
+              <form id="contact-form" class="space-y-6" action="/api/contact" method="POST" accept-charset="UTF-8" aria-describedby="contact-form-status" aria-busy="false">
                 <div class="grid sm:grid-cols-2 gap-6">
                   <div class="group">
                     <label for="nombre" class="block text-label text-charcoal mb-3 group-focus-within:text-olive transition-colors">
@@ -90,9 +90,15 @@ const contactPageData = {
                       id="nombre" 
                       name="nombre" 
                       placeholder="Cómo te llamo" 
+                      autocomplete="name"
+                      aria-invalid="false"
+                      aria-describedby="nombre-error"
+                      minlength="2"
+                      maxlength="120"
                       class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
                       required 
                     />
+                    <p id="nombre-error" class="text-label-sm text-terracotta mt-2" hidden></p>
                   </div>
                   <div class="group">
                     <label for="telefono" class="block text-label text-charcoal mb-3 group-focus-within:text-olive transition-colors">
@@ -103,8 +109,14 @@ const contactPageData = {
                       id="telefono" 
                       name="telefono" 
                       placeholder="Si prefieres que te llame" 
+                      autocomplete="tel"
+                      inputmode="tel"
+                      aria-invalid="false"
+                      aria-describedby="telefono-error"
+                      maxlength="30"
                       class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
                     />
+                    <p id="telefono-error" class="text-label-sm text-terracotta mt-2" hidden></p>
                   </div>
                 </div>
 
@@ -126,21 +138,29 @@ const contactPageData = {
                   <input 
                     type="email" 
                     id="email" 
-                    name="email" 
-                    placeholder="tu@email.com" 
-                    class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
-                    required 
-                  />
-                </div>
+                      name="email" 
+                      placeholder="tu@email.com" 
+                      autocomplete="email"
+                      inputmode="email"
+                      aria-invalid="false"
+                      aria-describedby="email-error"
+                      maxlength="180"
+                      class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
+                      required 
+                    />
+                    <p id="email-error" class="text-label-sm text-terracotta mt-2" hidden></p>
+                  </div>
                 
                 <div class="group">
                   <label for="servicio" class="block text-label text-charcoal mb-3 group-focus-within:text-olive transition-colors">
-                    ¿Qué te preocupa?
+                    Motivo de contacto
                   </label>
                   <div class="relative">
                     <select 
                       id="servicio" 
                       name="servicio"
+                      aria-invalid="false"
+                      aria-describedby="servicio-error"
                       class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 appearance-none cursor-pointer pr-12"
                     >
                       <option value="">Elige lo que más se acerque</option>
@@ -153,28 +173,40 @@ const contactPageData = {
                     </select>
                     <Icon name="chevronDown" class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-charcoal pointer-events-none" />
                   </div>
+                  <p id="servicio-error" class="text-label-sm text-terracotta mt-2" hidden></p>
                 </div>
                 
                 <div class="group">
                   <label for="mensaje" class="block text-label text-charcoal mb-3 group-focus-within:text-olive transition-colors">
-                    Tu mensaje <span class="text-olive">*</span>
+                    Mensaje breve <span class="text-olive">*</span>
                   </label>
                   <textarea 
                     id="mensaje" 
                     name="mensaje" 
-                    placeholder="Escribe lo que necesites. No hay forma correcta de empezar..." 
+                    placeholder="Cuéntame brevemente cómo puedo ayudarte y cómo prefieres que te contacte..." 
                     rows="5" 
+                    minlength="10"
+                    maxlength="2000"
+                    aria-invalid="false"
+                    aria-describedby="mensaje-guidance mensaje-error"
                     class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster resize-none transition-all duration-300 placeholder:text-charcoal/40"
                     required
                   ></textarea>
+                  <p id="mensaje-guidance" class="text-label-sm text-charcoal mt-2">
+                    No incluyas información clínica o especialmente sensible en este primer mensaje.
+                  </p>
+                  <p id="mensaje-error" class="text-label-sm text-terracotta mt-2" hidden></p>
                 </div>
 
                 <label class="flex items-start gap-3 text-body-sm text-charcoal">
                   <input
                     type="checkbox"
+                    id="privacidad"
                     name="privacidad"
                     value="aceptada"
                     class="mt-1 h-4 w-4 border-border-strong accent-olive"
+                    aria-invalid="false"
+                    aria-describedby="privacidad-error"
                     required
                   />
                   <span>
@@ -182,14 +214,15 @@ const contactPageData = {
                     <a href="/privacidad/" class="text-olive hover:underline underline-offset-2">política de privacidad</a>.
                   </span>
                 </label>
+                <p id="privacidad-error" class="text-label-sm text-terracotta -mt-4" hidden></p>
                 
                 <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                  <button type="submit" class="btn btn-sage w-full sm:w-auto group" data-submit-button>
+                  <button type="submit" class="btn btn-sage w-full sm:w-auto group" data-submit-button aria-controls="contact-form" aria-disabled="false">
                     <span data-submit-label>Enviar mensaje</span>
                     <Icon name="send" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p class="text-label-sm text-charcoal">
-                    Te respondo en menos de 24h. <a href="/privacidad/" class="text-olive hover:underline underline-offset-2">Privacidad garantizada</a>.
+                    Te respondo en menos de 24h. Consulta cómo se tratan tus datos en la <a href="/privacidad/" class="text-olive hover:underline underline-offset-2">política de privacidad</a>.
                   </p>
                 </div>
 
@@ -201,6 +234,12 @@ const contactPageData = {
                   hidden
                 ></p>
               </form>
+              <noscript>
+                <p class="text-body-sm text-charcoal mt-6">
+                  Si el formulario no se puede enviar, puedes escribirme directamente a
+                  <a href={`mailto:${CONTACT_EMAIL}`} class="text-olive hover:underline underline-offset-2">{CONTACT_EMAIL}</a>.
+                </p>
+              </noscript>
             </div>
           </div>
         </div>
@@ -262,6 +301,33 @@ const contactPageData = {
   const status = document.getElementById('contact-form-status');
   const submitButton = form?.querySelector('[data-submit-button]');
   const submitLabel = form?.querySelector('[data-submit-label]');
+  const fields = form
+    ? Array.from(form.querySelectorAll('input, select, textarea')).filter(
+        (field) => field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement
+      )
+    : [];
+  let isSubmitting = false;
+
+  const getFieldError = (field) => {
+    if (field.validity.valueMissing) return 'Este campo es obligatorio.';
+    if (field.validity.typeMismatch) return 'Introduce un email válido.';
+    if (field.validity.tooShort) return `Escribe al menos ${field.minLength} caracteres.`;
+    if (field.validity.tooLong) return 'El texto es demasiado largo.';
+    return '';
+  };
+
+  const updateFieldState = (field, showError = true) => {
+    const error = document.getElementById(`${field.id}-error`);
+    const isInvalid = !field.checkValidity();
+    field.setAttribute('aria-invalid', String(isInvalid));
+
+    if (error && showError) {
+      error.textContent = isInvalid ? getFieldError(field) : '';
+      error.hidden = !isInvalid;
+    }
+
+    return isInvalid;
+  };
 
   const setStatus = (message, type) => {
     if (!status) return;
@@ -271,16 +337,42 @@ const contactPageData = {
     status.classList.add(type === 'success' ? 'text-olive' : 'text-terracotta');
   };
 
+  fields.forEach((field) => {
+    field.addEventListener('invalid', () => {
+      updateFieldState(field);
+      setStatus('Revisa los campos señalados antes de enviar el mensaje.', 'error');
+    });
+    field.addEventListener('input', () => {
+      if (field.getAttribute('aria-invalid') === 'true') updateFieldState(field);
+    });
+    field.addEventListener('change', () => updateFieldState(field, field.getAttribute('aria-invalid') === 'true'));
+  });
+
+  const validateForm = () => {
+    const invalidFields = fields.filter((field) => updateFieldState(field));
+    const firstInvalidField = invalidFields[0];
+
+    if (firstInvalidField) {
+      setStatus('Revisa los campos señalados antes de enviar el mensaje.', 'error');
+      firstInvalidField.focus();
+      return false;
+    }
+
+    return true;
+  };
+
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    if (!(form instanceof HTMLFormElement) || !form.checkValidity()) {
-      form?.reportValidity();
+    if (!(form instanceof HTMLFormElement) || isSubmitting || !validateForm()) {
       return;
     }
 
+    isSubmitting = true;
+    form.setAttribute('aria-busy', 'true');
     if (submitButton instanceof HTMLButtonElement) {
       submitButton.disabled = true;
+      submitButton.setAttribute('aria-disabled', 'true');
       submitButton.classList.add('opacity-70', 'cursor-wait');
     }
     if (submitLabel) {
@@ -296,7 +388,9 @@ const contactPageData = {
         },
         body: JSON.stringify(Object.fromEntries(new FormData(form)))
       });
-      const result = await response.json().catch(() => ({}));
+      const result = response.headers.get('content-type')?.includes('application/json')
+        ? await response.json().catch(() => ({}))
+        : {};
 
       if (!response.ok) {
         throw new Error(result?.message || 'No se ha podido enviar el mensaje.');
@@ -307,14 +401,17 @@ const contactPageData = {
       window.dispatchEvent(new CustomEvent('contact-form-success'));
     } catch (error) {
       setStatus(
-        error instanceof Error
+        error instanceof Error && error.message
           ? error.message
           : `No se ha podido enviar el mensaje. También puedes escribir a ${contactEmail}.`,
         'error'
       );
     } finally {
+      isSubmitting = false;
+      form.setAttribute('aria-busy', 'false');
       if (submitButton instanceof HTMLButtonElement) {
         submitButton.disabled = false;
+        submitButton.setAttribute('aria-disabled', 'false');
         submitButton.classList.remove('opacity-70', 'cursor-wait');
       }
       if (submitLabel) {
@@ -322,4 +419,13 @@ const contactPageData = {
       }
     }
   });
+
+  const contactResult = new URLSearchParams(window.location.search).get('contacto');
+  if (contactResult === 'enviado') {
+    setStatus('Mensaje enviado correctamente. Te responderé en menos de 24 horas.', 'success');
+    window.history.replaceState({}, '', `${window.location.pathname}${window.location.hash}`);
+  } else if (contactResult === 'error') {
+    setStatus(`No se ha podido enviar el mensaje. También puedes escribir a ${contactEmail}.`, 'error');
+    window.history.replaceState({}, '', `${window.location.pathname}${window.location.hash}`);
+  }
 </script>

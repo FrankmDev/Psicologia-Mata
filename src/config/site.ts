@@ -1,5 +1,5 @@
 /** Canonical production URL (apex, no www). */
-export const SITE_URL = 'https://matacalapsicologia.es';
+export const SITE_URL = 'https://matacalapsicologia.com';
 
 export const SITE_NAME = 'María Ángeles Mata | Psicóloga en Córdoba y online';
 
@@ -40,7 +40,6 @@ export const WHATSAPP_URL = `https://wa.me/${CONTACT_PHONE_E164.replace('+', '')
 export const SOCIAL_PROFILES = [
   SOCIAL_INSTAGRAM,
   SOCIAL_FACEBOOK,
-  GOOGLE_MAPS_URL,
 ] as const;
 
 export const PUBLIC_GSC_VERIFICATION = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
