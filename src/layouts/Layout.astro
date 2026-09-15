@@ -164,17 +164,6 @@ const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
     
     <!-- Inline critical CSS para evitar CLS -->
     <style is:inline>
-      /* Critical CSS para prevenir layout shifts */
-      body { 
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        background-color: #F7F5F0;
-        color: #1B1E19;
-        /* overflow-x: hidden eliminado - causa scroll pegajoso */
-      }
-      /* Ocultar contenido hasta que las fuentes carguen */
-      .fonts-loaded body {
-        font-family: 'Manrope', system-ui, sans-serif;
-      }
       /* Contenedor principal - SIN contain para evitar scroll pegajoso */
       #main-content {
         min-height: 100vh;
