@@ -4,65 +4,65 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "matacalapsicologia.es" }],
-      "destination": "https://matacalapsicologia.com/:path*",
+      "has": [{ "type": "host", "value": "matacalapsicologia.com" }],
+      "destination": "https://matacalapsicologia.es/:path*",
       "statusCode": 308
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.matacalapsicologia.es" }],
-      "destination": "https://matacalapsicologia.com/:path*",
+      "destination": "https://matacalapsicologia.es/:path*",
       "statusCode": 308
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.matacalapsicologia.com" }],
-      "destination": "https://matacalapsicologia.com/:path*",
+      "destination": "https://matacalapsicologia.es/:path*",
       "statusCode": 308
     },
     {
       "source": "/services",
-      "destination": "https://matacalapsicologia.com/servicios/",
+      "destination": "/servicios/",
       "statusCode": 308
     },
     {
       "source": "/contact",
-      "destination": "https://matacalapsicologia.com/contacto/",
+      "destination": "/contacto/",
       "statusCode": 308
     },
     {
       "source": "/servicios",
-      "destination": "https://matacalapsicologia.com/servicios/",
+      "destination": "/servicios/",
       "statusCode": 308
     },
     {
       "source": "/blog",
-      "destination": "https://matacalapsicologia.com/blog/",
+      "destination": "/blog/",
       "statusCode": 308
     },
     {
       "source": "/contacto",
-      "destination": "https://matacalapsicologia.com/contacto/",
+      "destination": "/contacto/",
       "statusCode": 308
     },
     {
       "source": "/privacidad",
-      "destination": "https://matacalapsicologia.com/privacidad/",
+      "destination": "/privacidad/",
       "statusCode": 308
     },
     {
       "source": "/aviso-legal",
-      "destination": "https://matacalapsicologia.com/aviso-legal/",
+      "destination": "/aviso-legal/",
       "statusCode": 308
     },
     {
       "source": "/cookies",
-      "destination": "https://matacalapsicologia.com/cookies/",
+      "destination": "/cookies/",
       "statusCode": 308
     },
     {
       "source": "/blog/:slug",
-      "destination": "https://matacalapsicologia.com/blog/:slug/",
+      "destination": "/blog/:slug/",
       "statusCode": 308
     }
   ],

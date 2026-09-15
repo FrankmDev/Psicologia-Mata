@@ -1,5 +1,5 @@
 /** Canonical production URL (apex, no www). */
-export const SITE_URL = 'https://matacalapsicologia.com';
+export const SITE_URL = 'https://matacalapsicologia.es';
 
 export const SITE_NAME = 'María Ángeles Mata | Psicóloga en Córdoba y online';
 

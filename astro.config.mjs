@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 import { getBlogSitemapEntries, getCategorySitemapEntries } from './src/data/blog.ts';
 
 // https://astro.build/config
-const SITE = 'https://matacalapsicologia.com';
+const SITE = 'https://matacalapsicologia.es';
 
 const blogSitemapByPath = new Map(
   getBlogSitemapEntries().map((entry) => [entry.path, entry.lastmod]),
@@ -56,21 +56,12 @@ export default defineConfig({
 
   // Server configuration
   server: {
-    port: 4321,
     host: true,
   },
 
   // Vite configuration
   vite: {
     plugins: [tailwindcss()],
-    server: {
-      // No forzar puerto específico para evitar conflictos
-      strictPort: false,
-      // Desactivar overlay de errores HMR que puede causar problemas
-      hmr: {
-        overlay: false,
-      },
-    },
     build: {
       cssMinify: true,
       minify: 'terser',

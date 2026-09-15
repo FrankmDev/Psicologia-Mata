@@ -135,7 +135,7 @@ function buildEmail({ nombre, telefono, email, servicio, mensaje }) {
   const serviceLabel = formatService(servicio);
   const subject = `Nueva consulta web de ${nombre}`;
   const text = [
-    'Nueva consulta enviada desde matacalapsicologia.com',
+    'Nueva consulta enviada desde matacalapsicologia.es',
     '',
     `Nombre: ${nombre}`,
     `Email: ${email}`,
