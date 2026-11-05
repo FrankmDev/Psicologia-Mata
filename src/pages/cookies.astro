@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Schema from '../components/Schema.astro';
-import { SITE_URL } from '../config/site';
+import { SITE_URL, CONTACT_EMAIL, CONTACT_PHONE_DISPLAY } from '../config/site';
 
 const title = "Política de Cookies | María Ángeles Mata - Psicóloga en Córdoba";
 const description = "Política de cookies de la consulta de psicología de María Ángeles Mata. Información sobre el uso de cookies en matacalapsicologia.es.";
@@ -27,6 +27,7 @@ const breadcrumbData = [
       
       <div class="container-editorial relative z-10">
         <PageHeader
+          id="cookies-heading"
           label="Legal"
           title="Política de"
           highlight="Cookies"
@@ -39,44 +40,26 @@ const breadcrumbData = [
       <div class="container-editorial">
         <div class="max-w-3xl mx-auto prose prose-lg">
           
-          <p class="text-body text-charcoal"><strong>Última actualización:</strong> Enero 2025</p>
+          <p class="text-body text-charcoal"><strong>Última actualización técnica:</strong> 5 de noviembre de 2026</p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">1. ¿Qué son las Cookies?</h2>
           <p class="text-body text-charcoal mb-4">
             Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo (ordenador, tablet o móvil) cuando visitas un sitio web. Permiten recordar tus preferencias y mejorar tu experiencia de navegación.
           </p>
 
-          <h2 class="font-serif text-2xl text-ink mt-12 mb-6">2. Tipos de Cookies que Utilizamos</h2>
+          <h2 class="font-serif text-2xl text-ink mt-12 mb-6">2. Funcionamiento de esta web</h2>
           <p class="text-body text-charcoal mb-4">
-            Este sitio web utiliza los siguientes tipos de cookies:
+            El código de esta web no instala cookies propias de preferencias, publicidad o analítica. No hay un sistema de seguimiento de visitas ni un banner de aceptación de cookies.
           </p>
-
-          <h3 class="font-serif text-xl text-ink mt-8 mb-4">2.1. Cookies Técnicas (Necesarias)</h3>
           <p class="text-body text-charcoal mb-4">
-            Son esenciales para que el sitio web funcione correctamente. Permiten:
-          </p>
-          <ul class="list-disc pl-8 mb-4 space-y-2 text-body text-charcoal">
-            <li>Navegar por el sitio web</li>
-            <li>Usar funciones básicas</li>
-            <li>Recordar tus preferencias (como idioma o región)</li>
-          </ul>
-          <p class="text-body text-charcoal mb-4">
-            <strong>Cookies utilizadas:</strong> cookieconsentment, funciones básicas del sitio<br />
-            <strong>Duración:</strong> Sesión / 1 año
-          </p>
-
-          <h3 class="font-serif text-xl text-ink mt-8 mb-4">2.2. Cookies de Preferencias</h3>
-          <p class="text-body text-charcoal mb-4">
-            Permiten que el sitio web recuerde decisiones que has tomado (como tu nombre, idioma o región).
+            Las fuentes y las imágenes se sirven desde el propio sitio. La navegación y los enlaces de contacto no necesitan que aceptes cookies de analítica o publicidad.
           </p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">3. Cookies de Terceros</h2>
           <p class="text-body text-charcoal mb-4">
-            Este sitio puede utilizar servicios de terceros que instalarán cookies:
+            En Contacto, el mapa de Google permanece sin cargar hasta que pulses «Cargar mapa de Google». Al hacerlo, tu navegador conecta con Google, que recibe datos técnicos, como la dirección IP, y puede utilizar cookies de acuerdo con sus políticas y tu configuración.
           </p>
-          <ul class="list-disc pl-8 mb-4 space-y-2 text-body text-charcoal">
-            <li><strong>Google Maps:</strong> Para mostrar la ubicación de la consulta en la página de contacto</li>
-          </ul>
+          <p class="text-body text-charcoal mb-4">Puedes consultar la dirección y contactar sin cargar el mapa. Si sigues enlaces a Google Maps, WhatsApp, redes sociales u otras webs, se aplican las políticas de esos servicios. Consulta la <a href="https://policies.google.com/privacy?hl=es" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">política de privacidad de Google</a>.</p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">4. Cómo Gestionar las Cookies</h2>
           <p class="text-body text-charcoal mb-4">
@@ -89,12 +72,12 @@ const breadcrumbData = [
             <li><strong>Edge:</strong> Configuración → Cookies y permisos del sitio</li>
           </ul>
           <p class="text-body text-charcoal mb-4">
-            <strong>Nota:</strong> Bloquear cookies puede afectar al funcionamiento correcto del sitio web.
+            Puedes seguir leyendo la web y consultar los datos de contacto aunque no cargues el mapa o bloquees las cookies de terceros.
           </p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">5. Consentimiento</h2>
           <p class="text-body text-charcoal mb-4">
-            Al navegar por este sitio web por primera vez, se te mostrará un aviso sobre el uso de cookies. Puedes aceptar o rechazar el uso de cookies no esenciales.
+            Visitar una página no activa el mapa de Google. La decisión de cargarlo se toma mediante su botón; no se guarda como preferencia para visitas posteriores. Si no deseas conectar con Google, no lo cargues. Para interrumpir la conexión de un mapa ya cargado, recarga la página; las cookies existentes se gestionan desde el navegador.
           </p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">6. Actualizaciones</h2>
@@ -105,8 +88,8 @@ const breadcrumbData = [
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">7. Más Información</h2>
           <p class="text-body text-charcoal mb-4">
             Para preguntas sobre nuestra política de cookies, contacta a través de:<br />
-            <strong>Email:</strong> mangelesmatacala@hotmail.com<br />
-            <strong>Teléfono:</strong> +34 697 733 060
+            <strong>Email:</strong> {CONTACT_EMAIL}<br />
+            <strong>Teléfono:</strong> {CONTACT_PHONE_DISPLAY}
           </p>
 
           <div class="mt-16 pt-8 border-t border-border-delicate">

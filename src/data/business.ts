@@ -2,9 +2,11 @@ import {
   SITE_URL,
   CONTACT_ADDRESS,
   CONTACT_EMAIL,
+  CONTACT_HOURS,
   CONTACT_PHONE_SCHEMA,
   SOCIAL_PROFILES,
 } from '../config/site';
+import { servicePricing } from './services';
 
 const SITE = SITE_URL;
 
@@ -12,7 +14,7 @@ export const localBusinessData = {
   name: 'María Ángeles Mata - Psicóloga',
   legalName: 'María Ángeles Mata Cala',
   description:
-    'Consulta de María Ángeles Mata Cala, psicóloga en Córdoba. Ofrece terapia individual, de pareja y familiar, con atención presencial y online.',
+    'Consulta de María Ángeles Mata Cala, psicóloga general sanitaria en Córdoba. Terapia individual, de pareja y familiar; terapia individual y estimulación cognitiva también a domicilio. Atención a personas mayores y cuidadores.',
   url: SITE,
   telephone: CONTACT_PHONE_SCHEMA,
   email: CONTACT_EMAIL,
@@ -23,15 +25,17 @@ export const localBusinessData = {
     addressCountry: CONTACT_ADDRESS.addressCountry,
   },
   image: `${SITE}/profile.jpg`,
-  openingHours: ['Mo-Fr 09:00-20:00'],
+  openingHours: [CONTACT_HOURS.schema],
+  priceRange: '60–80 €',
+  currenciesAccepted: 'EUR',
   serviceArea: 'Córdoba, España',
   founderName: 'María Ángeles Mata Cala',
   services: [
-    'Terapia Individual (Presencial y Online)',
+    'Terapia Individual (Presencial, Online y a Domicilio en Córdoba)',
     'Terapia de Pareja (Presencial y Online)',
     'Terapia Familiar',
     'Evaluación Neuropsicológica',
-    'Estimulación Cognitiva (Online y Domicilio)',
+    'Estimulación Cognitiva (Online y a Domicilio en Córdoba)',
   ],
   socialProfiles: [...SOCIAL_PROFILES],
 };
@@ -41,7 +45,7 @@ export const personData = {
   url: `${SITE}/sobre-mi/`,
   jobTitle: 'Psicóloga General Sanitaria',
   description:
-    'Psicóloga colegiada (AN 12177) en Córdoba. Trabaja en terapia individual, terapia de pareja, terapia familiar y evaluación neuropsicológica.',
+    'Psicóloga general sanitaria colegiada (AN 12177) en Córdoba. Atención a personas mayores y apoyo psicológico a cuidadores; terapia individual y estimulación cognitiva también a domicilio.',
   telephone: CONTACT_PHONE_SCHEMA,
   email: CONTACT_EMAIL,
   image: `${SITE}/profile.jpg`,
@@ -111,44 +115,15 @@ export interface ServiceOffer {
   url: string;
 }
 
-export const serviceOffers: ServiceOffer[] = [
-  {
-    name: 'Terapia Individual',
-    description: 'Un espacio solo para ti, presencial en Córdoba o en línea.',
-    price: '60',
-    priceCurrency: 'EUR',
-    duration: '50 min',
-    url: `${SITE}/servicios/#individual`,
-  },
-  {
-    name: 'Terapia de Pareja',
-    description: 'Para volver a entenderos, sin señalar culpables.',
-    price: '70',
-    priceCurrency: 'EUR',
-    duration: '60 min',
-    url: `${SITE}/servicios/#pareja`,
-  },
-  {
-    name: 'Terapia Familiar',
-    description: 'Cuando la familia necesita encontrar su equilibrio.',
-    price: '80',
-    priceCurrency: 'EUR',
-    duration: '75 min',
-    url: `${SITE}/servicios/#familiar`,
-  },
-  {
-    name: 'Evaluación Neuropsicológica',
-    description: 'Valoración neuropsicológica mediante entrevistas y pruebas seleccionadas según el objetivo, con informe según el alcance acordado.',
-    duration: '90–120 min',
-    url: `${SITE}/servicios/#evaluacion`,
-  },
-  {
-    name: 'Estimulación Cognitiva',
-    description: 'Para personas mayores. Online o a domicilio en Córdoba.',
-    duration: '45–60 min',
-    url: `${SITE}/servicios/#cognitiva`,
-  },
-];
+export const serviceOffers: ServiceOffer[] = servicePricing.map((service) => ({
+  name: service.title,
+  description: service.description,
+  ...(service.price !== undefined
+    ? { price: String(service.price), priceCurrency: 'EUR' }
+    : {}),
+  duration: service.billingDuration,
+  url: `${SITE}${service.url}`,
+}));
 
 export const aboutCredentials = [
   {
@@ -164,8 +139,7 @@ export const aboutCredentials = [
   {
     year: '2021',
     title: 'Máster en Neuropsicología',
-    institution:
-      'Escuela de Postgrado de Psicología y Psiquiatría. Reconocido por Univ. Católica de Cuyo (Argentina) y Univ. CLEA (México)',
+    institution: 'Escuela de Postgrado de Psicología y Psiquiatría',
   },
   {
     year: '2021',

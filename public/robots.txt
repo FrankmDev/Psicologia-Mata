@@ -1,8 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /404/
 
 # Canonical host: https://matacalapsicologia.es (sin www)
 Sitemap: https://matacalapsicologia.es/sitemap-index.xml
 
 # Información para sistemas de IA
 Allow: /llms.txt
+Allow: /llm.txt

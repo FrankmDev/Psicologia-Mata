@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "installCommand": "npm ci",
   "trailingSlash": true,
   "redirects": [
     {
@@ -64,6 +65,11 @@
       "source": "/blog/:slug",
       "destination": "/blog/:slug/",
       "statusCode": 308
+    },
+    {
+      "source": "/blog/categoria/:slug",
+      "destination": "/blog/categoria/:slug/",
+      "statusCode": 308
     }
   ],
   "headers": [
@@ -73,15 +79,49 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=()"
         }
       ]
     },
     {
-      "source": "/(favicon\\.ico|favicon\\.avif|favicon-32x32\\.png|apple-touch-icon\\.png|icon-192x192\\.png|icon-512x512\\.png|site\\.webmanifest)",
+      "source": "/_astro/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(favicon\\.ico|favicon\\.avif|favicon-32x32\\.png|apple-touch-icon\\.png|icon-192x192\\.png|icon-512x512\\.png|site\\.webmanifest|profile\\.jpg|og-image\\.jpg)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
         }
       ]
     }

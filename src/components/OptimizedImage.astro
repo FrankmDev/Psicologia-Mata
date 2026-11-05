@@ -42,7 +42,6 @@ const {
 
 // Detectar tipo de imagen
 const isUnsplash = src.includes('images.unsplash.com');
-const isRemote = src.startsWith('http://') || src.startsWith('https://');
 const isLocalAsset = src.startsWith('/src/') || src.startsWith('~/');
 
 // Calcular altura si no se proporciona (ratio 4:3 por defecto)
@@ -92,7 +91,6 @@ const fetchPriority = priority ? 'high' : undefined;
 
 <figure class:list={['m-0', caption ? 'space-y-2' : '']}>
   {isLocalAsset ? (
-    <!-- Imagen local con optimización completa de Astro -->
     <Image
       src={src}
       alt={alt}
@@ -106,7 +104,6 @@ const fetchPriority = priority ? 'high' : undefined;
       {...(priority && { fetchpriority: 'high' })}
     />
   ) : (
-    <!-- Imagen remota con srcset optimizado -->
     <img
       src={optimizedSrc}
       alt={alt}

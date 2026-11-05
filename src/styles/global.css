@@ -1,15 +1,12 @@
 @import "tailwindcss";
-@import "@fontsource/cormorant-garamond/300.css";
-@import "@fontsource/cormorant-garamond/400.css";
-@import "@fontsource/cormorant-garamond/500.css";
-@import "@fontsource/cormorant-garamond/600.css";
-@import "@fontsource/cormorant-garamond/300-italic.css";
-@import "@fontsource/cormorant-garamond/400-italic.css";
-@import "@fontsource/manrope/200.css";
-@import "@fontsource/manrope/300.css";
-@import "@fontsource/manrope/400.css";
-@import "@fontsource/manrope/500.css";
-@import "@fontsource/manrope/600.css";
+@import "@fontsource/cormorant-garamond/latin-300.css";
+@import "@fontsource/cormorant-garamond/latin-400.css";
+@import "@fontsource/cormorant-garamond/latin-300-italic.css";
+@import "@fontsource/cormorant-garamond/latin-400-italic.css";
+@import "@fontsource/manrope/latin-300.css";
+@import "@fontsource/manrope/latin-400.css";
+@import "@fontsource/manrope/latin-500.css";
+@import "@fontsource/manrope/latin-600.css";
 
 /* ============================================
    SISTEMA DE DISEÑO - PSICOLOGÍA MATA (LUXURY EDITORIAL)
@@ -21,15 +18,15 @@
   --color-cream: #EBE5DB;
   --color-stone: #D4CDBC;
   --color-olive-light: #A4ACA1;
-  --color-olive: #626B5D; /* Verde musgo profundo */
+  --color-olive: #5E6759; /* Verde musgo profundo (AA sobre alabaster y cream) */
   --color-olive-dark: #3F473A;
   --color-ink: #1B1E19; /* Casi negro, cálido */
   --color-charcoal: #2A2E28;
-  --color-taupe: #78756F;
+  --color-taupe: #68655F;
   --color-taupe-light: #A8A39C;
   --color-border-delicate: rgba(27, 30, 25, 0.06);
   --color-border-strong: rgba(27, 30, 25, 0.12);
-  --color-terracotta: #A56D5B; /* Acento cálido */
+  --color-terracotta: #8A5143; /* Acento cálido (AA como texto sobre fondos claros) */
   --color-terracotta-light: #D9B3A7;
 
   /* Fuentes - Escala Editorial */
@@ -50,6 +47,8 @@
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
+    scroll-padding-bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
   }
 
   body {
@@ -70,7 +69,15 @@
     letter-spacing: -0.015em;
     line-height: 1.1;
     color: var(--color-ink);
+    text-wrap: balance;
+    overflow-wrap: anywhere;
   }
+
+  p { text-wrap: pretty; }
+  #main-content { min-height: 100vh; }
+  a[href^="mailto:"] { overflow-wrap: anywhere; }
+  [hidden] { display: none !important; }
+  :is(a, button, summary, input, select, textarea) { touch-action: manipulation; }
 
   h1 { font-size: clamp(2rem, 8vw, 3.5rem); }
   h2 { font-size: clamp(1.75rem, 6vw, 2.75rem); }
@@ -95,8 +102,26 @@
   }
 
   *:focus-visible {
-    outline: 2px solid currentColor;
+    outline: 2px solid var(--color-olive);
     outline-offset: 3px;
+    box-shadow: 0 0 0 5px var(--color-alabaster);
+  }
+
+  /* Formularios deshabilitados: siguen siendo legibles y se anuncian como inactivos. */
+  fieldset[disabled] {
+    border: 0;
+    padding: 0;
+    min-width: 0;
+  }
+
+  fieldset[disabled] :is(input, select, textarea, button),
+  fieldset[disabled] label {
+    cursor: not-allowed;
+  }
+
+  /* El texto de ayuda nunca debe quedar por debajo de 4.5:1. */
+  ::placeholder {
+    opacity: 1;
   }
 }
 
@@ -195,26 +220,22 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1rem 2rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  min-height: 44px;
+  max-width: 100%;
   border-radius: 9999px; /* Pill shape para elegancia */
   font-family: var(--font-sans);
   font-size: clamp(0.6875rem, 1.2vw, 0.75rem);
   font-weight: 500;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   cursor: pointer;
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
   position: relative;
   overflow: hidden;
   z-index: 1;
-}
-
-/* Keep fixed mobile actions clear of the home indicator and page content. */
-@media (max-width: 1023.98px) {
-  body {
-    padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 0px));
-  }
 }
 
 .btn::after {
@@ -313,17 +334,14 @@
   filter: blur(100px);
   opacity: 0.12;
   /* Animación más suave y con menos keyframes */
-  animation: float-aurora 25s infinite alternate ease-in-out;
-  /* Optimización: forzar capa GPU solo para los pseudo-elementos */
-  will-change: transform;
-  backface-visibility: hidden;
+  animation: float-aurora 4s ease-in-out;
 }
 
 @media (max-width: 768px) {
   .bg-aurora::before,
   .bg-aurora::after {
     filter: blur(60px);
-    animation-duration: 40s;
+    animation: none;
   }
 }
 .bg-aurora::before {
@@ -347,57 +365,15 @@
   100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
-/* Animaciones Reveal Ultra Suaves */
-html.reveal-ready [data-reveal] {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-  /* will-change eliminado - causa problemas de scroll sticky */
-  /* Solo se aplica dinámicamente cuando el elemento está cerca del viewport */
+/* Mejora progresiva: el contenido permanece visible incluso si falla el observer. */
+[data-reveal].is-visible {
+  animation: reveal-content 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--reveal-delay, 0ms);
 }
 
-html.reveal-ready [data-reveal].is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  /* will-change se remueve después de la animación para liberar GPU */
-  will-change: auto;
-}
-
-html.reveal-ready [data-reveal="left"] {
-  transform: translateX(-30px);
-}
-html.reveal-ready [data-reveal="left"].is-visible {
-  transform: translateX(0);
-}
-
-html.reveal-ready [data-reveal="right"] {
-  transform: translateX(30px);
-}
-html.reveal-ready [data-reveal="right"].is-visible {
-  transform: translateX(0);
-}
-
-/* Utilities de delay */
-[data-reveal-delay="100"] { transition-delay: 0.1s; }
-[data-reveal-delay="200"] { transition-delay: 0.2s; }
-[data-reveal-delay="300"] { transition-delay: 0.3s; }
-[data-reveal-delay="400"] { transition-delay: 0.4s; }
-[data-reveal-delay="500"] { transition-delay: 0.5s; }
-[data-reveal-delay="600"] { transition-delay: 0.6s; }
-[data-reveal-delay="700"] { transition-delay: 0.7s; }
-
-/* Efecto de entrada con escala suave */
-html.reveal-ready [data-reveal="scale"] {
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-html.reveal-ready [data-reveal="scale"].is-visible {
-  opacity: 1;
-  transform: scale(1);
+@keyframes reveal-content {
+  from { opacity: 0.85; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Link underline animado */
@@ -485,18 +461,6 @@ html.reveal-ready [data-reveal="scale"].is-visible {
 .img-reveal-wrapper {
   overflow: hidden;
   position: relative;
-}
-html.reveal-ready .img-reveal-wrapper::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-alabaster);
-  transform-origin: top;
-  transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1);
-  z-index: 10;
-}
-html.reveal-ready .img-reveal-wrapper.is-visible::after {
-  transform: scaleY(0);
 }
 
 /* Efecto hover en imágenes */
@@ -652,6 +616,7 @@ html.reveal-ready .img-reveal-wrapper.is-visible::after {
   }
   
   [data-reveal] {
+    animation: none !important;
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;

@@ -28,7 +28,7 @@ const isDark = variant === 'dark';
 <div class="space-y-8">
   <!-- Tarjeta principal -->
   <div class:list={[
-    'p-8 lg:p-10 border relative overflow-hidden',
+      'p-5 sm:p-8 lg:p-10 border relative overflow-hidden',
     isDark ? 'bg-ink border-border-strong/30' : 'bg-alabaster border-border-delicate'
   ]}>
     {/* Decorativo */}
@@ -39,21 +39,21 @@ const isDark = variant === 'dark';
     
     <span class:list={[
       'text-label mb-6 block',
-      isDark ? 'text-olive' : 'text-olive'
+      isDark ? 'text-terracotta-light' : 'text-olive'
     ]}>Cómo contactarme</span>
     
     <h2 class:list={[
       'font-serif text-2xl sm:text-3xl lg:text-4xl mb-8',
       isDark ? 'text-alabaster' : 'text-ink'
     ]}>
-      Estoy aquí
+      Datos de contacto
     </h2>
     
     <div class="space-y-6">
       {contactItems.map((item) => (
         <div class="group">
           {item.href ? (
-            <a href={item.href} class:list={[
+            <a href={item.href} target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined} class:list={[
               'flex items-start gap-5 p-4 -mx-4 transition-colors duration-300',
               isDark ? 'hover:bg-ink/50' : 'hover:bg-cream/50'
             ]}>
@@ -65,20 +65,20 @@ const isDark = variant === 'dark';
               ]}>
                 <Icon name={item.icon as any} class="w-5 h-5" />
               </div>
-              <div class="pt-1">
+              <div class="min-w-0 pt-1">
                 <p class:list={[
                   'text-label-sm mb-1',
                   isDark ? 'text-taupe-light' : 'text-charcoal'
                 ]}>{item.label}</p>
                 <p class:list={[
-                  'font-serif text-xl transition-colors duration-300',
+                  'font-serif text-xl transition-colors duration-300 break-words',
                   isDark 
                     ? 'text-alabaster group-hover:text-olive' 
                     : 'text-ink group-hover:text-olive'
                 ]}>{item.value}</p>
                 {item.subvalue && (
                   <p class:list={[
-                    'text-body-sm mt-1',
+                    'text-body-sm mt-1 break-words',
                     isDark ? 'text-taupe-light' : 'text-charcoal'
                   ]}>{item.subvalue}</p>
                 )}
@@ -97,18 +97,18 @@ const isDark = variant === 'dark';
               ]}>
                 <Icon name={item.icon as any} class="w-5 h-5" />
               </div>
-              <div class="pt-1">
+              <div class="min-w-0 pt-1">
                 <p class:list={[
                   'text-label-sm mb-1',
                   isDark ? 'text-taupe-light' : 'text-charcoal'
                 ]}>{item.label}</p>
                 <p class:list={[
-                  'font-serif text-xl',
+                  'font-serif text-xl break-words',
                   isDark ? 'text-alabaster' : 'text-ink'
                 ]}>{item.value}</p>
                 {item.subvalue && (
                   <p class:list={[
-                    'text-body-sm mt-1',
+                    'text-body-sm mt-1 break-words',
                     isDark ? 'text-taupe-light' : 'text-charcoal'
                   ]}>{item.subvalue}</p>
                 )}
@@ -138,18 +138,17 @@ const isDark = variant === 'dark';
       <div class="relative z-10">
         <div class="flex items-center gap-3 mb-4">
           <span class="relative flex h-3 w-3">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-olive opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3 w-3 bg-olive"></span>
           </span>
-          <span class="text-label text-olive">Disponible</span>
+          <span class="text-label text-terracotta-light">Atención con cita previa</span>
         </div>
         <p class="text-body-sm sm:text-body text-taupe-light mb-4">
-          De lunes a viernes, presencial en Córdoba y online. La primera consulta es sin compromiso: solo hablamos y vemos si encajamos.
+          Atención con cita previa en consulta y online. La terapia individual y la estimulación cognitiva también pueden realizarse a domicilio en Córdoba; consulta disponibilidad y zonas.
         </p>
-        <div class="flex items-center gap-4 text-label-sm text-alabaster/60">
+        <div class="flex flex-wrap items-center gap-4 text-label-sm text-alabaster/75">
           <div class="flex items-center gap-2">
             <Icon name="clock" class="w-4 h-4" />
-            <span>Sesiones de 50 minutos</span>
+            <span>Duración según servicio</span>
           </div>
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">

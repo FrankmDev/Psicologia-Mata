@@ -1,35 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import mariaAngelesMata from "../../assets/maria-angeles-mata.jpeg";
-
-const credentials = [
-    {
-        year: "2025",
-        title: "Máster en Psicología General Sanitaria",
-        institution: "Univ. Católica de Ávila",
-    },
-    {
-        year: "2023",
-        title: "Grado en Psicología – Mención en Psicología de la Salud",
-        institution: "Univ. Católica de Ávila",
-    },
-    {
-        year: "2021",
-        title: "Máster en Neuropsicología",
-        institution:
-            "Escuela de Postgrado de Psicología y Psiquiatría. Reconocido por Univ. Católica de Cuyo (Argentina) y Univ. CLEA (México)",
-    },
-    {
-        year: "2021",
-        title: "Máster en Deterioros Cognitivos",
-        institution: "Escuela De Postgrado de Psicología y Psiquiatría",
-    },
-    {
-        year: "2020",
-        title: "Máster en Gerontología: Intervención Psicológica y Pedagógica en la Tercera Edad",
-        institution: "Universidad San Jorge",
-    },
-];
+import { aboutCredentials as credentials } from '../../data/business';
 ---
 
 <section class="section bg-alabaster relative" id="sobre-mi">
@@ -44,10 +16,7 @@ const credentials = [
                 data-reveal
                 data-reveal-delay="100"
             >
-                "La terapia no es magia. Es un espacio donde puedes dejar de
-                fingir que todo va bien, <em class="text-olive italic"
-                    >y empezar a sentir que realmente lo está.</em
-                >"
+                "Un espacio para entender lo que te ocurre y trabajar objetivos concretos, con rigor profesional y sin tener que aparentar que todo va bien."
             </h2>
         </div>
 
@@ -74,7 +43,7 @@ const credentials = [
                     >
                         <Image
                             src={mariaAngelesMata}
-                            alt="María Ángeles Mata - Psicóloga"
+            alt="María Ángeles Mata, psicóloga general sanitaria en Córdoba"
                             class="w-full h-full object-cover filter grayscale-[20%] sepia-[15%] brightness-105 transition-all duration-1000 hover:grayscale-0 hover:scale-105"
                             style="min-height: 100%; aspect-ratio: 3/4;"
                             width={500}
@@ -86,7 +55,7 @@ const credentials = [
 
                     <!-- Sello flotante -->
                     <div aria-hidden="true"
-                        class="absolute -right-3 sm:-right-6 -bottom-3 sm:-bottom-6 w-24 sm:w-32 h-24 sm:h-32 bg-olive rounded-full flex items-center justify-center p-1.5 sm:p-2 z-20 shadow-xl hidden sm:flex animate-[spin_20s_linear_infinite]"
+                        class="absolute -right-3 sm:-right-6 -bottom-3 sm:-bottom-6 w-24 sm:w-32 h-24 sm:h-32 bg-olive rounded-full flex items-center justify-center p-1.5 sm:p-2 z-20 shadow-xl hidden sm:flex"
                     >
                         <svg
                             viewBox="0 0 100 100"
@@ -124,23 +93,15 @@ const credentials = [
                     </div>
 
                     <h3 class="title-section mb-6 sm:mb-8">
-                        Un enfoque <em class="text-olive italic"
-                            >profesional y humano</em
-                        >
+                        Cómo trabajo y qué puedes <em class="text-olive italic">esperar</em>
                     </h3>
 
                     <div class="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
                         <p class="text-body-sm">
-                            Llevo años acompañando a personas que,
-                            como tú, decidieron que merecían sentirse mejor. No
-                            busco "arreglarte" — busco que descubras que ya
-                            tienes dentro todo lo necesario.
+                            Soy María Ángeles Mata Cala, psicóloga general sanitaria (AN 12177). Trabajo con adultos, parejas y familias ante ansiedad, conflictos o cambios vitales.
                         </p>
                         <p class="text-body-sm">
-                            Combino lo que dice la ciencia con lo que siente el
-                            corazón. La terapia no es un manual: es una
-                            conversación honesta donde tú pones tu historia y yo
-                            pongo mi experiencia.
+                            Mi formación en neuropsicología, deterioro cognitivo y gerontología sostiene un foco especial en el bienestar de las personas mayores y de quienes las cuidan. Ofrezco terapia individual y estimulación cognitiva también a domicilio en Córdoba, además de evaluación cuando está indicada.
                         </p>
                     </div>
 
@@ -148,7 +109,7 @@ const credentials = [
                     <div class="mb-8 sm:mb-12">
                         <div class="flex items-center gap-4 mb-4 sm:mb-6">
                             <span class="text-label-xs text-charcoal"
-                                >Formación Reciente</span
+                                >Formación y titulaciones</span
                             >
                             <span class="h-[1px] flex-1 bg-border-delicate"
                             ></span>
@@ -178,7 +139,7 @@ const credentials = [
                         href="/contacto/"
                         class="btn btn-sage py-3 px-5 sm:py-4 sm:px-8 self-start"
                     >
-                        Descubre cómo puedo ayudarte
+                        Solicitar una cita
                     </a>
                 </div>
             </div>

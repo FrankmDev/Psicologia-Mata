@@ -1,0 +1,280 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Schema from '../../components/Schema.astro';
+import { CONTACT_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164, GOOGLE_MAPS_URL, SITE_URL } from '../../config/site';
+import { serviceLandingPages } from '../../data/serviceLandings';
+import { getPostBySlug } from '../../data/blog';
+
+export function getStaticPaths() {
+  return serviceLandingPages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const url = `${SITE_URL}/servicios/${page.slug}/`;
+const breadcrumbData = [
+  { name: 'Inicio', url: `${SITE_URL}/` },
+  { name: 'Servicios', url: `${SITE_URL}/servicios/` },
+  { name: page.title, url }
+];
+const serviceSchemaData = {
+  name: page.title,
+  description: page.description,
+  url,
+  serviceType: page.label,
+  areaServed: 'Córdoba, España',
+  provider: {
+    name: 'María Ángeles Mata - Psicóloga',
+    url: `${SITE_URL}/sobre-mi/`
+  }
+};
+const faqSchemaData = page.faqs.map(({ question, answer }) => ({ question, answer }));
+const approvedRelatedArticles = page.relatedArticles.filter(({ href }) => {
+  const slug = href.match(/^\/blog\/([^/]+)\/$/)?.[1];
+  if (!slug) return false;
+  const post = getPostBySlug(slug);
+  return post && post.reviewStatus !== 'pending';
+});
+const whatsappUrl = `https://wa.me/${CONTACT_PHONE_E164.replace('+', '')}?text=${encodeURIComponent(`Hola, me gustaría pedir información sobre ${page.label.toLowerCase()}.`)}`;
+---
+
+<Layout
+  title={page.seoTitle}
+  description={page.description}
+  canonical={`/servicios/${page.slug}/`}
+  ogImage={page.image.src}
+  ogImageAlt={page.imageAlt}
+  noindex={true}
+  author=""
+>
+  <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
+  <Schema slot="schema" type="webpage" data={{ name: page.seoTitle, description: page.description, url }} />
+  <Schema slot="schema" type="service" data={serviceSchemaData} />
+  <Schema slot="schema" type="faqpage" data={faqSchemaData} />
+  <Header activePage="Servicios" />
+
+  <main id="main-content">
+    <section class="section bg-cream relative overflow-hidden" aria-labelledby="service-heading">
+      <div class="bg-aurora opacity-50"></div>
+      <div class="container-editorial relative z-10">
+        <nav aria-label="Migas de pan" class="mb-10">
+          <ol class="flex flex-wrap items-center gap-2 text-label-xs text-charcoal/70">
+            <li><a class="hover:text-olive underline-offset-4 hover:underline" href="/">Inicio</a></li>
+            <li aria-hidden="true">/</li>
+            <li><a class="hover:text-olive underline-offset-4 hover:underline" href="/servicios/">Servicios</a></li>
+            <li aria-hidden="true">/</li>
+            <li aria-current="page" class="text-ink">{page.title}</li>
+          </ol>
+        </nav>
+
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          <div class="lg:col-span-7" data-reveal>
+            <p class="label-section mb-8">{page.label}</p>
+            <h1 id="service-heading" class="font-serif text-[clamp(2.5rem,7vw,5.5rem)] text-ink leading-[1.02] tracking-tight mb-8">
+              {page.title}
+            </h1>
+            <p class="text-lead max-w-2xl mb-10">{page.excerpt}</p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a class="btn btn-sage justify-center" href={`tel:${CONTACT_PHONE_E164}`} aria-label={`Llamar al ${CONTACT_PHONE_DISPLAY}`}>
+                Llamar · {CONTACT_PHONE_DISPLAY}
+              </a>
+              <a class="btn btn-outline justify-center" href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                Consultar por WhatsApp
+              </a>
+            </div>
+          </div>
+          <figure class="lg:col-span-5 relative" data-reveal="right" data-reveal-delay="120">
+            <div class="absolute -inset-3 border border-olive/20 translate-x-2 translate-y-2" aria-hidden="true"></div>
+            <Image
+              src={page.image}
+              alt={page.imageAlt}
+              class="relative aspect-[4/5] w-full object-cover"
+              width={720}
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              quality={85}
+              format="webp"
+              loading="eager"
+            />
+            <figcaption class="sr-only">{page.imageAlt}</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="container-editorial pt-8">
+      <aside class="border border-terracotta/35 bg-cream px-5 py-4 text-body-sm text-charcoal" role="note" aria-label="Estado editorial">
+        <strong class="text-ink">Pendiente de revisión profesional por María Ángeles Mata Cala.</strong>
+        Este contenido no sustituye una valoración individual. Se mantiene fuera del índice y del sitemap hasta su aprobación clínica.
+      </aside>
+    </div>
+
+    <section class="section bg-alabaster" aria-labelledby="intro-heading">
+      <div class="container-editorial grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <div class="lg:col-span-4" data-reveal>
+          <span class="label-section">Una primera orientación</span>
+          <h2 id="intro-heading" class="title-section mt-8">¿Te está pasando algo que te <em class="text-olive italic">preocupa?</em></h2>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6 text-body space-y-5" data-reveal data-reveal-delay="100">
+          <p>{page.intro}</p>
+          <p>La primera conversación sirve para aclarar qué necesitas y resolver dudas prácticas, sin tener que decidir de antemano qué servicio o diagnóstico corresponde.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-cream" aria-labelledby="situations-heading">
+      <div class="container-editorial">
+        <div class="max-w-3xl mb-12" data-reveal>
+          <span class="label-section">Motivos de consulta</span>
+          <h2 id="situations-heading" class="title-section mt-8">Situaciones que pueden llevarte a <em class="text-olive italic">consultar</em></h2>
+          <p class="text-body-sm mt-6">No son criterios diagnósticos ni una lista que tengas que cumplir. Si algo de esto te preocupa, puedes preguntar si una valoración tiene sentido.</p>
+        </div>
+        <ul class="grid md:grid-cols-2 gap-x-12 border-t border-border-delicate">
+          {page.situations.map((situation, index) => (
+            <li class="flex gap-5 py-6 border-b border-border-delicate text-body-sm text-charcoal">
+              <span class="text-label text-olive shrink-0">0{index + 1}</span>
+              <span>{situation}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="section bg-alabaster" aria-labelledby="service-description-heading">
+      <div class="container-editorial grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5" data-reveal>
+          <span class="label-section">El servicio</span>
+          <h2 id="service-description-heading" class="title-section mt-8">Qué puedes esperar y qué <em class="text-olive italic">no</em></h2>
+        </div>
+        <div class="lg:col-span-6 lg:col-start-7" data-reveal data-reveal-delay="100">
+          <p class="text-body">{page.serviceExplanation}</p>
+          <ul class="mt-8 space-y-4">
+            {page.limits.map((limit) => (
+              <li class="flex gap-3 text-body-sm text-charcoal">
+                <span aria-hidden="true" class="text-olive">—</span>
+                <span>{limit}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-ink text-alabaster" aria-labelledby="process-heading">
+      <div class="container-editorial">
+        <div class="max-w-3xl mb-14" data-reveal>
+          <span class="label-section !text-terracotta-light">Cómo empezar</span>
+          <h2 id="process-heading" class="title-section !text-alabaster mt-8">Un proceso hablado <em class="text-terracotta-light italic">contigo</em></h2>
+        </div>
+        <ol class="grid md:grid-cols-3 gap-8">
+          {page.process.map((step, index) => (
+            <li class="border-t border-alabaster/20 pt-6" data-reveal data-reveal-delay={index * 80}>
+              <span class="text-label text-terracotta-light">0{index + 1}</span>
+              <h3 class="font-serif text-2xl text-alabaster mt-5 mb-3">{step.title}</h3>
+              <p class="text-body-sm !text-alabaster/75">{step.description}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section bg-cream" aria-labelledby="practical-heading">
+      <div class="container-editorial grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-4" data-reveal>
+          <span class="label-section">Información práctica</span>
+          <h2 id="practical-heading" class="title-section mt-8">Modalidad, tiempo y <em class="text-olive italic">tarifa</em></h2>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6 divide-y divide-border-delicate border-y border-border-delicate" data-reveal data-reveal-delay="100">
+          <div class="py-6">
+            <h3 class="font-serif text-xl text-ink mb-2">Modalidad</h3>
+            <p class="text-body-sm">{page.modality}</p>
+          </div>
+          <div class="py-6">
+            <h3 class="font-serif text-xl text-ink mb-2">Duración</h3>
+            <p class="text-body-sm">{page.duration}</p>
+          </div>
+          <div class="py-6">
+            <h3 class="font-serif text-xl text-ink mb-2">Precio</h3>
+            <p class="text-body-sm">{page.price}</p>
+            <a href="/servicios/#tarifas" class="inline-flex mt-4 text-label text-olive underline underline-offset-4 hover:text-ink">Ver tarifas publicadas</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-alabaster" aria-labelledby="faq-heading">
+      <div class="container-editorial grid lg:grid-cols-12 gap-10 lg:gap-16">
+        <div class="lg:col-span-4" data-reveal>
+          <span class="label-section">Preguntas frecuentes</span>
+          <h2 id="faq-heading" class="title-section mt-8">Antes de <em class="text-olive italic">contactar</em></h2>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6 border-t border-border-delicate">
+          {page.faqs.map((faq, index) => (
+            <details class="group border-b border-border-delicate" data-reveal data-reveal-delay={index * 60}>
+              <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-olive">
+                <span class="font-serif text-lg sm:text-xl">{faq.question}</span>
+                <span aria-hidden="true" class="shrink-0 text-olive">+</span>
+              </summary>
+              <p class="pb-6 pr-8 text-body-sm">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section bg-cream" aria-labelledby="professional-heading">
+      <div class="container-editorial grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        <div class="lg:col-span-5" data-reveal>
+          <span class="label-section">Consulta en Córdoba</span>
+          <h2 id="professional-heading" class="title-section mt-8">Atención profesional, con información <em class="text-olive italic">clara</em></h2>
+          <p class="text-body-sm mt-6">María Ángeles Mata Cala · Psicóloga General Sanitaria · Colegiada AN 12177.</p>
+          <a class="inline-flex mt-5 text-label text-olive underline underline-offset-4" href="/sobre-mi/">Conocer su formación y trayectoria</a>
+        </div>
+        <address class="lg:col-span-6 lg:col-start-7 not-italic border-t border-border-delicate pt-6" data-reveal data-reveal-delay="100">
+          <p class="font-serif text-2xl text-ink">{CONTACT_ADDRESS.streetAddress}</p>
+          <p class="text-body-sm mt-2">{CONTACT_ADDRESS.postalCode} {CONTACT_ADDRESS.addressLocality}</p>
+          <div class="flex flex-wrap gap-x-6 gap-y-3 mt-6">
+            <a class="text-label text-olive underline underline-offset-4" href={GOOGLE_MAPS_URL} target="_blank" rel="noopener noreferrer">Ver ubicación en Google Maps</a>
+            <a class="text-label text-olive underline underline-offset-4" href={`mailto:${CONTACT_EMAIL}`}>Escribir por email</a>
+          </div>
+        </address>
+      </div>
+    </section>
+
+    <section class="section-sm bg-alabaster border-t border-border-delicate" aria-label="Servicios y lecturas relacionadas">
+      <div class="container-editorial grid md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="font-serif text-2xl text-ink mb-5">Servicios relacionados</h2>
+          <ul class="space-y-3">
+            {page.relatedServices.map((item) => (
+              <li><a class="text-body-sm text-olive underline underline-offset-4 hover:text-ink" href={item.href}>{item.title}</a><p class="text-label-xs text-charcoal mt-1">{item.description}</p></li>
+            ))}
+          </ul>
+        </div>
+        {approvedRelatedArticles.length > 0 && <div>
+          <h2 class="font-serif text-2xl text-ink mb-5">Lecturas relacionadas</h2>
+          <ul class="space-y-3">
+            {approvedRelatedArticles.map((item) => (
+              <li><a class="text-body-sm text-olive underline underline-offset-4 hover:text-ink" href={item.href}>{item.title}</a></li>
+            ))}
+          </ul>
+        </div>}
+      </div>
+    </section>
+
+    <section class="section bg-ink text-alabaster" aria-labelledby="contact-heading">
+      <div class="container-editorial text-center max-w-3xl">
+        <span class="label-section !text-terracotta-light">Si quieres preguntar</span>
+        <h2 id="contact-heading" class="font-serif text-4xl sm:text-5xl text-alabaster mt-7 mb-6">Podemos empezar por una <em class="text-terracotta-light italic">conversación</em></h2>
+        <p class="text-body !text-alabaster/75 mb-9">Puedes consultar modalidad, precio y disponibilidad por teléfono o WhatsApp. No incluyas información clínica sensible en el primer mensaje.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a class="btn !bg-terracotta-light !text-ink hover:!bg-alabaster justify-center" href={`tel:${CONTACT_PHONE_E164}`}>Llamar · {CONTACT_PHONE_DISPLAY}</a>
+          <a class="btn !bg-transparent !border-border-strong/40 !text-alabaster hover:!bg-alabaster/10 justify-center" href={whatsappUrl} target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

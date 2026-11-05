@@ -2,24 +2,32 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164, WHATSAPP_URL } from '../config/site';
 
 const title = 'Página no encontrada | María Ángeles Mata';
 const description = 'La página que buscas no existe. Vuelve al inicio o contacta con la consulta de psicología en Córdoba.';
 ---
 
-<Layout {title} {description} noindex={true} canonical="/404/">
+<Layout {title} {description} noindex={true}>
   <Header />
   <main id="main-content" class="min-h-[60vh] flex items-center justify-center">
     <div class="container-editorial text-center py-24">
       <p class="text-label text-olive mb-4">Error 404</p>
-      <h1 class="title-section mb-6">Esta página no existe</h1>
-      <p class="text-body text-charcoal mb-10 max-w-md mx-auto">
-        Puede que el enlace esté desactualizado. Prueba desde el inicio o escríbeme si necesitas ayuda.
+      <h1 class="title-section mb-6 text-balance">Esta página no existe</h1>
+      <p class="text-body text-charcoal mb-10 max-w-md mx-auto text-pretty">
+        Puede que el enlace esté desactualizado. Vuelve al inicio, revisa los servicios o escríbeme si necesitas ayuda.
       </p>
       <div class="flex flex-wrap gap-4 justify-center">
         <a href="/" class="btn btn-sage">Ir al inicio</a>
+        <a href="/servicios/" class="btn btn-outline">Ver servicios</a>
         <a href="/contacto/" class="btn btn-outline">Contactar</a>
       </div>
+      <p class="mt-10 text-body-sm text-charcoal">
+        ¿Prefieres hablar?
+        <a href={`tel:${CONTACT_PHONE_E164}`} class="text-olive underline underline-offset-4 hover:text-ink">{CONTACT_PHONE_DISPLAY}</a>
+        ·
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="text-olive underline underline-offset-4 hover:text-ink">WhatsApp</a>
+      </p>
     </div>
   </main>
   <Footer />

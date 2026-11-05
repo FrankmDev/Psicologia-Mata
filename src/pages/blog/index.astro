@@ -58,10 +58,11 @@ const breadcrumbData = [
       
       <div class="container-editorial relative z-10">
         <PageHeader
+          id="blog-heading"
           label="Blog"
-          title="Reflexiones para el"
-          highlight="día a día"
-          description="Artículos claros y prácticos sobre ansiedad, pareja, autoestima y terapia, escritos desde una consulta de psicología en Córdoba y pensados también para quien busca apoyo online."
+          title="Blog de psicología"
+          highlight="en Córdoba"
+          description="Artículos sobre ansiedad, pareja, autoestima y terapia online, escritos desde la consulta en Córdoba con lenguaje claro y criterio clínico."
         >
           {/* Categorías */}
           <div class="flex flex-wrap gap-3 mt-16">
@@ -99,7 +100,7 @@ const breadcrumbData = [
                     class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                     width={800}
                     loading="eager"
-                    quality={100}
+                    quality={82}
                   />
                   <div class="absolute inset-0 bg-gradient-to-tr from-ink/20 via-transparent to-transparent"></div>
                 </div>
@@ -156,7 +157,7 @@ const breadcrumbData = [
           </div>
           <div data-reveal data-reveal-delay="100">
             <p class="text-body-sm text-charcoal max-w-sm">
-              Pequeñas dosis de psicología para aplicar en tu día a día.
+              Contenido práctico para entender mejor lo que te ocurre.
             </p>
           </div>
         </div>
@@ -177,7 +178,7 @@ const breadcrumbData = [
                     class="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
                     width={600}
                     loading="lazy"
-                    quality={100}
+                    quality={82}
                   />
                   <div class="absolute inset-0 bg-olive/0 group-hover:bg-olive/10 transition-colors duration-500"></div>
                 </div>
@@ -219,8 +220,8 @@ const breadcrumbData = [
       label="¿Necesitas hablar?"
       title="Los artículos ayudan,"
       highlight="pero a veces necesitamos más"
-      description="Si sientes que lo que lees no es suficiente, quizás es momento de dar el paso. Estoy aquí para escucharte sin juzgarte."
-      primaryAction={{ text: "Hablamos", href: "/contacto/" }}
+      description="Si lo que lees se parece a lo que vives, podemos valorar juntos si la terapia puede ayudarte."
+      primaryAction={{ text: "Solicitar cita", href: "/contacto/" }}
       variant="dark"
     />
 

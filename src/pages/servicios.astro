@@ -6,8 +6,9 @@ import PageHeader from '../components/PageHeader.astro';
 import TherapyProcess from '../components/TherapyProcess.astro';
 import CTASection from '../components/CTASection.astro';
 import Schema from '../components/Schema.astro';
-import { allServices } from '../data/services';
+import { allServices, servicePricing } from '../data/services';
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import terapiaIndividual from '../assets/terapia-individual.avif';
 import terapiaPareja from '../assets/terapia-pareja.avif';
 import terapiaFamilia from '../assets/terapia-familiar.avif';
@@ -16,11 +17,11 @@ import cognitiva from '../assets/estimulacion-cognitiva.avif';
 import { SITE_URL } from '../config/site';
 import { serviceOffers } from '../data/business';
 
-const title = 'Servicios de psicología en Córdoba y online | Terapia individual y pareja';
+const title = 'Servicios y tarifas de psicología en Córdoba | Mata Cala';
 const description =
-  'Terapia individual, de pareja y familiar, evaluación neuropsicológica y estimulación cognitiva en Córdoba y online. Precios desde 60€. Primera consulta sin compromiso.';
+  'Terapia individual y estimulación cognitiva a domicilio en Córdoba, además de atención presencial y online. Apoyo a personas mayores y cuidadores.';
 const keywords =
-  'terapia individual córdoba, terapia de pareja córdoba, terapia familiar, evaluación neuropsicológica córdoba, psicólogo online, servicios psicología córdoba';
+  'terapia individual córdoba, terapia de pareja córdoba, terapia familiar córdoba, evaluación neuropsicológica córdoba, estimulación cognitiva mayores, psicólogo online';
 
 const serviceImages: Record<string, ImageMetadata> = {
   individual: terapiaIndividual,
@@ -30,54 +31,94 @@ const serviceImages: Record<string, ImageMetadata> = {
   cognitiva: cognitiva,
 };
 
+const serviceAlts: Record<string, string> = {
+  individual: 'Sesión de terapia individual en Córdoba',
+  pareja: 'Sesión de terapia de pareja en Córdoba',
+  familiar: 'Sesión de terapia familiar en Córdoba',
+  evaluacion: 'Evaluación neuropsicológica en consulta',
+  cognitiva: 'Estimulación cognitiva con personas mayores',
+};
+
+const serviceDetailUrls: Record<string, string> = {
+  individual: '/servicios/terapia-individual/',
+  pareja: '/servicios/terapia-pareja-cordoba/',
+  evaluacion: '/servicios/evaluacion-neuropsicologica/',
+  cognitiva: '/servicios/estimulacion-cognitiva/',
+};
+
+const additionalServices = [
+  {
+    title: 'Terapia para la ansiedad en Córdoba',
+    description: 'Atención individual para comprender el malestar y valorar qué apoyo puede encajar.',
+    href: '/servicios/ansiedad-cordoba/',
+    image: terapiaIndividual,
+    imageAlt: 'Espacio de terapia individual, imagen ilustrativa',
+  },
+  {
+    title: 'Psicología para personas mayores',
+    description: 'Atención a personas mayores y apoyo psicológico a quienes las cuidan, con opciones de terapia individual, evaluación y estimulación cognitiva.',
+    href: '/servicios/psicologia-personas-mayores/',
+    image: cognitiva,
+    imageAlt: 'Material para una actividad cognitiva, imagen ilustrativa',
+  },
+];
+
 const serviceContent: Record<string, {
   subtitle: string;
   quote: string;
   approach: string[];
 }> = {
   individual: {
-    subtitle: 'Un espacio solo para ti',
-    quote: 'A veces necesitamos un lugar donde poder ser nosotros mismos sin filtros. Sin juicios, sin prisas, sin tener que cuidar lo que decimos. Aquí puedes traer todo lo que llevas dentro: lo que duele, lo que confunde, lo que te avergüenza.',
-    approach: ['Escucha activa', 'Técnicas probadas', 'A tu ritmo']
+    subtitle: 'Ansiedad, autoestima y cambios',
+    quote: 'Puede ser ansiedad que no baja, autocrítica constante o una etapa que te supera. La terapia individual puede realizarse en consulta, online o a domicilio en Córdoba; acordamos objetivos y herramientas según tu situación.',
+    approach: ['TCC', 'ACT y mindfulness', 'Objetivos revisables']
   },
   pareja: {
-    subtitle: 'Cuando el amor necesita ayuda',
-    quote: 'No se trata de decidir quién tiene razón. Se trata de volver a entenderse, de recordar por qué eligieron estar juntos. A veces solo necesitamos alguien que nos ayude a escucharnos de verdad.',
-    approach: ['Comunicación real', 'Sin señalar culpas', 'Reconectar']
+    subtitle: 'Comunicación y conflictos',
+    quote: 'No se trata de decidir quién tiene razón, sino de entender el patrón que os atrapa: qué se repite, qué os aleja y cómo cambiar la conversación para que no os desgaste.',
+    approach: ['Pautas de comunicación', 'Gestión de conflictos', 'Acuerdos concretos']
   },
   familiar: {
-    subtitle: 'La familia es un equipo',
-    quote: 'Cuando uno sufre, todos sentimos el peso. Pero también funciona al revés: cuando uno mejora, todos respiramos mejor. Trabajamos juntos para que el hogar vuelva a ser un lugar de paz.',
-    approach: ['Entenderse mejor', 'Límites sanos', 'Crecer juntos']
+    subtitle: 'Roles, límites y convivencia',
+    quote: 'Cuando un conflicto se repite, toda la familia lo nota. Trabajamos qué mantiene el problema y cómo cambiar la forma de relacionarse, sin buscar un único culpable.',
+    approach: ['Perspectiva sistémica', 'Límites y acuerdos', 'Pautas para casa']
   },
   evaluacion: {
-    subtitle: 'Entender qué pasa',
-    quote: 'A veces notamos que algo no funciona igual, pero no sabemos exactamente qué es. Una evaluación exhaustiva nos da claridad: entender qué pasa es el primer paso para saber cómo actuar.',
-    approach: ['Evaluación completa', 'Informe claro', 'Plan personalizado']
+    subtitle: 'Memoria, atención y concentración',
+    quote: 'Si notas cambios en memoria, atención o concentración, una evaluación permite describir qué ocurre y orientar los siguientes pasos. No sustituye una valoración médica.',
+    approach: ['Entrevista y pruebas', 'Informe acordado', 'Orientación']
   },
   cognitiva: {
-    subtitle: 'Mantener la mente activa',
-    quote: 'La edad no tiene por qué significar abandono. Con ejercicios adaptados a cada persona, ayudamos a mantener la memoria, la atención y la orientación. Porque merecemos envejecer con dignidad.',
-    approach: ['A domicilio', 'Ejercicios divertidos', 'Adaptado a ti']
+    subtitle: 'Mayores y autonomía',
+    quote: 'Actividades ajustadas a los intereses y el ritmo de cada persona para trabajar memoria, atención y orientación.',
+    approach: ['Online o domicilio', 'Materiales adaptados', 'Seguimiento']
   }
 };
 
 const faqs = [
   {
     question: '¿Cuánto dura una sesión?',
-    answer: 'Depende del tipo de terapia. Las sesiones individuales duran 50 minutos, las de pareja 60 minutos, y las familiares 75 minutos. La primera consulta suele ser un poco más larga porque necesitamos conocernos y entender qué te trae aquí.'
+    answer: 'Depende del tipo de terapia. Las sesiones individuales duran 50 minutos, las de pareja 60 minutos y las familiares 75 minutos. En la primera sesión definimos el motivo de consulta y los objetivos.'
   },
   {
     question: '¿Tengo que venir cada semana?',
-    answer: 'Al principio suele ser mejor así, especialmente hasta que cogemos ritmo. Pero no es una regla rígida. Según vayas mejorando, podemos espaciar las sesiones. Lo importante es que tú decidas el ritmo que necesitas.'
+    answer: 'La frecuencia se acuerda según el motivo de consulta, los objetivos y tus circunstancias. Puede revisarse a lo largo del proceso para que el ritmo tenga sentido para ti.'
   },
   {
     question: '¿Cómo sé qué tipo de terapia necesito?',
-    answer: 'No te preocupes por eso ahora. En la primera consulta hablamos de tu situación y juntos decidimos qué enfoque tiene más sentido. Y si en algún momento no te sientes cómodo, podemos ajustar o parar. Sin compromiso.'
+    answer: 'No hace falta saberlo de antemano. En la primera consulta revisamos tu situación y valoramos qué enfoque tiene sentido. Si el formato o el enfoque no encajan, te lo diré con claridad.'
   },
   {
     question: '¿Qué técnicas usas?',
     answer: 'Trabajo principalmente con Terapia Cognitivo-Conductual (TCC) y terapias de tercera generación como ACT y mindfulness. Selecciono los procedimientos según la valoración, los objetivos acordados y las necesidades de cada persona.'
+  },
+  {
+    question: '¿Qué servicios se realizan a domicilio en Córdoba?',
+    answer: 'La terapia individual y la estimulación cognitiva pueden realizarse a domicilio en Córdoba. La zona, la disponibilidad y cualquier posible coste de desplazamiento se confirman al contactar.'
+  },
+  {
+    question: '¿Ofreces apoyo psicológico a cuidadores?',
+    answer: 'Sí. Puedes consultar por orientación y apoyo psicológico ante las dificultades asociadas al cuidado de una persona mayor. El formato se valora según cada situación.'
   }
 ];
 
@@ -110,10 +151,11 @@ const faqSchemaData = faqs.map(faq => ({
       
       <div class="container-editorial relative z-10">
         <PageHeader
+          id="services-heading"
           label="Servicios"
-          title="Cada persona necesita"
-          highlight="algo diferente"
-          description="Psicología presencial en Córdoba y terapia online para ansiedad, autoestima, pareja, familia y evaluación neuropsicológica con un enfoque cercano y basado en evidencia."
+          title="Psicología en Córdoba,"
+          highlight="presencial y online"
+          description="Terapia individual, de pareja y familiar, evaluación neuropsicológica y estimulación cognitiva. La terapia individual y la estimulación pueden realizarse a domicilio en Córdoba. Atención a personas mayores y cuidadores."
         >
           <!-- Navegación tipo índice -->
           <div class="flex flex-wrap gap-x-8 gap-y-4 mt-16">
@@ -122,7 +164,13 @@ const faqSchemaData = faqs.map(faq => ({
                 href={`#${service.id}`}
                 class="group flex items-baseline gap-3 text-ink hover:text-olive transition-colors duration-300"
               >
-                <span class="text-label text-olive/50 group-hover:text-olive transition-colors">{service.number}</span>
+                <span class="text-label text-olive" aria-hidden="true">{service.number}</span>
+                <span class="font-serif text-lg">{service.title}</span>
+              </a>
+            ))}
+            {additionalServices.map((service) => (
+              <a href={service.href} class="group flex items-baseline gap-3 text-ink hover:text-olive transition-colors duration-300">
+                <span class="text-label text-olive/50 group-hover:text-olive transition-colors" aria-hidden="true">↗</span>
                 <span class="font-serif text-lg">{service.title}</span>
               </a>
             ))}
@@ -139,7 +187,7 @@ const faqSchemaData = faqs.map(faq => ({
       return (
         <section 
           id={service.id}
-          class={`section ${isEven ? 'bg-cream' : 'bg-alabaster'} relative overflow-hidden`}
+          class={`section ${isEven ? "bg-cream" : "bg-alabaster"} relative overflow-hidden scroll-mt-24 lg:scroll-mt-28`}
           aria-labelledby={`service-${service.id}-heading`}
         >
           {/* Número decorativo de fondo */}
@@ -158,7 +206,7 @@ const faqSchemaData = faqs.map(faq => ({
                   <div class={`relative img-reveal-wrapper aspect-[3/4] overflow-hidden transition-transform duration-700 ease-out ${isEven ? 'group-hover:translate-x-3' : 'group-hover:-translate-x-3'}`}>
                     <Image 
                       src={serviceImages[service.id]} 
-                      alt={service.title}
+                      alt={serviceAlts[service.id]}
                       class="absolute inset-0 w-full h-full object-cover filter grayscale-[20%] sepia-[5%] group-hover:grayscale-0 group-hover:sepia-0 transition-all duration-700 group-hover:scale-105"
                       width={600}
                       densities={[1.5, 2]}
@@ -203,9 +251,9 @@ const faqSchemaData = faqs.map(faq => ({
                   ))}
                 </div>
                 
-                <div class="flex items-center gap-6">
-                  <a href="/contacto/" class="btn btn-sage group">
-                    <span>Hablamos</span>
+                <div class="flex flex-wrap items-center gap-4 sm:gap-6">
+                  <a href={serviceDetailUrls[service.id] ?? '/contacto/'} class="btn btn-sage group">
+                    <span>{serviceDetailUrls[service.id] ? 'Ver servicio y proceso' : 'Consultar el servicio'}</span>
                     <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
                     </svg>
@@ -219,14 +267,35 @@ const faqSchemaData = faqs.map(faq => ({
       );
     })}
 
+    <section class="section bg-cream" aria-labelledby="additional-services-heading">
+      <div class="container-editorial">
+        <div class="max-w-3xl mb-12" data-reveal>
+          <span class="label-section">Atención específica</span>
+          <h2 id="additional-services-heading" class="title-section mt-8">Encuentra la información de cada <em class="text-olive italic">servicio</em></h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+          {additionalServices.map((service, index) => (
+            <a href={service.href} class="group grid sm:grid-cols-5 gap-6 items-center border-t border-border-delicate pt-6" data-reveal data-reveal-delay={index * 100}>
+              <Image src={service.image} alt={service.imageAlt} class="sm:col-span-2 aspect-[4/3] w-full object-cover" width={500} format="webp" quality={85} loading="lazy" />
+              <div class="sm:col-span-3">
+                <h3 class="font-serif text-2xl text-ink group-hover:text-olive transition-colors">{service.title}</h3>
+                <p class="text-body-sm mt-3">{service.description}</p>
+                <span class="inline-block mt-5 text-label text-olive underline underline-offset-4">Ver información del servicio</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <!-- Tarifas -->
-    <section class="section bg-alabaster relative overflow-hidden" id="tarifas" aria-labelledby="tarifas-heading">
+    <section class="section bg-alabaster relative overflow-hidden scroll-mt-24 lg:scroll-mt-28" id="tarifas" aria-labelledby="tarifas-heading">
 
       <!-- Número decorativo de fondo -->
       <span class="absolute -right-8 top-1/2 -translate-y-1/2 font-serif text-[22rem] leading-none text-olive/[0.025] select-none pointer-events-none hidden lg:block" aria-hidden="true">€</span>
 
       <div class="container-editorial relative z-10">
-        <div class="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+        <div class="grid lg:grid-cols-12 gap-y-12 lg:gap-x-6 xl:gap-x-8 items-start">
 
           <!-- Columna izquierda: encabezado editorial -->
           <div class="lg:col-span-4 lg:sticky lg:top-32" data-reveal>
@@ -234,115 +303,46 @@ const faqSchemaData = faqs.map(faq => ({
             <span class="label-section">Tarifas</span>
 
             <h2 id="tarifas-heading" class="title-section mt-8">
-              Lo que<br />supone <em class="text-olive italic">invertir</em><br />en ti
+              Cuánto<br />cuesta<br /><em class="text-olive italic">la terapia</em>
             </h2>
 
             <p class="text-body-sm text-charcoal mt-8 leading-relaxed">
-              La primera consulta es sin compromiso. Hablamos, vemos si encajamos, y decidimos juntos si tiene sentido continuar.
+              Estos son los precios por sesión. En la primera consulta se aborda el motivo y se explican el encuadre y los siguientes pasos.
             </p>
-
-            <!-- Trust signals -->
-            <div class="mt-10 space-y-4">
-              {[
-                { icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", label: "Primera consulta sin compromiso" },
-                { icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", label: "Presencial y online disponible" },
-                { icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", label: "Respuesta en menos de 24h" },
-              ].map((item) => (
-                <div class="flex items-center gap-3">
-                  <svg class="w-4 h-4 text-olive shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                    <path stroke-linecap="round" stroke-linejoin="round" d={item.icon} />
-                  </svg>
-                  <span class="text-label-xs text-charcoal">{item.label}</span>
-                </div>
-              ))}
-            </div>
-
-            <a href="/contacto/" class="btn btn-sage mt-12 group">
-              <span>Reservar sesión</span>
-              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
-              </svg>
-            </a>
+            <p class="text-body-sm mt-4">Antes de reservar, confirma el coste de la primera cita, las condiciones de cancelación y, si es a domicilio, cualquier coste de desplazamiento.</p>
+            <a href="/contacto/" class="btn btn-outline mt-8">Consultar disponibilidad</a>
           </div>
 
-          <!-- Columna derecha: lista editorial de precios -->
-          <div class="lg:col-span-8" data-reveal data-reveal-delay="150">
-
-            <div class="border-t border-ink/10">
-              {[
-                {
-                  number: "01",
-                  service: "Terapia Individual",
-                  description: "Un espacio solo para ti, presencial en Córdoba o en línea.",
-                  price: "60",
-                  unit: "€",
-                  duration: "50 min",
-                  tags: ["Presencial", "Online"],
-                },
-                {
-                  number: "02",
-                  service: "Terapia de Pareja",
-                  description: "Para volver a entenderos, sin señalar culpables.",
-                  price: "70",
-                  unit: "€",
-                  duration: "60 min",
-                  tags: ["Presencial", "Online"],
-                },
-                {
-                  number: "03",
-                  service: "Terapia Familiar",
-                  description: "Cuando la familia necesita encontrar su equilibrio.",
-                  price: "80",
-                  unit: "€",
-                  duration: "75 min",
-                  tags: ["Presencial", "Online"],
-                },
-                {
-                  number: "04",
-                  service: "Evaluación Neuropsicológica",
-                  description: "Diagnóstico completo con informe completo incluido.",
-                  price: "—",
-                  unit: "",
-                  duration: "90–120 min",
-                  tags: ["Consultar precio", "Informe incluido"],
-                },
-                {
-                  number: "05",
-                  service: "Estimulación Cognitiva",
-                  description: "Para personas mayores. Online o a domicilio en Córdoba.",
-                  price: "—",
-                  unit: "",
-                  duration: "45–60 min",
-                  tags: ["A domicilio", "Online"],
-                },
-              ].map((item, index) => (
+          <div class="lg:col-span-7 lg:col-start-6 min-w-0">
+            <div class="space-y-4">
+              {servicePricing.map((item, index) => (
                 <div
                   class="group border-b border-ink/10 hover:border-olive/30 transition-colors duration-500 cursor-default"
                   data-reveal
                   data-reveal-delay={index * 80}
                 >
-                  <div class="py-8 lg:py-10 flex items-center gap-8 lg:gap-12">
+                  <div class="py-8 lg:py-10 flex flex-wrap items-center gap-4 sm:gap-8 lg:gap-10">
 
                     <!-- Número -->
-                    <span class="font-sans text-xs font-medium tracking-widest text-olive/40 group-hover:text-olive transition-colors duration-500 shrink-0 hidden sm:block">
+                    <span aria-hidden="true" class="font-sans text-xs font-medium tracking-widest text-olive group-hover:text-olive-dark transition-colors duration-500 shrink-0 hidden sm:block">
                       {item.number}
                     </span>
 
                     <!-- Contenido central -->
-                    <div class="flex-1 min-w-0">
+                    <div class="flex-1 min-w-[10rem]">
                       <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 mb-2">
                         <h3 class="font-serif text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-500 leading-tight">
-                          {item.service}
+                          {item.title}
                         </h3>
                         <div class="flex items-center gap-2 flex-wrap">
                           {item.tags.map((tag) => (
-                            <span class="inline-flex items-center px-2.5 py-0.5 text-[0.6rem] font-medium tracking-widest uppercase border border-border-strong text-charcoal/70 group-hover:border-olive/40 group-hover:text-olive/80 transition-colors duration-500">
+                            <span class="inline-flex items-center px-2.5 py-0.5 text-[0.6rem] font-medium tracking-widest uppercase border border-border-strong text-charcoal/70 group-hover:border-olive/40 group-hover:text-olive transition-colors duration-500">
                               {tag}
                             </span>
                           ))}
                         </div>
                       </div>
-                      <p class="text-body-sm text-charcoal/60 group-hover:text-charcoal/80 transition-colors duration-500 leading-relaxed">
+                      <p class="text-body-sm text-charcoal/75 group-hover:text-charcoal transition-colors duration-500 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
@@ -351,16 +351,17 @@ const faqSchemaData = faqs.map(faq => ({
                     <div class="shrink-0 text-right">
                       <div class="flex items-baseline justify-end gap-0.5">
                         <span class="font-serif text-4xl lg:text-5xl text-ink group-hover:text-olive transition-colors duration-700 leading-none tabular-nums">
-                          {item.price}
+                          {item.priceLabel}
                         </span>
-                        {item.unit && (
-                          <span class="font-serif text-xl lg:text-2xl text-ink/60 group-hover:text-olive/60 transition-colors duration-700 leading-none">
-                            {item.unit}
+                        {item.price !== undefined && (
+                          <span class="font-serif text-xl lg:text-2xl text-ink/70 group-hover:text-olive transition-colors duration-700 leading-none">
+                            €
                           </span>
                         )}
                       </div>
-                      <p class="text-label-xs text-charcoal/50 mt-1.5 group-hover:text-olive/60 transition-colors duration-500">
-                        {item.duration}
+                      {item.price === undefined && <p class="text-body-sm mb-1">Precio a consultar</p>}
+                      <p class="text-label-xs text-charcoal/75 mt-1.5 group-hover:text-olive transition-colors duration-500">
+                        {item.billingDuration}
                       </p>
                     </div>
 
@@ -377,9 +378,8 @@ const faqSchemaData = faqs.map(faq => ({
                 <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
               </svg>
               <p class="text-body-sm text-charcoal/70 leading-relaxed">
-                Consulta privada, sin convenio con la Seguridad Social. Algunas mutuas privadas
-                <span class="text-charcoal font-medium"> (Adeslas, Asisa, Sanitas)</span> pueden reembolsar
-                parcialmente según tu póliza — consulta con tu aseguradora.
+                Consulta privada, sin convenio con la Seguridad Social. Si tienes una mutua o seguro privado,
+                consulta con la compañía si tu póliza cubre o reembolsa sesiones de psicología y qué documentación requiere.
               </p>
             </div>
 
@@ -398,15 +398,15 @@ const faqSchemaData = faqs.map(faq => ({
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-16 lg:mb-24">
           <div data-reveal class="max-w-2xl">
             <div class="mb-8">
-              <span class="label-section">Preguntas que sueles hacerme</span>
+              <span class="label-section">Preguntas frecuentes</span>
             </div>
             <h2 class="title-section">
-              Quizás te lo estás <em class="text-olive italic">preguntando</em>
+              Antes de <em class="text-olive italic">empezar</em>
             </h2>
           </div>
           <div class="flex items-end lg:justify-end" data-reveal data-reveal-delay="100">
-            <p class="text-body-sm max-w-sm lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-olive pl-6 lg:pl-0 lg:pr-6">
-              Si no encuentras tu respuesta aquí, escríbeme. Me encanta resolver dudas.
+            <p class="text-body-sm max-w-sm lg:text-right border-t border-olive/40 pt-5">
+              Si no encuentras tu respuesta, escríbeme y te contesto personalmente.
             </p>
           </div>
         </div>
@@ -416,20 +416,20 @@ const faqSchemaData = faqs.map(faq => ({
             <div data-reveal data-reveal-delay={index * 100}>
               <details class="group border-b border-ink/20 open:border-olive/50 transition-colors duration-500">
                 <summary class="flex cursor-pointer items-center justify-between gap-8 py-8 lg:py-10 select-none list-none">
-                  <div class="flex items-center gap-6 md:gap-12 min-w-0 flex-1">
-                    <span class="text-label text-olive font-semibold w-8 md:w-12 shrink-0">
+                  <h3 class="flex items-center gap-6 md:gap-12 min-w-0 flex-1">
+                    <span class="text-label text-olive font-semibold w-8 md:w-12 shrink-0" aria-hidden="true">
                       0{index + 1}
                     </span>
-                    <h3 class="font-serif text-lg sm:text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-300 pr-4 leading-[1.2]">
+                    <span class="font-serif text-lg sm:text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-300 pr-4 leading-[1.2]">
                       {faq.question}
-                    </h3>
-                  </div>
+                    </span>
+                  </h3>
                   
-                  <div class="shrink-0 w-10 h-10 rounded-full border border-ink/20 flex items-center justify-center group-hover:bg-ink group-hover:border-ink text-ink group-hover:!text-alabaster transition-all duration-500 group-open:rotate-[135deg]">
+                  <span aria-hidden="true" class="shrink-0 w-10 h-10 rounded-full border border-ink/20 flex items-center justify-center group-hover:bg-ink group-hover:border-ink text-ink group-hover:!text-alabaster transition-all duration-500 group-open:rotate-[135deg]">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                  </div>
+                  </span>
                 </summary>
                 
                 <div class="pb-10 pl-[4.5rem] md:pl-24 text-body-sm sm:text-body text-charcoal max-w-3xl">
@@ -446,7 +446,7 @@ const faqSchemaData = faqs.map(faq => ({
             <p class="font-serif text-lg sm:text-xl text-ink">Escríbeme directamente</p>
           </div>
           <a href="/contacto/" class="btn btn-outline">
-            Contactar
+            Consultar mi caso
           </a>
         </div>
         
@@ -458,8 +458,8 @@ const faqSchemaData = faqs.map(faq => ({
       label="El primer paso"
       title="¿Te gustaría que"
       highlight="habláramos?"
-      description="La primera consulta es simplemente una conversación. Sin compromiso, sin presión. Solo tú y yo, viendo si puedo ayudarte."
-      primaryAction={{ text: "Pedir cita", href: "/contacto/", icon: true }}
+      description="En la primera sesión hablamos de lo que te ocurre, te explico cómo trabajo y valoramos juntos si la terapia puede ayudarte."
+      primaryAction={{ text: "Solicitar cita", href: "/contacto/", icon: true }}
       secondaryAction={{ text: "Llamar", href: "tel:+34697733060", icon: "phone" }}
     />
 

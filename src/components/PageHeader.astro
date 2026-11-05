@@ -5,6 +5,7 @@
  */
 
 interface Props {
+  id?: string;
   label: string;
   title: string;
   highlight?: string;
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const {
+  id,
   label,
   title,
   highlight,
@@ -33,16 +35,19 @@ const maxWidthClass = align === 'center' ? 'max-w-4xl mx-auto' : 'max-w-4xl';
   <span class:list={['label-section mb-8 block', isDark && '!text-terracotta-light']}>
     {label}
   </span>
-  <h1 class:list={['title-section mb-8', isDark && '!text-alabaster']}>
+  <h1 {id} class:list={['title-section mb-8 text-balance leading-[1.05]', isDark && '!text-alabaster']}>
     {title}
     {highlight && (
-      <em class:list={['italic', isDark ? '!text-terracotta-light' : 'text-olive']}>
-        {highlight}
-      </em>
+      <>
+        {' '}
+        <em class:list={['italic', isDark ? '!text-terracotta-light' : 'text-olive']}>
+          {highlight}
+        </em>
+      </>
     )}
   </h1>
   {description && (
-    <p class:list={['text-lead max-w-2xl', isDark ? '!text-taupe-light' : 'text-charcoal']}>
+    <p class:list={['text-lead max-w-2xl text-pretty', isDark ? '!text-taupe-light' : 'text-charcoal']}>
       {description}
     </p>
   )}

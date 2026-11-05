@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { CONTACT_FORM_ENABLED, CONTACT_FORM_DISABLED_MESSAGE } from '../src/config/contact.mjs';
 
 const DEFAULT_SMTP_HOST = 'smtp.dondominio.com';
 const DEFAULT_SMTP_PORT = 465;
@@ -32,15 +33,20 @@ function redirectResponse(request, result) {
   });
 }
 
-function publicResponse(request, payload, status = 200) {
+function publicResponse(request, payload, status = 200, headers = {}) {
   const acceptsHtml = (request.headers.get('accept') || '').includes('text/html');
   const prefersJson = (request.headers.get('accept') || '').includes('application/json');
 
   if (acceptsHtml && !prefersJson) {
-    return redirectResponse(request, status >= 200 && status < 300 ? 'enviado' : 'error');
+    const result = status >= 200 && status < 300
+      ? 'enviado'
+      : status === 503
+        ? 'deshabilitado'
+        : 'error';
+    return redirectResponse(request, result);
   }
 
-  return jsonResponse(payload, status);
+  return jsonResponse(payload, status, headers);
 }
 
 function cleanField(value) {
@@ -89,11 +95,29 @@ async function parseBody(request) {
     throw error;
   }
 
-  const rawBody = await request.text();
-  if (new TextEncoder().encode(rawBody).byteLength > MAX_REQUEST_BYTES) {
-    const error = new Error('request-too-large');
-    error.code = 'REQUEST_TOO_LARGE';
-    throw error;
+  // Limitar durante la lectura, también sin Content-Length o con transferencia chunked.
+  const reader = request.body?.getReader();
+  const decoder = new TextDecoder();
+  let rawBody = '';
+  let bytes = 0;
+  if (reader) {
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        bytes += value.byteLength;
+        if (bytes > MAX_REQUEST_BYTES) {
+          await reader.cancel();
+          const error = new Error('request-too-large');
+          error.code = 'REQUEST_TOO_LARGE';
+          throw error;
+        }
+        rawBody += decoder.decode(value, { stream: true });
+      }
+      rawBody += decoder.decode();
+    } finally {
+      reader.releaseLock();
+    }
   }
 
   const body = contentType === 'application/json'
@@ -120,10 +144,10 @@ function readField(body, key, maxLength, cleaner = cleanField) {
 
 function formatService(service) {
   const labels = {
-    individual: 'Me siento mal y no sé por qué',
+    individual: 'Ansiedad, estado de ánimo o autoestima',
     pareja: 'Problemas con mi pareja',
     familiar: 'Conflictos familiares',
-    evaluacion: 'Problemas de memoria o atención',
+    evaluacion: 'Cambios en memoria o atención',
     cognitiva: 'Estimulación para persona mayor',
     otro: 'Otro / No estoy seguro'
   };
@@ -205,7 +229,13 @@ function createTransport(config) {
     host: config.host,
     port: config.port,
     secure: config.secure,
-    auth: config.auth
+    auth: config.auth,
+    requireTLS: !config.secure,
+    disableFileAccess: true,
+    disableUrlAccess: true,
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000,
   });
 }
 
@@ -218,6 +248,24 @@ export function GET() {
 }
 
 export async function POST(request) {
+  // Interruptor maestro: no se procesa, valida ni envía nada.
+  if (!CONTACT_FORM_ENABLED) {
+    return publicResponse(
+      request,
+      {
+        ok: false,
+        message: CONTACT_FORM_DISABLED_MESSAGE,
+      },
+      503,
+      { 'Retry-After': '3600' },
+    );
+  }
+
+  const origin = request.headers.get('origin');
+  if ((origin && origin !== new URL(request.url).origin) || request.headers.get('sec-fetch-site') === 'cross-site') {
+    return publicResponse(request, { message: 'Origen de solicitud no permitido.' }, 403);
+  }
+
   let body;
   try {
     body = await parseBody(request);
@@ -292,7 +340,7 @@ export async function POST(request) {
   try {
     const transporter = createTransport(smtpConfig);
 
-    await transporter.sendMail({
+    const delivery = await transporter.sendMail({
       from: smtpConfig.from,
       to: smtpConfig.recipient,
       replyTo: email,
@@ -301,9 +349,14 @@ export async function POST(request) {
       html: emailContent.html
     });
 
+    if (!delivery.accepted?.length || delivery.rejected?.length) {
+      throw new Error('SMTP recipient not accepted');
+    }
+
     return publicResponse(request, { ok: true });
-  } catch (error) {
-    console.error('SMTP contact form error:', error);
+  } catch {
+    // No registrar respuestas SMTP que puedan contener direcciones o datos personales.
+    console.error('SMTP contact form delivery failed.');
     return publicResponse(request, { message: 'No se ha podido enviar el mensaje. Inténtalo de nuevo más tarde.' }, 502);
   }
 }

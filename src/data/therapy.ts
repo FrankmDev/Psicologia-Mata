@@ -19,38 +19,38 @@ export const therapyProcessSteps: ProcessStep[] = [
     number: '01',
     title: 'Primera Sesión',
     subtitle: 'Conocernos',
-    description: 'Cuéntame qué te trae aquí. No necesitas tener las palabras perfectas — solo la honestidad de empezar.'
+    description: 'Cuéntame qué te trae y qué esperas de la terapia. Te explico cómo trabajo, la confidencialidad y el coste para que conozcas el encuadre desde el inicio.'
   },
   {
     number: '02',
     title: 'Evaluación',
     subtitle: 'Entender',
-    description: 'Juntos entendemos de dónde viene lo que sientes. No para señalar el pasado, sino para dibujar un camino diferente.'
+    description: 'Revisamos tu situación, los factores que la mantienen y tus objetivos. Si necesitas otra valoración, te lo diré con claridad.'
   },
   {
     number: '03',
     title: 'Intervención',
-    subtitle: 'Acompañar',
-   description: 'Exploramos herramientas que pueden ayudarte a manejar lo que antes te desbordaba. Las practicamos y revisamos según tu evolución.'
+    subtitle: 'Trabajar',
+   description: 'Acordamos un plan con herramientas concretas para ansiedad, estado de ánimo, autoestima o relaciones, y revisamos su efecto.'
   },
   {
     number: '04',
     title: 'Seguimiento',
     subtitle: 'Consolidar',
-   description: 'Cuando tenga sentido para ti y según la evolución, podemos espaciar las sesiones. El objetivo es que desarrolles recursos propios y sepas cómo volver a pedir apoyo si lo necesitas.'
+   description: 'Según tu evolución, espaciamos las sesiones y revisamos lo aprendido para que mantengas los cambios con autonomía.'
   }
 ];
 
 export const therapyHighlights: ProcessHighlight[] = [
-  { value: '50 min', label: 'Duración por sesión' },
-  { value: 'Presencial y Online', label: 'Modalidad' },
-  { value: 'Personalizado', label: 'Adaptado a ti' }
+  { value: '45–120 min', label: 'Duración según servicio' },
+  { value: 'Presencial y online', label: 'Modalidad' },
+  { value: 'AN 12177', label: 'Colegiada en Andalucía' }
 ];
 
 /**
  * Información de contacto compartida
  */
-import { CONTACT_EMAIL, CONTACT_PHONE_E164, CONTACT_PHONE_DISPLAY, CONTACT_ADDRESS } from '../config/site';
+import { CONTACT_EMAIL, CONTACT_PHONE_E164, CONTACT_PHONE_DISPLAY, CONTACT_ADDRESS, WHATSAPP_URL } from '../config/site';
 
 export interface ContactInfo {
   icon: string;
@@ -58,6 +58,7 @@ export interface ContactInfo {
   value: string;
   href?: string;
   subvalue?: string;
+  external?: boolean;
 }
 
 export const contactInfo: ContactInfo[] = [
@@ -66,6 +67,13 @@ export const contactInfo: ContactInfo[] = [
     label: "Teléfono",
     value: CONTACT_PHONE_DISPLAY,
     href: `tel:${CONTACT_PHONE_E164}`
+  },
+  {
+    icon: "chatBubble",
+    label: "WhatsApp",
+    value: "Escribir un mensaje",
+    href: WHATSAPP_URL,
+    external: true
   },
   {
     icon: "mail",
@@ -82,7 +90,7 @@ export const contactInfo: ContactInfo[] = [
 ];
 
 export const availabilityInfo = [
-  { label: "Respuesta", value: "24 horas" },
+  { label: "Contacto", value: "Personal" },
   { label: "Confidencialidad", value: "Profesional" },
-  { label: "Modalidad", value: "Presencial y Online" }
+  { label: "Modalidad", value: "Consulta, online y domicilio según servicio" }
 ];

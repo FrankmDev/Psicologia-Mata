@@ -4,15 +4,12 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Schema from '../components/Schema.astro';
 import TherapyProcess from '../components/TherapyProcess.astro';
-import CTASection from '../components/CTASection.astro';
-import OptimizedImage from '../components/OptimizedImage.astro';
 import { Image } from 'astro:assets';
 import mariaAngelesMata from '../assets/maria-angeles-mata.jpeg';
 import psicologia from '../assets/psicologia.avif';
 import terapiaMesa from '../assets/terapia.avif';
 import Services from '../sections/home/Services.astro';
 import PressMention from '../sections/home/PressMention.astro';
-import { mainServices } from '../data/services';
 import { faqs } from '../data/faqs';
 import { blogPostsList, getFeaturedPost } from '../data/blog';
 import { localBusinessData, personData, aboutCredentials } from '../data/business';
@@ -20,9 +17,9 @@ import { SITE_URL } from '../config/site';
 
 const title = 'Psicóloga en Córdoba y online | María Ángeles Mata Cala';
 const description =
-  'Psicóloga General Sanitaria en Córdoba (AN 12177): terapia individual, de pareja y familiar, evaluación neuropsicológica y terapia online. Primera consulta sin compromiso.';
+  'Psicóloga en Córdoba y online. Terapia individual y estimulación cognitiva a domicilio; apoyo a mayores y cuidadores, además de terapia de pareja y familiar.';
 const keywords =
-  'psicóloga córdoba, psicólogo córdoba, terapia online córdoba, terapia de pareja córdoba, terapia individual, psicología clínica, ansiedad, autoestima';
+  'psicóloga córdoba, psicólogo córdoba, terapia online córdoba, terapia de pareja córdoba, ansiedad, autoestima, evaluación neuropsicológica, estimulación cognitiva';
 
 const featuredBlogPost = getFeaturedPost();
 const previewPosts = [
@@ -53,8 +50,8 @@ const values = [
     icon: "M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
   },
   {
-    title: "Empatía Real",
-    description: "Hay cosas que no se dicen con palabras. Yo las escucho igual. Sin juzgarte, sin prisas, con la paciencia que necesitas.",
+    title: "Escucha sin juicios",
+    description: "No necesitas tener las palabras perfectas ni contarlo todo de golpe. Empezamos por lo que más te pesa y avanzamos a tu ritmo.",
     icon: "M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
   },
   {
@@ -63,8 +60,8 @@ const values = [
     icon: "M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.315 48.315 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
   },
   {
-    title: "Compromiso Genuino",
-    description: "Cuando tú das el paso de venir, yo doy el mío de estar completamente presente. Tu proceso es mi prioridad.",
+    title: "Objetivos claros",
+    description: "Revisamos avances y ajustamos el plan. La terapia no se alarga sin motivo: buscamos cambios que puedas mantener fuera de consulta.",
     icon: "M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"
   }
 ];
@@ -85,10 +82,10 @@ const values = [
   
   <Header activePage="Inicio" />
   
-  <main id="main-content" role="main">
+  <main id="main-content">
     
     <!-- Hero -->
-    <section class="min-h-screen flex items-center bg-alabaster relative overflow-hidden pt-4" aria-label="Introducción">
+    <section class="flex min-h-[calc(100svh-4rem)] items-center bg-alabaster relative overflow-hidden pt-4 lg:min-h-[calc(100svh-6rem)]" aria-label="Introducción">
       <div class="bg-aurora"></div>
 
       <div class="container-editorial relative z-10 pt-6 pb-16 lg:pt-8">
@@ -99,41 +96,41 @@ const values = [
             <div class="absolute -left-12 lg:-left-24 top-0 w-[1px] h-full bg-border-delicate hidden md:block"></div>
 
             <div class="mb-10" data-reveal>
-              <span class="label-section">Psicología en Córdoba</span>
+              <span class="label-section">Psicóloga · AN 12177</span>
             </div>
 
-            <h1 class="font-serif text-[clamp(3.5rem,7vw,5rem)] lg:text-[5.5rem] font-light text-ink leading-[0.95] mb-10 tracking-tight">
-              <div data-reveal data-reveal-delay="100">Encuentra</div>
-              <div data-reveal data-reveal-delay="200" class="flex items-center gap-4 lg:gap-8 mt-2">
-                <span class="h-[1px] w-12 lg:w-24 bg-ink opacity-30"></span>
-                <em class="font-light text-olive">tu equilibrio</em>
-              </div>
-              <div data-reveal data-reveal-delay="300" class="mt-2">interior.</div>
+            <h1 class="font-serif text-[clamp(2.75rem,7vw,5rem)] lg:text-[5.5rem] font-light text-ink leading-[0.95] mb-10 tracking-tight">
+              <span class="block" data-reveal data-reveal-delay="100">Psicóloga</span>
+              <span class="mt-2 flex items-center gap-2 lg:gap-8" data-reveal data-reveal-delay="200">
+                <span class="h-[1px] w-8 lg:w-24 bg-ink opacity-30"></span>
+                <em class="font-light text-olive">en Córdoba</em>
+              </span>
+              <span class="mt-2 block" data-reveal data-reveal-delay="300">y online.</span>
             </h1>
 
             <div class="max-w-xl pl-0 md:pl-8 border-l border-transparent md:border-border-strong mb-12">
               <p class="text-lead" data-reveal data-reveal-delay="400">
-                Cuando todo pesa demasiado, no tienes que atravesarlo solo. Soy María Ángeles Mata, y estoy aquí para acompañarte en ese primer paso hacia sentirte mejor.
+                Soy María Ángeles Mata. Terapia individual, de pareja y familiar en Córdoba y online. La terapia individual y la estimulación cognitiva también pueden realizarse a domicilio; acompaño a personas mayores y a quienes las cuidan.
               </p>
             </div>
 
             <div class="flex flex-wrap items-center gap-8" data-reveal data-reveal-delay="500">
               <a href="/contacto/" class="btn btn-sage group">
-                <span>Quiero hablar contigo</span>
+                <span>Solicitar cita</span>
               </a>
 
               <div class="flex flex-col gap-2">
                 <div class="flex items-center gap-3">
                   <span class="w-1 h-1 rounded-full bg-olive"></span>
-                  <span class="text-label-xs text-charcoal">Terapia Individual</span>
+                  <span class="text-label-xs text-charcoal">Personas mayores y cuidadores</span>
                 </div>
                 <div class="flex items-center gap-3">
                   <span class="w-1 h-1 rounded-full bg-olive"></span>
-                  <span class="text-label-xs text-charcoal">Terapia de Pareja</span>
+                  <span class="text-label-xs text-charcoal">Terapia individual a domicilio</span>
                 </div>
                 <div class="flex items-center gap-3">
                   <span class="w-1 h-1 rounded-full bg-olive"></span>
-                  <span class="text-label-xs text-charcoal">Online y Presencial</span>
+                  <span class="text-label-xs text-charcoal">Estimulación cognitiva en casa</span>
                 </div>
               </div>
             </div>
@@ -141,7 +138,7 @@ const values = [
 
           <!-- Imagen Hero -->
           <div class="lg:col-span-5 relative mt-12 lg:mt-0">
-            <div class="absolute -right-5 lg:-right-9 top-1/2 -translate-y-1/2 rotate-180 [writing-mode:vertical-rl] text-label-xs text-ink opacity-40 z-30 hidden xl:block" data-reveal="right" data-reveal-delay="700">
+            <div class="absolute -right-5 lg:-right-9 top-1/2 -translate-y-1/2 rotate-180 [writing-mode:vertical-rl] text-label-xs text-taupe z-30 hidden xl:block" data-reveal="right" data-reveal-delay="700">
               Córdoba, España
             </div>
 
@@ -151,12 +148,13 @@ const values = [
               <div class="img-reveal-wrapper rounded-t-full rounded-b-[100px] overflow-hidden aspect-[3/4] z-10 relative shadow-2xl shadow-ink/5 group img-lcp">
                 <Image
                   src={psicologia}
-                  alt="María Ángeles Mata - Psicóloga"
+                  alt="Espacio de conversación terapéutica, imagen ilustrativa"
                   width={600}
                   densities={[1.5, 2]}
-                   loading="eager"
-                   fetchpriority="high"
-                   quality={85}
+                  sizes="(min-width: 1024px) 420px, 82vw"
+                  loading="eager"
+                  fetchpriority="high"
+                  quality={85}
                   format="webp"
                   class="w-full h-full object-cover scale-105 transition-all duration-[1.5s] group-hover:scale-100 group-hover:opacity-100 mix-blend-multiply opacity-90"
                 />
@@ -170,7 +168,7 @@ const values = [
                 <div class="h-10 w-[1px] bg-border-strong"></div>
                 <div>
                   <p class="text-label-sm text-charcoal leading-relaxed">
-                    Servicios<br />especializados
+                    Servicios<br />de psicología
                   </p>
                 </div>
               </div>
@@ -184,14 +182,14 @@ const values = [
     <Services />
 
     <!-- Sobre Mí -->
-    <section class="section bg-alabaster relative" id="sobre-mi">
+    <section class="section bg-alabaster relative scroll-mt-24 lg:scroll-mt-28" id="sobre-mi">
       <div class="container-editorial">
         <div class="max-w-4xl mx-auto text-center mb-20 lg:mb-32">
           <div data-reveal>
             <span class="label-section">María Ángeles Mata</span>
           </div>
           <h2 class="title-section mt-8" data-reveal data-reveal-delay="100">
-            "La terapia no es magia. Es un espacio donde puedes dejar de fingir que todo va bien, <em class="text-olive italic">y empezar a sentir que realmente lo está.</em>"
+            "Un espacio para entender lo que te ocurre y trabajar objetivos concretos, con rigor profesional y sin tener que aparentar que todo va bien."
           </h2>
         </div>
 
@@ -203,7 +201,7 @@ const values = [
               <div class="img-reveal-wrapper flex-1 rounded-[30px] overflow-hidden z-10 relative shadow-2xl shadow-ink/5">
                 <Image
                   src={mariaAngelesMata}
-                  alt="María Ángeles Mata - Psicóloga"
+                  alt="María Ángeles Mata, psicóloga general sanitaria en Córdoba"
                   width={500}
                   densities={[1.5, 2]}
                   loading="lazy"
@@ -214,7 +212,7 @@ const values = [
                 />
               </div>
 
-              <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-olive rounded-full flex items-center justify-center p-2 z-20 shadow-xl hidden md:flex animate-[spin_20s_linear_infinite]">
+              <div aria-hidden="true" class="absolute -right-6 -bottom-6 w-32 h-32 bg-olive rounded-full flex items-center justify-center p-2 z-20 shadow-xl hidden md:flex">
                 <svg viewBox="0 0 100 100" class="w-full h-full text-alabaster overflow-visible">
                   <path id="textPath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="transparent" />
                   <text font-family="Manrope" font-size="11" font-weight="600" letter-spacing="2.5" fill="currentColor">
@@ -234,21 +232,21 @@ const values = [
               </div>
 
               <h3 class="title-section mb-8">
-                Un enfoque <em class="text-olive italic">profesional y humano</em>
+                Cómo trabajo y qué puedes <em class="text-olive italic">esperar</em>
               </h3>
 
               <div class="space-y-6 mb-12">
                 <p class="text-body-sm">
-                  Llevo años acompañando a personas que, como tú, decidieron que merecían sentirse mejor. No busco "arreglarte" — busco que descubras que ya tienes dentro todo lo necesario.
+                  Soy María Ángeles Mata Cala, psicóloga general sanitaria (AN 12177). Trabajo con adultos, parejas y familias ante ansiedad, conflictos o cambios vitales.
                 </p>
                 <p class="text-body-sm">
-                  Combino lo que dice la ciencia con lo que siente el corazón. La terapia no es un manual: es una conversación honesta donde tú pones tu historia y yo pongo mi experiencia.
+                  Mi formación en neuropsicología, deterioro cognitivo y gerontología sostiene un foco especial en el bienestar de las personas mayores y de quienes las cuidan. Ofrezco terapia individual y estimulación cognitiva también a domicilio en Córdoba, además de evaluación cuando está indicada.
                 </p>
               </div>
 
               <div class="mb-12">
                 <div class="flex items-center gap-4 mb-6">
-                  <span class="text-label-sm text-charcoal">Formación Reciente</span>
+                  <span class="text-label-sm text-charcoal">Formación y titulaciones</span>
                   <span class="h-[1px] flex-1 bg-border-delicate"></span>
                 </div>
 
@@ -267,7 +265,7 @@ const values = [
             </div>
 
             <div>
-              <a href="/contacto/" class="btn btn-sage">Descubre cómo puedo ayudarte</a>
+              <a href="/contacto/" class="btn btn-sage">Solicitar una cita</a>
             </div>
           </div>
         </div>
@@ -278,7 +276,7 @@ const values = [
     <TherapyProcess variant="dark" showCTA={true} />
 
     <!-- Valores -->
-    <section class="section bg-alabaster relative" id="valores">
+    <section class="section bg-alabaster relative scroll-mt-24 lg:scroll-mt-28" id="valores">
       <div class="container-editorial">
         <div class="max-w-4xl mx-auto text-center mb-20 lg:mb-32">
           <div data-reveal>
@@ -288,7 +286,7 @@ const values = [
             La base de una terapia <em class="text-olive italic">cuidada y profesional</em>
           </h2>
           <p class="text-lead mt-10 max-w-2xl mx-auto" data-reveal data-reveal-delay="200">
-            Estos cuatro principios guían cada sesión. No son solo palabras: son mi compromiso contigo desde el primer día.
+            Cuatro criterios sostienen el trabajo: confidencialidad, escucha, rigor y objetivos que revisamos contigo.
           </p>
         </div>
 
@@ -317,7 +315,7 @@ const values = [
     </section>
 
     <!-- Blog Preview -->
-    <section class="section bg-cream relative" id="blog">
+    <section class="section bg-cream relative scroll-mt-24 lg:scroll-mt-28" id="blog">
       <div class="container-editorial">
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-16 mb-16 lg:mb-24">
           <div data-reveal class="max-w-2xl">
@@ -381,7 +379,7 @@ const values = [
     <PressMention />
 
     <!-- CTA Banner -->
-    <section class="relative overflow-hidden bg-ink" id="contacto-cta">
+    <section class="relative overflow-hidden bg-ink scroll-mt-24 lg:scroll-mt-28" id="contacto-cta">
       <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/60 z-10"></div>
         <Image
@@ -411,12 +409,12 @@ const values = [
             </h2>
 
             <p class="text-body !text-alabaster/80 mb-12 max-w-xl leading-relaxed" data-reveal data-reveal-delay="200">
-              No tienes que tenerlo todo claro para empezar. Solo necesitas sentir que ya no quieres seguir así. El resto lo hacemos juntos.
+              No necesitas tenerlo todo claro. Cuéntame qué te ocurre y te explicaré cómo trabajo, la duración y el coste antes de decidir.
             </p>
 
             <div class="flex flex-col sm:flex-row items-start gap-4 mb-16" data-reveal data-reveal-delay="300">
               <a href="/contacto/" class="btn btn-primary !bg-terracotta-light !text-ink hover:!bg-alabaster group">
-                <span>Me gustaría hablar contigo</span>
+                <span>Solicitar cita</span>
                 <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.75L21 12m0 0l-3.75 3.25M21 12H3" />
                 </svg>
@@ -431,7 +429,7 @@ const values = [
 
             <div class="pt-8 border-t border-border-strong/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-6" data-reveal data-reveal-delay="400">
               <div class="flex flex-wrap gap-x-10 gap-y-4">
-                {["Respuesta en 24h", "Primera consulta sin compromiso", "Consulta en Córdoba"].map((item) => (
+                {["Atención con cita previa", "Presencial y online", "Consulta en Córdoba"].map((item) => (
                   <div class="flex items-center gap-3">
                     <span class="w-1.5 h-1.5 rounded-full bg-terracotta-light"></span>
                     <span class="text-label-xs !text-alabaster/70">{item}</span>
@@ -445,7 +443,7 @@ const values = [
     </section>
 
     <!-- FAQ -->
-    <section class="section bg-cream relative" id="faqs">
+    <section class="section bg-cream relative scroll-mt-24 lg:scroll-mt-28" id="faqs">
       <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSI+PC9yZWN0Pgo8cGF0aCBkPSJNMCAwTDggOFpNOCAwTDAgOFoiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLW9wYWNpdHk9IjAuMDIiIHN0cm9rZS13aWR0aD0iMC41Ij48L3BhdGg+Cjwvc3ZnPg==')] opacity-[0.15] mix-blend-multiply pointer-events-none"></div>
 
       <div class="container-editorial relative z-10">
@@ -459,8 +457,8 @@ const values = [
             </h2>
           </div>
           <div class="flex items-end lg:justify-end" data-reveal data-reveal-delay="100">
-            <p class="text-body-sm max-w-sm lg:text-right border-l-2 lg:border-l-0 lg:border-r-2 border-olive pl-6 lg:pl-0 lg:pr-6">
-              Resolver tus dudas iniciales es parte del proceso de construir la confianza necesaria para la terapia.
+            <p class="text-body-sm max-w-sm lg:text-right border-t border-olive/40 pt-5">
+              Precios, modalidad, confidencialidad y primera sesión: lo esencial antes de pedir cita.
             </p>
           </div>
         </div>
@@ -470,18 +468,18 @@ const values = [
             <div data-reveal data-reveal-delay={index * 100}>
               <details class="group border-b border-ink/20 open:border-olive/50 transition-colors duration-500">
                 <summary class="flex cursor-pointer items-center justify-between gap-8 py-8 lg:py-10 select-none list-none">
-                  <div class="flex items-center gap-6 md:gap-12 min-w-0 flex-1">
-                    <span class="text-label text-olive font-semibold w-8 md:w-12 shrink-0">0{index + 1}</span>
-                    <h3 class="font-serif text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-300 pr-4 leading-[1.2]">
+                  <h3 class="flex items-center gap-6 md:gap-12 min-w-0 flex-1">
+                    <span class="text-label text-olive font-semibold w-8 md:w-12 shrink-0" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                    <span class="font-serif text-xl lg:text-2xl text-ink group-hover:text-olive transition-colors duration-300 pr-4 leading-[1.2]">
                       {faq.question}
-                    </h3>
-                  </div>
+                    </span>
+                  </h3>
                   
-                  <div class="shrink-0 w-10 h-10 rounded-full border border-ink/20 flex items-center justify-center group-hover:bg-ink group-hover:border-ink text-ink group-hover:!text-alabaster transition-all duration-500 group-open:rotate-[135deg]">
+                  <span aria-hidden="true" class="shrink-0 w-10 h-10 rounded-full border border-ink/20 flex items-center justify-center group-hover:bg-ink group-hover:border-ink text-ink group-hover:!text-alabaster transition-all duration-500 group-open:rotate-[135deg]">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                  </div>
+                  </span>
                 </summary>
                 
                 <div class="pb-10 pl-[4.5rem] md:pl-24 text-body text-charcoal max-w-3xl">
@@ -497,7 +495,7 @@ const values = [
             <p class="text-label-sm text-charcoal mb-2">¿No encuentras lo que buscas?</p>
             <p class="text-title-sm text-ink">Escríbeme directamente</p>
           </div>
-          <a href="/contacto/" class="btn btn-outline">Contactar ahora</a>
+          <a href="/contacto/" class="btn btn-outline">Consultar mi caso</a>
         </div>
       </div>
     </section>

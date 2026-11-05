@@ -7,13 +7,12 @@ import ContactInfoCard from '../components/ContactInfoCard.astro';
 import CTASection from '../components/CTASection.astro';
 import Schema from '../components/Schema.astro';
 import Icon from '../components/Icon.astro';
-import MobileStickyCTA from '../components/MobileStickyCTA.astro';
-import { SITE_URL, CONTACT_EMAIL, GOOGLE_MAPS_EMBED_URL, GOOGLE_MAPS_URL } from '../config/site';
+import { SITE_URL, CONTACT_ADDRESS, CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164, CONTACT_FORM_ENABLED, CONTACT_FORM_DISABLED_MESSAGE, WHATSAPP_URL, GOOGLE_MAPS_EMBED_URL, GOOGLE_MAPS_URL } from '../config/site';
 import { localBusinessData } from '../data/business';
 
 const title = 'Contacto y cita | Psicóloga en Córdoba y online';
 const description =
-  'Pide cita con María Ángeles Mata, psicóloga en Córdoba (AN 12177): consulta en Rodríguez Sánchez 9 y terapia online. Teléfono, email y respuesta en menos de 24 h.';
+  'Contacta con María Ángeles Mata, psicóloga en Córdoba. Terapia presencial, online y a domicilio. Consulta disponibilidad y pide cita.';
 const keywords =
   'cita psicólogo córdoba, contacto psicóloga, consulta psicología córdoba, terapia online cita, psicóloga rodríguez sánchez';
 
@@ -45,10 +44,11 @@ const contactPageData = {
       
       <div class="container-editorial relative z-10">
         <PageHeader
+          id="contact-heading"
           label="Contacto"
-          title="Dar el primer paso es lo más"
-          highlight="difícil"
-          description="Si estás buscando psicóloga en Córdoba o prefieres empezar con terapia online, puedes escribirme por teléfono, email o formulario. Respondo personalmente en menos de 24 horas."
+          title="Solicita tu cita"
+          highlight="en Córdoba u online"
+          description="Contacta por teléfono, WhatsApp o email. Atiendo en consulta y online; la terapia individual y la estimulación cognitiva también pueden realizarse a domicilio en Córdoba."
         />
       </div>
     </section>
@@ -65,21 +65,54 @@ const contactPageData = {
 
           <!-- Columna Formulario -->
           <div class="lg:col-span-7" data-reveal data-reveal-delay="100">
-            <div class="bg-alabaster p-8 lg:p-12 border border-border-delicate relative">
+            <div class="bg-alabaster p-6 sm:p-8 lg:p-12 border border-border-delicate relative">
               {/* Borde decorativo */}
               <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-olive via-olive/50 to-transparent"></div>
               
               <div class="mb-10">
                 <span class="text-label text-olive mb-6 block">Escríbeme</span>
                 <h2 class="font-serif text-2xl sm:text-3xl lg:text-4xl text-ink">
-                  Reserva tu primera consulta
+                  Solicita una primera consulta
                 </h2>
                 <p class="text-body-sm sm:text-body text-charcoal mt-4">
-                  No tienes que tenerlo todo claro. Cuéntame brevemente cómo puedo ayudarte y vemos si la terapia presencial en Córdoba o la modalidad online encajan contigo.
+                  {CONTACT_FORM_ENABLED ? 'Indica cómo prefieres que te contacte, sin incluir información clínica sensible.' : 'Para consultar disponibilidad, utiliza el teléfono, WhatsApp o email indicados a continuación.'}
                 </p>
               </div>
+
+              {!CONTACT_FORM_ENABLED && (
+                <div id="contact-form-disabled-note" class="mb-8 border border-terracotta/35 bg-terracotta/[0.06] p-5 sm:p-6 lg:p-7" role="note">
+                  <div class="flex items-start gap-4">
+                    <span class="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-terracotta/10 text-terracotta" aria-hidden="true">
+                      <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m0 3.75h.008M10.34 3.94l-8.4 14.55A1.5 1.5 0 003.24 21h17.52a1.5 1.5 0 001.3-2.51l-8.4-14.55a1.5 1.5 0 00-2.6 0z" />
+                      </svg>
+                    </span>
+                    <div class="min-w-0">
+                      <p class="font-serif text-xl text-ink">Contacta sin formulario</p>
+                      <p class="mt-2 text-body-sm text-charcoal">
+                        {CONTACT_FORM_DISABLED_MESSAGE}
+                      </p>
+                      <div class="mt-5 flex flex-col gap-3 sm:flex-row">
+                        <a href={`tel:${CONTACT_PHONE_E164}`} class="btn btn-sage w-full justify-center whitespace-normal px-5 text-center sm:w-auto">
+                          <Icon name="phone" class="h-4 w-4" />
+                          Llamar al {CONTACT_PHONE_DISPLAY}
+                        </a>
+                        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="btn btn-outline w-full justify-center whitespace-normal px-5 text-center sm:w-auto">
+                          Escribir por WhatsApp
+                        </a>
+                      </div>
+                      <p class="mt-4 text-body-sm text-charcoal">
+                        También puedes escribir a
+                        <a href={`mailto:${CONTACT_EMAIL}`} class="text-olive underline underline-offset-4 hover:text-ink">{CONTACT_EMAIL}</a>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
               
-              <form id="contact-form" class="space-y-6" action="/api/contact" method="POST" accept-charset="UTF-8" aria-describedby="contact-form-status" aria-busy="false">
+              <form id="contact-form" class="space-y-6" action="/api/contact/" method="POST" accept-charset="UTF-8" aria-describedby={CONTACT_FORM_ENABLED ? 'contact-form-status' : 'contact-form-disabled-note contact-form-status'} aria-busy="false" data-disabled={String(!CONTACT_FORM_ENABLED)}>
+                <fieldset disabled={!CONTACT_FORM_ENABLED} aria-label={CONTACT_FORM_ENABLED ? 'Datos para solicitar cita' : 'Formulario de contacto deshabilitado'} class="w-full min-w-0 border-0 p-0">
+                <legend class="sr-only">Datos para solicitar cita</legend>
                 <div class="grid sm:grid-cols-2 gap-6">
                   <div class="group">
                     <label for="nombre" class="block text-label text-charcoal mb-3 group-focus-within:text-olive transition-colors">
@@ -95,7 +128,7 @@ const contactPageData = {
                       aria-describedby="nombre-error"
                       minlength="2"
                       maxlength="120"
-                      class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
+                      class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/70"
                       required 
                     />
                     <p id="nombre-error" class="text-label-sm text-terracotta mt-2" hidden></p>
@@ -114,7 +147,7 @@ const contactPageData = {
                       aria-invalid="false"
                       aria-describedby="telefono-error"
                       maxlength="30"
-                      class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
+                      class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/70"
                     />
                     <p id="telefono-error" class="text-label-sm text-terracotta mt-2" hidden></p>
                   </div>
@@ -141,11 +174,12 @@ const contactPageData = {
                       name="email" 
                       placeholder="tu@email.com" 
                       autocomplete="email"
+                      spellcheck="false"
                       inputmode="email"
                       aria-invalid="false"
                       aria-describedby="email-error"
                       maxlength="180"
-                      class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/50"
+                      class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 placeholder:text-charcoal/70"
                       required 
                     />
                     <p id="email-error" class="text-label-sm text-terracotta mt-2" hidden></p>
@@ -164,10 +198,10 @@ const contactPageData = {
                       class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster transition-all duration-300 appearance-none cursor-pointer pr-12"
                     >
                       <option value="">Elige lo que más se acerque</option>
-                      <option value="individual">Me siento mal y no sé por qué</option>
+                      <option value="individual">Ansiedad, estado de ánimo o autoestima</option>
                       <option value="pareja">Problemas con mi pareja</option>
                       <option value="familiar">Conflictos familiares</option>
-                      <option value="evaluacion">Problemas de memoria o atención</option>
+                      <option value="evaluacion">Cambios en memoria o atención</option>
                       <option value="cognitiva">Estimulación para persona mayor</option>
                       <option value="otro">Otro / No estoy seguro</option>
                     </select>
@@ -183,13 +217,13 @@ const contactPageData = {
                   <textarea 
                     id="mensaje" 
                     name="mensaje" 
-                    placeholder="Cuéntame brevemente cómo puedo ayudarte y cómo prefieres que te contacte..." 
+                    placeholder="Indica cómo prefieres que te contacte…"
                     rows="5" 
                     minlength="10"
                     maxlength="2000"
                     aria-invalid="false"
                     aria-describedby="mensaje-guidance mensaje-error"
-                    class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster resize-none transition-all duration-300 placeholder:text-charcoal/40"
+                    class="w-full px-4 py-4 bg-cream border border-border-delicate text-ink focus:outline-none focus:border-olive focus:bg-alabaster resize-y transition-colors duration-300 placeholder:text-charcoal/70"
                     required
                   ></textarea>
                   <p id="mensaje-guidance" class="text-label-sm text-charcoal mt-2">
@@ -217,12 +251,19 @@ const contactPageData = {
                 <p id="privacidad-error" class="text-label-sm text-terracotta -mt-4" hidden></p>
                 
                 <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-                  <button type="submit" class="btn btn-sage w-full sm:w-auto group" data-submit-button aria-controls="contact-form" aria-disabled="false">
-                    <span data-submit-label>Enviar mensaje</span>
+                  <button
+                    type="submit"
+                    class:list={['btn btn-sage w-full sm:w-auto group', !CONTACT_FORM_ENABLED && 'opacity-50 cursor-not-allowed']}
+                    data-submit-button
+                    aria-controls="contact-form"
+                    aria-disabled={!CONTACT_FORM_ENABLED}
+                    disabled={!CONTACT_FORM_ENABLED}
+                  >
+                    <span data-submit-label>Enviar solicitud</span>
                     <Icon name="send" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                   </button>
                   <p class="text-label-sm text-charcoal">
-                    Te respondo en menos de 24h. Consulta cómo se tratan tus datos en la <a href="/privacidad/" class="text-olive hover:underline underline-offset-2">política de privacidad</a>.
+                    Recibirás respuesta para coordinar la disponibilidad. Consulta cómo se tratan tus datos en la <a href="/privacidad/" class="text-olive hover:underline underline-offset-2">política de privacidad</a>.
                   </p>
                 </div>
 
@@ -233,11 +274,14 @@ const contactPageData = {
                   aria-live="polite"
                   hidden
                 ></p>
+                </fieldset>
               </form>
               <noscript>
                 <p class="text-body-sm text-charcoal mt-6">
-                  Si el formulario no se puede enviar, puedes escribirme directamente a
-                  <a href={`mailto:${CONTACT_EMAIL}`} class="text-olive hover:underline underline-offset-2">{CONTACT_EMAIL}</a>.
+                  {!CONTACT_FORM_ENABLED
+                    ? 'El formulario no está disponible; puedes escribirme directamente por email.'
+                    : 'Si el formulario no se puede enviar, puedes escribirme directamente por email.'}
+                  {' '}<a href={`mailto:${CONTACT_EMAIL}`} class="text-olive hover:underline underline-offset-2">{CONTACT_EMAIL}</a>.
                 </p>
               </noscript>
             </div>
@@ -253,8 +297,8 @@ const contactPageData = {
             <span class="label-section">Consulta presencial</span>
             <h2 class="title-section mt-8 mb-6">Cómo llegar</h2>
             <p class="text-body-sm text-charcoal mb-4">
-              C/ Rodríguez Sánchez, 9<br />
-              14003 Córdoba
+              {CONTACT_ADDRESS.streetAddress}<br />
+              {CONTACT_ADDRESS.postalCode} {CONTACT_ADDRESS.addressLocality}
             </p>
             <a
               href={GOOGLE_MAPS_URL}
@@ -267,14 +311,12 @@ const contactPageData = {
           </div>
           <div class="lg:col-span-8" data-reveal data-reveal-delay="100">
             <div class="border border-border-delicate overflow-hidden bg-cream">
-              <iframe
-                title="Mapa de la consulta de psicología en Córdoba"
-                src={GOOGLE_MAPS_EMBED_URL}
-                class="w-full h-[320px] lg:h-[420px] border-0"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                allowfullscreen
-              ></iframe>
+              <div id="consultation-map" class="flex min-h-[320px] lg:min-h-[420px] flex-col items-center justify-center gap-6 p-6 text-center">
+                <p id="map-privacy-note" class="text-body-sm max-w-md">El mapa está desactivado para no conectar con Google al visitar esta página. Si lo cargas, Google recibirá datos técnicos de conexión y podrá utilizar cookies según su política.</p>
+                <button type="button" class="btn btn-outline" id="load-map" data-map-src={GOOGLE_MAPS_EMBED_URL} aria-describedby="map-privacy-note" aria-controls="consultation-map" hidden>Cargar mapa de Google</button>
+                <a href="https://policies.google.com/privacy?hl=es" target="_blank" rel="noopener noreferrer" class="text-body-sm underline underline-offset-4">Privacidad de Google</a>
+                <noscript><p class="text-body-sm">Puedes consultar la dirección con el enlace «Abrir en Google Maps».</p></noscript>
+              </div>
             </div>
           </div>
         </div>
@@ -284,10 +326,10 @@ const contactPageData = {
     <!-- CTA Teléfono -->
     <CTASection
       label="Si prefieres hablar"
-      title="A veces es más fácil"
-      highlight="llamar"
-      description="No pasa nada si no sabes qué decir. Solo di 'hola' y ya empezamos. Estoy aquí para escucharte."
-      primaryAction={{ text: "697 733 060", href: "tel:+34697733060", icon: false }}
+      title="También puedes"
+      highlight="llamarme"
+      description="Atención presencial en Córdoba y online. Contacta para consultar disponibilidad y resolver dudas sobre la primera sesión."
+      primaryAction={{ text: CONTACT_PHONE_DISPLAY, href: `tel:${CONTACT_PHONE_E164}`, icon: false }}
       variant="dark"
     />
 
@@ -296,7 +338,9 @@ const contactPageData = {
   <Footer />
 </Layout>
 
+{CONTACT_FORM_ENABLED && (
 <script define:vars={{ contactEmail: CONTACT_EMAIL }}>
+  (function initContactForm() {
   const form = document.getElementById('contact-form');
   const status = document.getElementById('contact-form-status');
   const submitButton = form?.querySelector('[data-submit-button]');
@@ -364,6 +408,10 @@ const contactPageData = {
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
 
+    if (form.dataset.disabled === 'true') {
+      return;
+    }
+
     if (!(form instanceof HTMLFormElement) || isSubmitting || !validateForm()) {
       return;
     }
@@ -376,7 +424,7 @@ const contactPageData = {
       submitButton.classList.add('opacity-70', 'cursor-wait');
     }
     if (submitLabel) {
-      submitLabel.textContent = 'Enviando...';
+      submitLabel.textContent = 'Enviando solicitud…';
     }
 
     try {
@@ -392,12 +440,12 @@ const contactPageData = {
         ? await response.json().catch(() => ({}))
         : {};
 
-      if (!response.ok) {
+      if (!response.ok || result.ok !== true) {
         throw new Error(result?.message || 'No se ha podido enviar el mensaje.');
       }
 
       form.reset();
-      setStatus('Mensaje enviado correctamente. Te responderé en menos de 24 horas.', 'success');
+      setStatus('Solicitud enviada correctamente. Te contactaré para indicarte disponibilidad.', 'success');
       window.dispatchEvent(new CustomEvent('contact-form-success'));
     } catch (error) {
       setStatus(
@@ -415,17 +463,50 @@ const contactPageData = {
         submitButton.classList.remove('opacity-70', 'cursor-wait');
       }
       if (submitLabel) {
-        submitLabel.textContent = 'Enviar mensaje';
+        submitLabel.textContent = 'Enviar solicitud';
       }
     }
   });
+  })();
+</script>
+)}
 
-  const contactResult = new URLSearchParams(window.location.search).get('contacto');
-  if (contactResult === 'enviado') {
-    setStatus('Mensaje enviado correctamente. Te responderé en menos de 24 horas.', 'success');
-    window.history.replaceState({}, '', `${window.location.pathname}${window.location.hash}`);
-  } else if (contactResult === 'error') {
-    setStatus(`No se ha podido enviar el mensaje. También puedes escribir a ${contactEmail}.`, 'error');
-    window.history.replaceState({}, '', `${window.location.pathname}${window.location.hash}`);
+<script define:vars={{ contactEmail: CONTACT_EMAIL, contactFormEnabled: CONTACT_FORM_ENABLED, disabledMessage: CONTACT_FORM_DISABLED_MESSAGE }}>
+  (function initContactStatus() {
+  const url = new URL(window.location.href);
+  const contactResult = url.searchParams.get('contacto');
+  const status = document.getElementById('contact-form-status');
+
+  if (status && ['enviado', 'error', 'deshabilitado'].includes(contactResult)) {
+    const isDisabled = !contactFormEnabled || contactResult === 'deshabilitado';
+    const isSuccess = !isDisabled && contactResult === 'enviado';
+    status.hidden = false;
+    status.textContent = isDisabled
+      ? disabledMessage
+      : isSuccess
+        ? 'Solicitud enviada correctamente. Te contactaré para indicarte disponibilidad.'
+        : `No se ha podido enviar el mensaje. También puedes escribir a ${contactEmail}.`;
+    status.classList.add(isSuccess ? 'text-olive' : 'text-terracotta');
+    url.searchParams.delete('contacto');
+    window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+  }
+  })();
+</script>
+
+<script>
+  const mapButton = document.getElementById('load-map');
+  const mapContainer = document.getElementById('consultation-map');
+  if (mapButton && mapContainer) {
+    mapButton.hidden = false;
+    mapButton.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.title = 'Mapa de la consulta de psicología en Córdoba';
+      frame.src = mapButton.dataset.mapSrc || '';
+      frame.className = 'w-full h-[320px] lg:h-[420px] border-0';
+      frame.referrerPolicy = 'no-referrer';
+      frame.tabIndex = 0;
+      mapContainer.replaceWith(frame);
+      frame.focus();
+    }, { once: true });
   }
 </script>

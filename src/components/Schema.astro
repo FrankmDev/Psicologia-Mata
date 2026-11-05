@@ -16,6 +16,8 @@ interface LocalBusinessData {
   };
   image?: string;
   openingHours?: string[];
+  priceRange?: string;
+  currenciesAccepted?: string;
   serviceArea?: string;
   socialProfiles?: string[];
   foundingDate?: string;
@@ -26,7 +28,7 @@ interface ArticleData {
   headline: string;
   description: string;
   image: string;
-  datePublished: string;
+  datePublished?: string;
   dateModified?: string;
   author: {
     name: string;
@@ -94,6 +96,18 @@ interface ServiceOfferItem {
   url: string;
 }
 
+interface ServiceSchemaData {
+  name: string;
+  description: string;
+  url: string;
+  serviceType?: string;
+  areaServed?: string;
+  provider?: {
+    name: string;
+    url?: string;
+  };
+}
+
 interface Props {
   type:
     | 'localbusiness'
@@ -102,7 +116,8 @@ interface Props {
     | 'breadcrumbs'
     | 'faqpage'
     | 'person'
-    | 'servicecatalog';
+    | 'servicecatalog'
+    | 'service';
   data:
     | LocalBusinessData
     | ArticleData
@@ -110,7 +125,8 @@ interface Props {
     | BreadcrumbItem[]
     | FAQItem[]
     | PersonData
-    | ServiceOfferItem[];
+    | ServiceOfferItem[]
+    | ServiceSchemaData;
 }
 
 import { SITE_URL } from '../config/site';
@@ -130,13 +146,14 @@ function generateLocalBusinessSchema(data: LocalBusinessData) {
     url: data.url,
     telephone: data.telephone,
     ...(data.email && { email: data.email }),
-    inLanguage: 'es-ES',
     address: {
       '@type': 'PostalAddress',
       ...data.address,
     },
     ...(data.image && { image: data.image }),
     ...(data.openingHours?.length && { openingHours: data.openingHours }),
+    ...(data.priceRange && { priceRange: data.priceRange }),
+    ...(data.currenciesAccepted && { currenciesAccepted: data.currenciesAccepted }),
     ...(data.socialProfiles?.length && { sameAs: data.socialProfiles }),
     ...(data.serviceArea && { areaServed: data.serviceArea }),
     ...(data.foundingDate && { foundingDate: data.foundingDate }),
@@ -161,8 +178,12 @@ function generateArticleSchema(data: ArticleData) {
     headline: data.headline,
     description: data.description,
     image: articleImage,
-    datePublished: data.datePublished,
-    dateModified: data.dateModified || data.datePublished,
+    ...(data.datePublished ? { datePublished: data.datePublished } : {}),
+    ...(data.dateModified
+      ? { dateModified: data.dateModified }
+      : data.datePublished
+        ? { dateModified: data.datePublished }
+        : {}),
     inLanguage: 'es-ES',
     ...(data.articleSection ? { articleSection: data.articleSection } : {}),
     ...(data.keywords?.length ? { keywords: data.keywords.join(', ') } : {}),
@@ -250,7 +271,6 @@ function generatePersonSchema(data: PersonData) {
     ...(data.telephone && { telephone: data.telephone }),
     ...(data.email && { email: data.email }),
     ...(data.image && { image: data.image }),
-    inLanguage: 'es-ES',
     ...(data.sameAs?.length && { sameAs: data.sameAs }),
     worksFor: {
       '@type': 'ProfessionalService',
@@ -301,9 +321,8 @@ function generateServiceCatalogSchema(offers: ServiceOfferItem[]) {
     '@context': 'https://schema.org',
     '@type': 'OfferCatalog',
     name: 'Servicios de psicología',
-    itemListElement: offers.map((offer, index) => ({
+    itemListElement: offers.map((offer) => ({
       '@type': 'Offer',
-      position: index + 1,
       url: offer.url,
       ...(offer.price
         ? {
@@ -318,6 +337,28 @@ function generateServiceCatalogSchema(offers: ServiceOfferItem[]) {
         url: offer.url,
       },
     })),
+  };
+}
+
+function generateServiceSchema(data: ServiceSchemaData) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: data.name,
+    description: data.description,
+    url: data.url,
+    ...(data.serviceType ? { serviceType: data.serviceType } : {}),
+    ...(data.areaServed ? { areaServed: data.areaServed } : {}),
+    ...(data.provider
+      ? {
+          provider: {
+            '@type': 'ProfessionalService',
+            '@id': `${SITE_URL}/#business`,
+            name: data.provider.name,
+            ...(data.provider.url ? { url: data.provider.url } : {}),
+          },
+        }
+      : {}),
   };
 }
 
@@ -345,6 +386,9 @@ switch (type) {
   case 'servicecatalog':
     schemaData = generateServiceCatalogSchema(data as ServiceOfferItem[]);
     break;
+  case 'service':
+    schemaData = generateServiceSchema(data as ServiceSchemaData);
+    break;
   default: {
     const _exhaustive: never = type;
     schemaData = null;
@@ -352,7 +396,7 @@ switch (type) {
   }
 }
 
-const schemaJson = schemaData ? JSON.stringify(schemaData) : '';
+const schemaJson = schemaData ? JSON.stringify(schemaData).replace(/</g, '\\u003c') : '';
 ---
 
 {schemaJson && <script type="application/ld+json" set:html={schemaJson} />}

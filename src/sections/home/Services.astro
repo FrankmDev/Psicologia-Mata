@@ -10,6 +10,17 @@ const serviceImages = [
   terapiaPareja,
   terapiaFamilia,
 ];
+
+const serviceAlt = [
+  'Sesión de terapia individual en Córdoba',
+  'Sesión de terapia de pareja en Córdoba',
+  'Sesión de terapia familiar en Córdoba',
+];
+
+const serviceDetailUrls: Record<string, string> = {
+  individual: '/servicios/#individual',
+  pareja: '/servicios/#pareja',
+};
 ---
 
 <section class="section bg-cream relative" id="servicios">
@@ -22,16 +33,16 @@ const serviceImages = [
     <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-12 mb-12 sm:mb-16 lg:mb-24">
       <div data-reveal class="max-w-2xl">
         <div class="mb-6 sm:mb-8">
-          <span class="label-section">Áreas de Especialidad</span>
+          <span class="label-section">Servicios de psicología</span>
         </div>
         <h2 class="title-section">
-          Un enfoque <em>profesional y humano</em> para tu bienestar.
+          Terapia para lo que te está <em>costando ahora</em>.
         </h2>
       </div>
       
       <div class="flex flex-col items-start lg:items-end gap-4 sm:gap-6" data-reveal data-reveal-delay="200">
         <p class="text-body-sm max-w-sm lg:text-right">
-          Terapia presencial en Córdoba y terapia online con un enfoque basado en evidencia, adaptado a tu historia y momento vital.
+          Terapia individual, de pareja y familiar en Córdoba y online. La terapia individual y la estimulación cognitiva también se realizan a domicilio. Atención a personas mayores y apoyo a sus cuidadores.
         </p>
         <a href="/servicios/" class="btn btn-outline py-3 px-5 sm:py-4 sm:px-6">Ver todos los servicios</a>
       </div>
@@ -41,7 +52,7 @@ const serviceImages = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-y-12 sm:gap-y-16 lg:gap-y-24 gap-x-6 sm:gap-x-8 lg:gap-x-10">
       {mainServices.map((service, index) => (
         <a
-          href={`/servicios/#${service.id}`}
+          href={serviceDetailUrls[service.id] ?? `/servicios/#${service.id}`}
           class={`group block md:col-span-1 ${index === 0 ? 'lg:col-span-4' : index === 1 ? 'lg:col-span-4 lg:mt-24' : 'lg:col-span-4 lg:mt-12'}`}
           data-reveal
           data-reveal-delay={index * 150}
@@ -57,7 +68,7 @@ const serviceImages = [
             <div class="relative mb-6 sm:mb-8 img-reveal-wrapper aspect-[4/5] overflow-hidden bg-cream">
               <Image
                 src={serviceImages[index]}
-                alt={service.title}
+                alt={serviceAlt[index]}
                 class="absolute inset-0 w-full h-full object-cover filter grayscale-[30%] sepia-[10%] group-hover:grayscale-0 group-hover:sepia-0 group-hover:scale-105 transition-all duration-1000 ease-out"
                 width={400}
                 densities={[1.5, 2]}
@@ -114,6 +125,15 @@ const serviceImages = [
         </a>
       ))}
     </div>
+
+    <nav class="mt-12 pt-7 border-t border-border-delicate" aria-label="Otros servicios de psicología">
+      <p class="text-label-xs uppercase tracking-widest text-charcoal mb-4">Otras áreas de consulta</p>
+      <ul class="flex flex-wrap gap-x-7 gap-y-3">
+        <li><a class="text-label-sm text-olive underline underline-offset-4 hover:text-ink" href="/servicios/#individual">Ansiedad y autoestima</a></li>
+        <li><a class="text-label-sm text-olive underline underline-offset-4 hover:text-ink" href="/servicios/#cognitiva">Personas mayores y estimulación cognitiva</a></li>
+        <li><a class="text-label-sm text-olive underline underline-offset-4 hover:text-ink" href="/servicios/#evaluacion">Evaluación neuropsicológica</a></li>
+      </ul>
+    </nav>
     
   </div>
 </section>

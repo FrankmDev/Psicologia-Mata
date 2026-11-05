@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Schema from '../components/Schema.astro';
-import { SITE_URL } from '../config/site';
+import { SITE_URL, CONTACT_ADDRESS, CONTACT_PHONE_DISPLAY, CONTACT_EMAIL, CONTACT_FORM_ENABLED } from '../config/site';
 
 const title = "Política de privacidad | Psicóloga en Córdoba";
 const description = "Política de privacidad de la consulta de psicología de María Ángeles Mata en Córdoba. Información sobre protección de datos y RGPD.";
@@ -27,6 +27,7 @@ const breadcrumbData = [
       
       <div class="container-editorial relative z-10">
         <PageHeader
+          id="privacy-heading"
           label="Legal"
           title="Política de"
           highlight="Privacidad"
@@ -39,16 +40,16 @@ const breadcrumbData = [
       <div class="container-editorial">
         <div class="max-w-3xl mx-auto prose prose-lg">
           
-          <p class="text-body text-charcoal"><strong>Última actualización:</strong> Enero 2025</p>
+          <p class="text-body text-charcoal"><strong>Última actualización técnica:</strong> 5 de noviembre de 2026</p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">1. Responsable del Tratamiento</h2>
           <p class="text-body text-charcoal mb-4">
             <strong>María Ángeles Mata Cala</strong><br />
             Psicóloga<br />
             Colegiada AN 12177<br />
-            Dirección: C/ Rodríguez Sánchez, 9, 14003 Córdoba<br />
-            Teléfono: +34 697 733 060<br />
-            Email: mangelesmatacala@hotmail.com
+            Dirección: {CONTACT_ADDRESS.full}<br />
+            Teléfono: {CONTACT_PHONE_DISPLAY}<br />
+            Email: {CONTACT_EMAIL}
           </p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">2. Finalidad del Tratamiento</h2>
@@ -67,7 +68,7 @@ const breadcrumbData = [
             El tratamiento de tus datos se realiza bajo las siguientes bases legales:
           </p>
           <ul class="list-disc pl-8 mb-4 space-y-2 text-body text-charcoal">
-            <li><strong>Consentimiento:</strong> Mediante el envío del formulario de contacto o comunicación directa.</li>
+            <li><strong>Gestión de consultas:</strong> Para responder a tu solicitud de información o de cita y realizar las gestiones previas que solicites.</li>
             <li><strong>Ejecución de un contrato:</strong> Para la prestación de servicios terapéuticos.</li>
             <li><strong>Obligaciones legales:</strong> Para la conservación de documentación de sesiones.</li>
           </ul>
@@ -110,6 +111,7 @@ const breadcrumbData = [
           <p class="text-body text-charcoal mb-4">
             Para ejercer tus derechos, contacta conmigo a través del email o teléfono indicados.
           </p>
+          <p class="text-body text-charcoal mb-4">Cuando el tratamiento se base en tu consentimiento, puedes retirarlo sin que afecte al tratamiento realizado anteriormente. Si consideras que tus derechos no se han atendido, puedes presentar una reclamación ante la <a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4">Agencia Española de Protección de Datos</a>.</p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">8. Medidas de Seguridad</h2>
           <p class="text-body text-charcoal mb-4">
@@ -118,8 +120,10 @@ const breadcrumbData = [
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">9. Formulario de Contacto</h2>
           <p class="text-body text-charcoal mb-4">
-            Los datos enviados a través del formulario de contacto (nombre, email, teléfono y mensaje) se utilizan únicamente para responder a tu consulta. No se almacenan con fines de marketing.
+            {CONTACT_FORM_ENABLED ? 'Los datos enviados a través del formulario de contacto (nombre, email, teléfono, motivo y mensaje) se utilizan para responder a tu consulta y no con fines de marketing.' : 'El formulario está deshabilitado: no permite introducir ni enviar datos y su endpoint no procesa el contenido de las solicitudes.'}
           </p>
+          <p class="text-body text-charcoal mb-4">Para una primera consulta por teléfono, email o WhatsApp, facilita solo los datos necesarios para coordinar la cita. No envíes informes ni información clínica sensible por estos canales iniciales.</p>
+          <p class="text-body text-charcoal mb-4">El mapa de Google solo se carga si lo solicitas en Contacto. Al cargarlo o seguir enlaces externos, intervienen los proveedores de esos servicios. Consulta también la <a href="/cookies/" class="underline underline-offset-4">información sobre cookies y servicios de terceros</a>.</p>
 
           <h2 class="font-serif text-2xl text-ink mt-12 mb-6">10. Modificaciones</h2>
           <p class="text-body text-charcoal mb-4">

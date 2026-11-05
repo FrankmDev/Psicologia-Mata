@@ -7,12 +7,12 @@ import terapiaPareja from '../assets/terapia-pareja.avif';
 import terapiaIndividual from '../assets/terapia-individual.avif';
 import estres from '../assets/estres.avif';
 import apunte from '../assets/apunte.avif';
-import terapiaFamilia from '../assets/terapia-familia.avif';
 import psicologia from '../assets/psicologia.avif';
 import estimulacionCognitiva from '../assets/estimulacion-cognitiva.avif';
 import evaluacion from '../assets/evaluacion.avif';
 import primeraSesionPsicologia from '../assets/primera-sesion-psicologia.avif';
 import terapia from '../assets/terapia.avif';
+import { editorialPosts } from './editorialPosts';
 
 export interface BlogPost {
   slug: string;
@@ -26,6 +26,9 @@ export interface BlogPost {
   readTime: string;
   category: string;
   image: ImageMetadata;
+  imageAlt?: string;
+  reviewStatus?: 'pending' | 'approved';
+  modifiedDate?: string;
   faq?: {
     question: string;
     answer: string;
@@ -33,15 +36,16 @@ export interface BlogPost {
   content: string;
 }
 
-export const blogPosts: Record<string, BlogPost> = {
+const existingBlogPosts: Record<string, BlogPost> = {
   "cuando-ir-al-psicologo": {
     slug: "cuando-ir-al-psicologo",
     title: "Cuándo ir al psicólogo: señales, mitos y qué esperar en la primera sesión",
     seoTitle: "Cuándo ir al psicólogo: señales, mitos y qué esperar",
-    seoDescription: "¿Cuándo ir al psicólogo? Señales claras, mitos frecuentes y qué ocurre en la primera sesión. Guía profesional para pedir ayuda psicológica con confianza. Consulta presencial en Córdoba y online.",
+    seoDescription: "¿Cuándo ir al psicólogo? Señales, mitos y qué ocurre en la primera sesión. Guía clara para decidir con confianza. Consulta en Córdoba y online.",
     keywords: "cuando ir al psicologo, señales ir al psicologo, necesito un psicologo, primera sesion psicologo, primera consulta psicologica, cuando pedir ayuda psicologica, mitos psicologia, valoracion psicologica, psicologo cordoba, psicologa cordoba, psicologo cerca de mi, terapia psicologica cordoba",
     excerpt: "Si llevas tiempo preguntándote si necesitas un psicólogo, este artículo te ayuda a leer las señales con calma, desmontar mitos habituales y saber qué esperar antes de dar el paso.",
     date: "3 Agosto 2026",
+    modifiedDate: "5 Noviembre 2026",
     dateShort: "3 Ago",
     readTime: "14 min",
     category: "Salud Mental",
@@ -57,7 +61,7 @@ export const blogPosts: Record<string, BlogPost> = {
       },
       {
         question: "¿Cuánto dura una primera sesión de psicología?",
-        answer: "Suele durar entre 50 y 60 minutos. Es un espacio para conocernos, entender qué te trae y valorar si el enfoque y el formato encajan contigo."
+        answer: "Suele durar 50 minutos. Es un espacio para conocernos, entender qué te trae y valorar si el enfoque y el formato encajan contigo."
       },
       {
         question: "¿Puedo ir al psicólogo sin saber exactamente qué me pasa?",
@@ -69,14 +73,22 @@ export const blogPosts: Record<string, BlogPost> = {
       },
       {
         question: "¿Cómo pedir cita con un psicólogo en Córdoba?",
-        answer: "Puedes contactar por teléfono, email o formulario web para solicitar una primera valoración. En consulta presencial se valora tu caso con calma; si prefieres empezar desde casa, también es posible en formato online."
+        answer: "Puedes contactar por teléfono o email para solicitar una primera valoración. En consulta presencial se valora tu caso con calma; si prefieres empezar desde casa, también es posible en formato online."
+      },
+      {
+        question: "¿Cómo elegir psicóloga en Córdoba?",
+        answer: "Comprueba la formación y colegiación, pregunta por la experiencia relacionada con tu motivo, la modalidad, el precio y cómo se revisan los objetivos. La primera sesión también te permite valorar si te sientes escuchado y respetado."
+      },
+      {
+        question: "¿Dónde puedo verificar la colegiación?",
+        answer: "El Colegio Oficial de Psicología de Andalucía Occidental ofrece un buscador de colegiados activos. El directorio ayuda a comprobar la colegiación, pero no sustituye revisar la formación y el encaje del servicio."
       }
     ],
     content: `
       <p>Si estás leyendo esto, probablemente ya llevas un tiempo preguntándote si necesitas un psicólogo. No porque no lo intuyas, sino porque dudas de si es “suficientemente grave”, si es el momento adecuado o si pedir ayuda significa admitir una debilidad. Muchas personas llegan a consulta después de meses —a veces años— posponiendo esa conversación. La realidad es otra: una valoración psicológica es un acto de cuidado, no de fracaso. Y cuanto antes se entiende qué está pasando, más opciones suele haber para recuperar bienestar, claridad y calidad de vida.</p>
 
       <figure class="article-figure--bleed">
-        <img src="${terapia.src}" alt="Espacio de consulta psicológica tranquilo para una primera sesión de terapia" loading="lazy" />
+        <img src="${terapia.src}" width="${terapia.width}" height="${terapia.height}" alt="Espacio de consulta psicológica tranquilo para una primera sesión de terapia" loading="lazy" />
         <figcaption>La primera sesión no es un examen: es un espacio para entender qué te trae y qué tipo de ayuda puede encajar contigo.</figcaption>
       </figure>
 
@@ -208,7 +220,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </div>
 
       <figure class="article-figure--bleed">
-        <img src="${evaluacion.src}" alt="Valoración psicológica profesional para elegir el tipo de ayuda adecuado" loading="lazy" />
+        <img src="${evaluacion.src}" width="${evaluacion.width}" height="${evaluacion.height}" alt="Valoración psicológica profesional para elegir el tipo de ayuda adecuado" loading="lazy" />
         <figcaption>Elegir bien al profesional y entender el proceso desde el principio facilita sentirte en buenas manos.</figcaption>
       </figure>
 
@@ -237,19 +249,26 @@ export const blogPosts: Record<string, BlogPost> = {
 
       <p>No tienes que contarlo todo en la primera sesión. La confianza se construye poco a poco. Lo importante es que salgas con una idea más clara de si quieres continuar y de qué camino tiene sentido para ti. En mi experiencia, muchas personas se sorprenden de lo reconfortante que resulta, por fin, poner en palabras algo que llevaban tiempo cargando solas.</p>
 
-      <h2>Cómo elegir psicólogo: qué mirar antes de pedir cita</h2>
+      <h2>Cómo elegir psicóloga en Córdoba: criterios prácticos</h2>
 
-      <p>Elegir profesional no es solo cuestión de cercanía o precio. Conviene revisar formación, colegiación, experiencia en tu tipo de dificultad y sensación de encaje personal. En España, quien ejerce psicología sanitaria debe contar con la titulación y habilitación correspondientes. Puedes conocer la trayectoria y el enfoque de cada profesional en su página de <a href="/sobre-mi/">sobre mí</a> antes de contactar.</p>
+      <p>Si buscas una <strong>psicóloga en Córdoba</strong>, no tienes que encontrar a una persona “perfecta” ni dejarte guiar solo por una lista de popularidad. Busca información verificable y una explicación clara de cómo se trabajaría tu motivo. El <a href="https://sede.copao.es/buscar-un-psicologo" target="_blank" rel="noopener noreferrer">Colegio Oficial de Psicología de Andalucía Occidental</a> dispone de un directorio de colegiados activos con filtros por provincia y área; aparecer en un directorio ayuda a comprobar la colegiación, pero no sustituye revisar formación, habilitación sanitaria cuando corresponda y experiencia relacionada.</p>
 
-      <p>Si buscas atención presencial, factores prácticos como la ubicación, el horario y la facilidad de acceso también importan: una consulta accesible facilita la constancia. Atiendo en Córdoba capital, en un espacio tranquilo y discreto en el centro de la ciudad, y también ofrezco <a href="/servicios/">terapia online</a> para quienes prefieren esa modalidad, viven en otras localidades de la provincia o combinan ambas según la etapa del proceso.</p>
+      <p>En España hay distintas vías de cualificación para prestar atención psicológica sanitaria. Pregunta qué formación y habilitación tiene la profesional que te atenderá, quién será responsable de tu proceso y si el tipo de atención que ofrece corresponde a tu necesidad. Puedes revisar la trayectoria y el número de colegiación de María Ángeles Mata Cala en la página de <a href="/sobre-mi/">formación y perfil profesional</a>.</p>
 
+      <h3>Qué conviene preguntar antes de reservar</h3>
       <ul class="article-checklist">
-        <li><strong>Formación y colegiación:</strong> verifica que la persona esté colegiada y tenga formación en psicología general sanitaria si buscas atención clínica.</li>
-        <li><strong>Experiencia en tu motivo de consulta:</strong> ansiedad, pareja, familia, duelo, autoestima o evaluación requieren enfoques distintos.</li>
-        <li><strong>Claridad en el proceso:</strong> un buen profesional explica objetivos, límites, confidencialidad y duración orientativa sin prometer resultados milagrosos.</li>
-        <li><strong>Sensación de seguridad:</strong> no necesitas sentirte “cómodo al 100 %” desde el minuto uno, pero sí respetado y escuchado.</li>
-        <li><strong>Modalidad:</strong> presencial, online o mixta. Lo importante es que puedas sostener el proceso con regularidad.</li>
+        <li><strong>Formación y colegiación:</strong> qué titulación sanitaria tiene, cuál es su número colegial y dónde puedes verificarlo.</li>
+        <li><strong>Experiencia relacionada:</strong> si atiende el motivo por el que consultas y cómo decide si el caso requiere otro recurso.</li>
+        <li><strong>Forma de trabajo:</strong> cómo se plantean los objetivos, se revisa el proceso y se explican sus límites.</li>
+        <li><strong>Coste y duración:</strong> precio por sesión, minutos incluidos, política de cambios y si hay costes adicionales en evaluaciones.</li>
+        <li><strong>Confidencialidad:</strong> cómo se protege la información y en qué circunstancias existen límites legales al secreto profesional.</li>
+        <li><strong>Encaje:</strong> si en la primera sesión te sientes escuchado, respetado y con libertad para preguntar o expresar dudas.</li>
+        <li><strong>Modalidad y accesibilidad:</strong> presencial u online, ubicación, horarios, privacidad y condiciones para sostener el proceso.</li>
       </ul>
+
+      <p>En una conversación inicial puedes pedir que te expliquen el encuadre en palabras sencillas y valorar si la forma de trabajo encaja contigo. Desconfía de promesas de curación garantizada, plazos cerrados para todo el mundo o mensajes que te hagan sentir culpable por dudar.</p>
+
+      <p>La consulta de María Ángeles Mata Cala está en C/ Rodríguez Sánchez, 9, Córdoba, y ofrece atención presencial y online en los servicios indicados. Puedes ver las opciones de <a href="/servicios/terapia-individual/">terapia individual</a>, <a href="/servicios/terapia-pareja-cordoba/">terapia de pareja</a> y <a href="/servicios/#tarifas">tarifas publicadas</a> antes de contactar.</p>
 
       <h2>Presencial u online: qué conviene en cada caso</h2>
 
@@ -312,14 +331,14 @@ export const blogPosts: Record<string, BlogPost> = {
         <ul>
           <li>Respondes a unas preguntas sencillas sobre qué te trae y qué formato prefieres.</li>
           <li>Se acuerda una primera sesión de unos 50 minutos, presencial u online.</li>
-          <li>En esa cita se valora tu situación y se decide con calma si continuar tiene sentido.</li>
+          <li>En esa cita se valora tu situación, se explican los objetivos iniciales y se plantean los siguientes pasos.</li>
         </ul>
       </div>
 
       <div class="article-cta">
         <p>¿Te reconoces en alguna de estas señales?</p>
-        <p>Si llevas tiempo dándole vueltas, podemos hablar con tranquilidad sobre qué te ocurre y si una primera sesión —presencial en Córdoba u online— encaja contigo. Sin presión: solo una conversación honesta para ver si puedo ayudarte.</p>
-        <a href="/contacto/">Pedir información sobre una primera sesión</a>
+        <p>Si llevas tiempo dándole vueltas, puedes solicitar una cita para hablar de lo que te ocurre y conocer el encuadre de la terapia, presencial en Córdoba u online.</p>
+        <a href="/contacto/">Solicitar una primera sesión</a>
       </div>
 
       <h2>Preguntas frecuentes</h2>
@@ -335,7 +354,7 @@ export const blogPosts: Record<string, BlogPost> = {
         </div>
         <div class="article-card">
           <h3>¿Cuánto dura una primera sesión de psicología?</h3>
-          <p>Suele durar entre 50 y 60 minutos. Es un espacio para conocernos, entender qué te trae y valorar si el enfoque y el formato encajan contigo.</p>
+          <p>Suele durar 50 minutos. Es un espacio para conocernos, entender qué te trae y valorar si el enfoque y el formato encajan contigo.</p>
         </div>
         <div class="article-card">
           <h3>¿Puedo ir al psicólogo sin saber exactamente qué me pasa?</h3>
@@ -347,7 +366,7 @@ export const blogPosts: Record<string, BlogPost> = {
         </div>
         <div class="article-card">
           <h3>¿Cómo pedir cita con un psicólogo en Córdoba?</h3>
-          <p>Puedes contactar por teléfono, email o formulario web para solicitar una primera valoración. En consulta presencial se valora tu caso con calma; si prefieres empezar desde casa, también es posible en formato online.</p>
+          <p>Puedes contactar por teléfono o email para solicitar una primera valoración. En consulta presencial se valora tu caso con calma; si prefieres empezar desde casa, también es posible en formato online.</p>
         </div>
       </div>
 
@@ -355,7 +374,8 @@ export const blogPosts: Record<string, BlogPost> = {
 
       <ul class="article-related">
         <li><a href="/blog/beneficios-terapia-individual/">¿Por qué la terapia individual funciona?</a></li>
-        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona</a></li>
+        <li><a href="/servicios/#tarifas">Consultar las tarifas publicadas</a></li>
+        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: señales y opciones de tratamiento</a></li>
         <li><a href="/blog/gestion-ansiedad/">Cómo gestionar la ansiedad cuando el cuerpo se activa</a></li>
         <li><a href="/blog/autoestima-saludable/">Baja autoestima: señales y cómo empezar a trabajarla</a></li>
         <li><a href="/blog/terapia-de-pareja-cuando-empezar/">Terapia de pareja: cuándo empezar y qué esperar</a></li>
@@ -371,6 +391,7 @@ export const blogPosts: Record<string, BlogPost> = {
         <li id="ref-ci2">National Center for Biotechnology Information. <a href="https://pubmed.ncbi.nlm.nih.gov/34860613/" target="_blank" rel="noopener noreferrer">The effectiveness of telehealth versus face-to-face interventions for anxiety disorders: A systematic review and meta-analysis</a>.</li>
         <li id="ref-ci3">National Institute for Health and Care Excellence. <a href="https://www.nice.org.uk/guidance/cg123" target="_blank" rel="noopener noreferrer">Common mental health problems: identification and pathways to care</a>. Clinical guideline CG123.</li>
         <li id="ref-ci4">National Institute of Mental Health. <a href="https://www.nimh.nih.gov/health/topics/psychotherapies" target="_blank" rel="noopener noreferrer">Psychotherapies</a>. Última revisión: junio de 2024.</li>
+        <li id="ref-ci5">Colegio Oficial de Psicología de Andalucía Occidental. <a href="https://sede.copao.es/buscar-un-psicologo" target="_blank" rel="noopener noreferrer">Buscador de colegiados activos</a>.</li>
       </ol>
     `
   },
@@ -382,6 +403,7 @@ export const blogPosts: Record<string, BlogPost> = {
     keywords: "ansiedad en personas mayores, ansiedad mayores, sintomas ansiedad ancianos, ansiedad tercera edad, psicologia mayores cordoba, terapia ansiedad mayores",
     excerpt: "La ansiedad en la vejez no siempre aparece como nerviosismo evidente. A veces se expresa como insomnio, quejas físicas, irritabilidad, miedo a salir o preocupación constante por la salud.",
     date: "11 Junio 2026",
+    modifiedDate: "5 Noviembre 2026",
     dateShort: "11 Jun",
     readTime: "14 min",
     category: "Ansiedad",
@@ -408,7 +430,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <p>La ansiedad en personas mayores merece una mirada cuidadosa. No basta con decir “es normal por la edad” ni conviene interpretar cualquier preocupación como un trastorno. En la vejez pueden convivir cambios de salud, duelos, jubilación, soledad, responsabilidades de cuidado y miedo a perder autonomía. Todo eso puede activar ansiedad, pero también puede ocultarla detrás de síntomas físicos, alteraciones del sueño o cambios de conducta que la familia no siempre reconoce como malestar emocional.</p>
 
       <figure class="article-figure--bleed">
-        <img src="${estimulacionCognitiva.src}" alt="Persona mayor realizando una actividad cognitiva acompañada en consulta" loading="lazy" />
+        <img src="${estimulacionCognitiva.src}" width="${estimulacionCognitiva.width}" height="${estimulacionCognitiva.height}" alt="Persona mayor realizando una actividad cognitiva acompañada en consulta" loading="lazy" />
         <figcaption>En personas mayores, la ansiedad se entiende mejor desde una perspectiva psicológica, médica, familiar y social.</figcaption>
       </figure>
 
@@ -508,7 +530,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </ul>
 
       <figure class="article-figure--bleed">
-        <img src="${evaluacion.src}" alt="Evaluación psicológica para comprender síntomas de ansiedad y salud emocional" loading="lazy" />
+        <img src="${evaluacion.src}" width="${evaluacion.width}" height="${evaluacion.height}" alt="Evaluación psicológica para comprender síntomas de ansiedad y salud emocional" loading="lazy" />
         <figcaption>Una buena evaluación distingue ansiedad, depresión, duelo, deterioro cognitivo, efectos de medicación y problemas médicos.</figcaption>
       </figure>
 
@@ -614,7 +636,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-cta">
         <p>¿La ansiedad está reduciendo tu vida o la de una persona cercana?</p>
         <p>Podemos valorar qué está ocurriendo y qué tipo de ayuda encaja mejor. Atiendo en consulta presencial en Córdoba y también online cuando el formato es adecuado para la persona.</p>
-        <a href="/contacto/">Solicitar información</a>
+        <a href="/contacto/">Solicitar cita</a>
       </div>
 
       <h2>Preguntas frecuentes</h2>
@@ -641,7 +663,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <h2>También puede interesarte</h2>
 
       <ul class="article-related">
-        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona</a></li>
+        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: señales y opciones de tratamiento</a></li>
         <li><a href="/blog/gestion-ansiedad/">Cómo gestionar la ansiedad cuando el cuerpo se activa</a></li>
         <li><a href="/blog/atencion-plena-mindfulness-psicologia/">Atención plena: qué es y cómo integrarla en terapia</a></li>
         <li><a href="/blog/beneficios-terapia-individual/">Beneficios de la terapia individual</a></li>
@@ -655,7 +677,7 @@ export const blogPosts: Record<string, BlogPost> = {
         <li id="ref-am1">National Institute of Mental Health. <a href="https://www.nimh.nih.gov/health/topics/anxiety-disorders" target="_blank" rel="noopener noreferrer">Anxiety Disorders</a>. Última revisión: diciembre de 2024.</li>
         <li id="ref-am2">World Health Organization. <a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-of-older-adults" target="_blank" rel="noopener noreferrer">Mental health of older adults</a>.</li>
         <li id="ref-am3">National Institute for Health and Care Excellence. <a href="https://www.nice.org.uk/guidance/cg113" target="_blank" rel="noopener noreferrer">Generalised anxiety disorder and panic disorder in adults: management</a>. Clinical guideline CG113.</li>
-        <li id="ref-am4">Gould RL, Coulson MC, Howard RJ. <a href="https://pubmed.ncbi.nlm.nih.gov/21709684/" target="_blank" rel="noopener noreferrer">Cognitive behavioral therapy for anxiety disorders in older people: a meta-analysis and meta-regression of randomized controlled trials</a>. <em>Journal of the American Geriatrics Society</em>. 2012.</li>
+        <li id="ref-am4">Gould RL, Coulson MC, Howard RJ. <a href="https://pubmed.ncbi.nlm.nih.gov/22283717/" target="_blank" rel="noopener noreferrer">Efficacy of cognitive behavioral therapy for anxiety disorders in older people: a meta-analysis and meta-regression of randomized controlled trials</a>. <em>Journal of the American Geriatrics Society</em>. 2012.</li>
       </ol>
     `
   },
@@ -667,6 +689,7 @@ export const blogPosts: Record<string, BlogPost> = {
     keywords: "atencion plena, mindfulness psicologia, mindfulness terapia, meditacion psicologia, tecnicas mindfulness, psicologo cordoba",
     excerpt: "La atención plena no consiste en dejar la mente en blanco. Es aprender a relacionarte de otra manera con tus pensamientos, emociones y sensaciones para responder con más claridad.",
     date: "11 Junio 2026",
+    modifiedDate: "5 Noviembre 2026",
     dateShort: "11 Jun",
     readTime: "12 min",
     category: "Atención plena",
@@ -675,7 +698,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <p>La atención plena, también conocida como <em>mindfulness</em>, se ha popularizado mucho en los últimos años. A veces se presenta como una técnica rápida para relajarse, pero en psicología conviene entenderla con más precisión: es una forma de entrenar la atención para observar lo que ocurre en el presente, con menos juicio automático y más capacidad de respuesta. No busca eliminar pensamientos ni emociones, sino cambiar la manera en que nos relacionamos con ellos.</p>
 
       <figure class="article-figure--bleed">
-        <img src="${apunte.src}" alt="Cuaderno de trabajo para practicar atención plena en terapia" loading="lazy" />
+        <img src="${apunte.src}" width="${apunte.width}" height="${apunte.height}" alt="Cuaderno de trabajo para practicar atención plena en terapia" loading="lazy" />
         <figcaption>La atención plena se entrena mejor cuando pasa de ser una idea bonita a una práctica concreta y revisable.</figcaption>
       </figure>
 
@@ -746,7 +769,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </div>
 
       <figure class="article-figure--bleed">
-        <img src="${psicologia.src}" alt="Sesión de psicología donde se integra mindfulness y regulación emocional" loading="lazy" />
+        <img src="${psicologia.src}" width="${psicologia.width}" height="${psicologia.height}" alt="Sesión de psicología donde se integra mindfulness y regulación emocional" loading="lazy" />
         <figcaption>En terapia, mindfulness se adapta a la historia y a los objetivos de cada persona.</figcaption>
       </figure>
 
@@ -784,13 +807,13 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-cta">
         <p>¿Quieres aprender a regularte sin pelearte contigo?</p>
         <p>Si la ansiedad, el estrés o la autocrítica están ocupando demasiado espacio, podemos valorar qué herramientas tienen sentido para tu caso. Atiendo en consulta presencial en Córdoba y también en formato online.</p>
-        <a href="/contacto/">Solicitar información</a>
+        <a href="/contacto/">Solicitar cita</a>
       </div>
 
       <h2>También puede interesarte</h2>
 
       <ul class="article-related">
-        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona</a></li>
+        <li><a href="/blog/ansiedad-persistente-tratamiento-psicologico/">Ansiedad persistente: señales y opciones de tratamiento</a></li>
         <li><a href="/blog/gestion-ansiedad/">Cómo gestionar la ansiedad cuando el cuerpo se activa</a></li>
         <li><a href="/blog/autoestima-saludable/">Baja autoestima: señales y cómo empezar a trabajarla</a></li>
         <li><a href="/blog/beneficios-terapia-individual/">Beneficios de la terapia individual</a></li>
@@ -805,13 +828,13 @@ export const blogPosts: Record<string, BlogPost> = {
       <ol class="article-references">
         <li id="ref-m1">National Center for Complementary and Integrative Health. <a href="https://www.nccih.nih.gov/health/meditation-and-mindfulness-effectiveness-and-safety" target="_blank" rel="noopener noreferrer">Meditation and Mindfulness: Effectiveness and Safety</a>.</li>
         <li id="ref-m2">Goyal M, Singh S, Sibinga EMS, et al. <a href="https://pubmed.ncbi.nlm.nih.gov/24395196/" target="_blank" rel="noopener noreferrer">Meditation Programs for Psychological Stress and Well-being: A Systematic Review and Meta-analysis</a>. <em>JAMA Internal Medicine</em>. 2014.</li>
-        <li id="ref-m3">Hoge EA, Bui E, Mete M, et al. <a href="https://pubmed.ncbi.nlm.nih.gov/36102337/" target="_blank" rel="noopener noreferrer">Mindfulness-Based Stress Reduction vs Escitalopram for the Treatment of Adults With Anxiety Disorders</a>. <em>JAMA Psychiatry</em>. 2022.</li>
+        <li id="ref-m3">Hoge EA, Bui E, Mete M, et al. <a href="https://pubmed.ncbi.nlm.nih.gov/36350591/" target="_blank" rel="noopener noreferrer">Mindfulness-Based Stress Reduction vs Escitalopram for the Treatment of Adults With Anxiety Disorders: A Randomized Clinical Trial</a>. <em>JAMA Psychiatry</em>. 2023.</li>
       </ol>
     `
   },
   "ansiedad-persistente-tratamiento-psicologico": {
     slug: "ansiedad-persistente-tratamiento-psicologico",
-    title: "Ansiedad persistente: cómo reconocerla y qué tratamiento psicológico funciona",
+    title: "Ansiedad persistente: cómo reconocerla y qué opciones de tratamiento existen",
     seoTitle: "Ansiedad persistente y tratamiento psicológico en Córdoba",
     seoDescription: "Síntomas, evaluación y tratamiento psicológico de la ansiedad. Consulta presencial en Córdoba y terapia online con enfoque basado en evidencia.",
     keywords: "ansiedad persistente, tratamiento ansiedad, terapia ansiedad cordoba, trastorno ansiedad, psicologo ansiedad, terapia cognitivo conductual ansiedad",
@@ -825,7 +848,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <p>Sentir ansiedad no significa estar haciendo algo mal. La ansiedad es una respuesta humana normal ante la incertidumbre, la presión o el peligro. El problema aparece cuando deja de ser una señal puntual y se convierte en un estado casi permanente: cuesta descansar, el cuerpo vive en alerta y la mente no desconecta. En ese punto, una evaluación psicológica ayuda a diferenciar entre estrés esperable, ansiedad clínica y otros problemas que pueden parecerse mucho entre sí.<sup><a href="#ref-1">1</a></sup><sup><a href="#ref-2">2</a></sup></p>
 
       <figure class="article-figure--bleed">
-        <img src="${psicologia.src}" alt="Consulta de psicología para trabajar la ansiedad" loading="lazy" />
+        <img src="${psicologia.src}" width="${psicologia.width}" height="${psicologia.height}" alt="Consulta de psicología para trabajar la ansiedad" loading="lazy" />
         <figcaption>La ansiedad se entiende mejor cuando observamos a la vez pensamientos, cuerpo y conductas.</figcaption>
       </figure>
 
@@ -935,7 +958,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </div>
 
       <figure class="article-figure--bleed">
-        <img src="${apunte.src}" alt="Herramientas de autorregulación para la ansiedad" loading="lazy" />
+        <img src="${apunte.src}" width="${apunte.width}" height="${apunte.height}" alt="Herramientas de autorregulación para la ansiedad" loading="lazy" />
         <figcaption>Las herramientas ayudan más cuando se integran en un plan terapéutico claro y se practican con constancia.</figcaption>
       </figure>
 
@@ -961,7 +984,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-cta">
         <p>¿Cuándo pedir ayuda profesional?</p>
         <p>Si la ansiedad te está quitando sueño, energía, concentración o libertad para hacer vida normal, merece una valoración seria. Si buscas una psicóloga para ansiedad en Córdoba o prefieres trabajar online, el objetivo no es solo “aguantar mejor”, sino entender el patrón y reducirlo de forma estable.</p>
-        <a href="/contacto/">Solicitar información</a>
+        <a href="/contacto/">Solicitar cita</a>
       </div>
 
       <h2>Referencias y fuentes</h2>
@@ -988,10 +1011,10 @@ export const blogPosts: Record<string, BlogPost> = {
     category: "Relaciones",
     image: terapiaPareja,
     content: `
-      <p>Muchas parejas esperan demasiado antes de pedir ayuda. No llegan cuando “hay un problema”, sino cuando ya acumulan meses o años de discusiones repetidas, distancia emocional, desgaste sexual, resentimiento o sensación de convivencia en piloto automático. La terapia de pareja no es un juicio ni una negociación improvisada: es un espacio clínico para observar el patrón relacional, entender qué lo mantiene y ensayar maneras más seguras y efectivas de vincularse.<sup><a href="#ref-a">1</a></sup><sup><a href="#ref-b">2</a></sup></p>
+      <p>Muchas parejas esperan demasiado antes de pedir ayuda. No llegan cuando “hay un problema”, sino cuando ya acumulan meses o años de discusiones repetidas, distancia emocional, distanciamiento sexual, resentimiento o sensación de convivencia en piloto automático. La terapia de pareja no es un juicio ni una negociación improvisada: es un espacio clínico para observar el patrón relacional, entender qué lo mantiene y ensayar maneras más seguras y efectivas de vincularse.<sup><a href="#ref-a">1</a></sup><sup><a href="#ref-b">2</a></sup></p>
 
       <figure class="article-figure--bleed">
-        <img src="${terapiaPareja2.src}" alt="Pareja en un proceso de terapia" loading="lazy" />
+        <img src="${terapiaPareja2.src}" width="${terapiaPareja2.width}" height="${terapiaPareja2.height}" alt="Pareja en un proceso de terapia" loading="lazy" />
         <figcaption>En terapia de pareja se trabaja la interacción entre ambos, no solo la versión individual de cada uno.</figcaption>
       </figure>
 
@@ -1059,7 +1082,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <p>En términos prácticos, esto significa que la terapia de pareja, cuando tras una valoración resulta adecuada, no es “solo para salvar relaciones”. También puede ayudar a <strong>tomar decisiones con más claridad</strong>, revisar patrones dañinos y practicar habilidades relacionales fuera de la consulta.<sup><a href="#ref-d">4</a></sup></p>
 
       <figure class="article-figure--bleed">
-        <img src="${autoestima.src}" alt="Conversación consciente en pareja" loading="lazy" />
+        <img src="${autoestima.src}" width="${autoestima.width}" height="${autoestima.height}" alt="Conversación consciente en pareja" loading="lazy" />
         <figcaption>La mejora suele empezar cuando cada persona entiende su parte del patrón sin convertir la sesión en un reparto de culpas.</figcaption>
       </figure>
 
@@ -1107,7 +1130,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-cta">
         <p>¿Cuándo tiene sentido consultar?</p>
         <p>Si notáis que os queréis pero no conseguís entenderos, o si una crisis os ha dejado sin forma útil de hablar, una valoración profesional puede orientaros. Si estáis buscando terapia de pareja en Córdoba, presencial u online, el primer objetivo no es forzar acuerdos rápidos, sino entender si todavía hay base para trabajar y cómo hacerlo bien.</p>
-        <a href="/contacto/">Solicitar primera valoración</a>
+        <a href="/contacto/">Solicitar cita de pareja</a>
       </div>
 
       <h2>Referencias y fuentes</h2>
@@ -1132,7 +1155,7 @@ export const blogPosts: Record<string, BlogPost> = {
     dateShort: "15 Ene",
     readTime: "5 min",
     category: "Bienestar",
-    image: terapiaFamilia,
+    image: terapiaIndividual,
     content: `
       <p>Mucha gente llega a la terapia individual con una idea equivocada: que alguien les dirá qué hacer con su vida. En realidad, el trabajo consiste en algo más útil: entender qué te ocurre, por qué se repite y qué opciones tienes para sentirte mejor. No hace falta estar en crisis para empezar. Basta con querer un espacio donde no tengas que cuidar cada palabra ni resolverlo todo solo.</p>
 
@@ -1141,7 +1164,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${psicologia.src}" alt="Espacio tranquilo de consulta psicológica para terapia individual" loading="lazy" />
+        <img src="${psicologia.src}" width="${psicologia.width}" height="${psicologia.height}" alt="Espacio tranquilo de consulta psicológica para terapia individual" loading="lazy" />
         <figcaption>Un buen proceso terapéutico empieza por un espacio donde puedas hablar con honestidad y sin prisas.</figcaption>
       </figure>
       
@@ -1199,8 +1222,8 @@ export const blogPosts: Record<string, BlogPost> = {
       
       <div class="article-cta">
         <p>¿Tienes dudas sobre la terapia individual?</p>
-        <p>Podemos hablar con tranquilidad sobre qué te trae, qué formato encaja mejor contigo y qué puedes esperar de una primera sesión. Sin presión: solo una conversación honesta.</p>
-        <a href="/contacto/">Pedir información sobre terapia individual</a>
+        <p>La primera sesión permite hablar de tu motivo, conocer el encuadre y plantear qué pasos podrían seguir.</p>
+        <a href="/contacto/">Solicitar una primera sesión</a>
       </div>
     `
   },
@@ -1224,7 +1247,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${autoestima.src}" alt="Pareja conversando con dificultad para entenderse" loading="lazy" />
+        <img src="${autoestima.src}" width="${autoestima.width}" height="${autoestima.height}" alt="Pareja conversando con dificultad para entenderse" loading="lazy" />
         <figcaption>La comunicación real implica escuchar, no solo exponer tu versión de los hechos.</figcaption>
       </figure>
       
@@ -1293,7 +1316,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-cta">
         <p>¿Sientes que vuestra comunicación se ha roto?</p>
         <p>La terapia de pareja puede ayudaros a salir del bucle antes de que el resentimiento se instale. Si buscáis apoyo en Córdoba o en formato online, el primer paso es una valoración para ver si tiene sentido continuar juntos.</p>
-        <a href="/contacto/">Solicitar información sobre terapia de pareja</a>
+        <a href="/contacto/">Solicitar cita de pareja</a>
       </div>
     `
   },
@@ -1317,7 +1340,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${apunte.src}" alt="Persona practicando técnicas de regulación para la ansiedad" loading="lazy" />
+        <img src="${apunte.src}" width="${apunte.width}" height="${apunte.height}" alt="Persona practicando técnicas de regulación para la ansiedad" loading="lazy" />
         <figcaption>La respiración y la atención al presente son herramientas accesibles, pero requieren práctica para ser útiles en momentos de activación.</figcaption>
       </figure>
       
@@ -1367,8 +1390,8 @@ export const blogPosts: Record<string, BlogPost> = {
       
       <div class="article-cta">
         <p>¿La ansiedad está limitando tu vida?</p>
-        <p>No tienes que atravesarlo solo. En consulta —presencial en Córdoba u online— podemos entender tu patrón y trabajar herramientas concretas para recuperar margen y tranquilidad.</p>
-        <a href="/contacto/">Pedir información sobre terapia para la ansiedad</a>
+        <p>No tienes que atravesarlo solo. En consulta —presencial en Córdoba u online— podemos entender tu patrón y trabajar con herramientas concretas para recuperar margen y tranquilidad.</p>
+        <a href="/contacto/">Solicitar cita</a>
       </div>
     `
   },
@@ -1392,7 +1415,7 @@ export const blogPosts: Record<string, BlogPost> = {
       </div>
       
       <figure class="article-figure--bleed">
-        <img src="${estres.src}" alt="Persona reflexionando sobre su relación consigo misma" loading="lazy" />
+        <img src="${estres.src}" width="${estres.width}" height="${estres.height}" alt="Persona reflexionando sobre su relación consigo misma" loading="lazy" />
         <figcaption>Quererse no es egoísmo: es la base desde la que puedes cuidar mejor de ti y de los demás.</figcaption>
       </figure>
       
@@ -1400,7 +1423,7 @@ export const blogPosts: Record<string, BlogPost> = {
       
       <p>Fíjate en tu diálogo interno. ¿Serías tan duro con un amigo como lo eres contigo? Probablemente no. Esa voz crítica no es la verdad: es un hábito aprendido, muchas veces en contextos donde solo recibías atención al equivocarte o al cumplir expectativas ajenas.</p>
 
-      <p>Trabajar la autoestima implica reconocer ese patrón, cuestionarlo y practicar una forma de hablarte más justa, sin caer en lo contrario —la autoengaño o la grandiosidad—.</p>
+      <p>Trabajar la autoestima implica reconocer ese patrón, cuestionarlo y practicar una forma de hablarte más justa, sin caer en el autoengaño o la grandiosidad.</p>
       
       <h2>Señales de que tu autoestima necesita atención</h2>
 
@@ -1418,7 +1441,7 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-grid">
         <div class="article-card">
           <h3>1. Observa tu diálogo interno</h3>
-          <p>Cuando te catches siendo duro contigo, pregúntate: "¿Le diría esto a alguien a quien quiero?" Si la respuesta es no, reformula el mensaje con más justicia.</p>
+          <p>Cuando te sorprendas siendo duro contigo, pregúntate: "¿Le diría esto a alguien a quien quiero?" Si la respuesta es no, reformula el mensaje con más justicia.</p>
         </div>
         
         <div class="article-card">
@@ -1452,10 +1475,15 @@ export const blogPosts: Record<string, BlogPost> = {
       <div class="article-cta">
         <p>¿Quieres trabajar tu relación contigo mismo?</p>
         <p>La terapia es un espacio seguro para entender de dónde viene tu autocrítica y aprender a tratarte con más justicia. Presencial en Córdoba u online, según lo que mejor encaje contigo.</p>
-        <a href="/contacto/">Pedir información sobre terapia individual</a>
+        <a href="/contacto/">Solicitar una primera sesión</a>
       </div>
     `
   }
+};
+
+export const blogPosts: Record<string, BlogPost> = {
+  ...existingBlogPosts,
+  ...editorialPosts,
 };
 
 const BLOG_MONTHS: Record<string, number> = {
@@ -1508,7 +1536,7 @@ export function resolvePostImageUrl(image: ImageMetadata, siteUrl: string): stri
 
 export const blogPostsList = Object.values(blogPosts).sort(
   (a, b) => parseBlogDate(b.date).getTime() - parseBlogDate(a.date).getTime(),
-);
+).filter((post) => post.reviewStatus !== 'pending');
 
 /** Artículo más reciente (destacado en inicio y blog). */
 export function getFeaturedPost(): BlogPost {
@@ -1519,20 +1547,45 @@ export function getFeaturedPost(): BlogPost {
 export function getBlogSitemapEntries(): { path: string; lastmod: string }[] {
   return blogPostsList.map((post) => ({
     path: `/blog/${post.slug}/`,
-    lastmod: formatBlogDateISO(post.date),
+    lastmod: formatBlogDateISO(post.modifiedDate ?? post.date),
   }));
 }
 
-/** lastmod de páginas de categoría según el artículo más reciente. */
+/** Última modificación de los artículos de un listado, en formato YYYY-MM-DD. */
+export function getLatestPostModifiedDate(posts: BlogPost[]): string | undefined {
+  return posts
+    .map((post) => formatBlogDateISO(post.modifiedDate ?? post.date))
+    .sort()
+    .at(-1);
+}
+
+/** lastmod de categorías según la última modificación de sus artículos. */
 export function getCategorySitemapEntries(): { path: string; lastmod: string }[] {
-  return getBlogCategories().map((category) => {
-    const posts = getPostsByCategory(category);
-    const latestDate = posts[0]?.date ?? getFeaturedPost().date;
-    return {
-      path: `/blog/categoria/${categoryToSlug(category)}/`,
-      lastmod: formatBlogDateISO(latestDate),
-    };
-  });
+  return getBlogCategories()
+    .filter((category) => isCategoryIndexable(category))
+    .map((category) => {
+      const posts = getPostsByCategory(category);
+      return {
+        path: `/blog/categoria/${categoryToSlug(category)}/`,
+        lastmod: getLatestPostModifiedDate(posts)!,
+      };
+    });
+}
+
+/**
+ * Una categoría con un único artículo duplica su contenido y compite con él
+ * en el índice. Se mantiene navegable, pero con `noindex, follow`.
+ */
+export const MIN_POSTS_FOR_INDEXABLE_CATEGORY = 2;
+
+export function isCategoryIndexable(category: string): boolean {
+  return getPostsByCategory(category).length >= MIN_POSTS_FOR_INDEXABLE_CATEGORY;
+}
+
+export function getIndexableCategoryPaths(): string[] {
+  return getBlogCategories()
+    .filter((category) => isCategoryIndexable(category))
+    .map((category) => getCategoryUrl(category));
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

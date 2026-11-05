@@ -2,7 +2,8 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import { getBlogSitemapEntries, getCategorySitemapEntries } from './src/data/blog.ts';
+import { blogPosts, blogPostsList, getBlogSitemapEntries, getCategorySitemapEntries, getIndexableCategoryPaths, getLatestPostModifiedDate } from './src/data/blog.ts';
+import { PENDING_SERVICE_PATHS } from './src/data/serviceLandings.ts';
 
 // https://astro.build/config
 const SITE = 'https://matacalapsicologia.es';
@@ -14,6 +15,16 @@ const blogSitemapByPath = new Map(
 const categorySitemapByPath = new Map(
   getCategorySitemapEntries().map((entry) => [entry.path, entry.lastmod]),
 );
+
+const pendingEditorialPaths = new Set([
+  ...PENDING_SERVICE_PATHS,
+  ...Object.values(blogPosts)
+    .filter((post) => post.reviewStatus === 'pending')
+    .map((post) => `/blog/${post.slug}/`),
+]);
+
+/** Categorías con un solo artículo: navegables, pero no indexables ni en sitemap. */
+const indexableCategoryPaths = new Set(getIndexableCategoryPaths());
 
 export default defineConfig({
   site: SITE,
@@ -28,18 +39,19 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: (page) => {
-        const excluded = [
-          '/404',
-        ];
-        return !excluded.some((path) => page.includes(path));
+        const pathname = new URL(page).pathname;
+        const isNotFoundPage = pathname === '/404' || pathname === '/404/';
+        const isThinCategory =
+          pathname.startsWith('/blog/categoria/') && !indexableCategoryPaths.has(pathname);
+        return !isNotFoundPage && !pendingEditorialPaths.has(pathname) && !isThinCategory;
       },
       serialize(item) {
         const pathname = new URL(item.url).pathname;
         const entry = { ...item };
 
         if (pathname === '/blog/') {
-          const featuredLastmod = blogSitemapByPath.get('/blog/cuando-ir-al-psicologo/');
-          return featuredLastmod ? { ...entry, lastmod: featuredLastmod } : entry;
+          const lastmod = getLatestPostModifiedDate(blogPostsList);
+          return lastmod ? { ...entry, lastmod } : entry;
         }
         if (pathname.startsWith('/blog/categoria/')) {
           const lastmod = categorySitemapByPath.get(pathname);

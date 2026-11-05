@@ -10,11 +10,11 @@ import mariaAngelesMata from '../assets/maria-angeles-mata.jpeg';
 import { aboutCredentials, personData } from '../data/business';
 import { SITE_URL } from '../config/site';
 
-const title = 'Sobre mí | Psicóloga en Córdoba | María Ángeles Mata';
+const title = 'Sobre mí | Psicóloga sanitaria en Córdoba | María Ángeles Mata';
 const description =
-  'Conoce a María Ángeles Mata, psicóloga General Sanitaria colegiada AN 12177 en Córdoba. Formación, enfoque terapéutico y consulta presencial y online.';
+  'Conoce a María Ángeles Mata en Córdoba. Atención a personas mayores y cuidadores; terapia individual y estimulación cognitiva a domicilio.';
 const keywords =
-  'maría ángeles mata, psicóloga córdoba, psicóloga general sanitaria, colegiada AN 12177, sobre mí psicóloga';
+  'maría ángeles mata, psicóloga córdoba, psicóloga general sanitaria, colegiada AN 12177, neuropsicología córdoba, gerontología';
 
 const SITE = SITE_URL;
 
@@ -32,18 +32,19 @@ const breadcrumbData = [
     type="webpage"
     data={{ name: title, description, url: `${SITE}/sobre-mi/` }}
   />
-  <Header />
+  <Header activePage="Sobre mí" />
 
   <main id="main-content">
-    <section class="section bg-alabaster relative overflow-hidden" aria-labelledby="about-heading">
+    <section class="section bg-alabaster relative overflow-hidden" aria-labelledby="about-page-heading">
       <div class="bg-aurora"></div>
 
       <div class="container-editorial relative z-10">
         <PageHeader
-          label="María Ángeles Mata"
-          title="Un enfoque"
-          highlight="profesional y humano"
-          description="Psicóloga General Sanitaria colegiada AN 12177 en Córdoba. Terapia individual, de pareja y familiar, evaluación neuropsicológica y sesiones online."
+          id="about-page-heading"
+          label="Sobre mí"
+          title="María Ángeles Mata,"
+          highlight="psicóloga en Córdoba"
+          description="Psicóloga general sanitaria colegiada AN 12177. Terapia individual, de pareja y familiar, evaluación neuropsicológica y estimulación cognitiva, presencial en Córdoba y online."
         />
       </div>
     </section>
@@ -52,7 +53,7 @@ const breadcrumbData = [
       <div class="container-editorial">
         <div class="max-w-4xl mx-auto text-center mb-20 lg:mb-32">
           <h2 id="about-heading" class="title-section">
-            "La terapia no es magia. Es un espacio donde puedes dejar de fingir que todo va bien, <em class="text-olive italic">y empezar a sentir que realmente lo está.</em>"
+            "Un espacio para entender lo que te ocurre y trabajar objetivos concretos, con rigor profesional y sin tener que aparentar que todo va bien."
           </h2>
         </div>
 
@@ -67,6 +68,7 @@ const breadcrumbData = [
                   alt="María Ángeles Mata - Psicóloga en Córdoba"
                   width={500}
                   densities={[1.5, 2]}
+                  sizes="(min-width: 1024px) 448px, 82vw"
                   loading="lazy"
                   quality={85}
                   format="webp"
@@ -81,16 +83,16 @@ const breadcrumbData = [
             <div>
               <div class="space-y-6 mb-12">
                 <p class="text-body-sm">
-                  Llevo años acompañando a personas que, como tú, decidieron que merecían sentirse mejor. No busco "arreglarte" — busco que descubras que ya tienes dentro todo lo necesario.
+                  Soy María Ángeles Mata Cala, psicóloga general sanitaria (AN 12177). Trabajo con adultos, parejas y familias ante ansiedad, conflictos o cambios vitales.
                 </p>
                 <p class="text-body-sm">
-                  Combino lo que dice la ciencia con lo que siente el corazón. La terapia no es un manual: es una conversación honesta donde tú pones tu historia y yo pongo mi experiencia.
+                  Mi formación en neuropsicología, deterioro cognitivo y gerontología sostiene un foco especial en el bienestar de las personas mayores y de quienes las cuidan. Ofrezco terapia individual y estimulación cognitiva también a domicilio en Córdoba, además de evaluación cuando está indicada.
                 </p>
               </div>
 
               <div class="mb-12">
                 <div class="flex items-center gap-4 mb-6">
-                  <span class="text-label-sm text-charcoal">Formación Reciente</span>
+                  <span class="text-label-sm text-charcoal">Formación y titulaciones</span>
                   <span class="h-[1px] flex-1 bg-border-delicate"></span>
                 </div>
 
@@ -109,7 +111,7 @@ const breadcrumbData = [
             </div>
 
             <div>
-              <a href="/contacto/" class="btn btn-sage">Descubre cómo puedo ayudarte</a>
+              <a href="/contacto/" class="btn btn-sage">Solicitar una cita</a>
             </div>
           </div>
         </div>
@@ -120,8 +122,8 @@ const breadcrumbData = [
       label="¿Hablamos?"
       title="El primer paso es solo"
       highlight="una conversación"
-      description="No tienes que tenerlo todo claro para empezar. Solo necesitas sentir que ya no quieres seguir así."
-      primaryAction={{ text: 'Pedir cita', href: '/contacto/', icon: true }}
+      description="Cuéntame qué te ocurre y te explicaré cómo trabajo, la duración y el coste para que conozcas el encuadre desde el inicio."
+      primaryAction={{ text: 'Solicitar cita', href: '/contacto/', icon: true }}
       variant="dark"
     />
   </main>

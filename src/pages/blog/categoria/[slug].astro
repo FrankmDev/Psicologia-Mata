@@ -14,6 +14,7 @@ import {
   getCategorySeo,
   getCategoryUrl,
   categoryToSlug,
+  isCategoryIndexable,
 } from '../../../data/blog';
 import { SITE_URL } from '../../../config/site';
 
@@ -61,7 +62,7 @@ const breadcrumbData = [
 ];
 ---
 
-<Layout {title} {description} {keywords} canonical={canonicalPath}>
+<Layout {title} {description} {keywords} canonical={canonicalPath} noindex={!isCategoryIndexable(category)}>
   <Schema slot="schema" type="breadcrumbs" data={breadcrumbData} />
   <Schema
     slot="schema"
@@ -77,6 +78,7 @@ const breadcrumbData = [
 
       <div class="container-editorial relative z-10">
         <PageHeader
+          id="category-heading"
           label="Blog"
           title={category}
           description={categorySeo.intro}
@@ -109,7 +111,7 @@ const breadcrumbData = [
           <div>
             <span class="label-section mb-4 block">{posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}</span>
             <p class="text-body-sm text-charcoal max-w-xl">
-              Contenido escrito por María Ángeles Mata desde la consulta de psicología en Córdoba, con enfoque clínico y lenguaje claro.
+              Contenido escrito por María Ángeles Mata desde la consulta de psicología en Córdoba, con criterio clínico y lenguaje claro.
             </p>
           </div>
         </div>
@@ -143,7 +145,6 @@ const breadcrumbData = [
                 </div>
 
                 <h2
-                  id={index === 0 ? 'category-heading' : undefined}
                   class="font-serif text-xl sm:text-2xl text-ink group-hover:text-olive transition-colors duration-500 leading-tight mb-3"
                 >
                   {post.title}
@@ -184,7 +185,7 @@ const breadcrumbData = [
       title="Podemos hablar"
       highlight="con calma"
       description="Si lo que lees aquí encaja con lo que te ocurre, una primera conversación puede ayudarte a ver si la terapia —presencial en Córdoba u online— es el siguiente paso adecuado."
-      primaryAction={{ text: 'Pedir información', href: '/contacto/' }}
+      primaryAction={{ text: 'Solicitar cita', href: '/contacto/' }}
       secondaryAction={{ text: '697 733 060', href: 'tel:+34697733060', icon: 'phone' }}
       variant="light"
       centered={true}

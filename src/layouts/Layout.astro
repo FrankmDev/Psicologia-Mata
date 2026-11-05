@@ -2,11 +2,17 @@
 import "../styles/global.css";
 import RevealAnimation from '../components/RevealAnimation.astro';
 import MobileStickyCTA from '../components/MobileStickyCTA.astro';
+import bodyFont from '@fontsource/manrope/files/manrope-latin-300-normal.woff2?url';
+import headingFont from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-300-normal.woff2?url';
 import {
   SITE_URL,
   SITE_NAME,
+  SITE_SHORT_NAME,
   DEFAULT_DESCRIPTION,
   DEFAULT_OG_IMAGE,
+  DEFAULT_OG_IMAGE_ALT,
+  DEFAULT_OG_IMAGE_WIDTH,
+  DEFAULT_OG_IMAGE_HEIGHT,
   PUBLIC_GSC_VERIFICATION,
   absoluteUrl,
 } from '../config/site';
@@ -18,6 +24,7 @@ interface Props {
   type?: 'website' | 'article';
   image?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   canonical?: string;
   noindex?: boolean;
   author?: string;
@@ -35,6 +42,7 @@ const {
   type = 'website',
   image = DEFAULT_OG_IMAGE,
   ogImage,
+  ogImageAlt,
   canonical,
   noindex = false,
   author = 'María Ángeles Mata Cala',
@@ -42,6 +50,8 @@ const {
   modifiedTime,
   articleSection,
   articleTags = [],
+  prevUrl,
+  nextUrl,
 } = Astro.props;
 
 const normalizedCanonicalPath = canonical
@@ -65,6 +75,8 @@ const ogImageCandidate = ogImage || image;
 const ogImageUrl = ogImageCandidate.startsWith('http')
   ? ogImageCandidate
   : absoluteUrl(ogImageCandidate);
+const isDefaultOgImage = ogImageCandidate === DEFAULT_OG_IMAGE;
+const ogImageAltText = ogImageAlt ?? (isDefaultOgImage ? DEFAULT_OG_IMAGE_ALT : title);
 
   const websiteSchema = {
   '@context': 'https://schema.org',
@@ -90,14 +102,14 @@ const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <meta name="theme-color" content="#F7F5F0" />
+    <meta name="color-scheme" content="light" />
     <meta name="msapplication-TileColor" content="#F7F5F0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Psicología Mata" />
+    <meta name="apple-mobile-web-app-title" content={SITE_SHORT_NAME} />
 
-    <!-- Prefetch para navegación inmediata -->
-    <link rel="prefetch" href="/servicios/" />
-    <link rel="prefetch" href="/contacto/" />
+    <link rel="preload" href={bodyFont} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={headingFont} as="font" type="font/woff2" crossorigin />
 
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
     <link rel="icon" href={absoluteUrl('/favicon.ico')} sizes="32x32" />
@@ -108,13 +120,15 @@ const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
     <!-- SEO Meta Tags -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content={author} />
+    {author && <meta name="author" content={author} />}
     {noindex ? (
       <meta name="robots" content="noindex, follow" />
     ) : (
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     )}
     <link rel="canonical" href={canonicalUrl} />
+    {prevUrl && <link rel="prev" href={prevUrl} />}
+    {nextUrl && <link rel="next" href={nextUrl} />}
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
@@ -122,12 +136,15 @@ const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={ogImageAltText} />
+    {isDefaultOgImage && <meta property="og:image:width" content={String(DEFAULT_OG_IMAGE_WIDTH)} />}
+    {isDefaultOgImage && <meta property="og:image:height" content={String(DEFAULT_OG_IMAGE_HEIGHT)} />}
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:site_name" content={SITE_SHORT_NAME} />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
     {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
     {articleSection && <meta property="article:section" content={articleSection} />}
-    {type === 'article' && <meta property="article:author" content={author} />}
+    {type === 'article' && author && <meta property="article:author" content={author} />}
     {articleTags.map((tag) => (
       <meta property="article:tag" content={tag} />
     ))}
@@ -138,16 +155,17 @@ const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAltText} />
     
-    <!-- Structured Data Slot -->
-    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <!-- Escapar < evita que un título futuro cierre el script JSON-LD. -->
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema).replace(/</g, '\\u003c')} />
     <slot name="schema" />
     
     <!-- View Transitions -->
     <!-- <ClientRouter /> --> <!-- Desactivado para evitar caché -->
   </head>
 
-  <body class="antialiased selection:bg-stone/50 bg-alabaster pb-14 lg:pb-0">
+  <body class="antialiased selection:bg-stone/50 bg-alabaster pb-[calc(4rem+env(safe-area-inset-bottom,0px))] xl:pb-0">
     
     <!-- Skip link para accesibilidad -->
     <a
@@ -162,19 +180,10 @@ const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
 
     <MobileStickyCTA />
     
-    <!-- Inline critical CSS para evitar CLS -->
-    <style is:inline>
-      /* Contenedor principal - SIN contain para evitar scroll pegajoso */
-      #main-content {
-        min-height: 100vh;
-        /* contain eliminado - causa problemas de scroll */
-      }
-    </style>
-
     <!-- Scroll progress indicator -->
     <div
       id="scroll-progress"
-      class="fixed top-0 left-0 h-[3px] z-[60] bg-olive origin-left scale-x-0 transition-transform duration-[150ms] ease-out"
+      class="fixed top-0 left-0 w-full h-[3px] z-[60] bg-olive origin-left scale-x-0 motion-safe:transition-transform duration-[150ms] ease-out"
       aria-hidden="true"
     >
     </div>
@@ -216,26 +225,4 @@ const gscVerification = PUBLIC_GSC_VERIFICATION.trim();
     }, { once: true });
   })();
 
-  // Smooth scroll solo para navegación por anclas (no afecta scroll manual)
-  (function initSmoothAnchorScroll() {
-    document.addEventListener('click', (e) => {
-      const link = (e.target as HTMLElement)?.closest('a[href^="#"]');
-      if (!link) return;
-      
-      const targetId = link.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-      
-      const target = document.querySelector(targetId);
-      if (!target) return;
-      
-      // Respetar prefers-reduced-motion
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      e.preventDefault();
-      target.scrollIntoView({ 
-        behavior: prefersReduced ? 'auto' : 'smooth',
-        block: 'start'
-      });
-    });
-  })();
 </script>
